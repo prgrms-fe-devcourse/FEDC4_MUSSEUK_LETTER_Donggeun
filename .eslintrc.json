@@ -7,9 +7,9 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
-    "prettier"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -18,7 +18,6 @@
   },
   "plugins": ["@typescript-eslint", "react", "react-refresh"],
   "rules": {
-    "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
-    "@typescript-eslint/no-unused-vars": "warn"
+    "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }]
   }
 }
