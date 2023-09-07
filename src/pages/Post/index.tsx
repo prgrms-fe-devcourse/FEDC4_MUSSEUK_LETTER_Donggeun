@@ -4,8 +4,8 @@ const Post = () => {
   const { postId } = useParams();
   return (
     <>
-      <h1>Post</h1>
-      {postId}의 Post 입니다.
+      <h1>Post page</h1>
+      {postId}의 post 입니다.
     </>
   );
 };

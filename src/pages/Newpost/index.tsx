@@ -1,9 +1,9 @@
-const Newpost = () => {
+const NewPost = () => {
   return (
     <>
-      <h1>Newpost</h1>
+      <h1>New post</h1>
     </>
   );
 };
 
-export default Newpost;
+export default NewPost;

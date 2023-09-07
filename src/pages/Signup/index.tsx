@@ -1,9 +1,9 @@
-const Signup = () => {
+const SignUp = () => {
   return (
     <>
-      <h1>Signup</h1>
+      <h1>Signup page</h1>
     </>
   );
 };
 
-export default Signup;
+export default SignUp;
