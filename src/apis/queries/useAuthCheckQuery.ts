@@ -1,15 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
+import type { QueryOptions } from '@/apis/types';
 
-const useAuthCheckQuery = () => {
-  return useQuery({
+// TODO: 응답 데이터를 임시로 비워뒀습니다. 원래의 데이터는 User 모델과 동일합니다.
+interface ResponseData {}
+
+export const getAuthUser = async () => {
+  const { data } = await authInstance.get<ResponseData>('/auth-user');
+  return data;
+};
+
+const useAuthCheckQuery = (options?: QueryOptions<ResponseData>) => {
+  return useQuery<ResponseData>({
     queryKey: queryKey.auth,
-    queryFn: async () => {
-      // TODO: 응답 데이터를 임시로 unknown으로 설정했습니다.
-      const { data } = await authInstance.get<unknown>('/auth-user');
-      return data;
-    }
+    queryFn: getAuthUser,
+    ...options
   });
 };
 
