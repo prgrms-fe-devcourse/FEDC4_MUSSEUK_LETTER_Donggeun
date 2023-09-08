@@ -1,22 +1,11 @@
-import {
-  Box,
-  Button,
-  Icon,
-  VStack,
-  Flex,
-  Heading,
-  InputGroup,
-  Input,
-  InputRightElement,
-  Text,
-  useBoolean
-} from '@chakra-ui/react';
+import { Box, Button, Icon, Flex, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import type { InputProps } from '@chakra-ui/react';
+import musseuk from '@/assets/images/musseuk_hood.png';
+import InputField from './components/InputField';
 
 const colors = {
   background: '#F2F8EB',
-  error: '#DD1D1D'
+  submit: '#8CD790'
 };
 
 const SignUp = () => {
@@ -24,12 +13,12 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
 
   return (
-    <Flex w="100%" p="8" minH="100vh" bg={colors.background} justifyContent="center" alignItems="center">
+    <Flex w="100%" px="4" py="8" minH="100vh" bg={colors.background} justifyContent="center" alignItems="center">
       <Flex
-        p="8"
+        px={['8', '16', '24']}
+        py={['6', '8', '12']}
         w="100%"
-        maxW="500px"
-        maxH="1000px"
+        maxW="xl"
         bg="white"
         boxSizing="border-box"
         boxShadow="lg"
@@ -38,7 +27,8 @@ const SignUp = () => {
         gap="2"
         justifyContent="center"
         alignItems="center">
-        <Heading>Sign up</Heading>
+        <Image maxW="32" src={musseuk} alt="머쓱이" />
+        <Heading textAlign="center">Sign up</Heading>
         <InputField
           label="Email"
           errorMessage="Error Message"
@@ -67,7 +57,7 @@ const SignUp = () => {
         />
         <Box w="100%" fontSize="sm">
           <Text>· Length must be greater than 8 characters</Text>
-          <Text color="green.400">· Password must contain numbers</Text>
+          <Text color="var(--green03)">· Password must contain numbers</Text>
         </Box>
         <InputField
           label="Confirm Password"
@@ -79,48 +69,41 @@ const SignUp = () => {
           }}
           icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
         />
-        <Button mt="6" w="100%" colorScheme="green">
+        <Button
+          mt="6"
+          w="100%"
+          color="white"
+          backgroundColor="var(--green01)"
+          _hover={{ backgroundColor: 'var(--green03)' }}
+          _active={{ backgroundColor: 'green.500' }}>
           Create account
         </Button>
-        <Flex mt="3" w="100%" justifyContent="space-around" userSelect="none">
-          <Text color="gray.400" fontSize="sm" cursor="pointer">
-            Already have an account?
-          </Text>
-          <Text color="green.500" fontSize="sm" fontWeight="semibold" cursor="pointer">
+        <Flex
+          mt="3"
+          w="100%"
+          direction={['column', 'row']}
+          justifyContent="space-around"
+          alignItems="center"
+          transition="color 0.2s"
+          gap="1"
+          fontSize="sm">
+          <Text color="gray.400">Already have an account?</Text>
+          <Text
+            color="green.500"
+            _hover={{
+              color: 'green.600'
+            }}
+            _active={{
+              color: 'green.700'
+            }}
+            fontWeight="semibold"
+            cursor="pointer"
+            userSelect="none">
             Sign in
           </Text>
         </Flex>
       </Flex>
     </Flex>
-  );
-};
-
-const InputField = ({
-  label,
-  errorMessage,
-  inputProps,
-  icon
-}: {
-  label: string;
-  errorMessage?: string;
-  inputProps: InputProps;
-  icon?: React.ReactNode;
-}) => {
-  return (
-    <VStack w="100%" align="start">
-      <Text as="label" fontWeight="semibold" htmlFor={inputProps.id}>
-        {label}
-      </Text>
-      <InputGroup>
-        <Input w="100%" {...inputProps} />
-        <InputRightElement cursor="pointer">{icon}</InputRightElement>
-      </InputGroup>
-      {errorMessage && (
-        <Text fontSize="sm" color={colors.error}>
-          {errorMessage}
-        </Text>
-      )}
-    </VStack>
   );
 };
 
