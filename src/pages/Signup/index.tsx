@@ -1,3 +1,4 @@
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { Box, Button, Icon, Flex, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import musseuk from '@/assets/images/musseuk_hood.png';
@@ -8,13 +9,31 @@ const colors = {
   submit: '#8CD790'
 };
 
+type Inputs = {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const SignUp = () => {
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onError: SubmitErrorHandler<Inputs> = (errors) => console.log(errors);
 
   return (
     <Flex w="100%" px="4" py="8" minH="100vh" bg={colors.background} justifyContent="center" alignItems="center">
       <Flex
+        as="form"
+        onSubmit={handleSubmit(onSubmit, onError)}
         px={['8', '16', '24']}
         py={['6', '8', '12']}
         w="100%"
@@ -37,6 +56,7 @@ const SignUp = () => {
             type: 'email',
             placeholder: '이메일을 입력해주세요'
           }}
+          registerProps={register('email', { required: true })}
         />
         <InputField
           label="Username"
@@ -45,6 +65,7 @@ const SignUp = () => {
             type: 'text',
             placeholder: '실명을 입력해주세요'
           }}
+          registerProps={register('username', { required: true })}
         />
         <InputField
           label="Password"
@@ -53,6 +74,7 @@ const SignUp = () => {
             type: showPassword ? 'text' : 'password',
             placeholder: '비밀번호를 입력해주세요'
           }}
+          registerProps={register('password', { required: true })}
           icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
         />
         <Box w="100%" fontSize="sm">
@@ -67,9 +89,11 @@ const SignUp = () => {
             type: showConfirmPassword ? 'text' : 'password',
             placeholder: '비밀번호를 재확인해주세요'
           }}
+          registerProps={register('confirmPassword', { required: true })}
           icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
         />
         <Button
+          type="submit"
           mt="6"
           w="100%"
           color="white"
