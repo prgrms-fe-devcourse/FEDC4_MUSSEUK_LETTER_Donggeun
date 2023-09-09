@@ -1,4 +1,6 @@
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Box, Button, Icon, Flex, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import musseuk from '@/assets/images/musseuk_hood.png';
@@ -9,12 +11,14 @@ const colors = {
   submit: '#8CD790'
 };
 
-type Inputs = {
-  email: string;
-  username: string;
-  password: string;
-  confirmPassword: string;
-};
+const schema = z.object({
+  email: z.string().email(),
+  username: z.string().min(2),
+  password: z.string().min(8),
+  confirmPassword: z.string().min(8)
+});
+
+type Inputs = z.infer<typeof schema>;
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useBoolean(false);
@@ -24,10 +28,12 @@ const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    resolver: zodResolver(schema)
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const onError: SubmitErrorHandler<Inputs> = (errors) => console.log(errors);
+  const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
   return (
     <Flex w="100%" px="4" py="8" minH="100vh" bg={colors.background} justifyContent="center" alignItems="center">
@@ -50,7 +56,7 @@ const SignUp = () => {
         <Heading textAlign="center">Sign up</Heading>
         <InputField
           label="Email"
-          errorMessage="Error Message"
+          errorMessage={errors.email?.message}
           inputProps={{
             id: 'email',
             type: 'email',
@@ -60,6 +66,7 @@ const SignUp = () => {
         />
         <InputField
           label="Username"
+          errorMessage={errors.username?.message}
           inputProps={{
             id: 'username',
             type: 'text',
@@ -83,7 +90,7 @@ const SignUp = () => {
         </Box>
         <InputField
           label="Confirm Password"
-          errorMessage="Error Message"
+          errorMessage={errors.confirmPassword?.message}
           inputProps={{
             id: 'confirm-password',
             type: showConfirmPassword ? 'text' : 'password',
