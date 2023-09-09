@@ -70,6 +70,7 @@ const SignUp = () => {
       }
     );
   };
+
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
   return (
