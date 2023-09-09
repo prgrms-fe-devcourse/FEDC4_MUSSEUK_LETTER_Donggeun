@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Icon, Flex, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import musseuk from '@/assets/images/musseuk_hood.png';
@@ -11,14 +12,30 @@ const colors = {
   submit: '#8CD790'
 };
 
-const schema = z.object({
-  email: z.string().email(),
-  username: z.string().min(2),
-  password: z.string().min(8),
-  confirmPassword: z.string().min(8)
-});
+const navigations = {
+  signin: '/signin'
+};
 
-type Inputs = z.infer<typeof schema>;
+const formSchema = z
+  .object({
+    email: z.string().email(),
+    username: z
+      .string()
+      .min(2, 'Length must be greater than 2 characters')
+      .max(4, 'Length must be smaller than 4 characters')
+      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력해주세요'),
+    password: z
+      .string()
+      .min(8, 'Length must be greater than 8 characters')
+      .refine((value) => /\d/.test(value), 'Password must contain numbers'),
+    confirmPassword: z.string()
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword']
+  });
+
+type Inputs = z.infer<typeof formSchema>;
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useBoolean(false);
@@ -29,8 +46,12 @@ const SignUp = () => {
     watch,
     formState: { errors }
   } = useForm<Inputs>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(formSchema)
   });
+
+  const password = watch('password');
+  const isPasswordShort = !password || password.length < 8;
+  const isPasswordContainNumber = /\d/.test(password);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
@@ -51,7 +72,8 @@ const SignUp = () => {
         flexDir="column"
         gap="2"
         justifyContent="center"
-        alignItems="center">
+        alignItems="center"
+        transition="padding 0.25s ease-in-out">
         <Image maxW="32" src={musseuk} alt="머쓱이" />
         <Heading textAlign="center">Sign up</Heading>
         <InputField
@@ -62,7 +84,7 @@ const SignUp = () => {
             type: 'email',
             placeholder: '이메일을 입력해주세요'
           }}
-          registerProps={register('email', { required: true })}
+          registerProps={register('email')}
         />
         <InputField
           label="Username"
@@ -70,23 +92,25 @@ const SignUp = () => {
           inputProps={{
             id: 'username',
             type: 'text',
-            placeholder: '실명을 입력해주세요'
+            placeholder: '실명을 입력해주세요',
+            maxLength: 4
           }}
-          registerProps={register('username', { required: true })}
+          registerProps={register('username')}
         />
         <InputField
           label="Password"
           inputProps={{
             id: 'password',
             type: showPassword ? 'text' : 'password',
-            placeholder: '비밀번호를 입력해주세요'
+            placeholder: '비밀번호를 입력해주세요',
+            maxLength: 30
           }}
-          registerProps={register('password', { required: true })}
+          registerProps={register('password')}
           icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
         />
         <Box w="100%" fontSize="sm">
-          <Text>· Length must be greater than 8 characters</Text>
-          <Text color="var(--green03)">· Password must contain numbers</Text>
+          {isPasswordShort && <Text>· Length must be greater than 8 characters</Text>}
+          {!isPasswordContainNumber && <Text color="var(--green03)">· Password must contain numbers</Text>}
         </Box>
         <InputField
           label="Confirm Password"
@@ -94,9 +118,10 @@ const SignUp = () => {
           inputProps={{
             id: 'confirm-password',
             type: showConfirmPassword ? 'text' : 'password',
-            placeholder: '비밀번호를 재확인해주세요'
+            placeholder: '비밀번호를 재확인해주세요',
+            maxLength: 30
           }}
-          registerProps={register('confirmPassword', { required: true })}
+          registerProps={register('confirmPassword')}
           icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
         />
         <Button
@@ -117,21 +142,24 @@ const SignUp = () => {
           alignItems="center"
           transition="color 0.2s"
           gap="1"
-          fontSize="sm">
+          fontSize="sm"
+          textAlign="center">
           <Text color="gray.400">Already have an account?</Text>
-          <Text
-            color="green.500"
-            _hover={{
-              color: 'green.600'
-            }}
-            _active={{
-              color: 'green.700'
-            }}
-            fontWeight="semibold"
-            cursor="pointer"
-            userSelect="none">
-            Sign in
-          </Text>
+          <Link to={navigations.signin}>
+            <Text
+              color="green.500"
+              _hover={{
+                color: 'green.600'
+              }}
+              _active={{
+                color: 'green.700'
+              }}
+              fontWeight="semibold"
+              cursor="pointer"
+              userSelect="none">
+              Sign in
+            </Text>
+          </Link>
         </Flex>
       </Flex>
     </Flex>
