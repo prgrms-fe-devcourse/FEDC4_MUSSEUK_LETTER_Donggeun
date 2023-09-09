@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Icon, Flex, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import useSignupMutation from '@/apis/mutations/useSignupMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import InputField from './components/InputField';
 
@@ -12,7 +13,8 @@ const colors = {
   submit: '#8CD790'
 };
 
-const navigations = {
+const links = {
+  main: '/',
   signin: '/signin'
 };
 
@@ -38,22 +40,36 @@ const formSchema = z
 type Inputs = z.infer<typeof formSchema>;
 
 const SignUp = () => {
+  const { mutate } = useSignupMutation();
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
   const {
     register,
     handleSubmit,
+    setError,
     watch,
     formState: { errors }
   } = useForm<Inputs>({
     resolver: zodResolver(formSchema)
   });
+  const navigate = useNavigate();
 
   const password = watch('password');
   const isPasswordShort = !password || password.length < 8;
   const isPasswordContainNumber = /\d/.test(password);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    mutate(
+      { email: data.email, password: data.password, username: data.username, introduce: '' },
+      {
+        onSuccess: () => navigate(links.main),
+        onError: (error) => {
+          const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
+          setError('email', { type: 'server', message: errorMessage });
+        }
+      }
+    );
+  };
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
   return (
@@ -145,7 +161,7 @@ const SignUp = () => {
           fontSize="sm"
           textAlign="center">
           <Text color="gray.400">Already have an account?</Text>
-          <Link to={navigations.signin}>
+          <Link to={links.signin}>
             <Text
               color="green.500"
               _hover={{
