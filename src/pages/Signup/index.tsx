@@ -7,7 +7,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import useSignupMutation from '@/apis/mutations/useSignupMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import InputField from './components/InputField';
-import PageTemplate from './templates/PageTemplate';
+import { PageTemplate, LinkTemplate } from './templates';
 
 const links = {
   main: '/',
@@ -131,16 +131,7 @@ const SignUp = () => {
         _active={{ backgroundColor: 'green.500' }}>
         Create account
       </Button>
-      <Flex
-        mt="3"
-        w="100%"
-        direction={['column', 'row']}
-        justifyContent="space-around"
-        alignItems="center"
-        transition="color 0.2s"
-        gap="1"
-        fontSize="sm"
-        textAlign="center">
+      <LinkTemplate>
         <Text color="gray.400">Already have an account?</Text>
         <Link to={links.signin}>
           <Text
@@ -157,7 +148,7 @@ const SignUp = () => {
             Sign in
           </Text>
         </Link>
-      </Flex>
+      </LinkTemplate>
     </PageTemplate>
   );
 };
