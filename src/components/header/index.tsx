@@ -43,7 +43,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
                 borderTopRightRadius={5}
                 h={7}
                 justifyContent={'center'}
-                _hover={{ bg: 'var(--gray01)' }}
+                _hover={{ bg: 'gray01' }}
                 onClick={() => handleMenuItem(`/profile/${userId}`)}>
                 프로필
               </MenuItem>
@@ -52,8 +52,8 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
                 borderBottomRightRadius={5}
                 h={7}
                 justifyContent={'center'}
-                _hover={{ bg: 'var(--gray01)' }}
-                onClick={() => handleMenuItem(`/changePassword/${userId}`)}>
+                _hover={{ bg: 'gray01' }}
+                onClick={() => handleMenuItem('/changePassword')}>
                 비밀번호 변경
               </MenuItem>
             </MenuList>

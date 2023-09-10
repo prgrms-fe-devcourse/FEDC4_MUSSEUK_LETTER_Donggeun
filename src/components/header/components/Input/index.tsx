@@ -6,9 +6,9 @@ const InputField = ({ icon, inputProps, mw }: { icon?: React.ReactNode; inputPro
     <InputGroup maxW={mw}>
       <Input
         w="100%"
-        _placeholder={{ opacity: 1, color: 'var(--gray03)' }}
+        _placeholder={{ opacity: 1, color: 'gray03' }}
         borderRadius="10px"
-        borderColor="var(--blue01)"
+        borderColor="blue01"
         {...inputProps}
       />
       {icon && (
