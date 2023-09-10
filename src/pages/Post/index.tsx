@@ -12,7 +12,7 @@ const Post = () => {
   return (
     <VStack
       p="2rem 2rem 5rem 2rem"
-      backgroundColor="var(--bg01)"
+      backgroundColor="bg01"
       backgroundImage={BackgroundHome}
       backgroundPosition="center"
       backgroundSize="contain"
