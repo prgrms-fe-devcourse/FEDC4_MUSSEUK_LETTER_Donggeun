@@ -60,7 +60,7 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
-      { email: data.email, password: data.password, username: data.username, introduce: '' },
+      { email: data.email, password: data.password, username: data.username },
       {
         onSuccess: () => navigate(links.main),
         onError: (error) => {

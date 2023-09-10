@@ -6,7 +6,7 @@ interface CustomRequestData {
   email: string;
   password: string;
   username: string; // 사용자 실명
-  introduce: string;
+  introduce?: string;
 }
 
 interface RequestData {
@@ -26,7 +26,7 @@ const postSignup = async (customParams: CustomRequestData) => {
     password: customParams.password,
     fullName: JSON.stringify({
       username: customParams.username,
-      introduce: customParams.introduce
+      introduce: customParams.introduce ?? ''
     })
   };
 
