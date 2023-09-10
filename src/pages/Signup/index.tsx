@@ -60,7 +60,7 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
-      { email: data.email, password: data.password, username: data.username, introduce: '' },
+      { email: data.email, password: data.password, username: data.username },
       {
         onSuccess: () => navigate(links.main),
         onError: (error) => {
@@ -95,7 +95,7 @@ const SignUp = () => {
         <Heading textAlign="center">Sign up</Heading>
         <InputField
           label="Email"
-          errorMessage={errors.email?.message}
+          error={errors.email}
           inputProps={{
             id: 'email',
             type: 'email',
@@ -105,7 +105,7 @@ const SignUp = () => {
         />
         <InputField
           label="Username"
-          errorMessage={errors.username?.message}
+          error={errors.username}
           inputProps={{
             id: 'username',
             type: 'text',
@@ -127,11 +127,11 @@ const SignUp = () => {
         />
         <Box w="100%" fontSize="sm">
           {isPasswordShort && <Text>· Length must be greater than 8 characters</Text>}
-          {!isPasswordContainNumber && <Text color="var(--green03)">· Password must contain numbers</Text>}
+          {!isPasswordContainNumber && <Text color="green03">· Password must contain numbers</Text>}
         </Box>
         <InputField
           label="Confirm Password"
-          errorMessage={errors.confirmPassword?.message}
+          error={errors.confirmPassword}
           inputProps={{
             id: 'confirm-password',
             type: showConfirmPassword ? 'text' : 'password',
@@ -146,8 +146,8 @@ const SignUp = () => {
           mt="6"
           w="100%"
           color="white"
-          backgroundColor="var(--green01)"
-          _hover={{ backgroundColor: 'var(--green03)' }}
+          backgroundColor="green01"
+          _hover={{ backgroundColor: 'green03' }}
           _active={{ backgroundColor: 'green.500' }}>
           Create account
         </Button>
