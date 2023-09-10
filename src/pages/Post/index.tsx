@@ -2,12 +2,13 @@ import { Box, Heading, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import AnnouncementText from './components/AnnouncementText';
 import ListButton from './components/ListButton';
-import Musseuk from './components/Musseuk';
 import DescriptionText from './components/DescriptionText';
 import BackgroundHome from '@/assets/images/background_home.png';
+import CommentBoard from './components/CommentBoard';
 
 const Post = () => {
   const { postId } = useParams();
+
   return (
     <VStack
       p="2rem 2rem 5rem 2rem"
@@ -22,7 +23,7 @@ const Post = () => {
         </AnnouncementText>
         <ListButton />
       </Box>
-      <Musseuk />
+      <CommentBoard />
       <Heading mb="1rem">{postId}의 머쓱이</Heading>
       <DescriptionText>
         안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을
