@@ -95,7 +95,7 @@ const SignUp = () => {
         <Heading textAlign="center">Sign up</Heading>
         <InputField
           label="Email"
-          errorMessage={errors.email?.message}
+          error={errors.email}
           inputProps={{
             id: 'email',
             type: 'email',
@@ -105,7 +105,7 @@ const SignUp = () => {
         />
         <InputField
           label="Username"
-          errorMessage={errors.username?.message}
+          error={errors.username}
           inputProps={{
             id: 'username',
             type: 'text',
@@ -131,7 +131,7 @@ const SignUp = () => {
         </Box>
         <InputField
           label="Confirm Password"
-          errorMessage={errors.confirmPassword?.message}
+          error={errors.confirmPassword}
           inputProps={{
             id: 'confirm-password',
             type: showConfirmPassword ? 'text' : 'password',
