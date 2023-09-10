@@ -81,14 +81,7 @@ const SignIn = () => {
         }}
         registerProps={register('password')}
       />
-      <Button
-        type="submit"
-        mt="6"
-        w="100%"
-        color="white"
-        backgroundColor="green01"
-        _hover={{ backgroundColor: 'green03' }}
-        _active={{ backgroundColor: 'green.500' }}>
+      <Button type="submit" mt="6" w="100%" colorScheme="primary">
         Sign in
       </Button>
       <LinkTemplate>

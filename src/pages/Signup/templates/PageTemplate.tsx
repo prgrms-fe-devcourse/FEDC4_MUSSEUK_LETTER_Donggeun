@@ -15,6 +15,7 @@ const PageTemplate = ({ children, ...props }: FlexProps & React.FormHTMLAttribut
         py={['6', '8', '12']}
         w="100%"
         maxW="xl"
+        minH="3xl"
         bg="white"
         boxSizing="border-box"
         boxShadow="lg"

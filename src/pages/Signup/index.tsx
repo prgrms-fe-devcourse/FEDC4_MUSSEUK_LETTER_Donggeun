@@ -106,8 +106,8 @@ const SignUp = () => {
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
       />
       <Box w="100%" fontSize="sm">
-        {isPasswordShort && <Text>· Length must be greater than 8 characters</Text>}
-        {!isPasswordContainNumber && <Text color="green03">· Password must contain numbers</Text>}
+        {isPasswordShort && <Text fontWeight="light">· Length must be greater than 8 characters</Text>}
+        {!isPasswordContainNumber && <Text fontWeight="light">· Password must contain numbers</Text>}
       </Box>
       <InputField
         label="Confirm Password"
