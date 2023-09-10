@@ -1,17 +1,52 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Image, Heading, Button, Text, Flex } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
+import useSigninMutation from '@/apis/mutations/useSigninMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import InputField from '@/pages/Signup/components/InputField';
 import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
 
 const links = {
+  main: '/',
   signup: '/signup'
 };
 
+const formSchema = z.object({ email: z.string().email(), password: z.string() });
+
+type Inputs = z.infer<typeof formSchema>;
+
 const SignIn = () => {
+  const { mutate } = useSigninMutation();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors }
+  } = useForm<Inputs>({
+    resolver: zodResolver(formSchema)
+  });
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    mutate(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => navigate(links.main),
+        onError: (error) => {
+          const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
+          setError('email', { type: 'server', message: errorMessage });
+          setError('password', { type: 'server', message: errorMessage });
+        }
+      }
+    );
+  };
+  const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
+
   return (
-    <PageTemplate>
+    <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk} alt="머쓱이" />
       <Heading textAlign="center">Sign in</Heading>
       <Flex
@@ -27,20 +62,24 @@ const SignIn = () => {
       </Flex>
       <InputField
         label="Email"
+        error={errors.email}
         inputProps={{
           id: 'email',
           type: 'email',
           placeholder: '이메일을 입력해주세요'
         }}
+        registerProps={register('email')}
       />
       <InputField
         label="Password"
+        error={errors.password}
         inputProps={{
           id: 'password',
           type: 'password',
           placeholder: '비밀번호를 입력해주세요',
           maxLength: 30
         }}
+        registerProps={register('password')}
       />
       <Button
         type="submit"
