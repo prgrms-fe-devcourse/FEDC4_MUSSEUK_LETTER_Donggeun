@@ -127,7 +127,7 @@ const SignUp = () => {
         />
         <Box w="100%" fontSize="sm">
           {isPasswordShort && <Text>· Length must be greater than 8 characters</Text>}
-          {!isPasswordContainNumber && <Text color="var(--green03)">· Password must contain numbers</Text>}
+          {!isPasswordContainNumber && <Text color="green03">· Password must contain numbers</Text>}
         </Box>
         <InputField
           label="Confirm Password"
@@ -146,8 +146,8 @@ const SignUp = () => {
           mt="6"
           w="100%"
           color="white"
-          backgroundColor="var(--green01)"
-          _hover={{ backgroundColor: 'var(--green03)' }}
+          backgroundColor="green01"
+          _hover={{ backgroundColor: 'green03' }}
           _active={{ backgroundColor: 'green.500' }}>
           Create account
         </Button>

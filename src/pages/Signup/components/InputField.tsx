@@ -21,11 +21,11 @@ const InputField = ({
         {label}
       </Text>
       <InputGroup>
-        <Input w="100%" borderColor="var(--blue01)" {...inputProps} {...registerProps} />
+        <Input w="100%" borderColor="blue01" {...inputProps} {...registerProps} />
         {icon && <InputRightElement cursor="pointer">{icon}</InputRightElement>}
       </InputGroup>
       {errorMessage && (
-        <Text fontSize="sm" color="var(--red01)">
+        <Text fontSize="sm" color="red01">
           {errorMessage}
         </Text>
       )}
