@@ -12,7 +12,6 @@ const Post = () => {
 
   return (
     <>
-      <Header userId="frong123" />
       <VStack
         p="2rem 2rem 5rem 2rem"
         backgroundColor="bg01"

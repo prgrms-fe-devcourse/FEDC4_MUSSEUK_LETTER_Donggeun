@@ -7,7 +7,6 @@ const NewPost = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Header></Header>
       <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);">
         <Box p="2rem" margin="auto" w="34%" textAlign="center">
           <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
