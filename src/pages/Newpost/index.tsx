@@ -36,6 +36,7 @@ const NewPost = () => {
           </Flex>
         </Box>
       </Box>
+      <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);"></Box>
     </>
   );
 };
