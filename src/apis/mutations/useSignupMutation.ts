@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { baseInstance } from '@/apis/instance';
+import storage from '@/utils/storage';
+import { AUTH_TOKEN } from '@/constants/storageKey';
 import type { User } from '@/types';
 
 interface CustomRequestData {
@@ -38,10 +40,7 @@ const postSignup = async (customParams: CustomRequestData) => {
 const useSignupMutation = () => {
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postSignup,
-    onSuccess: (data) => {
-      // TODO: 임시 코드입니다. 이후에 로그인 토큰 저장 관련 로직 작성시 수정해야 합니다.
-      sessionStorage.setItem('token', data.token);
-    }
+    onSuccess: (data) => storage('session').setItem(AUTH_TOKEN, data.token)
   });
 };
 
