@@ -61,25 +61,21 @@ const SignIn = () => {
         Welcome to 머쓱레터 <EmailIcon />
       </Flex>
       <InputField
+        {...register('email')}
+        id="email"
+        type="email"
         label="Email"
         error={errors.email}
-        inputProps={{
-          id: 'email',
-          type: 'email',
-          placeholder: '이메일을 입력해주세요'
-        }}
-        registerProps={register('email')}
+        placeholder="이메일을 입력해주세요"
       />
       <InputField
+        {...register('password')}
+        id="password"
+        type="password"
         label="Password"
         error={errors.password}
-        inputProps={{
-          id: 'password',
-          type: 'password',
-          placeholder: '비밀번호를 입력해주세요',
-          maxLength: 30
-        }}
-        registerProps={register('password')}
+        placeholder="비밀번호를 입력해주세요"
+        maxLength={30}
       />
       <Button type="submit" mt="6" w="100%" colorScheme="primary">
         Sign in
