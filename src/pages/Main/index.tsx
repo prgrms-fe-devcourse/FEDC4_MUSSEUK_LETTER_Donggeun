@@ -75,32 +75,6 @@ const Main = () => {
                 userName="남궁호수"
                 musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
                 letter="24"></PostCard>
-              {/* <Card maxW="sm">
-                <CardBody>
-                  <Image src={Musseuk} alt="Green double couch with wooden legs" borderRadius="lg" />
-                  <Stack mt="6" spacing="3">
-                    <Heading fontWeight="extrabold" textAlign="center" size="md">
-                      머쓱이 2
-                    </Heading>
-                    <Text fontWeight="bold" fontSize="0.8rem" color="gray" textAlign="center">
-                      남궁호수
-                    </Text>
-                    <Text textAlign="center">안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!</Text>
-                    <Box>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M20 2H4C2.897 2 2 2.897 2 4V16C2 17.103 2.897 18 4 18H7V21.767L13.277 18H20C21.103 18 22 17.103 22 16V4C22 2.897 21.103 2 20 2ZM20 16H12.723L9 18.233V16H4V4H20V16Z"
-                          fill="black"
-                        />
-                        <path d="M7 7H17V9H7V7ZM7 11H14V13H7V11Z" fill="black" />
-                      </svg>
-                    </Box>
-                    <Text textAlign="right" color="blue.600" fontSize="2xl">
-                      24
-                    </Text>
-                  </Stack>
-                </CardBody>
-              </Card> */}
             </SwiperSlide>
           ))}
         </Swiper>
