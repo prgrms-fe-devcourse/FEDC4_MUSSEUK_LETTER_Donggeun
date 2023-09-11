@@ -1,6 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { baseInstance } from '@/apis/instance';
+import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
 import type { User } from '@/types';
@@ -17,13 +18,19 @@ interface ResponseData {
 
 const postLogin = async (params: RequestData) => {
   const { data } = await baseInstance.post('/login', params);
+
   return data;
 };
 
 const useSigninMutation = () => {
+  const queryClient = useQueryClient();
+
   return useMutation<ResponseData, AxiosError, RequestData>({
     mutationFn: postLogin,
-    onSuccess: (data) => storage('session').setItem(AUTH_TOKEN, data.token)
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKey.auth, data.user);
+      storage('session').setItem(AUTH_TOKEN, data.token);
+    }
   });
 };
 

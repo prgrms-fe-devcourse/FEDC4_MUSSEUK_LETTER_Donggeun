@@ -1,6 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { baseInstance } from '@/apis/instance';
+import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
 import type { User } from '@/types';
@@ -34,13 +35,19 @@ const postSignup = async (customParams: CustomRequestData) => {
   };
 
   const { data } = await baseInstance.post('/signup', params);
+
   return data;
 };
 
 const useSignupMutation = () => {
+  const queryClient = useQueryClient();
+
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postSignup,
-    onSuccess: (data) => storage('session').setItem(AUTH_TOKEN, data.token)
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKey.auth, data.user);
+      storage('session').setItem(AUTH_TOKEN, data.token);
+    }
   });
 };
 
