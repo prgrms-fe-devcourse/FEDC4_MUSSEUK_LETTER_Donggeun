@@ -1,32 +1,33 @@
-import { VStack, InputGroup, Input, InputRightElement, Text } from '@chakra-ui/react';
+import { InputGroup, Input, InputRightElement, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import type { InputProps } from '@chakra-ui/react';
+import type { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 const InputField = ({
   label,
-  errorMessage,
+  error,
   inputProps,
+  registerProps,
   icon
 }: {
   label: string;
-  errorMessage?: string;
+  error?: FieldError;
   inputProps: InputProps;
+  registerProps?: UseFormRegisterReturn;
   icon?: React.ReactNode;
 }) => {
   return (
-    <VStack w="100%" align="start">
-      <Text as="label" fontWeight="semibold" htmlFor={inputProps.id}>
+    <FormControl isInvalid={error ? true : false}>
+      <FormLabel htmlFor={inputProps.id} fontWeight="semibold">
         {label}
-      </Text>
+      </FormLabel>
       <InputGroup>
-        <Input w="100%" borderColor="var(--blue01)" {...inputProps} />
+        <Input w="100%" borderColor="blue01" fontWeight="light" {...inputProps} {...registerProps} />
         {icon && <InputRightElement cursor="pointer">{icon}</InputRightElement>}
       </InputGroup>
-      {errorMessage && (
-        <Text fontSize="sm" color="var(--red01)">
-          {errorMessage}
-        </Text>
-      )}
-    </VStack>
+      <FormErrorMessage fontSize="sm" color="red01">
+        {error?.message}
+      </FormErrorMessage>
+    </FormControl>
   );
 };
 

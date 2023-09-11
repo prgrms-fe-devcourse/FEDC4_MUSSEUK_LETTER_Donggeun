@@ -17,7 +17,7 @@ const postLogin = async (params: RequestData) => {
   return data;
 };
 
-const useLoginMutation = () => {
+const useSigninMutation = () => {
   return useMutation<ResponseData, AxiosError, RequestData>({
     mutationFn: postLogin,
     onSuccess: (data) => {
@@ -27,4 +27,4 @@ const useLoginMutation = () => {
   });
 };
 
-export default useLoginMutation;
+export default useSigninMutation;
