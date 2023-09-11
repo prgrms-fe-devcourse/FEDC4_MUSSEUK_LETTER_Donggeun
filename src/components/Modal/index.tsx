@@ -12,7 +12,7 @@ const BasicModal = ({
   ...props
 }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'> & ModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="2xl" {...props}>
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl" {...props}>
       <ModalOverlay />
       {children}
     </Modal>

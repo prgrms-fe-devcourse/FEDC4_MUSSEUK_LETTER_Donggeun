@@ -15,8 +15,19 @@ type DecoProps = {
 
 const Decoration = ({ decoId, ...props }: DecoProps) => {
   return (
-    <Box {...props}>
-      <Image src={decoImage[decoId]} alt={decoId} />
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      w="7rem"
+      h="7rem"
+      border="1px"
+      borderColor="gray03"
+      borderRadius="1rem"
+      mb="2rem"
+      mx="auto"
+      {...props}>
+      <Image src={decoImage[decoId]} alt={decoId} h="5rem" userSelect="none" />
     </Box>
   );
 };
