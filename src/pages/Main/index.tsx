@@ -4,12 +4,13 @@ import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
 import { useNavigate } from 'react-router-dom';
-import { Heading, Stack, Card, CardBody, Box, Image, Text, Button } from '@chakra-ui/react';
+import { Heading, Box, Image, Text, Button } from '@chakra-ui/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import PostCard from '@/components/header/components/PostCard';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -68,7 +69,13 @@ const Main = () => {
           virtual>
           {slides.map((slideContent, index) => (
             <SwiperSlide key={slideContent} virtualIndex={index}>
-              <Card maxW="sm">
+              <PostCard
+                imgUrl={Musseuk}
+                musseukName="머쓱이 1"
+                userName="남궁호수"
+                musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
+                letter="24"></PostCard>
+              {/* <Card maxW="sm">
                 <CardBody>
                   <Image src={Musseuk} alt="Green double couch with wooden legs" borderRadius="lg" />
                   <Stack mt="6" spacing="3">
@@ -93,7 +100,7 @@ const Main = () => {
                     </Text>
                   </Stack>
                 </CardBody>
-              </Card>
+              </Card> */}
             </SwiperSlide>
           ))}
         </Swiper>
