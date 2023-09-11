@@ -37,7 +37,11 @@ const Main = () => {
 
   return (
     <>
-      <Box w="100%" bg="lightgreen" p="3rem">
+      <Box
+        w="100%"
+        bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%); linear-gradient(180deg, color(display-p3 0.8233 1 0.7792) 0%, color(display-p3 0.9667 1 0.8958) 100%);"
+        p="3rem">
+        <Image w="40rem" h="30rem" src={Musseuk} alt="Musseuk" />
         <Heading mb={4}>데브코스 익명 편지 전송 서비스</Heading>
         <br></br>
         <Text fontSize="xl">팀원들에게 전하지 못한 말들이 있어 아쉽지 않으셨나요?</Text>
