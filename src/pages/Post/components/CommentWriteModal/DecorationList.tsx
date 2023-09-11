@@ -1,14 +1,20 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Pagination, Navigation } from 'swiper/modules';
 import Decoration from './Decoration';
-import { DECO_ID } from '../../constants';
+import { DECO_ID, decoType } from '../../constants';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './decoSwiper.css';
+import { Dispatch, SetStateAction } from 'react';
 
-const DecorationList = () => {
+type DecorationListProps = {
+  selectedDeco: decoType | null;
+  setSelectedDeco: Dispatch<SetStateAction<decoType | null>>;
+};
+
+const DecorationList = ({ selectedDeco, setSelectedDeco }: DecorationListProps) => {
   return (
     <Swiper
       slidesPerView={1}
@@ -33,7 +39,7 @@ const DecorationList = () => {
       }}>
       {Object.values(DECO_ID).map((decoId) => (
         <SwiperSlide key={decoId}>
-          <Decoration decoId={decoId} />
+          <Decoration decoId={decoId} selectedDeco={selectedDeco} onClick={() => setSelectedDeco(decoId)} />
         </SwiperSlide>
       ))}
     </Swiper>

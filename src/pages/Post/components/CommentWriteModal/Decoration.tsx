@@ -11,9 +11,12 @@ import Uh1 from '@/assets/images/decoration_uh1.png';
 
 type DecoProps = {
   decoId: decoType;
+  selectedDeco: decoType | null;
 } & BoxProps;
 
-const Decoration = ({ decoId, ...props }: DecoProps) => {
+const Decoration = ({ decoId, selectedDeco, ...props }: DecoProps) => {
+  const isSelected = decoId === selectedDeco;
+
   return (
     <Box
       display="flex"
@@ -21,9 +24,10 @@ const Decoration = ({ decoId, ...props }: DecoProps) => {
       alignItems="center"
       w="7rem"
       h="7rem"
-      border="1px"
-      borderColor="gray03"
+      border={isSelected ? '4px' : '1px'}
+      borderColor={isSelected ? '#CDF400' : 'gray03'}
       borderRadius="1rem"
+      backgroundColor={isSelected ? 'yellow.50' : 'white'}
       mb="2rem"
       mx="auto"
       {...props}>
