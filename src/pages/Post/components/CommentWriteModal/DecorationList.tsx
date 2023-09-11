@@ -24,15 +24,15 @@ const DecorationList = ({ selectedDeco, setSelectedDeco }: DecorationListProps) 
       modules={[Grid, Pagination, Navigation]}
       className="deco-swiper"
       breakpoints={{
-        '@0.75': {
+        '360': {
           slidesPerView: 2,
           grid: { rows: 2, fill: 'row' }
         },
-        '@1.00': {
+        '540': {
           slidesPerView: 3,
           grid: { rows: 2, fill: 'row' }
         },
-        '@1.25': {
+        '720': {
           slidesPerView: 4,
           grid: { rows: 2, fill: 'row' }
         }
