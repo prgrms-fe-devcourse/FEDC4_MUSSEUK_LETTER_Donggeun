@@ -5,7 +5,6 @@ import ListButton from './components/ListButton';
 import DescriptionText from './components/DescriptionText';
 import BackgroundHome from '@/assets/images/background_home.png';
 import CommentBoard from './components/CommentBoard';
-import Header from '@/components/header';
 import CommentWriteModal from './components/CommentWriteModal';
 
 const Post = () => {
