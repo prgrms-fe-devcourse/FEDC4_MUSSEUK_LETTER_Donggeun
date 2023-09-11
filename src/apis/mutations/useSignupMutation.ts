@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { baseInstance } from '@/apis/instance';
+import type { User } from '@/types';
 
 interface CustomRequestData {
   email: string;
@@ -16,7 +17,7 @@ interface RequestData {
 }
 
 interface ResponseData {
-  user: unknown; // TODO: 임시로 unknown으로 설정했습니다.
+  user: User;
   token: string;
 }
 
