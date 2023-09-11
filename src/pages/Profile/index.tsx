@@ -1,4 +1,4 @@
-import Header from '@/components/Header';
+import Header from '@/components/header';
 import MusseukCard from './components/MusseukCard';
 import { Grid, GridItem, Card, CardHeader, CardBody, Circle, Heading, Stack, Text, Button } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
@@ -70,12 +70,12 @@ const Profile = () => {
         <GridItem area={'nav'} px={6}>
           <ProfileBar userName={'이상훈'} />
         </GridItem>
-        <GridItem area={'main'} p={[6, 0]}>
+        <GridItem area={'main'}>
           <Stack w={'100%'} h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} px={6}>
             <Text fontSize={'1.8rem'} mt={16} py={0} w={'32rem'}>
               {userName}의 편지를 전달해주는 머쓱이 5마리가 기다리고 있어요!
             </Text>
-            <Button leftIcon={<AddIcon />} w={56} bg={'green01'} color={'white'} mt={4}>
+            <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary">
               새로운 머쓱이 추가
             </Button>
           </Stack>

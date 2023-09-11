@@ -18,7 +18,7 @@ const ProfileBar = ({ userName }) => {
     <VStack h={'100vh'} my={10} pt={4} px={6} borderRight="1px solid #B6B6B6">
       <VStack py={4}>
         <Avatar size={'2xl'} src={hoodMusseuk} />
-        <Button h={8} bg={'green01'} color={'white'}>
+        <Button h={8} colorScheme="primary">
           이미지 업로드
         </Button>
         <Text>{userName} 님</Text>
@@ -28,7 +28,7 @@ const ProfileBar = ({ userName }) => {
         <UserInfoField icon={<EmailIcon />} type={'text'} value={'Nickname'} />
         <UserInfoField icon={<ChatIcon />} type={'text'} value={'Introduce~'} />
       </VStack>
-      <Button h={8} bg={'green01'} color={'white'}>
+      <Button h={8} colorScheme="primary">
         프로필 편집하기
       </Button>
     </VStack>
