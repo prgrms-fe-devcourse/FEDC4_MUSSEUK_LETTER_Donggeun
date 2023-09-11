@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
+import { useNavigate } from 'react-router-dom';
 import {
   ButtonGroup,
   CardFooter,
@@ -27,6 +28,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const Main = () => {
+  const navigate = useNavigate();
+
   const [swiperRef, setSwiperRef] = useState(null);
   const appendNumber = useRef(25);
   const prependNumber = useRef(1);
@@ -41,7 +44,15 @@ const Main = () => {
         <Text fontSize="xl">다른 사람의 머쓱이에게 편지를 남겨보세요!</Text>
         <br></br>
         <Text fontSize="xl"> 또는, 당신의 머쓱이를 만들어서 공유해보세요! </Text>
-        <Button display="flex" m="auto" size="lg" colorScheme="green" mt="3.5rem">
+        <Button
+          onClick={() => {
+            navigate('/newpost');
+          }}
+          display="flex"
+          m="auto"
+          size="lg"
+          colorScheme="green"
+          mt="3.5rem">
           <Image boxSize="2.5rem" src={Museeukhood} alt="Museeukhood" />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나만의 머쓱이
           만들기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

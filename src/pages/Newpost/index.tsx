@@ -1,7 +1,9 @@
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
+import { useNavigate } from 'react-router-dom';
 
 const NewPost = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Box p="2rem" margin="auto" w="34%" textAlign="center">
@@ -20,7 +22,13 @@ const NewPost = () => {
         </Text>
         <Textarea size="lg" marginBottom="4rem" placeholder="머쓱이에 대한 소개를 작성해주세요" />
         <Flex justifyContent="space-between">
-          <Button colorScheme="gray">뒤로가기</Button>
+          <Button
+            onClick={() => {
+              navigate('/');
+            }}
+            colorScheme="gray">
+            뒤로가기
+          </Button>
           <Button colorScheme="whatsapp">생성하기</Button>
         </Flex>
       </Box>
