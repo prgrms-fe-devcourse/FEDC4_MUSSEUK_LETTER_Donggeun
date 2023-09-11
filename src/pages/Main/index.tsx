@@ -22,10 +22,7 @@ const Main = () => {
   return (
     <>
       <Header></Header>
-      <Box
-        w="100%"
-        bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%); linear-gradient(180deg, color(display-p3 0.8233 1 0.7792) 0%, color(display-p3 0.9667 1 0.8958) 100%);"
-        p="3rem">
+      <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
         <Image
           top="3.3rem"
           right="1rem"
@@ -81,7 +78,7 @@ const Main = () => {
                     <Text fontWeight="bold" fontSize="0.8rem" color="gray" textAlign="center">
                       남궁호수
                     </Text>
-                    <Text textAlign="center">안녕하세요! 피드백을 받고 싶으 머쓱이 입니다!</Text>
+                    <Text textAlign="center">안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!</Text>
                     <Box>
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path
