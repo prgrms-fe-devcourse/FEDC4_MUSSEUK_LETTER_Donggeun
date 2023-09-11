@@ -58,7 +58,7 @@ const Main = () => {
         </Button>
       </Box>
 
-      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);" paddingTop="5rem">
+      <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);" paddingTop="5rem">
         <Swiper
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={5}
