@@ -18,14 +18,14 @@ const MusseukCard = ({ cardInfo }) => {
       </CardHeader>
       <CardBody mt={4} p={0}>
         <Stack textAlign="center">
-          <Heading fontSize="lg" my={4} mx={0}>
+          <Heading fontSize="lg" m={0}>
             {musseukName}
           </Heading>
           <Text fontSize="0.8rem">{musseukContent}</Text>
         </Stack>
       </CardBody>
       <CardFooter p={0} justify="flex-end" alignItems="center" color={'blue03'}>
-        <EmailIcon mr="10px" />
+        <EmailIcon mr="1rem" />
         <Text>{letter}</Text>
       </CardFooter>
     </Card>
