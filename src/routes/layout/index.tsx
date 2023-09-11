@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 const MainLayout = () => {
   return (
     <>
-      <Header userId="frong123" />
+      <Header />
       <Outlet />
     </>
   );

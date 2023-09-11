@@ -6,15 +6,13 @@ import InputField from '@/components/header/components/Input';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
 import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
-type HeaderProps = {
-  profileImg?: string;
-  userId?: string;
-};
-
-const Header = ({ profileImg, userId }: HeaderProps) => {
+const Header = () => {
   const navigate = useNavigate();
   const { mutate } = useSignOutMutation();
+
+  const { data } = useAuthCheckQuery();
 
   const signOut = () => {
     mutate(undefined, {
@@ -27,7 +25,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
       <BellIcon w={8} h={8} cursor={'pointer'} />
       <Menu autoSelect={false}>
         <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-          <Avatar size={'sm'} src={profileImg ?? defaultProfile} />
+          <Avatar size={'sm'} src={data?.image ?? defaultProfile} />
         </MenuButton>
         <MenuList minW={36} p={0}>
           <MenuItem
@@ -36,7 +34,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
             h={9}
             justifyContent={'center'}
             _hover={{ bg: 'gray01' }}
-            onClick={() => navigate(`/profile/${userId}`)}>
+            onClick={() => navigate(`/profile/${data?._id}`)}>
             프로필
           </MenuItem>
           <MenuItem
@@ -74,7 +72,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
             fontWeight: 'normal'
           }}
         />
-        {userId ? headerMenu() : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
+        {data?._id ? headerMenu() : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
       </Flex>
     </Box>
   );
