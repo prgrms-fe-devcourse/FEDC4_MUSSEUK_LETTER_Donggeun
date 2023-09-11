@@ -2,10 +2,12 @@ import BasicModal from '@/components/Modal';
 import {
   Button,
   Heading,
+  Input,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
+  Textarea,
   UseDisclosureReturn,
   VStack
 } from '@chakra-ui/react';
@@ -21,7 +23,22 @@ const CommentWriteModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpe
             <Heading>장식을 선택해주세요</Heading>
             <DecorationList />
             <Heading>메세지를 작성해주세요</Heading>
+            <Textarea
+              w="90%"
+              h="10rem"
+              _placeholder={{ opacity: 1, color: 'gray03' }}
+              borderRadius="10px"
+              borderColor="blue01"
+              mb="1rem"
+            />
             <Heading>작성자에게 보여줄 닉네임</Heading>
+            <Input
+              placeholder="익명의 머쓱이"
+              w="90%"
+              _placeholder={{ opacity: 1, color: 'gray03' }}
+              borderRadius="10px"
+              borderColor="blue01"
+            />
           </VStack>
         </ModalBody>
         <ModalFooter>
