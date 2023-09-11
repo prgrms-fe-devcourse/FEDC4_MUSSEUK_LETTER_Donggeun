@@ -2,7 +2,7 @@ import { Box, Button, Flex, Image, Stack, Menu, MenuButton, MenuList, MenuItem, 
 import { BellIcon, SearchIcon } from '@chakra-ui/icons';
 import logo from '@/assets/images/logo.png';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
-import InputField from '@/components/Header/components/Input';
+import InputField from '@/components/header/components/Input';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
 
