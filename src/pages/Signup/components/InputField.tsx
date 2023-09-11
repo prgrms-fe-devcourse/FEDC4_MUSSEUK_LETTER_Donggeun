@@ -21,7 +21,7 @@ const InputField = ({
         {label}
       </FormLabel>
       <InputGroup>
-        <Input w="100%" borderColor="blue01" {...inputProps} {...registerProps} />
+        <Input w="100%" borderColor="blue01" fontWeight="light" {...inputProps} {...registerProps} />
         {icon && <InputRightElement cursor="pointer">{icon}</InputRightElement>}
       </InputGroup>
       <FormErrorMessage fontSize="sm" color="red01">
