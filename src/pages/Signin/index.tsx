@@ -37,7 +37,6 @@ const SignIn = () => {
         onSuccess: () => navigate(links.main),
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          console.log(error);
           setError('email', { type: 'server', message: errorMessage });
           setError('password', { type: 'server', message: errorMessage });
         }
