@@ -4,24 +4,7 @@ import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
 import { useNavigate } from 'react-router-dom';
-import {
-  ButtonGroup,
-  CardFooter,
-  Divider,
-  Heading,
-  Stack,
-  Card,
-  CardBody,
-  Center,
-  Square,
-  Box,
-  Flex,
-  Spacer,
-  Image,
-  Text,
-  Button,
-  WrapItem
-} from '@chakra-ui/react';
+import { Heading, Stack, Card, CardBody, Box, Image, Text, Button } from '@chakra-ui/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -38,6 +21,7 @@ const Main = () => {
 
   return (
     <>
+      <Header></Header>
       <Box
         w="100%"
         bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%); linear-gradient(180deg, color(display-p3 0.8233 1 0.7792) 0%, color(display-p3 0.9667 1 0.8958) 100%);"
@@ -56,7 +40,7 @@ const Main = () => {
           display="flex"
           m="auto"
           size="lg"
-          colorScheme="green"
+          colorScheme="primary"
           mt="3.5rem">
           <Image boxSize="2.5rem" src={Museeukhood} alt="Museeukhood" />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나만의 머쓱이

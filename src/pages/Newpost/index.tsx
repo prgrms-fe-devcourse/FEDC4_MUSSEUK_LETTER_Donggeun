@@ -29,7 +29,7 @@ const NewPost = () => {
             colorScheme="gray">
             뒤로가기
           </Button>
-          <Button colorScheme="whatsapp">생성하기</Button>
+          <Button colorScheme="primary">생성하기</Button>
         </Flex>
       </Box>
     </>
