@@ -34,7 +34,7 @@ const NewPost = () => {
           <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">
               <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image objectFit="fill" marginTop="0.7rem" src={Musseuk} alt="Musseuk" />
+                <Image p="0.5rem 0 0.5rem 0" objectFit="fill" marginTop="0.7rem" src={Musseuk} alt="Musseuk" />
               </Box>
               <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
                 <Image p="1.3rem 1.7rem 1.3rem 1.3rem" src={Musseuk2} alt="Dan Musseuk" />
@@ -43,10 +43,10 @@ const NewPost = () => {
                 <Image p="1.5rem" src={Musseuk3} alt="Dan Musseuk" />
               </Box>
               <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image padding="0 0 0.6rem 0" src={Musseuk4} alt="Dan Musseuk" />
+                <Image padding="0.8rem 0 1.1rem 0" src={Musseuk4} alt="Dan Musseuk" />
               </Box>
               <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image p="0.3rem 1.5rem 0 0.3rem " src={Musseuk5} alt="Dan Musseuk" />
+                <Image p="0.8rem 1.5rem 0.6rem 0.3rem " src={Musseuk5} alt="Dan Musseuk" />
               </Box>
             </Flex>
           </Box>
