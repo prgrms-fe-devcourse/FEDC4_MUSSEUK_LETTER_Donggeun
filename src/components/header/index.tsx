@@ -2,20 +2,22 @@ import { Box, Button, Flex, Image, Stack, Menu, MenuButton, MenuList, MenuItem, 
 import { BellIcon, SearchIcon } from '@chakra-ui/icons';
 import logo from '@/assets/images/logo.png';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
-import InputField from '@/components/Header/components/Input';
+import InputField from '@/components/header/components/Input';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
+import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
-type HeaderProps = {
-  profileImg?: string;
-  userId?: string;
-};
-
-const Header = ({ profileImg, userId }: HeaderProps) => {
+const Header = () => {
   const navigate = useNavigate();
+  const { mutate } = useSignOutMutation();
 
-  const handlePath = (path: string) => {
-    navigate(path);
+  const { data } = useAuthCheckQuery();
+
+  const signOut = () => {
+    mutate(undefined, {
+      onSuccess: () => navigate('/signin')
+    });
   };
 
   const headerMenu = () => (
@@ -23,26 +25,33 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
       <BellIcon w={8} h={8} cursor={'pointer'} />
       <Menu autoSelect={false}>
         <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-          <Avatar size={'sm'} src={profileImg ?? defaultProfile} />
+          <Avatar size={'sm'} src={data?.image ?? defaultProfile} />
         </MenuButton>
         <MenuList minW={36} p={0}>
           <MenuItem
             borderTopLeftRadius={5}
             borderTopRightRadius={5}
-            h={7}
+            h={9}
             justifyContent={'center'}
             _hover={{ bg: 'gray01' }}
-            onClick={() => handlePath(`/profile/${userId}`)}>
+            onClick={() => navigate(`/profile/${data?._id}`)}>
             프로필
+          </MenuItem>
+          <MenuItem
+            h={9}
+            justifyContent={'center'}
+            _hover={{ bg: 'gray01' }}
+            onClick={() => navigate('/changePassword')}>
+            비밀번호 변경
           </MenuItem>
           <MenuItem
             borderBottomLeftRadius={5}
             borderBottomRightRadius={5}
-            h={7}
+            h={9}
             justifyContent={'center'}
             _hover={{ bg: 'gray01' }}
-            onClick={() => handlePath('/changePassword')}>
-            비밀번호 변경
+            onClick={signOut}>
+            로그아웃
           </MenuItem>
         </MenuList>
       </Menu>
@@ -52,7 +61,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
   return (
     <Box h={16} px={6}>
       <Flex gap={4} alignItems={'center'} h="100%" justifyContent={'space-between'}>
-        <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => handlePath('/')} />
+        <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => navigate('/')} />
         <InputField
           icon={<Icon as={SearchIcon} />}
           mw={'65rem'}
@@ -63,7 +72,7 @@ const Header = ({ profileImg, userId }: HeaderProps) => {
             fontWeight: 'normal'
           }}
         />
-        {userId ? headerMenu() : <PrimaryButton onClick={() => handlePath('/signin')}>로그인</PrimaryButton>}
+        {data?._id ? headerMenu() : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
       </Flex>
     </Box>
   );

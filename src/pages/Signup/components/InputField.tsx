@@ -1,27 +1,21 @@
+import { forwardRef, ComponentProps } from 'react';
 import { InputGroup, Input, InputRightElement, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
-import type { InputProps } from '@chakra-ui/react';
-import type { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import type { FieldError } from 'react-hook-form';
 
-const InputField = ({
-  label,
-  error,
-  inputProps,
-  registerProps,
-  icon
-}: {
+type Props = ComponentProps<typeof Input> & {
   label: string;
   error?: FieldError;
-  inputProps: InputProps;
-  registerProps?: UseFormRegisterReturn;
   icon?: React.ReactNode;
-}) => {
+};
+
+const InputField = forwardRef(({ label, error, icon, ...props }: Props, ref) => {
   return (
     <FormControl isInvalid={error ? true : false}>
-      <FormLabel htmlFor={inputProps.id} fontWeight="semibold">
+      <FormLabel htmlFor={props.id} fontWeight="semibold">
         {label}
       </FormLabel>
       <InputGroup>
-        <Input w="100%" borderColor="blue01" {...inputProps} {...registerProps} />
+        <Input ref={ref} w="100%" borderColor="blue01" fontWeight="light" {...props} />
         {icon && <InputRightElement cursor="pointer">{icon}</InputRightElement>}
       </InputGroup>
       <FormErrorMessage fontSize="sm" color="red01">
@@ -29,6 +23,8 @@ const InputField = ({
       </FormErrorMessage>
     </FormControl>
   );
-};
+});
+
+InputField.displayName = 'InputField';
 
 export default InputField;
