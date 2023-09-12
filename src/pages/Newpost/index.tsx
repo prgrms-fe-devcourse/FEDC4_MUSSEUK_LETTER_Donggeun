@@ -6,7 +6,6 @@ import Musseuk3 from '@/assets/images/musseuk_hood.png';
 import Musseuk4 from '@/assets/images/musseuk_heart.png';
 import Musseuk5 from '@/assets/images/musseuk_default.png';
 import { useNavigate } from 'react-router-dom';
-import Table from '@/assets/images/table.png';
 
 const NewPost = () => {
   const navigate = useNavigate();
@@ -30,10 +29,7 @@ const NewPost = () => {
             머쓱이 테마
           </Text>
           <Box margin="auto" h="31rem" p={4}>
-            <Image src={Musseuk} alt="Dan Musseuk" />
-          </Box>
-          <Box margin="auto" h="31rem" p={4}>
-            <Image src={Musseuk} alt="Dan Musseuk" />
+            <Image src={Musseuk} alt="Musseuk" />
           </Box>
           <Box bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">
