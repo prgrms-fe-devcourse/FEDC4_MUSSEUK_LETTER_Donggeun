@@ -28,7 +28,7 @@ const NewPost = () => {
           <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
             머쓱이 테마
           </Text>
-          <Box margin="auto" h="35rem" p={4}>
+          <Box margin="auto" h="30rem" p={4}>
             <Image src={Musseuk} alt="Dan Abramov" />
           </Box>
           <Box bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
