@@ -50,10 +50,10 @@ const Main = () => {
         <Swiper
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={5}
-          centeredSlides={true}
+          centeredSlides={false}
           spaceBetween={0}
           pagination={{
-            type: 'fraction'
+            type: 'bullets'
           }}
           navigation={true}
           virtual>
