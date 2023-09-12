@@ -63,7 +63,7 @@ const Main = () => {
           virtual>
           {slides.map((slideContent, index) => (
             <SwiperSlide key={slideContent} virtualIndex={index}>
-              <div style={{ marginBottom: '3.5rem' }}>
+              <div style={{ marginLeft: '4rem', marginBottom: '3.5rem' }}>
                 <PostCard
                   imgUrl={Musseuk}
                   musseukName="머쓱이 1"
