@@ -1,4 +1,5 @@
 import Header from '@/components/header';
+import PostCard from '@/components/PostCard';
 import MusseukCard from './components/MusseukCard';
 import {
   Grid,
@@ -78,7 +79,6 @@ const Profile = () => {
   ];
   return (
     <>
-      <Header></Header>
       <Grid bg={'bg0101'} h="100vh" gridTemplateColumns={'1fr 3.5fr'}>
         <GridItem>
           <ProfileBar userName={'이상훈'} />
@@ -95,7 +95,7 @@ const Profile = () => {
           <Grid gridTemplateColumns={isSmallerThan768 ? '1fr' : 'repeat(3, 1fr)'} gap={5} p={6} justifyItems={'center'}>
             {musseuk_default.map((card) => (
               <GridItem key={card.id}>
-                <MusseukCard cardInfo={card} />
+                <PostCard {...card} />
               </GridItem>
             ))}
             <AddCard></AddCard>
