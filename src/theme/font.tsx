@@ -6,25 +6,25 @@ const Fonts = () => (
       @font-face {
         font-family: 'netmarble';
         font-weight: 300;
-        src: url('/src/assets/fonts/netmarbleL.ttf');
+        src: url('/fonts/netmarbleL.ttf');
       }
 
       @font-face {
         font-family: 'netmarble';
         font-weight: 500;
-        src: url('/src/assets/fonts/netmarbleM.ttf');
+        src: url('/fonts/netmarbleM.ttf');
       }
 
       @font-face {
         font-family: 'netmarble';
         font-weight: normal;
-        src: url('/src/assets/fonts/netmarbleM.ttf');
+        src: url('/fonts/netmarbleM.ttf');
       }
 
       @font-face {
         font-family: 'netmarble';
         font-weight: 700;
-        src: url('/src/assets/fonts/netmarbleB.ttf');
+        src: url('/fonts/netmarbleB.ttf');
       }
   `}
   />
