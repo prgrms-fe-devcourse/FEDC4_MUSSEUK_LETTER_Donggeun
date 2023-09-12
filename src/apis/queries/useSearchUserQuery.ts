@@ -3,19 +3,16 @@ import { baseInstance } from '@/apis/instance';
 import { UserResponse } from '@/apis/types';
 import queryKey from '@/apis/queryKeys';
 
-interface RequestQuery {
-  keyword?: string;
-}
-export const getSearchResult = async ({ keyword }: RequestQuery) => {
+export const getSearchResult = async (keyword: string) => {
   const { data } = await baseInstance.get<UserResponse[]>(`/search/users/${keyword}`);
 
   return data;
 };
 
-const useSearchUserQuery = (keyword: RequestQuery) => {
+const useSearchUserQuery = (keyword: string) => {
   return useQuery<UserResponse[]>({
-    queryKey: queryKey.users.search,
-    queryFn: getSearchResult(keyword)
+    queryKey: queryKey.users.search(keyword),
+    queryFn: () => getSearchResult(keyword)
   });
 };
 

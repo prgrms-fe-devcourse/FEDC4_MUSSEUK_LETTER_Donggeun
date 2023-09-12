@@ -7,17 +7,30 @@ import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
 import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import useSearchUserQuery from '@/apis/queries/useSearchUserQuery';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 
+type InputValue = {
+  keyword: string;
+};
 const Header = () => {
   const navigate = useNavigate();
-  const { mutate } = useSignOutMutation();
+  const [keyword, setKeyword] = useState('');
+  const { data: searchList } = useSearchUserQuery(keyword);
 
+  const { handleSubmit, register } = useForm<InputValue>();
+  const { mutate } = useSignOutMutation();
   const { data } = useAuthCheckQuery();
 
   const signOut = () => {
     mutate(undefined, {
       onSuccess: () => navigate('/signin')
     });
+  };
+
+  const onSubmit: SubmitHandler<InputValue> = (value: { keyword: string }) => {
+    setKeyword(value.keyword);
   };
 
   const headerMenu = () => (
@@ -62,16 +75,17 @@ const Header = () => {
     <Box h={16} px={6}>
       <Flex gap={4} alignItems={'center'} h="100%" justifyContent={'space-between'}>
         <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => navigate('/')} />
-        <InputField
-          icon={<Icon as={SearchIcon} />}
-          mw={'65rem'}
-          inputProps={{
-            placeholder: '사용자 이름을 입력해 주세요',
-            size: 'md',
-            fontSize: '14px',
-            fontWeight: 'normal'
-          }}
-        />
+        <form style={{ width: '65rem' }} onSubmit={handleSubmit(onSubmit)}>
+          <InputField
+            {...register('keyword')}
+            icon={<Icon as={SearchIcon} onClick={handleSubmit(onSubmit)} />}
+            id="keyword"
+            placeholder="사용자 이름을 입력해 주세요"
+            size="md"
+            fontSize="14px"
+            fontWeight="normal"
+          />
+        </form>
         {data?._id ? headerMenu() : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
       </Flex>
     </Box>
