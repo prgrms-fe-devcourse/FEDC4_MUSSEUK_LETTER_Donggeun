@@ -16,7 +16,7 @@ const App = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/post:postId" element={<Post />} />
+          <Route path="/post/:postId" element={<Post />} />
           <Route path="/newpost" element={<NewPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
         </Route>

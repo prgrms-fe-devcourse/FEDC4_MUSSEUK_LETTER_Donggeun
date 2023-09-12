@@ -1,14 +1,15 @@
-import { Box, Heading, VStack } from '@chakra-ui/react';
+import { Box, Heading, VStack, useDisclosure } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import AnnouncementText from './components/AnnouncementText';
 import ListButton from './components/ListButton';
 import DescriptionText from './components/DescriptionText';
 import BackgroundHome from '@/assets/images/background_home.png';
 import CommentBoard from './components/CommentBoard';
-import Header from '@/components/header';
+import CommentWriteModal from './components/CommentWriteModal';
 
 const Post = () => {
   const { postId } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -25,7 +26,7 @@ const Post = () => {
           </AnnouncementText>
           <ListButton />
         </Box>
-        <CommentBoard />
+        <CommentBoard onOpen={onOpen} />
         <Heading mb="1rem">{postId}의 머쓱이</Heading>
         <DescriptionText>
           안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을
@@ -33,6 +34,7 @@ const Post = () => {
           입니다.
         </DescriptionText>
       </VStack>
+      <CommentWriteModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 };
