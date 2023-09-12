@@ -64,7 +64,7 @@ const Main = () => {
                 musseukName="머쓱이 1"
                 userName="남궁호수"
                 musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
-                letter="24"></PostCard>
+                letter={24}></PostCard>
             </SwiperSlide>
           ))}
         </Swiper>
