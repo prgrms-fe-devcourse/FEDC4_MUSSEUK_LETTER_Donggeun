@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import PostCard from '@/components/header/components/PostCard';
+import PostCard from '@/components/PostCard';
 import swiper from './swiper.css';
 
 const Main = () => {
