@@ -2,15 +2,14 @@ import { Card, CardHeader, CardBody, CardFooter, Flex } from '@chakra-ui/react';
 import { Image, Stack, Heading, Text } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
 
-type cardInfo = {
+type Props = {
   imgUrl: string;
   musseukName: string;
   musseukContent: string;
-  letter: string;
+  letter: number;
 };
 
-const MusseukCard = ({ cardInfo }) => {
-  const { imgUrl, musseukName, musseukContent, letter }: cardInfo = cardInfo;
+const MusseukCard = ({ imgUrl, musseukName, musseukContent, letter }: Props) => {
   return (
     <Card w={56} h={64} p={4} border={'2px'} borderColor={'green01'} boxShadow={' 0px 4px 7px 0px rgba(0, 0, 0, 0.25)'}>
       <CardHeader textAlign="center" p={0}>
