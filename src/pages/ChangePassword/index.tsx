@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import musseuk from '@/assets/images/musseuk_hood.png';
+import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
 import InputField from '@/pages/Signup/components/InputField';
 import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
 
@@ -28,6 +29,7 @@ const formSchema = z
 type Inputs = z.infer<typeof formSchema>;
 
 const ChangePassword = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
   const {
@@ -38,13 +40,10 @@ const ChangePassword = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(formSchema)
   });
-  const navigate = useNavigate();
-
   const password = watch('password');
-  const isPasswordShort = !password || password.length < 8;
-  const isPasswordContainNumber = /\d/.test(password);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.log(errors);
 
   return (
@@ -63,8 +62,8 @@ const ChangePassword = () => {
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
       />
       <Box w="100%" fontSize="sm">
-        {isPasswordShort && <Text fontWeight="light">· Length must be greater than 8 characters</Text>}
-        {!isPasswordContainNumber && <Text fontWeight="light">· Password must contain numbers</Text>}
+        {isPasswordTooShort(password) && <Text fontWeight="light">· Length must be greater than 8 characters</Text>}
+        {!isPasswordContainNumber(password) && <Text fontWeight="light">· Password must contain numbers</Text>}
       </Box>
       <InputField
         {...register('confirmPassword')}
