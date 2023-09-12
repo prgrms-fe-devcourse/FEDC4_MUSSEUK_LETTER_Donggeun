@@ -29,7 +29,7 @@ const NewPost = () => {
             머쓱이 테마
           </Text>
           <Box margin="auto" h="30rem" p={4}>
-            <Image src={Musseuk} alt="Dan Abramov" />
+            <Image src={Musseuk} alt="Dan Musseuk" />
           </Box>
           <Box bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">

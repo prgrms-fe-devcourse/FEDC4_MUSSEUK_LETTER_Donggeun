@@ -75,7 +75,7 @@ const Main = () => {
           ))}
         </Swiper>
       </Box>
-      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">$nbsp</Box>
+      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
     </>
   );
 };
