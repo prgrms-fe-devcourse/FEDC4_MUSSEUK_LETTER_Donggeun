@@ -5,16 +5,16 @@ interface RequestData {
   password: string;
 }
 
-const putUpdatePassword = async (params: RequestData) => {
+const putChangePassword = async (params: RequestData) => {
   const { data } = await authInstance.put('/settings/update-password', params);
 
   return data;
 };
 
-const useUpdatePasswordMutation = () => {
+const useChangePasswordMutation = () => {
   return useMutation({
-    mutationFn: putUpdatePassword
+    mutationFn: putChangePassword
   });
 };
 
-export default useUpdatePasswordMutation;
+export default useChangePasswordMutation;
