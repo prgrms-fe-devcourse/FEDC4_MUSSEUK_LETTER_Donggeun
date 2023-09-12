@@ -1,6 +1,10 @@
 import Header from '@/components/header';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
+import Musseuk2 from '@/assets/images/musseuk_labtop.png';
+import Musseuk3 from '@/assets/images/musseuk_hood.png';
+import Musseuk4 from '@/assets/images/musseuk_heart.png';
+import Musseuk5 from '@/assets/images/musseuk_default.png';
 import { useNavigate } from 'react-router-dom';
 
 const NewPost = () => {
@@ -26,6 +30,25 @@ const NewPost = () => {
           </Text>
           <Box margin="auto" h="35rem" p={4}>
             <Image src={Musseuk} alt="Dan Abramov" />
+          </Box>
+          <Box bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
+            <Flex justify="center" align="center">
+              <Box width="50rem" height="auto">
+                <Image marginTop="0.7rem" src={Musseuk} alt="Musseuk" />
+              </Box>
+              <Box width="50rem" height="auto">
+                <Image p="1.3rem 1.7rem 1.3rem 1.3rem" src={Musseuk2} alt="Dan Musseuk" />
+              </Box>
+              <Box width="50rem" height="auto">
+                <Image p="1.5rem" src={Musseuk3} alt="Dan Musseuk" />
+              </Box>
+              <Box width="50rem" height="auto">
+                <Image padding="0 0 0.6rem 0" src={Musseuk4} alt="Dan Musseuk" />
+              </Box>
+              <Box width="50rem" height="auto">
+                <Image p="0.3rem 1.5rem 0 0.3rem " src={Musseuk5} alt="Dan Musseuk" />
+              </Box>
+            </Flex>
           </Box>
           <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.5rem" color="black">
             편지를 쓸 사람들에게 보여줄 멘트
