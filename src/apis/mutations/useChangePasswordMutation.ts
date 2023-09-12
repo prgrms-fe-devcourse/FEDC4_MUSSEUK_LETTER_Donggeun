@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 
 interface RequestData {
@@ -12,7 +13,7 @@ const putChangePassword = async (params: RequestData) => {
 };
 
 const useChangePasswordMutation = () => {
-  return useMutation({
+  return useMutation<unknown, AxiosError, RequestData>({
     mutationFn: putChangePassword
   });
 };

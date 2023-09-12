@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { toast } from 'react-toastify';
 import useChangePasswordMutation from '@/apis/mutations/useChangePasswordMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
@@ -48,8 +49,14 @@ const ChangePassword = () => {
     mutate(
       { password: data.password },
       {
-        onSuccess: () => navigate(links.back),
-        onError: (error) => console.error(error)
+        onSuccess: () => {
+          toast.success('비밀번호가 변경되었어요!', { position: 'top-center' });
+          navigate(links.back);
+        },
+        onError: (error) => {
+          const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
+          toast.error(errorMessage, { position: 'top-center' });
+        }
       }
     );
   };
