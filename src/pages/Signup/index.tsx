@@ -74,35 +74,29 @@ const SignUp = () => {
       <Image maxW="32" src={musseuk} alt="머쓱이" />
       <Heading textAlign="center">Sign up</Heading>
       <InputField
+        {...register('email')}
+        id="email"
+        type="email"
         label="Email"
         error={errors.email}
-        inputProps={{
-          id: 'email',
-          type: 'email',
-          placeholder: '이메일을 입력해주세요'
-        }}
-        registerProps={register('email')}
+        placeholder="이메일을 입력해주세요"
       />
       <InputField
+        {...register('username')}
+        id="username"
+        type="text"
         label="Username"
         error={errors.username}
-        inputProps={{
-          id: 'username',
-          type: 'text',
-          placeholder: '실명을 입력해주세요',
-          maxLength: 4
-        }}
-        registerProps={register('username')}
+        placeholder="실명을 입력해주세요"
+        maxLength={4}
       />
       <InputField
+        {...register('password')}
+        id="password"
+        type={showPassword ? 'text' : 'password'}
         label="Password"
-        inputProps={{
-          id: 'password',
-          type: showPassword ? 'text' : 'password',
-          placeholder: '비밀번호를 입력해주세요',
-          maxLength: 30
-        }}
-        registerProps={register('password')}
+        placeholder="비밀번호를 입력해주세요"
+        maxLength={30}
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
       />
       <Box w="100%" fontSize="sm">
@@ -110,15 +104,13 @@ const SignUp = () => {
         {!isPasswordContainNumber && <Text fontWeight="light">· Password must contain numbers</Text>}
       </Box>
       <InputField
+        {...register('confirmPassword')}
+        id="confirm-password"
+        type={showConfirmPassword ? 'text' : 'password'}
         label="Confirm Password"
+        placeholder="비밀번호를 재확인해주세요"
+        maxLength={30}
         error={errors.confirmPassword}
-        inputProps={{
-          id: 'confirm-password',
-          type: showConfirmPassword ? 'text' : 'password',
-          placeholder: '비밀번호를 재확인해주세요',
-          maxLength: 30
-        }}
-        registerProps={register('confirmPassword')}
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
       />
       <Button type="submit" mt="6" w="100%" colorScheme="primary">
