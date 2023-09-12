@@ -55,6 +55,7 @@ const Main = () => {
           slidesPerGroup={5}
           centeredSlides={false}
           spaceBetween={0}
+          speed={1000}
           pagination={{
             type: 'bullets'
           }}
