@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import useUpdatePasswordMutation from '@/apis/mutations/useUpdatePasswordMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
 import InputField from '@/pages/Signup/components/InputField';
@@ -29,6 +30,7 @@ const formSchema = z
 type Inputs = z.infer<typeof formSchema>;
 
 const ChangePassword = () => {
+  const { mutate } = useUpdatePasswordMutation();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
@@ -42,9 +44,17 @@ const ChangePassword = () => {
   });
   const password = watch('password');
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    mutate(
+      { password: data.password },
+      {
+        onSuccess: () => navigate(links.back),
+        onError: (error) => console.error(error)
+      }
+    );
+  };
 
-  const onError: SubmitErrorHandler<Inputs> = (errors) => console.log(errors);
+  const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
