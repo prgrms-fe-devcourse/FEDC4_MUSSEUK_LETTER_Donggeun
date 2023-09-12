@@ -1,6 +1,4 @@
-import Header from '@/components/header';
 import PostCard from '@/components/PostCard';
-import MusseukCard from './components/MusseukCard';
 import {
   Grid,
   GridItem,
