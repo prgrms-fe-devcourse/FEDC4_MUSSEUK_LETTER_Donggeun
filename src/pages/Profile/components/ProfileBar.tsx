@@ -1,5 +1,4 @@
 import { VStack, HStack, Avatar, Button, Text, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { EmailIcon, ChatIcon } from '@chakra-ui/icons';
 import hoodMusseuk from '@/assets/images/musseuk_hood.png';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdFaceUnlock, MdComment } from 'react-icons/md';
