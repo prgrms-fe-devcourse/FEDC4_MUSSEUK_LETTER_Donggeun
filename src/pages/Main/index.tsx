@@ -52,6 +52,7 @@ const Main = () => {
           loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={5}
+          slidesPerGroup={5}
           centeredSlides={false}
           spaceBetween={0}
           pagination={{
@@ -73,6 +74,7 @@ const Main = () => {
           ))}
         </Swiper>
       </Box>
+      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">$nbsp</Box>
     </>
   );
 };

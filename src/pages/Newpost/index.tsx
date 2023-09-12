@@ -7,7 +7,7 @@ const NewPost = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);">
+      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">
         <Box p="2rem" margin="auto" w="34%" textAlign="center">
           <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
             머쓱이 이름
@@ -35,7 +35,6 @@ const NewPost = () => {
           </Flex>
         </Box>
       </Box>
-      <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);"></Box>
     </>
   );
 };
