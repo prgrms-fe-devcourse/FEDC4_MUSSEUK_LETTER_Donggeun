@@ -3,7 +3,17 @@ import hoodMusseuk from '@/assets/images/musseuk_hood.png';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdFaceUnlock, MdComment } from 'react-icons/md';
 
-const UserInfoField = ({ icon, type, value }) => {
+type UserInfoFieldProps = {
+  icon: React.ReactNode;
+  type: string;
+  value: string;
+};
+
+type ProfileBarProps = {
+  userName: string;
+};
+
+const UserInfoField = ({ icon, type, value }: UserInfoFieldProps) => {
   return (
     <FormControl>
       <HStack my={4} justify={'center'} align={'center'}>
@@ -16,7 +26,7 @@ const UserInfoField = ({ icon, type, value }) => {
   );
 };
 
-const ProfileBar = ({ userName }) => {
+const ProfileBar = ({ userName }: ProfileBarProps) => {
   return (
     <VStack h={'100%'} my={10} pt={4} px={6} borderRight="1px solid #B6B6B6">
       <VStack py={4}>
