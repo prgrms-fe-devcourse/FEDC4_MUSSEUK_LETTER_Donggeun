@@ -1,5 +1,5 @@
-import { Box, Heading, VStack, useDisclosure } from '@chakra-ui/react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Heading, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 import AnnouncementText from './components/AnnouncementText';
 import ListButton from './components/ListButton';
 import DescriptionText from './components/DescriptionText';
@@ -11,10 +11,9 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
 const Post = () => {
   const { postId } = useParams();
-  const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data: postData } = usePostDetailQuery(parseInt(postId ?? '0', 16));
+  const { data: postData } = usePostDetailQuery(postId ?? '');
   const { data: userData } = useAuthCheckQuery();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
@@ -30,17 +29,23 @@ const Post = () => {
         backgroundRepeat="no-repeat">
         <Box w="100%">
           <AnnouncementText mb="1rem">
-            원하는 위치를 클릭해서 {postData?.author.fullName} 님의 머쓱이에게 편지를 남겨주세요.
+            {isAuthor ? (
+              <>
+                {postData?.author.username} 님에게{' '}
+                <Text display="inline" color="red.400">
+                  {postData?.comments.length}
+                </Text>
+                개의 편지가 전달됐어요!
+              </>
+            ) : (
+              `원하는 위치를 클릭해서 ${postData?.author.username} 님의 머쓱이에게 편지를 남겨주세요.`
+            )}
           </AnnouncementText>
-          <ListButton />
+          {isAuthor && <ListButton />}
         </Box>
         <CommentBoard onOpen={onOpen} />
         <Heading mb="1rem">{postData?.title}</Heading>
-        <DescriptionText>
-          안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을
-          받고 싶은 머쓱이 입니다.안녕하세요! 피드백을 받고 싶은 머쓱이 입니다.안녕하세요! 피드백을 받고 싶은 머쓱이
-          입니다.
-        </DescriptionText>
+        <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
       <CommentWriteModal isOpen={isOpen} onClose={onClose} />
     </>

@@ -5,13 +5,13 @@ import queryKey from '@/apis/queryKeys';
 import parsePost from '../utils/parsePost';
 import { Post } from '@/types';
 
-export const getPostDetail = async (id: number) => {
+export const getPostDetail = async (id: string) => {
   const { data } = await baseInstance.get<PostResponse>(`/posts/${id}`);
 
   return parsePost(data);
 };
 
-const usePostDetailQuery = (id: number) => {
+const usePostDetailQuery = (id: string) => {
   return useQuery<Post>({
     queryKey: queryKey.posts.detail(id),
     queryFn: () => getPostDetail(id)
