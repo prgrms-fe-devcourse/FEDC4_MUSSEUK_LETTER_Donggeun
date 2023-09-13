@@ -1,17 +1,17 @@
 import Header from '@/components/header';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
-import Musseuk2 from '@/assets/images/musseuk_labtop.png';
-import Musseuk3 from '@/assets/images/musseuk_hood.png';
-import Musseuk4 from '@/assets/images/musseuk_heart.png';
-import Musseuk5 from '@/assets/images/musseuk_default.png';
+import MusseukLabtop from '@/assets/images/musseuk_labtop.png';
+import MusseukHood from '@/assets/images/musseuk_hood.png';
+import MusseukHeart from '@/assets/images/musseuk_heart.png';
+import MusseukDefault from '@/assets/images/musseuk_default.png';
 import { useNavigate } from 'react-router-dom';
 
 const NewPost = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">
+      <Box bgColor="bg01">
         <Box p="2rem" margin="auto" w="42%" textAlign="center">
           <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
             머쓱이 이름
@@ -33,20 +33,45 @@ const NewPost = () => {
           </Box>
           <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">
-              <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image p="0.5rem 0 0.5rem 0" objectFit="fill" marginTop="0.7rem" src={Musseuk} alt="Musseuk" />
+              <Box
+                border="0.3rem solid transparent"
+                borderRadius="10px"
+                _hover={{ borderColor: '#72D988' }}
+                width="50rem"
+                height="auto">
+                <Image p="0.5rem 0 1.1rem 0" objectFit="fill" marginTop="0.7rem" src={Musseuk} alt="Musseuk" />
               </Box>
-              <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image p="1.3rem 1.7rem 1.3rem 1.3rem" src={Musseuk2} alt="Dan Musseuk" />
+              <Box
+                border="0.3rem solid transparent"
+                borderRadius="10px"
+                _hover={{ borderColor: '#72D988' }}
+                width="50rem"
+                height="auto">
+                <Image p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLabtop} alt="MusseukLabtop" />
               </Box>
-              <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image p="1.5rem" src={Musseuk3} alt="Dan Musseuk" />
+              <Box
+                border="0.3rem solid transparent"
+                borderRadius="10px"
+                _hover={{ borderColor: '#72D988' }}
+                width="50rem"
+                height="auto">
+                <Image p="1.5rem" src={MusseukHood} alt="MusseukHood" />
               </Box>
-              <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image padding="0.8rem 0 1.1rem 0" src={Musseuk4} alt="Dan Musseuk" />
+              <Box
+                border="0.3rem solid transparent"
+                borderRadius="10px"
+                _hover={{ borderColor: '#72D988' }}
+                width="50rem"
+                height="auto">
+                <Image padding="0.8rem 0 1.9rem 0" src={MusseukHeart} alt="MusseukHeart" />
               </Box>
-              <Box _hover={{ border: '0.3rem solid #72D988', borderRadius: '10px' }} width="50rem" height="auto">
-                <Image p="0.8rem 1.5rem 0.6rem 0.3rem " src={Musseuk5} alt="Dan Musseuk" />
+              <Box
+                border="0.3rem solid transparent"
+                borderRadius="10px"
+                _hover={{ borderColor: '#72D988' }}
+                width="50rem"
+                height="auto">
+                <Image p="0.8rem 1.5rem 0.9rem 0.3rem " src={MusseukDefault} alt="MusseukDefault" />
               </Box>
             </Flex>
           </Box>
