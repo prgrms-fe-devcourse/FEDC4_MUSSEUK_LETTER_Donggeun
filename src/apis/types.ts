@@ -40,6 +40,9 @@ export interface ChannelResponse {
   description: string;
   createdAt: string;
   updatedAt: string;
+  title: string;
+  author: UserResponse;
+  comments: CommentResponse[];
 }
 
 export interface PostResponse {

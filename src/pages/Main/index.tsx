@@ -1,5 +1,3 @@
-import Header from '@/components/header';
-import { useRef, useState } from 'react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
@@ -11,14 +9,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import PostCard from '@/components/PostCard';
+import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
 
 const Main = () => {
   const navigate = useNavigate();
 
-  const [swiperRef, setSwiperRef] = useState(null);
-  const appendNumber = useRef(25);
-  const prependNumber = useRef(1);
-  const [slides, setSlides] = useState(Array.from({ length: 25 }).map((_, index) => `Slide ${index + 1}`));
+  const { data, status } = useGetPostsInfoQuery();
 
   return (
     <>
@@ -60,19 +56,20 @@ const Main = () => {
           }}
           navigation={true}
           virtual>
-          {slides.map((slideContent, index) => (
-            <SwiperSlide key={slideContent} virtualIndex={index}>
-              <Box ml="4rem" mb="3.5rem">
-                <PostCard
-                  imgUrl={Musseuk}
-                  musseukName="머쓱이 1"
-                  userName="남궁호수"
-                  musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
-                  letter={24}
-                />
-              </Box>
-            </SwiperSlide>
-          ))}
+          {status === 'success' &&
+            data.map((slideContent, index) => (
+              <SwiperSlide key={slideContent._id} virtualIndex={index}>
+                <Box ml="4rem" mb="3.5rem">
+                  <PostCard
+                    imgUrl="null"
+                    musseukName={slideContent.title}
+                    userName={slideContent.author.fullName}
+                    musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
+                    letter={slideContent.comments.length}
+                  />
+                </Box>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
