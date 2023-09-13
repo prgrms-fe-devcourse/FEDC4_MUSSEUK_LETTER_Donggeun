@@ -2,9 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
+import { Box, Button, Icon, Heading, Text, Image, useBoolean, useToast } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { toast } from 'react-toastify';
 import useChangePasswordMutation from '@/apis/mutations/useChangePasswordMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
@@ -31,6 +30,7 @@ const formSchema = z
 type Inputs = z.infer<typeof formSchema>;
 
 const ChangePassword = () => {
+  const toast = useToast();
   const navigate = useNavigate();
   const { mutate } = useChangePasswordMutation();
   const [showPassword, setShowPassword] = useBoolean(false);
@@ -50,12 +50,20 @@ const ChangePassword = () => {
       { password: data.password },
       {
         onSuccess: () => {
-          toast.success('비밀번호가 변경되었어요!', { position: 'top-center' });
+          toast({
+            title: '비밀번호가 변경되었어요!',
+            status: 'success',
+            position: 'top'
+          });
           navigate(links.back);
         },
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          toast.error(errorMessage, { position: 'top-center' });
+          toast({
+            title: errorMessage,
+            status: 'error',
+            position: 'top'
+          });
         }
       }
     );
