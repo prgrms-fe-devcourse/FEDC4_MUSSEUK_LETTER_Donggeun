@@ -2,27 +2,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
+import { Box, Button, Icon, Heading, Text, Image, useBoolean, useToast } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import useSignupMutation from '@/apis/mutations/useSignupMutation';
+import useChangePasswordMutation from '@/apis/mutations/useChangePasswordMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
-import { isPasswordTooShort, isPasswordContainNumber } from './helpers/password';
-import InputField from './components/InputField';
-import { PageTemplate, LinkTemplate } from './templates';
+import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
+import InputField from '@/pages/Signup/components/InputField';
+import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
 
 const links = {
-  main: '/',
-  signin: '/signin'
+  back: '..'
 };
 
 const formSchema = z
   .object({
-    email: z.string().email(),
-    username: z
-      .string()
-      .min(2, 'Length must be greater than 2 characters')
-      .max(4, 'Length must be smaller than 4 characters')
-      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력해주세요'),
     password: z
       .string()
       .min(8, 'Length must be greater than 8 characters')
@@ -36,15 +29,15 @@ const formSchema = z
 
 type Inputs = z.infer<typeof formSchema>;
 
-const SignUp = () => {
+const ChangePassword = () => {
+  const toast = useToast();
   const navigate = useNavigate();
-  const { mutate } = useSignupMutation();
+  const { mutate } = useChangePasswordMutation();
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
   const {
     register,
     handleSubmit,
-    setError,
     watch,
     formState: { errors }
   } = useForm<Inputs>({
@@ -54,12 +47,23 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
-      { email: data.email, password: data.password, username: data.username },
+      { password: data.password },
       {
-        onSuccess: () => navigate(links.main),
+        onSuccess: () => {
+          toast({
+            title: '비밀번호가 변경되었어요!',
+            status: 'success',
+            position: 'top'
+          });
+          navigate(links.back);
+        },
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          setError('email', { type: 'server', message: errorMessage });
+          toast({
+            title: errorMessage,
+            status: 'error',
+            position: 'top'
+          });
         }
       }
     );
@@ -70,24 +74,9 @@ const SignUp = () => {
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk} alt="머쓱이" />
-      <Heading textAlign="center">Sign up</Heading>
-      <InputField
-        {...register('email')}
-        id="email"
-        type="email"
-        label="Email"
-        error={errors.email}
-        placeholder="이메일을 입력해주세요"
-      />
-      <InputField
-        {...register('username')}
-        id="username"
-        type="text"
-        label="Username"
-        error={errors.username}
-        placeholder="실명을 입력해주세요"
-        maxLength={4}
-      />
+      <Heading size="lg" textAlign="center">
+        Change Password
+      </Heading>
       <InputField
         {...register('password')}
         id="password"
@@ -108,15 +97,15 @@ const SignUp = () => {
         label="Confirm Password"
         placeholder="비밀번호를 재확인해주세요"
         maxLength={30}
-        error={errors.confirmPassword}
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
+        error={errors.confirmPassword}
       />
       <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        Create account
+        Change password
       </Button>
       <LinkTemplate>
-        <Text color="gray.400">Already have an account?</Text>
-        <Link to={links.signin}>
+        <Text color="gray.400">Not want to change the password?</Text>
+        <Link to={links.back}>
           <Text
             color="green.500"
             _hover={{
@@ -128,7 +117,7 @@ const SignUp = () => {
             fontWeight="semibold"
             cursor="pointer"
             userSelect="none">
-            Sign in
+            Back
           </Text>
         </Link>
       </LinkTemplate>
@@ -136,4 +125,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ChangePassword;
