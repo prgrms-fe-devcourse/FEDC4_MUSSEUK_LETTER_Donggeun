@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import NewPost from './pages/Newpost';
 import Post from './pages/Post';
 import Search from './pages/Search';
+import ChangePassword from './pages/ChangePassword';
 
 const App = () => {
   useAuthCheckQuery();
@@ -24,6 +25,7 @@ const App = () => {
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/changePassword" element={<ChangePassword />} />
       </Routes>
     </Router>
   );
