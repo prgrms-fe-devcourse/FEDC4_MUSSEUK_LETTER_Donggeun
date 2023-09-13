@@ -2,15 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import { PostResponse } from '@/apis/types';
 import queryKey from '@/apis/queryKeys';
+import parsePost from '../utils/parsePost';
+import { Post } from '@/types';
 
 export const getPostDetail = async (id: number) => {
   const { data } = await baseInstance.get<PostResponse>(`/posts/${id}`);
 
-  return data;
+  return parsePost(data);
 };
 
 const usePostDetailQuery = (id: number) => {
-  return useQuery<PostResponse>({
+  return useQuery<Post>({
     queryKey: queryKey.posts.detail(id),
     queryFn: () => getPostDetail(id)
   });

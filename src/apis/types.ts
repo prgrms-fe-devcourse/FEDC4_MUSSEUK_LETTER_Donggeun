@@ -44,7 +44,7 @@ export interface ChannelResponse {
 
 export interface PostResponse {
   likes: LikeResponse[];
-  comments: Comment[];
+  comments: CommentResponse[];
   _id: string;
   image?: string;
   imagePublicId?: string;
