@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { PostResponse } from '@/apis/types';
 
 type CardProps = {
+  id: string;
   name: string;
   email: string;
   post: PostResponse[];
@@ -13,7 +14,7 @@ type CardProps = {
   image?: string;
 };
 
-const UserCard = ({ name, email, post, comment, image }: CardProps) => {
+const UserCard = ({ id, name, email, post, comment, image }: CardProps) => {
   const navigate = useNavigate();
   return (
     <Card
@@ -25,7 +26,7 @@ const UserCard = ({ name, email, post, comment, image }: CardProps) => {
       borderColor={'green01'}
       borderRadius={'10px'}
       cursor={'pointer'}
-      onClick={() => navigate(`/profile/${name}`)}>
+      onClick={() => navigate(`/profile/${id}`)}>
       <Avatar bg={'green01'} size={'lg'} src={image ?? defaultProfile} />
       <CardBody>
         <Text fontWeight={'bold'} fontSize={'xl'} mb={1}>

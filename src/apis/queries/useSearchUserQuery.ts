@@ -13,7 +13,8 @@ const useSearchUserQuery = (keyword: string) => {
   return useQuery<UserResponse[]>({
     queryKey: queryKey.users.search(keyword),
     queryFn: () => getSearchResult(keyword),
-    enabled: false
+    refetchOnMount: true,
+    staleTime: 0
   });
 };
 

@@ -16,8 +16,6 @@ type InputValue = {
 };
 const Header = () => {
   const navigate = useNavigate();
-  const [keyword, setKeyword] = useState('');
-  const { refetch } = useSearchUserQuery(keyword);
 
   const { handleSubmit, register, reset } = useForm<InputValue>();
   const { mutate } = useSignOutMutation();
@@ -29,9 +27,7 @@ const Header = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<InputValue> = async (value: { keyword: string }) => {
-    await setKeyword(value.keyword);
-    refetch();
+  const onSubmit: SubmitHandler<InputValue> = (value: { keyword: string }) => {
     navigate(`/search/${value.keyword}`);
     reset();
   };

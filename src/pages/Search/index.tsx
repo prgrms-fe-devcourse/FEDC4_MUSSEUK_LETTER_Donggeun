@@ -29,7 +29,13 @@ const Search = () => {
         {searchList &&
           searchList.map((user) => (
             <List width={'100%'} key={user.email}>
-              <UserCard name={user.fullName} email={user.email} post={user.posts} comment={user.comments} />
+              <UserCard
+                id={user._id}
+                name={user.fullName}
+                email={user.email}
+                post={user.posts}
+                comment={user.comments}
+              />
             </List>
           ))}
       </Container>
