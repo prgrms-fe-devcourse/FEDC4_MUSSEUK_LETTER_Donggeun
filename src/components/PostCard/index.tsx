@@ -6,7 +6,7 @@ export type Props = {
   musseukName: string;
   userName?: string;
   musseukContent: string;
-  letter: string;
+  letter: number;
 };
 
 const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Props) => {

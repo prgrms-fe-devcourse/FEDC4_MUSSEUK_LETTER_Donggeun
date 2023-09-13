@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import PostCard from '@/components/header/components/PostCard';
+import PostCard from '@/components/PostCard';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -46,29 +46,36 @@ const Main = () => {
         </Button>
       </Box>
 
-      <Box h="100vh" bgColor="color(display-p3 0.9765 0.9765 0.9569);" paddingTop="5rem">
+      <Box bgColor="bg01" paddingTop="5rem">
         <Swiper
+          loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={5}
-          centeredSlides={true}
+          slidesPerGroup={5}
+          centeredSlides={false}
           spaceBetween={0}
+          speed={1000}
           pagination={{
-            type: 'fraction'
+            type: 'bullets'
           }}
           navigation={true}
           virtual>
           {slides.map((slideContent, index) => (
             <SwiperSlide key={slideContent} virtualIndex={index}>
-              <PostCard
-                imgUrl={Musseuk}
-                musseukName="머쓱이 1"
-                userName="남궁호수"
-                musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
-                letter="24"></PostCard>
+              <Box ml="4rem" mb="3.5rem">
+                <PostCard
+                  imgUrl={Musseuk}
+                  musseukName="머쓱이 1"
+                  userName="남궁호수"
+                  musseukContent="안녕하세요! 피드백을 받고 싶은 머쓱이 입니다!"
+                  letter={24}
+                />
+              </Box>
             </SwiperSlide>
           ))}
         </Swiper>
       </Box>
+      <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
     </>
   );
 };
