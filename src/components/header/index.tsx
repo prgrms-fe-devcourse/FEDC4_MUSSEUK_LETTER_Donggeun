@@ -17,9 +17,9 @@ type InputValue = {
 const Header = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
-  const { data: searchList } = useSearchUserQuery(keyword);
+  const { refetch } = useSearchUserQuery(keyword);
 
-  const { handleSubmit, register } = useForm<InputValue>();
+  const { handleSubmit, register, reset } = useForm<InputValue>();
   const { mutate } = useSignOutMutation();
   const { data } = useAuthCheckQuery();
 
@@ -29,8 +29,11 @@ const Header = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<InputValue> = (value: { keyword: string }) => {
-    setKeyword(value.keyword);
+  const onSubmit: SubmitHandler<InputValue> = async (value: { keyword: string }) => {
+    await setKeyword(value.keyword);
+    refetch();
+    navigate(`/search/${value.keyword}`);
+    reset();
   };
 
   const headerMenu = () => (
@@ -72,7 +75,7 @@ const Header = () => {
   );
 
   return (
-    <Box h={16} px={6}>
+    <Box h={16} px={6} bg={'white'}>
       <Flex gap={4} alignItems={'center'} h="100%" justifyContent={'space-between'}>
         <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => navigate('/')} />
         <form style={{ width: '65rem' }} onSubmit={handleSubmit(onSubmit)}>

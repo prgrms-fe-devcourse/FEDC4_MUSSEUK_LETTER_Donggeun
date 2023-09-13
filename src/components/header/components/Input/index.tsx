@@ -11,6 +11,7 @@ const InputField = forwardRef(({ icon, ...props }: Props, ref) => {
       <InputGroup>
         <Input
           ref={ref}
+          required={true}
           w="100%"
           _placeholder={{ opacity: 1, color: 'gray03' }}
           borderRadius="10px"
