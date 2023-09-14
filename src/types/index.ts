@@ -22,7 +22,7 @@ export interface Post extends PostTitle {
 export interface PostTitle {
   title: string; // 머쓱이 제목, default: "머쓱이"
   content: string; // 소개글, default: ""
-  musseukImageName: string; // 머쓱이 이미지 파일 이름
+  musseukImageName: string; // 머쓱이 이미지 파일 이름, default: "musseuk_default"
 }
 
 export interface Comment extends CommentField {
@@ -33,5 +33,5 @@ export interface CommentField {
   content: string; // default: ""
   pos: [number, number]; // 댓글 좌표(백분율), default: [0, 0]
   nickname: string; // default: "익명의 머쓱이"
-  decorationImageName: string; // 장식 이미지 파일 이름, default: ""
+  decorationImageName: string; // 장식 이미지 파일 이름, default: "decoration_soju1"
 }
