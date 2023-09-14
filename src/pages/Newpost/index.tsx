@@ -11,7 +11,7 @@ import { ReactDOM, useRef, useState } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 
 const NewPost = () => {
-  // useNewPostMutation();
+  const { mutate } = useNewPostMutation();
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
@@ -143,7 +143,12 @@ const NewPost = () => {
               colorScheme="gray">
               뒤로가기
             </Button>
-            <Button width="10rem" colorScheme="primary">
+            <Button
+              onClick={() => {
+                mutate({ musseukTitle, musseukImage, musseukIntroduce });
+              }}
+              width="10rem"
+              colorScheme="primary">
               생성하기
             </Button>
           </Flex>
