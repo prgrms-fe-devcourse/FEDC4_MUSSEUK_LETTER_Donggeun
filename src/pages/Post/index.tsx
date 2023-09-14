@@ -12,7 +12,7 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 const Post = () => {
   const { postId } = useParams();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isCommentWriteOpen, onOpen: onCommentWriteOpen, onClose: onCommentWriteClose } = useDisclosure();
   const { data: postData } = usePostDetailQuery(postId ?? '');
   const { data: userData } = useAuthCheckQuery();
 
@@ -43,11 +43,11 @@ const Post = () => {
           </AnnouncementText>
           {isAuthor && <ListButton />}
         </Box>
-        <CommentBoard onOpen={onOpen} />
+        <CommentBoard onOpen={onCommentWriteOpen} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
-      <CommentWriteModal isOpen={isOpen} onClose={onClose} />
+      <CommentWriteModal isOpen={isCommentWriteOpen} onClose={onCommentWriteClose} />
     </>
   );
 };
