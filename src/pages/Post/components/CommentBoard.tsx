@@ -3,8 +3,13 @@ import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
 import React, { useRef, useState } from 'react';
+import { MusseukType } from '@/types';
 
-const CommentBoard = ({ onOpen }: Pick<UseDisclosureReturn, 'onOpen'>) => {
+type CommentBoardProps = {
+  musseukImageName: MusseukType;
+};
+
+const CommentBoard = ({ musseukImageName, onOpen }: CommentBoardProps & Pick<UseDisclosureReturn, 'onOpen'>) => {
   const [commentPosRatio, setCommentPosRatio] = useState({ x: 0, y: 0 });
   const musseukRef = useRef<HTMLImageElement | null>(null);
 
@@ -24,7 +29,7 @@ const CommentBoard = ({ onOpen }: Pick<UseDisclosureReturn, 'onOpen'>) => {
 
   return (
     <Box position="relative" onClick={handleMusseukClick}>
-      <Musseuk ref={musseukRef} />
+      <Musseuk ref={musseukRef} musseukImageName={musseukImageName} />
       <CommentList>
         <Comment top={commentPosRatio.y} left={commentPosRatio.x} />
       </CommentList>

@@ -1,5 +1,5 @@
 import { Box, BoxProps, Image } from '@chakra-ui/react';
-import { DecorationType } from '../../constants';
+import { DecorationType } from '@/types';
 import Beer1 from '@/assets/images/decoration_beer1.png';
 import Chicken1 from '@/assets/images/decoration_chicken1.png';
 import Coffee1 from '@/assets/images/decoration_coffee1.png';

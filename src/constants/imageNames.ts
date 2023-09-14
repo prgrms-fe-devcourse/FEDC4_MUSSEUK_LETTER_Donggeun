@@ -4,9 +4,7 @@ export const MUSSEUK_IMAGE_NAME = {
   HOOD: 'musseuk_hood',
   LAPTOP: 'musseuk_laptop',
   SEMICOLON: 'musseuk_semicolon'
-};
-
-export type MusseukType = (typeof MUSSEUK_IMAGE_NAME)[keyof typeof MUSSEUK_IMAGE_NAME];
+} as const;
 
 export const DECORATION_IMAGE_NAME = {
   BEER1: 'decoration_beer1',
@@ -18,5 +16,3 @@ export const DECORATION_IMAGE_NAME = {
   SOJU1: 'decoration_soju1',
   UH1: 'decoration_uh1'
 } as const;
-
-export type DecorationType = (typeof DECORATION_IMAGE_NAME)[keyof typeof DECORATION_IMAGE_NAME];
