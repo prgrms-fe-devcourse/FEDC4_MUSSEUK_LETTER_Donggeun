@@ -8,11 +8,15 @@ import CommentBoard from './components/CommentBoard';
 import CommentWriteModal from './components/CommentWriteModal';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import CommentListModal from './components/CommentListModal';
+import CommentInfoModal from './components/CommentInfoModal';
 
 const Post = () => {
   const { postId } = useParams();
 
   const { isOpen: isCommentWriteOpen, onOpen: onCommentWriteOpen, onClose: onCommentWriteClose } = useDisclosure();
+  const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
+  const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
   const { data: postData } = usePostDetailQuery(postId ?? '');
   const { data: userData } = useAuthCheckQuery();
 
@@ -41,13 +45,15 @@ const Post = () => {
               `원하는 위치를 클릭해서 ${postData?.author.username} 님의 머쓱이에게 편지를 남겨주세요.`
             )}
           </AnnouncementText>
-          {isAuthor && <ListButton />}
+          {isAuthor && <ListButton onClick={onInfoOpen} />}
         </Box>
         <CommentBoard onOpen={onCommentWriteOpen} postId={postId ?? ''} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
       <CommentWriteModal isOpen={isCommentWriteOpen} onClose={onCommentWriteClose} />
+      <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
+      <CommentListModal isOpen={isListOpen} onClose={onListClose} />
     </>
   );
 };
