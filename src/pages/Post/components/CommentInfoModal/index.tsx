@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import headerImage from '@/assets/images/comment-header.png';
 import decoImage from '@/assets/images/decoration_soju1.png';
+
 const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
