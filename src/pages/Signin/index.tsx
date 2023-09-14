@@ -1,9 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Image, Heading, Button, Text, Flex } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useSigninMutation from '@/apis/mutations/useSigninMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import InputField from '@/pages/Signup/components/InputField';
@@ -19,7 +20,11 @@ const formSchema = z.object({ email: z.string().email(), password: z.string() })
 type Inputs = z.infer<typeof formSchema>;
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
+  const { data: user } = useAuthCheckQuery();
   const { mutate } = useSigninMutation();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +33,6 @@ const SignIn = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(formSchema)
   });
-  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
@@ -43,7 +47,10 @@ const SignIn = () => {
       }
     );
   };
+
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
+
+  if (user) return <Navigate to={links.main} />;
 
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>

@@ -1,17 +1,21 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Button, Icon, Heading, Text, Image, useBoolean, useToast } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useChangePasswordMutation from '@/apis/mutations/useChangePasswordMutation';
+import storage from '@/utils/storage';
+import { AUTH_TOKEN } from '@/constants/storageKey';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
 import InputField from '@/pages/Signup/components/InputField';
 import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
 
 const links = {
-  back: '..'
+  back: '..',
+  signin: '/signin'
 };
 
 const formSchema = z
@@ -32,7 +36,10 @@ type Inputs = z.infer<typeof formSchema>;
 const ChangePassword = () => {
   const toast = useToast();
   const navigate = useNavigate();
+
+  const { data: user } = useAuthCheckQuery();
   const { mutate } = useChangePasswordMutation();
+
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
   const {
@@ -70,6 +77,8 @@ const ChangePassword = () => {
   };
 
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
+
+  if (!user && !storage('session').getItem(AUTH_TOKEN, null)) return <Navigate to={links.signin} />;
 
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
