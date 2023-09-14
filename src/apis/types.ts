@@ -9,7 +9,7 @@ export interface UserResponse {
   emailVerified: boolean; // 사용되지 않음
   banned: boolean; // 사용되지 않음
   isOnline: boolean;
-  posts: PostResponse[];
+  posts: PostResponse[] | string[];
   likes: LikeResponse[];
   comments: string[];
   followers: [];

@@ -1,4 +1,4 @@
-import { Post, customPostTitle } from '@/types';
+import { Post, PostTitle } from '@/types';
 import { PostResponse } from '../types';
 import parseComment from './parseComment';
 import parseUser from './parseUser';
@@ -6,20 +6,20 @@ import parseUser from './parseUser';
 const parsePost = (rawPost: PostResponse) => {
   const { _id, title: titleJSON, comments: rawComments, author: rawAuthor } = rawPost;
 
-  const { title, content, musseukId } = JSON.parse(titleJSON) as customPostTitle;
+  const { title, content, musseukImageName } = JSON.parse(titleJSON) as PostTitle;
   const comments = rawComments.map((comment) => parseComment(comment));
   const author = parseUser(rawAuthor);
 
-  const customPost: Post = {
+  const post: Post = {
     _id,
     title,
     content,
-    musseukId,
+    musseukImageName,
     comments,
     author
   };
 
-  return customPost;
+  return post;
 };
 
 export default parsePost;

@@ -2,8 +2,8 @@ export interface User extends UserFullName {
   _id: string;
   email: string;
   image: string; // default: 기본 이미지
-  posts: string[]; // 포스트 id 목록
-  comments: string[]; // 댓글 id 목록
+  postCount: number; // 총 포스트 개수
+  commentCount: number; // 본인이 작성한 총 댓글 개수
 }
 
 export interface UserFullName {

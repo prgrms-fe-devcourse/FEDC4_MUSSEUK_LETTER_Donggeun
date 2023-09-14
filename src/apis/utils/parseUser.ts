@@ -1,21 +1,22 @@
-import { User, customUserFullName } from '@/types';
+import { User, UserFullName } from '@/types';
 import { UserResponse } from '../types';
 
 const parseUser = (rawUser: UserResponse) => {
-  const { _id, email, fullName: fullNameJSON, image } = rawUser;
+  const { _id, email, fullName: fullNameJSON, image, posts, comments } = rawUser;
 
-  const { username, nickname, introduce } = JSON.parse(fullNameJSON) as customUserFullName;
+  const { username, introduce } = JSON.parse(fullNameJSON) as UserFullName;
 
-  const customUser: User = {
+  const user: User = {
     _id,
     email,
     username,
-    nickname,
     introduce,
-    image
+    image,
+    postCount: posts.length,
+    commentCount: comments.length
   };
 
-  return customUser;
+  return user;
 };
 
 export default parseUser;

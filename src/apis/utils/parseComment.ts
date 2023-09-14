@@ -1,19 +1,20 @@
-import { Comment, customCommentComment } from '@/types';
+import { Comment, CommentField } from '@/types';
 import { CommentResponse } from '../types';
 
 const parseComment = (rawComment: CommentResponse) => {
   const { _id, comment: commentJSON } = rawComment;
 
-  const { content, pos, nickname } = JSON.parse(commentJSON) as customCommentComment;
+  const { content, pos, nickname, decorationImageName } = JSON.parse(commentJSON) as CommentField;
 
-  const customComment: Comment = {
+  const comment: Comment = {
     _id,
     content,
     pos,
-    nickname
+    nickname,
+    decorationImageName
   };
 
-  return customComment;
+  return comment;
 };
 
 export default parseComment;
