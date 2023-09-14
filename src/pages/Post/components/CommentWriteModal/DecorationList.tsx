@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Pagination, Navigation } from 'swiper/modules';
 import Decoration from './Decoration';
-import { DECO_ID, decoType } from '../../constants';
+import { DECORATION_IMAGE_NAME, DecorationType } from '../../constants';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
@@ -10,8 +10,8 @@ import './decoSwiper.css';
 import { Dispatch, SetStateAction } from 'react';
 
 type DecorationListProps = {
-  selectedDeco: decoType | null;
-  setSelectedDeco: Dispatch<SetStateAction<decoType | null>>;
+  selectedDeco: DecorationType | null;
+  setSelectedDeco: Dispatch<SetStateAction<DecorationType | null>>;
 };
 
 const DecorationList = ({ selectedDeco, setSelectedDeco }: DecorationListProps) => {
@@ -37,7 +37,7 @@ const DecorationList = ({ selectedDeco, setSelectedDeco }: DecorationListProps) 
           grid: { rows: 2, fill: 'row' }
         }
       }}>
-      {Object.values(DECO_ID).map((decoId) => (
+      {Object.values(DECORATION_IMAGE_NAME).map((decoId) => (
         <SwiperSlide key={decoId}>
           <Decoration decoId={decoId} selectedDeco={selectedDeco} onClick={() => setSelectedDeco(decoId)} />
         </SwiperSlide>

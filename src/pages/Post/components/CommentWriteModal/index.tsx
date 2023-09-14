@@ -12,11 +12,11 @@ import {
   VStack
 } from '@chakra-ui/react';
 import DecorationList from './DecorationList';
-import { decoType } from '../../constants';
+import { DecorationType } from '../../constants';
 import { useState } from 'react';
 
 const CommentWriteModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
-  const [selectedDeco, setSelectedDeco] = useState<decoType | null>(null);
+  const [selectedDeco, setSelectedDeco] = useState<DecorationType | null>(null);
 
   const handleClose = () => {
     setSelectedDeco(null);

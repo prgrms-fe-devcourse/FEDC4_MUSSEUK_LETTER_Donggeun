@@ -1,5 +1,5 @@
 import { Box, BoxProps, Image } from '@chakra-ui/react';
-import { decoType } from '../../constants';
+import { DecorationType } from '../../constants';
 import Beer1 from '@/assets/images/decoration_beer1.png';
 import Chicken1 from '@/assets/images/decoration_chicken1.png';
 import Coffee1 from '@/assets/images/decoration_coffee1.png';
@@ -9,12 +9,12 @@ import Medal1 from '@/assets/images/decoration_medal1.png';
 import Soju1 from '@/assets/images/decoration_soju1.png';
 import Uh1 from '@/assets/images/decoration_uh1.png';
 
-type DecoProps = {
-  decoId: decoType;
-  selectedDeco: decoType | null;
+type DecorationProps = {
+  decoId: DecorationType;
+  selectedDeco: DecorationType | null;
 } & BoxProps;
 
-const Decoration = ({ decoId, selectedDeco, ...props }: DecoProps) => {
+const Decoration = ({ decoId, selectedDeco, ...props }: DecorationProps) => {
   const isSelected = decoId === selectedDeco;
 
   return (
@@ -37,14 +37,14 @@ const Decoration = ({ decoId, selectedDeco, ...props }: DecoProps) => {
 };
 
 const decoImage = {
-  beer1: Beer1,
-  chicken1: Chicken1,
-  coffee1: Coffee1,
-  glasses1: Glasses1,
-  hat1: Hat1,
-  medal1: Medal1,
-  soju1: Soju1,
-  uh1: Uh1
+  decoration_beer1: Beer1,
+  decoration_chicken1: Chicken1,
+  decoration_coffee1: Coffee1,
+  decoration_glasses1: Glasses1,
+  decoration_hat1: Hat1,
+  decoration_medal1: Medal1,
+  decoration_soju1: Soju1,
+  decoration_uh1: Uh1
 };
 
 export default Decoration;
