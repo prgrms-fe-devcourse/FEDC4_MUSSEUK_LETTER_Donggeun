@@ -14,7 +14,8 @@ import InputField from '@/pages/Signup/components/InputField';
 import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
 
 const links = {
-  back: '..'
+  back: '..',
+  signin: '/signin'
 };
 
 const formSchema = z
@@ -77,7 +78,7 @@ const ChangePassword = () => {
 
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
-  if (!user && !storage('session').getItem(AUTH_TOKEN, null)) return <Navigate to={links.back} />;
+  if (!user && !storage('session').getItem(AUTH_TOKEN, null)) return <Navigate to={links.signin} />;
 
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
