@@ -1,6 +1,14 @@
-import { extendTheme } from '@chakra-ui/react';
+import { StyleFunctionProps, extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
+  styles: {
+    global: (props: StyleFunctionProps) => ({
+      body: {
+        color: 'default',
+        bg: 'bg01'
+      }
+    })
+  },
   colors: {
     primary: {
       500: '#8CD790',

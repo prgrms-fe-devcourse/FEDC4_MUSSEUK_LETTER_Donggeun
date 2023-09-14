@@ -12,7 +12,9 @@ export const getSearchResult = async (keyword: string) => {
 const useSearchUserQuery = (keyword: string) => {
   return useQuery<UserResponse[]>({
     queryKey: queryKey.users.search(keyword),
-    queryFn: () => getSearchResult(keyword)
+    queryFn: () => getSearchResult(keyword),
+    refetchOnMount: true,
+    staleTime: 0
   });
 };
 
