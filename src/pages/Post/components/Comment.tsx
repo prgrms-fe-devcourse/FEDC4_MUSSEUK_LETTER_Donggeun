@@ -1,13 +1,14 @@
 import { Box, Image } from '@chakra-ui/react';
 import DecorationSoju1 from '@/assets/images/decoration_soju1.png';
 import React from 'react';
+import { CommentField } from '@/types';
 
 type CommentType = {
   top: number;
   left: number;
-};
+} & Omit<CommentField, 'pos'>;
 
-const Comment = ({ top = 0, left = 0 }: CommentType) => {
+const Comment = ({ top = 0, left = 0, content, nickname, decorationImageName }: CommentType) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };

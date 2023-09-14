@@ -3,15 +3,16 @@ import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
 import React, { useRef, useState } from 'react';
-import { MusseukType } from '@/types';
+import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 
 type CommentBoardProps = {
-  musseukImageName: MusseukType;
+  postId: string;
 };
 
-const CommentBoard = ({ musseukImageName, onOpen }: CommentBoardProps & Pick<UseDisclosureReturn, 'onOpen'>) => {
+const CommentBoard = ({ postId, onOpen }: CommentBoardProps & Pick<UseDisclosureReturn, 'onOpen'>) => {
   const [commentPosRatio, setCommentPosRatio] = useState({ x: 0, y: 0 });
   const musseukRef = useRef<HTMLImageElement | null>(null);
+  const { data } = usePostDetailQuery(postId);
 
   const handleMusseukClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!musseukRef.current) return;
@@ -29,9 +30,19 @@ const CommentBoard = ({ musseukImageName, onOpen }: CommentBoardProps & Pick<Use
 
   return (
     <Box position="relative" onClick={handleMusseukClick}>
-      <Musseuk ref={musseukRef} musseukImageName={musseukImageName} />
+      <Musseuk ref={musseukRef} musseukImageName={data?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
-        <Comment top={commentPosRatio.y} left={commentPosRatio.x} />
+        {data &&
+          data.comments.map(({ _id, content, pos, nickname, decorationImageName }) => (
+            <Comment
+              key={_id}
+              top={pos[1]}
+              left={pos[0]}
+              content={content}
+              nickname={nickname}
+              decorationImageName={decorationImageName}
+            />
+          ))}
       </CommentList>
     </Box>
   );

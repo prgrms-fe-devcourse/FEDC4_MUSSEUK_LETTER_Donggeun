@@ -43,7 +43,7 @@ const Post = () => {
           </AnnouncementText>
           {isAuthor && <ListButton />}
         </Box>
-        <CommentBoard onOpen={onCommentWriteOpen} musseukImageName={postData?.musseukImageName ?? 'musseuk_default'} />
+        <CommentBoard onOpen={onCommentWriteOpen} postId={postId ?? ''} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
