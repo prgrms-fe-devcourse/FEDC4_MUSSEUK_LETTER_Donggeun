@@ -33,8 +33,8 @@ const Search = () => {
                 id={user._id}
                 name={user.fullName}
                 email={user.email}
-                post={user.posts}
-                comment={user.comments}
+                post={user.posts.length}
+                comment={user.comments.length}
               />
             </List>
           ))}

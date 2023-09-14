@@ -3,14 +3,13 @@ import defaultProfile from '@/assets/images/musseuk_hood.png';
 import { EmailIcon } from '@chakra-ui/icons';
 import { FiFileText } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { PostResponse } from '@/apis/types';
 
 type CardProps = {
   id: string;
   name: string;
   email: string;
-  post: PostResponse[];
-  comment: string[];
+  post: number;
+  comment: number;
   image?: string;
 };
 
@@ -38,11 +37,11 @@ const UserCard = ({ id, name, email, post, comment, image }: CardProps) => {
         <VStack gap={4} color={'blue03'} fontSize={'lg'} alignItems={'start'} justifyContent={'center'}>
           <HStack>
             <FiFileText style={{ width: '26px', height: '26px', marginRight: '10px' }} />
-            <Text>{post.length}</Text>
+            <Text>{post}</Text>
           </HStack>
           <HStack>
             <EmailIcon w={'26px'} h={'26px'} mr="10px" />
-            <Text>{comment.length}</Text>
+            <Text>{comment}</Text>
           </HStack>
         </VStack>
       </CardFooter>
