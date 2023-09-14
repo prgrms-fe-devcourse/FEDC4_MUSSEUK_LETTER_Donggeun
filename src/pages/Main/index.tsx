@@ -41,7 +41,6 @@ const Main = () => {
           <Image src={rightarrow} alt="rightarrow" />
         </Button>
       </Box>
-
       <Box bgColor="bg01" paddingTop="5rem">
         <Swiper
           loop={true}
