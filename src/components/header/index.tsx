@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
 import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
-import useSearchUserQuery from '@/apis/queries/useSearchUserQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
 
 type InputValue = {
   keyword: string;
