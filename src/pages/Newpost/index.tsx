@@ -9,6 +9,7 @@ import MusseukDefault from '@/assets/images/musseuk_default.png';
 import { useNavigate } from 'react-router-dom';
 import { ReactDOM, useRef, useState } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
+const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
@@ -149,7 +150,7 @@ const NewPost = () => {
                   musseukTitle: `${musseukTitle}`,
                   musseukIntroduce: `${musseukIntroduce}`
                 });
-                mutate({ title, musseukImage, musseukIntroduce });
+                mutate({ title, musseukImage, CHANNEL_ID });
               }}
               width="10rem"
               colorScheme="primary">

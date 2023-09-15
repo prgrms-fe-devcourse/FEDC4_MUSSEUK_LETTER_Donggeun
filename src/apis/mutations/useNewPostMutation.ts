@@ -2,12 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formDataInstance } from '../instance';
 import queryKey from '../queryKeys';
 import { string } from 'zod';
-const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
 interface CustomRequestData {
   title: string;
   musseukImage: string;
-  musseukIntroduce: string;
+  CHANNEL_ID: string;
 }
 interface ResponseData {
   _id: string;
