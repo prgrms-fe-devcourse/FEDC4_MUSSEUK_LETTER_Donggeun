@@ -12,8 +12,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 import DecorationList from './DecorationList';
-import { DecorationType } from '../../constants';
 import { useState } from 'react';
+import { DecorationType } from '@/types';
 
 const CommentWriteModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
   const [selectedDeco, setSelectedDeco] = useState<DecorationType | null>(null);

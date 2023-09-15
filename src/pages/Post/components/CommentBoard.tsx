@@ -33,11 +33,11 @@ const CommentBoard = ({ postId, onOpen }: CommentBoardProps & Pick<UseDisclosure
       <Musseuk ref={musseukRef} musseukImageName={data?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
         {data &&
-          data.comments.map(({ _id, content, pos, nickname, decorationImageName }) => (
+          data.comments.map(({ _id, content, position, nickname, decorationImageName }) => (
             <Comment
               key={_id}
-              top={pos[1]}
-              left={pos[0]}
+              top={position[1]}
+              left={position[0]}
               content={content}
               nickname={nickname}
               decorationImageName={decorationImageName}
