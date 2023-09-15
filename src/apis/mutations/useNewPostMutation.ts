@@ -2,9 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formDataInstance } from '../instance';
 import queryKey from '../queryKeys';
 import { string } from 'zod';
+const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
 interface CustomRequestData {
-  musseukTitle: string;
+  title: string;
   musseukImage: string;
   musseukIntroduce: string;
 }
@@ -17,15 +18,7 @@ interface AxiosError {
   error: string;
 }
 const getNewPost = async (customParams: CustomRequestData) => {
-  const formData = new FormData();
-
-  formData.append('title', customParams.musseukTitle);
-  formData.append('image', customParams.musseukImage);
-  formData.append('channelId', customParams.musseukIntroduce);
-
-  const { data } = await formDataInstance.post('/posts/create', {
-    formData
-  });
+  const { data } = await formDataInstance.post('/posts/create');
   return data;
 };
 

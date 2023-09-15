@@ -145,7 +145,11 @@ const NewPost = () => {
             </Button>
             <Button
               onClick={() => {
-                mutate({ musseukTitle, musseukImage, musseukIntroduce });
+                const title = JSON.stringify({
+                  musseukTitle: `${musseukTitle}`,
+                  musseukIntroduce: `${musseukIntroduce}`
+                });
+                mutate({ title, musseukImage, musseukIntroduce });
               }}
               width="10rem"
               colorScheme="primary">
