@@ -45,7 +45,7 @@ const Post = () => {
               `원하는 위치를 클릭해서 ${postData?.author.username} 님의 머쓱이에게 편지를 남겨주세요.`
             )}
           </AnnouncementText>
-          {isAuthor && <ListButton onClick={onInfoOpen} />}
+          {isAuthor && <ListButton onClick={onListOpen} />}
         </Box>
         <CommentBoard onOpen={onCommentWriteOpen} />
         <Heading mb="1rem">{postData?.title}</Heading>
