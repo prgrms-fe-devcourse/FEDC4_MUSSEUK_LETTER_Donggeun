@@ -1,18 +1,23 @@
-import { Box, UseDisclosureReturn } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
+import { COMMENT_INFO_ACTION } from '../constants';
+import { CommentField } from '@/types';
 
 type CommentBoardProps = {
   postId: string;
+  onInfoOpen: () => void;
+  onWriteOpen: () => void;
 };
 
-const CommentBoard = ({ postId, onOpen }: CommentBoardProps & Pick<UseDisclosureReturn, 'onOpen'>) => {
-  const [commentPosRatio, setCommentPosRatio] = useState({ x: 0, y: 0 });
+const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) => {
   const musseukRef = useRef<HTMLImageElement | null>(null);
   const { data } = usePostDetailQuery(postId);
+  const dispatch = useCommentInfoDispatch();
 
   const handleMusseukClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!musseukRef.current) return;
@@ -20,12 +25,27 @@ const CommentBoard = ({ postId, onOpen }: CommentBoardProps & Pick<UseDisclosure
     const { clientX, clientY } = e;
     const { x, y, width, height } = musseukRef.current.getBoundingClientRect();
 
-    setCommentPosRatio({
-      x: ((clientX - x) / width) * 100,
-      y: ((clientY - y) / height) * 100
+    const xRatio = ((clientX - x) / width) * 100;
+    const yRatio = ((clientY - y) / height) * 100;
+
+    dispatch({
+      type: COMMENT_INFO_ACTION.POSITION,
+      position: [xRatio, yRatio]
     });
 
-    onOpen();
+    onWriteOpen();
+  };
+
+  const handleCommentClick = ({ content, nickname, decorationImageName }: Omit<CommentField, 'position'>) => {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      dispatch({ type: COMMENT_INFO_ACTION.CONTENT, content });
+      dispatch({ type: COMMENT_INFO_ACTION.NICKNAME, nickname });
+      dispatch({ type: COMMENT_INFO_ACTION.DECORATION, decorationImageName });
+
+      onInfoOpen();
+    };
   };
 
   return (
@@ -38,9 +58,8 @@ const CommentBoard = ({ postId, onOpen }: CommentBoardProps & Pick<UseDisclosure
               key={_id}
               top={position[1]}
               left={position[0]}
-              content={content}
-              nickname={nickname}
               decorationImageName={decorationImageName}
+              onClick={handleCommentClick({ content, nickname, decorationImageName })}
             />
           ))}
       </CommentList>
