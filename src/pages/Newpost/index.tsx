@@ -147,7 +147,8 @@ const NewPost = () => {
               onClick={() => {
                 const title = JSON.stringify({
                   musseukTitle: `${musseukTitle || '머쓱이'}`,
-                  musseukIntroduce: `${musseukIntroduce || ''}`
+                  musseukIntroduce: `${musseukIntroduce || ''}`,
+                  musseukImageName: `${musseukImage || 'musseuk_default'}'}`
                 });
                 mutate({ title, musseukImage, CHANNEL_ID });
               }}
