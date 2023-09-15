@@ -1,3 +1,11 @@
+import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from '@/constants/imageNames';
+
+import MusseukDefault from '@/assets/images/musseuk_default.png';
+import MusseukHeart from '@/assets/images/musseuk_heart.png';
+import MusseukHood from '@/assets/images/musseuk_hood.png';
+import MusseukLaptop from '@/assets/images/musseuk_laptop.png';
+import MusseukSemicolon from '@/assets/images/musseuk_semicolon.png';
+
 import Beer1 from '@/assets/images/decoration_beer1.png';
 import Chicken1 from '@/assets/images/decoration_chicken1.png';
 import Coffee1 from '@/assets/images/decoration_coffee1.png';
@@ -6,13 +14,20 @@ import Hat1 from '@/assets/images/decoration_hat1.png';
 import Medal1 from '@/assets/images/decoration_medal1.png';
 import Soju1 from '@/assets/images/decoration_soju1.png';
 import Uh1 from '@/assets/images/decoration_uh1.png';
-import { DECORATION_IMAGE_NAME } from '@/constants/imageNames';
 
 export const COMMENT_INFO_ACTION = {
   CONTENT: 'SET_CONTENT',
   POSITION: 'SET_POSITION',
   NICKNAME: 'SET_NICKNAME',
   DECORATION: 'SET_DECORATION_IMAGE_NAME'
+} as const;
+
+export const MUSSEUK_IMAGE = {
+  [MUSSEUK_IMAGE_NAME.DEFAULT]: MusseukDefault,
+  [MUSSEUK_IMAGE_NAME.HEART]: MusseukHeart,
+  [MUSSEUK_IMAGE_NAME.HOOD]: MusseukHood,
+  [MUSSEUK_IMAGE_NAME.LAPTOP]: MusseukLaptop,
+  [MUSSEUK_IMAGE_NAME.SEMICOLON]: MusseukSemicolon
 } as const;
 
 export const DECORATION_IMAGE = {
