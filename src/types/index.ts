@@ -35,7 +35,7 @@ export interface Comment extends CommentField {
 
 export interface CommentField {
   content: string; // default: ""
-  pos: [number, number]; // 댓글 좌표(백분율), default: [0, 0]
+  position: [number, number]; // 댓글 좌표(백분율), default: [0, 0]
   nickname: string; // default: "익명의 머쓱이"
   decorationImageName: DecorationType; // 장식 이미지 파일 이름, default: "decoration_soju1"
 }

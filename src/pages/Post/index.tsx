@@ -10,6 +10,7 @@ import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
+import { CommentInfoProvider } from './contexts/CommentInfoProvider';
 
 const Post = () => {
   const { postId } = useParams();
@@ -23,7 +24,7 @@ const Post = () => {
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
   return (
-    <>
+    <CommentInfoProvider>
       <VStack
         p="2rem 2rem 5rem 2rem"
         backgroundColor="bg01"
@@ -54,7 +55,7 @@ const Post = () => {
       <CommentWriteModal isOpen={isCommentWriteOpen} onClose={onCommentWriteClose} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
       <CommentListModal isOpen={isListOpen} onClose={onListClose} />
-    </>
+    </CommentInfoProvider>
   );
 };
 
