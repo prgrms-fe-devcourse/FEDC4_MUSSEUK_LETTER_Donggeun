@@ -146,8 +146,8 @@ const NewPost = () => {
             <Button
               onClick={() => {
                 const title = JSON.stringify({
-                  musseukTitle: `${musseukTitle}`,
-                  musseukIntroduce: `${musseukIntroduce}`
+                  musseukTitle: `${musseukTitle || '머쓱이'}`,
+                  musseukIntroduce: `${musseukIntroduce || ''}`
                 });
                 mutate({ title, musseukImage, CHANNEL_ID });
               }}

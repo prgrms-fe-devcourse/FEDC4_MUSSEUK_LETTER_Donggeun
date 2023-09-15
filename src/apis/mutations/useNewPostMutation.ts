@@ -18,7 +18,7 @@ interface AxiosError {
 const getNewPost = async (customParams: CustomRequestData) => {
   const { data } = await formDataInstance.post('/posts/create', {
     title: customParams.title,
-    image: customParams.musseukImage,
+    image: customParams.musseukImage || 'musseuk_default',
     channelId: customParams.CHANNEL_ID
   });
   return data;
