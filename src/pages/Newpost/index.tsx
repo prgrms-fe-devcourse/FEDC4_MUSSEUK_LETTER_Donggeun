@@ -1,13 +1,12 @@
 import { ChangeEvent, MouseEvent } from 'react';
-import Header from '@/components/header';
-import { Flex, Button, Image, Textarea, Box, Text, Input, useStatStyles } from '@chakra-ui/react';
+import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import MusseukLabtop from '@/assets/images/musseuk_labtop.png';
 import MusseukHood from '@/assets/images/musseuk_hood.png';
 import MusseukHeart from '@/assets/images/musseuk_heart.png';
 import MusseukDefault from '@/assets/images/musseuk_default.png';
 import { useNavigate } from 'react-router-dom';
-import { ReactDOM, useRef, useState } from 'react';
+import { useState } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
