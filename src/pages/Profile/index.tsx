@@ -19,6 +19,7 @@ import hoodMusseuk from '@/assets/images/musseuk_hood.png';
 import labtopMusseuk from '@/assets/images/musseuk_labtop.png';
 import semicolonMusseuk from '@/assets/images/musseuk_semicolon.png';
 import ProfileBar from './components/ProfileBar';
+import { useNavigate } from 'react-router-dom';
 
 const USER_NAME = '이상훈';
 const DUMMY_DATA = [
@@ -58,12 +59,22 @@ const DUMMY_DATA = [
     letter: 18
   }
 ];
+export type AddCardProps = {
+  goToNewPost: () => void;
+};
 
-const AddCard = () => {
+const AddCard = ({ goToNewPost }: AddCardProps) => {
   return (
     <Card w={56} h={64} p={4} textAlign={'center'} align={'center'} border={'2px'} borderColor={'green01'}>
       <CardHeader>
-        <Circle as="button" size="5rem" bg={'green01'} justifyContent="center" m={0} display={'inline-flex'}>
+        <Circle
+          as="button"
+          size="5rem"
+          bg={'green01'}
+          justifyContent="center"
+          m={0}
+          display={'inline-flex'}
+          onClick={goToNewPost}>
           <AddIcon color={'white'} boxSize={8} />
         </Circle>
       </CardHeader>
@@ -76,6 +87,11 @@ const AddCard = () => {
 
 const Profile = () => {
   const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
+  const navigate = useNavigate();
+
+  const goToNewPost = () => {
+    navigate('/newpost');
+  };
 
   return (
     <>
@@ -88,17 +104,22 @@ const Profile = () => {
             <Text fontSize={isSmallerThan768 ? '1.2rem' : '1.6rem'} mt={14} py={0}>
               {USER_NAME}의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 5마리가 기다리고 있어요!
             </Text>
-            <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary">
+            <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
               새로운 머쓱이 추가
             </Button>
           </Stack>
           <Grid gridTemplateColumns={isSmallerThan768 ? '1fr' : 'repeat(3, 1fr)'} gap={5} p={6} justifyItems={'center'}>
             {DUMMY_DATA.map((card) => (
               <GridItem key={card.id}>
-                <PostCard {...card} />
+                <PostCard
+                  {...card}
+                  handleClick={() => {
+                    navigate(`/post/${card.id}`);
+                  }}
+                />
               </GridItem>
             ))}
-            <AddCard></AddCard>
+            <AddCard goToNewPost={goToNewPost}></AddCard>
           </Grid>
         </GridItem>
       </Grid>

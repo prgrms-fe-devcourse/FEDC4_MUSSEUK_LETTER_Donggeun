@@ -7,11 +7,13 @@ export type Props = {
   userName?: string;
   musseukContent: string;
   letter: number;
+  handleClick: () => void;
 };
 
-const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Props) => {
+const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName, handleClick }: Props) => {
   return (
     <Card
+      onClick={handleClick}
       w="15.5rem"
       h="19.5rem"
       p={4}
