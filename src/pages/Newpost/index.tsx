@@ -1,4 +1,3 @@
-import Header from '@/components/header';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import MusseukLabtop from '@/assets/images/musseuk_labtop.png';
