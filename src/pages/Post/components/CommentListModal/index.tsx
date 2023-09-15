@@ -82,8 +82,7 @@ const CommentListModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
             }
           }}
           pt={'3rem'}
-          box-boxSizing="border-box"
-          overflowY={'auto'}>
+          box-boxSizing="border-box">
           <Accordion allowMultiple>
             {mockData.map((comment) => (
               <AccordionItems key={comment._id} nickname={comment.nickname} content={comment.content} />
