@@ -1,5 +1,4 @@
-import Header from '@/components/header';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
@@ -15,9 +14,6 @@ import PostCard from '@/components/PostCard';
 const Main = () => {
   const navigate = useNavigate();
 
-  const [swiperRef, setSwiperRef] = useState(null);
-  const appendNumber = useRef(25);
-  const prependNumber = useRef(1);
   const [slides, setSlides] = useState(Array.from({ length: 25 }).map((_, index) => `Slide ${index + 1}`));
 
   return (
