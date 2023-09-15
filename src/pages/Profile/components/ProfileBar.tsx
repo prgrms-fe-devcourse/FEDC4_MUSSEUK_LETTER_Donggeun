@@ -1,7 +1,7 @@
 import { VStack, HStack, Avatar, Button, Text, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import hoodMusseuk from '@/assets/images/musseuk_hood.png';
 import { BiEnvelope } from 'react-icons/bi';
-import { MdFaceUnlock, MdComment } from 'react-icons/md';
+import { MdComment } from 'react-icons/md';
 
 type UserInfoFieldProps = {
   icon: React.ReactNode;
@@ -38,7 +38,6 @@ const ProfileBar = ({ userName }: ProfileBarProps) => {
       </VStack>
       <VStack>
         <UserInfoField icon={<BiEnvelope />} type={'email'} value={'prong@gmail.com'} />
-        <UserInfoField icon={<MdFaceUnlock />} type={'text'} value={'Nickname'} />
         <UserInfoField icon={<MdComment />} type={'text'} value={'Introduce~'} />
         <Button colorScheme="primary">프로필 편집하기</Button>
       </VStack>

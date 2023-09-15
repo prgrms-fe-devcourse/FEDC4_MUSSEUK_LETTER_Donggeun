@@ -20,7 +20,7 @@ import labtopMusseuk from '@/assets/images/musseuk_labtop.png';
 import semicolonMusseuk from '@/assets/images/musseuk_semicolon.png';
 import ProfileBar from './components/ProfileBar';
 
-const USER_NAME = '곰돌이';
+const USER_NAME = '이상훈';
 const DUMMY_DATA = [
   {
     id: 1,
