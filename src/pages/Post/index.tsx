@@ -10,11 +10,12 @@ import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
+import { CommentInfoProvider } from './contexts/CommentInfoProvider';
 
 const Post = () => {
   const { postId } = useParams();
 
-  const { isOpen: isCommentWriteOpen, onOpen: onCommentWriteOpen, onClose: onCommentWriteClose } = useDisclosure();
+  const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
   const { data: postData } = usePostDetailQuery(postId ?? '');
@@ -23,7 +24,7 @@ const Post = () => {
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
   return (
-    <>
+    <CommentInfoProvider>
       <VStack
         p="2rem 2rem 5rem 2rem"
         backgroundColor="bg01"
@@ -47,14 +48,14 @@ const Post = () => {
           </AnnouncementText>
           {isAuthor && <ListButton onClick={onListOpen} />}
         </Box>
-        <CommentBoard onOpen={onCommentWriteOpen} />
+        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId ?? ''} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
-      <CommentWriteModal isOpen={isCommentWriteOpen} onClose={onCommentWriteClose} />
+      <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
       <CommentListModal isOpen={isListOpen} onClose={onListClose} />
-    </>
+    </CommentInfoProvider>
   );
 };
 
