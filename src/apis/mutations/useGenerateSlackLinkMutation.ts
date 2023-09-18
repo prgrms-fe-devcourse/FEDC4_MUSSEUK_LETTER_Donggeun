@@ -8,7 +8,7 @@ interface RequestData {
   slackWorkspace: SlackWorkspace;
 }
 
-const generateSlackLink = async (params: RequestData) => {
+const postSlackVerification = async (params: RequestData) => {
   const { data } = await slackInstance.post('/slack/verification', params);
 
   return data;
@@ -16,7 +16,7 @@ const generateSlackLink = async (params: RequestData) => {
 
 const useGenerateSlackLinkMutation = () => {
   return useMutation<unknown, AxiosError, RequestData>({
-    mutationFn: generateSlackLink
+    mutationFn: postSlackVerification
   });
 };
 
