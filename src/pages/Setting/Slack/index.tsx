@@ -7,7 +7,6 @@ import useGenerateSlackLinkMutation from '@/apis/mutations/useGenerateSlackLinkM
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import LinkField from './components/LinkField';
 import { SLACK_ID_DESCRIPTION } from '@/pages/Setting/Slack/constants/index';
-import { SlackWorkspace } from '@/types';
 import { z } from 'zod';
 import { SLACK_WORKSPACE } from '@/constants/slack';
 
@@ -42,7 +41,7 @@ const SettingSlack = () => {
       <FormControl>
         <Controller
           defaultValue="Frontend"
-          name="devcourse"
+          name="slackWorkspace"
           control={control}
           render={({ field }) => (
             <RadioGroup {...field} display={'flex'} w={'100%'} gap={2} my={8}>
