@@ -3,39 +3,23 @@ import { PostResponse } from '../types';
 import parseComment from './parseComment';
 import parseUser from './parseUser';
 
-const parsePost = (rawPost: PostResponse) => {
-  const { _id, title: titleJSON, comments: rawComments, author: rawAuthor } = rawPost;
+const parsePost = (rawPost: PostResponse): Post => {
+  let titleField;
 
-  const comments = rawComments.map((comment) => parseComment(comment));
-  const author = parseUser(rawAuthor);
-
-  let titleData: PostTitle;
   try {
-    titleData = JSON.parse(titleJSON) as PostTitle;
+    titleField = JSON.parse(rawPost.title) as PostTitle;
   } catch (err) {
-    if (err instanceof SyntaxError) {
-      titleData = {
-        title: '머쓱이',
-        content: '',
-        musseukImageName: 'musseuk_default'
-      };
-    } else {
-      throw err;
-    }
+    console.error(err);
   }
 
-  const { title = '머쓱이', content = '', musseukImageName = 'musseuk_default' } = titleData;
-
-  const post: Post = {
-    _id,
-    title,
-    content,
-    musseukImageName,
-    comments,
-    author
+  return {
+    _id: rawPost._id,
+    title: titleField?.title ?? '머쓱이',
+    content: titleField?.content ?? '',
+    musseukImageName: titleField?.musseukImageName ?? 'musseuk_default',
+    comments: rawPost.comments.map((comment) => parseComment(comment)),
+    author: parseUser(rawPost.author)
   };
-
-  return post;
 };
 
 export default parsePost;

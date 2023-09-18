@@ -11,7 +11,8 @@ import { AUTH_TOKEN } from '@/constants/storageKey';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import { isPasswordTooShort, isPasswordContainNumber } from '@/pages/Signup/helpers/password';
 import InputField from '@/pages/Signup/components/InputField';
-import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
+import { LinkTemplate } from '@/pages/Signup/templates';
+import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 
 const links = {
   back: '..',
@@ -81,7 +82,7 @@ const ChangePassword = () => {
   if (!user && !storage('session').getItem(AUTH_TOKEN, null)) return <Navigate to={links.signin} />;
 
   return (
-    <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
+    <PageTemplateWithHeader onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk} alt="머쓱이" />
       <Heading size="lg" textAlign="center">
         Change Password
@@ -130,7 +131,7 @@ const ChangePassword = () => {
           </Text>
         </Link>
       </LinkTemplate>
-    </PageTemplate>
+    </PageTemplateWithHeader>
   );
 };
 
