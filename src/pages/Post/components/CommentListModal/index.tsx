@@ -20,7 +20,6 @@ const CommentListModal = ({
   onClose,
   comments
 }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'> & { comments: Comment[] }) => {
-  console.log(comments);
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
       <ModalContent borderRadius={20} h={'25rem'}>
