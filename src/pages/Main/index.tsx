@@ -9,16 +9,17 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import PostCard from '@/components/PostCard';
 import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
-import musseuk_default from '@/assets/images/musseuk_default.png';
-import musseuk_heart from '@/assets/images/musseuk_heart.png';
-import musseuk_hood from '@/assets/images/musseuk_hood.png';
-import musseuk_labtop from '@/assets/images/musseuk_labtop.png';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 
 const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
+
+  console.log(data);
+  console.log(JSON.parse(data[1].title).musseukTitle);
+  console.log(JSON.parse(data[1].title).musseukImageName);
+  console.log(JSON.parse(data[1].title).musseukIntroduce);
 
   return (
     <>

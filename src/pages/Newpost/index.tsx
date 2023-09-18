@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent } from 'react';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
-import MusseukLaptop from '@/assets/images/musseuk_laptop.png';
+import MusseukLaptop from '@/assets/images/laptop.png';
 import MusseukHood from '@/assets/images/musseuk_hood.png';
 import MusseukHeart from '@/assets/images/musseuk_heart.png';
 import MusseukDefault from '@/assets/images/musseuk_default.png';
@@ -89,7 +89,7 @@ const NewPost = () => {
                 _hover={{ borderColor: '#72D988' }}
                 width="50rem"
                 height="auto">
-                <Image onClick={clickMusseuk} p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLabtop} alt="MusseukLabtop" />
+                <Image onClick={clickMusseuk} p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLaptop} alt="MusseukLaptop" />
               </Box>
               <Box
                 border="0.3rem solid transparent"
@@ -152,7 +152,7 @@ const NewPost = () => {
                 const title = JSON.stringify({
                   musseukTitle: `${musseukTitle || '머쓱이'}`,
                   musseukIntroduce: `${musseukIntroduce || ''}`,
-                  musseukImageName: `${musseukImage || 'musseuk_default'}'}`
+                  musseukImageName: `${musseukImage || 'musseuk_default'}`
                 });
                 mutate(
                   { title, musseukImage, CHANNEL_ID },
