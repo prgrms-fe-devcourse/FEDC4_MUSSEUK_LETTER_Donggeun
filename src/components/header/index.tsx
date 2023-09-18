@@ -8,6 +8,7 @@ import PrimaryButton from './components/Button';
 import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import slackIcon from '@/assets/images/icon-slack.png';
 
 type InputValue = {
   keyword: string;
@@ -32,7 +33,22 @@ const Header = () => {
 
   const headerMenu = () => (
     <Stack direction={'row'} spacing={6}>
-      <BellIcon w={8} h={8} cursor={'pointer'} />
+      <Menu autoSelect={false}>
+        <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
+          <BellIcon color={'black'} w={8} h={8} cursor={'pointer'} />
+        </MenuButton>
+        <MenuList minW={36} p={0}>
+          <MenuItem
+            borderRadius={5}
+            h={9}
+            justifyContent={'center'}
+            _hover={{ bg: 'gray01' }}
+            onClick={() => navigate('/setting/slack')}>
+            <Image w={4} h={4} alt="slack" src={slackIcon} mr={'0.5rem'} />
+            <span>Slack 알림 연동</span>
+          </MenuItem>
+        </MenuList>
+      </Menu>
       <Menu autoSelect={false}>
         <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
           <Avatar size={'sm'} src={data?.image ?? defaultProfile} />

@@ -9,6 +9,7 @@ import NewPost from './pages/Newpost';
 import Post from './pages/Post';
 import Search from './pages/Search';
 import ChangePassword from './pages/ChangePassword';
+import SettingSlack from './pages/Setting/Slack';
 
 const App = () => {
   useAuthCheckQuery();
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/newpost" element={<NewPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/search/:keyword" element={<Search />} />
+          <Route path="/setting/slack" element={<SettingSlack />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
