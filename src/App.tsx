@@ -25,10 +25,10 @@ const App = () => {
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/setting/slack" element={<SettingSlack />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

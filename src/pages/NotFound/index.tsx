@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Flex, Button, Heading, Text, Image } from '@chakra-ui/react';
-import { PageTemplate } from '@/pages/Signup/templates';
+import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 import notfound from '@/assets/images/404_notfound.png';
 
 const links = {
@@ -9,7 +9,7 @@ const links = {
 
 const NotFound = () => {
   return (
-    <PageTemplate>
+    <PageTemplateWithHeader>
       <Image
         maxW={{
           base: '52',
@@ -32,7 +32,7 @@ const NotFound = () => {
           이전 페이지로 돌아가기
         </Button>
       </Link>
-    </PageTemplate>
+    </PageTemplateWithHeader>
   );
 };
 

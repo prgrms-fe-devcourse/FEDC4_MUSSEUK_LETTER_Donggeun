@@ -10,9 +10,12 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import slackIcon from '@/assets/images/icon-slack.png';
 
+export const HEADER_HEIGHT = '4rem';
+
 type InputValue = {
   keyword: string;
 };
+
 const Header = () => {
   const navigate = useNavigate();
 
@@ -85,7 +88,7 @@ const Header = () => {
   );
 
   return (
-    <Box h={16} px={6} bg={'white'}>
+    <Box h={HEADER_HEIGHT} px={6} bg={'white'}>
       <Flex gap={4} alignItems={'center'} h="100%" justifyContent={'space-between'}>
         <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => navigate('/')} />
         <form style={{ width: '65rem' }} onSubmit={handleSubmit(onSubmit)}>
