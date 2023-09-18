@@ -11,7 +11,7 @@ const parseComment = (rawComment: CommentResponse) => {
     if (err instanceof SyntaxError) {
       commentData = {
         content: '',
-        pos: [0, 0],
+        position: [0, 0],
         nickname: '익명의 머쓱이',
         decorationImageName: 'decoration_soju1'
       };
@@ -22,7 +22,7 @@ const parseComment = (rawComment: CommentResponse) => {
 
   const {
     content = '',
-    pos = [0, 0],
+    position = [0, 0],
     nickname = '익명의 머쓱이',
     decorationImageName = 'decoration_soju1'
   } = commentData;
@@ -30,7 +30,7 @@ const parseComment = (rawComment: CommentResponse) => {
   const comment: Comment = {
     _id,
     content,
-    pos,
+    position,
     nickname,
     decorationImageName
   };

@@ -16,7 +16,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import defaultMusseuk from '@/assets/images/musseuk_default.png';
 import hearttMusseuk from '@/assets/images/musseuk_heart.png';
 import hoodMusseuk from '@/assets/images/musseuk_hood.png';
-import labtopMusseuk from '@/assets/images/musseuk_labtop.png';
+import laptopMusseuk from '@/assets/images/musseuk_laptop.png';
 import semicolonMusseuk from '@/assets/images/musseuk_semicolon.png';
 import ProfileBar from './components/ProfileBar';
 
@@ -45,7 +45,7 @@ const DUMMY_DATA = [
   },
   {
     id: 4,
-    imgUrl: labtopMusseuk,
+    imgUrl: laptopMusseuk,
     musseukName: 'musseuk4',
     musseukContent: "hello I'm Musseuk4",
     letter: 18
