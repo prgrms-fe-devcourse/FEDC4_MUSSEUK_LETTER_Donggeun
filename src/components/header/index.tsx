@@ -10,7 +10,7 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import slackIcon from '@/assets/images/icon-slack.png';
 
-export const HEADER_HEIGHT = 16;
+export const HEADER_HEIGHT = '4rem';
 
 type InputValue = {
   keyword: string;

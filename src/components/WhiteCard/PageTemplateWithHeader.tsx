@@ -9,7 +9,7 @@ const PageTemplateWithHeader = ({ children, ...props }: FlexProps & React.FormHT
       w="100%"
       px="4"
       py="8"
-      minH={`calc(100vh - --chakra-sizes-${HEADER_HEIGHT})`}
+      minH={`calc(100vh - ${HEADER_HEIGHT})`}
       justifyContent="center"
       alignItems="center"
       {...props}>
