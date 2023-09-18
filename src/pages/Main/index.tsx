@@ -15,9 +15,18 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
+  // console.log(data);
 
   return (
     <>
+      {/* 포스트 카드 참조 예시 코드 */}
+      {/* <PostCard
+        imgName={JSON.parse(data[0].title).musseukImageName}
+        musseukName={JSON.parse(data[0].title).musseukTitle}
+        userName={data[0].author.fullName}
+        musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
+        letter={data[0].comments.length}
+      /> */}
       <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
         <Image
           top="3.3rem"
@@ -81,14 +90,6 @@ const Main = () => {
               </SwiperSlide>
             ))}
         </Swiper>
-        {/* 포스트 카드 참조 예시 코드 */}
-        {/* <PostCard
-        imgName={JSON.parse(data[0].title).musseukImageName}
-        musseukName={JSON.parse(data[0].title).musseukTitle}
-        userName={data[0].author.fullName}
-        musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
-        letter={data[0].comments.length}
-      /> */}
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
     </>
