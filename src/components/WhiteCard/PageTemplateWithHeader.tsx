@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import type { FlexProps } from '@chakra-ui/react';
-import WhiteCard from '@/components/WhiteCard/WhiteCard';
+import WhiteCard from '@/components/WhiteCard';
 import { HEADER_HEIGHT } from '../header';
 
 const PageTemplateWithHeader = ({ children, ...props }: FlexProps & React.FormHTMLAttributes<HTMLFormElement>) => {
