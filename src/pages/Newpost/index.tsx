@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent } from 'react';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
-import MusseukLaptop from '@/assets/images/laptop.png';
+import MusseukLaptop from '@/assets/images/musseuk_laptop.png';
 import MusseukHood from '@/assets/images/musseuk_hood.png';
 import MusseukHeart from '@/assets/images/musseuk_heart.png';
 import MusseukDefault from '@/assets/images/musseuk_default.png';

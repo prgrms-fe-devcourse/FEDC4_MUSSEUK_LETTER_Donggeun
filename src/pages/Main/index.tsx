@@ -16,10 +16,11 @@ const Main = () => {
 
   const { data, status } = useGetPostsInfoQuery();
 
-  console.log(data);
-  console.log(JSON.parse(data[1].title).musseukTitle);
-  console.log(JSON.parse(data[1].title).musseukImageName);
-  console.log(JSON.parse(data[1].title).musseukIntroduce);
+  // console.log(data);
+  // console.log(JSON.parse(data[0].title).musseukTitle);
+  // console.log(JSON.parse(data[0].title).musseukImageName);
+  // console.log(JSON.parse(data[0].title).musseukIntroduce);
+  // console.log(data[0].author.fullName);
 
   return (
     <>
