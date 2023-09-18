@@ -16,21 +16,8 @@ const Main = () => {
 
   const { data, status } = useGetPostsInfoQuery();
 
-  console.log(data);
-  // console.log(JSON.parse(data[0].title).musseukTitle);
-  // console.log(JSON.parse(data[0].title).musseukImageName);
-  // console.log(JSON.parse(data[0].title).musseukIntroduce);
-  // console.log(data[0].author.fullName);
-
   return (
     <>
-      <PostCard
-        imgUrl={JSON.parse(data[0].title).musseukImageName}
-        musseukName={JSON.parse(data[0].title).musseukTitle}
-        userName={data[0].author.fullName}
-        musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
-        letter={data[0].comments.length}
-      />
       <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
         <Image
           top="3.3rem"
@@ -63,7 +50,7 @@ const Main = () => {
         </Button>
       </Box>
       <Box bgColor="bg01" paddingTop="5rem">
-        {/* <Swiper
+        <Swiper
           loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={5}
@@ -81,7 +68,7 @@ const Main = () => {
               <SwiperSlide key={slideContent._id} virtualIndex={index}>
                 <Box ml="4rem" mb="3.5rem">
                   <PostCard
-                    imgUrl="null"
+                    imgName="null"
                     musseukName={slideContent.title}
                     userName={slideContent.author.fullName}
                     musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
@@ -90,7 +77,15 @@ const Main = () => {
                 </Box>
               </SwiperSlide>
             ))}
-        </Swiper> */}
+        </Swiper>
+        {/* 포스트 카드 참조 예시 코드 */}
+        {/* <PostCard
+        imgName={JSON.parse(data[0].title).musseukImageName}
+        musseukName={JSON.parse(data[0].title).musseukTitle}
+        userName={data[0].author.fullName}
+        musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
+        letter={data[0].comments.length}
+      /> */}
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
     </>

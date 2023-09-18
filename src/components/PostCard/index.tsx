@@ -7,14 +7,14 @@ import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import { EmailIcon } from '@chakra-ui/icons';
 
 export type Props = {
-  imgUrl: string;
+  imgName: string;
   musseukName: string;
   userName?: string;
   musseukContent: string;
   letter: number;
 };
 
-const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Props) => {
+const PostCard = ({ imgName, letter, musseukContent, musseukName, userName }: Props) => {
   return (
     <Card
       w="15.5rem"
@@ -29,7 +29,7 @@ const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Pro
           w="10rem"
           h="8rem"
           alt="musseukAvatar"
-          src={`src/assets/images/${imgUrl}.png`}
+          src={`src/assets/images/${imgName}.png`}
         />
       </CardHeader>
       <CardBody p={0}>
