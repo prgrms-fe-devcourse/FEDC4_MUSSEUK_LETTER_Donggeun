@@ -1,4 +1,3 @@
-import Musseuk from '@/assets/images/musseuk_semicolon.png';
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import PostCard from '@/components/PostCard';
 import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
+import musseuk_default from '@/assets/images/musseuk_default.png';
+import musseuk_heart from '@/assets/images/musseuk_heart.png';
+import musseuk_hood from '@/assets/images/musseuk_hood.png';
+import musseuk_labtop from '@/assets/images/musseuk_labtop.png';
+import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -19,7 +23,15 @@ const Main = () => {
   return (
     <>
       <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
-        <Image top="3.3rem" right="1rem" position="absolute" w="40rem" h="30rem" src={Musseuk} alt="Musseuk" />
+        <Image
+          top="3.3rem"
+          right="1rem"
+          position="absolute"
+          w="40rem"
+          h="30rem"
+          src={musseuk_semicolon}
+          alt="musseuk_semicolon"
+        />
         <Heading mb={4}>데브코스 익명 편지 전송 서비스</Heading>
         <br></br>
         <Text fontSize="xl">팀원들에게 전하지 못한 말들이 있어 아쉽지 않으셨나요?</Text>
