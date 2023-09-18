@@ -66,8 +66,11 @@ const Main = () => {
           {status === 'success' &&
             data.map((slideContent, index) => (
               <SwiperSlide key={slideContent._id} virtualIndex={index}>
-                <Box ml="4rem" mb="3.5rem">
+                <Box ml="4rem" mb="3.5rem" cursor="pointer">
                   <PostCard
+                    onClick={() => {
+                      navigate(`/post/${slideContent._id}`);
+                    }}
                     imgName="null"
                     musseukName={slideContent.title}
                     userName={slideContent.author.fullName}

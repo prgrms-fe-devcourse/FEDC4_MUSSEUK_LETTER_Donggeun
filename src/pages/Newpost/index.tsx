@@ -9,12 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
-const baseURL = import.meta.env.VITE_BASE_URL;
-import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
 
 const NewPost = () => {
-  const { data, status } = useGetPostsInfoQuery();
-
   const { mutate } = useNewPostMutation();
 
   const [musseukTitle, setMusseukTitle] = useState('');

@@ -5,6 +5,7 @@ import musseuk_hood from '@/assets/images/musseuk_hood.png';
 import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import { EmailIcon } from '@chakra-ui/icons';
+import { UseMutationResult } from '@tanstack/react-query';
 
 export type Props = {
   imgName: string;
@@ -12,11 +13,13 @@ export type Props = {
   userName?: string;
   musseukContent: string;
   letter: number;
+  onClick?: () => void;
 };
 
-const PostCard = ({ imgName, letter, musseukContent, musseukName, userName }: Props) => {
+const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onClick }: Props) => {
   return (
     <Card
+      onClick={onClick}
       w="15.5rem"
       h="19.5rem"
       p={4}
