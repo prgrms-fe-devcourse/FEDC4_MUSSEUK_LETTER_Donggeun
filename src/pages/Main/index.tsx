@@ -18,7 +18,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
-  // console.log(data);
+  console.log(data);
   const { data: user } = useAuthCheckQuery();
 
   return (
@@ -73,26 +73,30 @@ const Main = () => {
           navigation={true}
           virtual>
           {status === 'success' &&
-            data.slice(0, 25).map((slideContent, index) => (
-              <SwiperSlide key={slideContent._id} virtualIndex={index}>
-                <Box ml="4rem" mb="3.5rem" cursor="pointer">
-                  <PostCard
-                    onClick={() => {
-                      if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
-                        navigate('/signin');
-                      } else {
-                        navigate(`/post/${slideContent._id}`);
-                      }
-                    }}
-                    imgName={JSON.parse(slideContent.title).musseukImageName}
-                    musseukName={JSON.parse(slideContent.title).title}
-                    userName={JSON.parse(slideContent.author.fullName).username}
-                    musseukContent={JSON.parse(slideContent.title).content}
-                    letter={slideContent.comments.length}
-                  />
-                </Box>
-              </SwiperSlide>
-            ))}
+            data
+              .slice(0, 50)
+              .sort((a, b) => b.comments.length - a.comments.length)
+              .slice(0, 25)
+              .map((slideContent, index) => (
+                <SwiperSlide key={slideContent._id} virtualIndex={index}>
+                  <Box ml="4rem" mb="3.5rem" cursor="pointer">
+                    <PostCard
+                      onClick={() => {
+                        if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+                          navigate('/signin');
+                        } else {
+                          navigate(`/post/${slideContent._id}`);
+                        }
+                      }}
+                      imgName={JSON.parse(slideContent.title).musseukImageName}
+                      musseukName={JSON.parse(slideContent.title).title}
+                      userName={JSON.parse(slideContent.author.fullName).username}
+                      musseukContent={JSON.parse(slideContent.title).content}
+                      letter={slideContent.comments.length}
+                    />
+                  </Box>
+                </SwiperSlide>
+              ))}
         </Swiper>
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
