@@ -63,9 +63,15 @@ const NewPost = () => {
           <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
             머쓱이 테마
           </Text>
-          <Box margin="auto" h="31rem" p={4}>
-            <Image ref={musseukImageRef} marginBottom="-6.5rem" src={musseuk_semicolon} alt="musseukImage" />
-            <Image margin="auto" src={table} alt="table" />
+          <Box margin="auto" h="30rem" p={4}>
+            <Image
+              w="25rem"
+              margin="auto"
+              ref={musseukImageRef}
+              src={musseukImage || musseuk_semicolon}
+              alt="musseukImage"
+            />
+            {/* <Image margin="auto" src={table} alt="table" /> */}
           </Box>
           <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">
