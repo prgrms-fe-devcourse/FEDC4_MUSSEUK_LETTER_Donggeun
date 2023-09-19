@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { slackInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
-import { UserResponse } from '../types';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
+import { User } from '@/types';
 
 type VerifyResponse = {
-  user: UserResponse;
+  user: User;
   token: string;
 };
 
@@ -17,7 +17,7 @@ export const getTokenResult = async (slackToken: string) => {
 };
 
 const useSlackTokenCheckQuery = (slackToken: string) => {
-  return useQuery<VerifyResponse>({
+  return useQuery<User>({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: queryKey.auth,
     queryFn: () => getTokenResult(slackToken)
