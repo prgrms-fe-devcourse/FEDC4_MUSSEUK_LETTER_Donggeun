@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
@@ -25,7 +26,7 @@ const postLogin = async (params: RequestData) => {
 const useSigninMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  return useMutation<ResponseData, AxiosError, RequestData>({
     mutationFn: postLogin,
     onSuccess: (data) => {
       storage('session').setItem(AUTH_TOKEN, data.token);
