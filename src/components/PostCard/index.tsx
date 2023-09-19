@@ -24,19 +24,24 @@ const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onCl
       <CardHeader textAlign="center" p={0}>
         <Image
           display={'inline-block'}
-          w="9rem"
-          h="8rem"
-          alt="musseukAvatar"
+          objectFit="cover"
+          w="7rem"
+          h="7rem"
+          alt="Musseuk"
           src={`src/assets/images/${imgName}.png`}
         />
       </CardHeader>
       <CardBody p={0}>
         <Stack textAlign="center">
-          <Heading fontSize="1.3rem">{musseukName}</Heading>
+          <Heading fontSize="1.3rem">
+            {musseukName.length > 10 ? musseukName.slice(0, 10) + '...' : musseukName}
+          </Heading>
           <Text color="#6D8198" pb="0.3rem" fontSize="0.6rem">
             {userName}
           </Text>
-          <Text fontSize="0.8rem">{musseukContent}</Text>
+          <Text fontSize="0.8rem">
+            {musseukContent.length > 50 ? musseukContent.slice(0, 50) + '...' : musseukContent}
+          </Text>
         </Stack>
       </CardBody>
       <CardFooter fontSize="1.1rem" p={0} justify="flex-end" alignItems="center" color={'blue03'}>

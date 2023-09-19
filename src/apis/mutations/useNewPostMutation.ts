@@ -28,8 +28,8 @@ const useNewPostMutation = () => {
   const queryClient = useQueryClient();
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postNewPost,
-    onMutate: () => {
-      queryClient.setQueryData(queryKey.auth, null);
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKey.posts.all);
     }
   });
 };
