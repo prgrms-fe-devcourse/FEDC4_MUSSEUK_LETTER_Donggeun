@@ -29,7 +29,7 @@ const useNewPostMutation = () => {
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postNewPost,
     onSuccess: () => {
-      queryClient.invalidateQueries(queryKey.posts.all);
+      queryClient.invalidateQueries(queryKey.posts.list);
     }
   });
 };
