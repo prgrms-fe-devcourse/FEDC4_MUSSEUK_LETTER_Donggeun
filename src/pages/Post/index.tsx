@@ -11,8 +11,6 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
 import { CommentInfoProvider } from './contexts/CommentInfoProvider';
-import storage from '@/utils/storage';
-import { AUTH_TOKEN } from '@/constants/storageKey';
 
 const links = {
   notFound: '/notFound',
@@ -52,12 +50,18 @@ const Post = () => {
                 개의 편지가 전달됐어요!
               </>
             ) : (
-              `원하는 위치를 클릭해서 ${postData?.author.username} 님의 머쓱이에게 편지를 남겨주세요.`
+              <>
+                원하는{' '}
+                <Text display={'inline'} color={'green03'}>
+                  위치
+                </Text>
+                를 클릭해서 {postData?.author.username} 님의 머쓱이에게 편지를 남겨주세요.
+              </>
             )}
           </AnnouncementText>
           {isAuthor && <ListButton onClick={onListOpen} />}
         </Box>
-        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} />
+        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} isAuthor={isAuthor} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
