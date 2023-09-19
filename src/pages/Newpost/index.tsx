@@ -40,6 +40,22 @@ const NewPost = () => {
     }
   };
 
+  const handleCreateMusseukPost = () => {
+    const title = JSON.stringify({
+      musseukTitle: `${musseukTitle || '머쓱이'}`,
+      musseukIntroduce: `${musseukIntroduce || ''}`,
+      musseukImageName: `${musseukImage || 'musseuk_default'}`
+    });
+    mutate(
+      { title, musseukImage, CHANNEL_ID },
+      {
+        onSuccess: (data) => {
+          navigate(`/post/${data._id}`);
+        }
+      }
+    );
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -159,24 +175,7 @@ const NewPost = () => {
               colorScheme="gray">
               뒤로가기
             </Button>
-            <Button
-              onClick={() => {
-                const title = JSON.stringify({
-                  musseukTitle: `${musseukTitle || '머쓱이'}`,
-                  musseukIntroduce: `${musseukIntroduce || ''}`,
-                  musseukImageName: `${musseukImage || 'musseuk_default'}`
-                });
-                mutate(
-                  { title, musseukImage, CHANNEL_ID },
-                  {
-                    onSuccess: (data) => {
-                      navigate(`/post/${data._id}`);
-                    }
-                  }
-                );
-              }}
-              width="10rem"
-              colorScheme="primary">
+            <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
               생성하기
             </Button>
           </Flex>
