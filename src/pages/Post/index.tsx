@@ -13,12 +13,12 @@ import CommentInfoModal from './components/CommentInfoModal';
 import { CommentInfoProvider } from './contexts/CommentInfoProvider';
 
 const Post = () => {
-  const { postId } = useParams();
+  const { postId = '' } = useParams();
 
   const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
-  const { data: postData } = usePostDetailQuery(postId ?? '');
+  const { data: postData } = usePostDetailQuery(postId);
   const { data: userData } = useAuthCheckQuery();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
@@ -48,11 +48,11 @@ const Post = () => {
           </AnnouncementText>
           {isAuthor && <ListButton onClick={onListOpen} />}
         </Box>
-        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId ?? ''} />
+        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} />
         <Heading mb="1rem">{postData?.title}</Heading>
         <DescriptionText>{postData?.content}</DescriptionText>
       </VStack>
-      <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} />
+      <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
       <CommentListModal isOpen={isListOpen} onClose={onListClose} />
     </CommentInfoProvider>

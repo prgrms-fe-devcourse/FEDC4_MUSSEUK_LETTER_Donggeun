@@ -31,7 +31,7 @@ const parseComment = (rawComment: CommentResponse) => {
     _id,
     content,
     position,
-    nickname,
+    nickname: nickname || '익명의 머쓱이',
     decorationImageName
   };
 
