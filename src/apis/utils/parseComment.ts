@@ -14,7 +14,7 @@ const parseComment = (rawComment: CommentResponse): Comment => {
     _id: rawComment._id,
     content: commentField?.content ?? '',
     position: commentField?.position ?? [0, 0],
-    nickname: commentField?.nickname ?? '익명의 머쓱이',
+    nickname: commentField?.nickname || '익명의 머쓱이',
     decorationImageName: commentField?.decorationImageName ?? 'decoration_soju1'
   };
 };
