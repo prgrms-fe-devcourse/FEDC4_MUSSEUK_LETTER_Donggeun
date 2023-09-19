@@ -17,6 +17,7 @@ import ProfileBar from './components/ProfileBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUserPostListQuery from '@/apis/queries/useUserPostListQuery';
 import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
 export type AddCardProps = {
   goToNewPost: () => void;
@@ -48,9 +49,12 @@ const Profile = () => {
   const { userId } = useParams();
   const { data: postList } = useUserPostListQuery(userId);
   const { data: user } = useUserInfoQuery(userId);
+  const { data: authUser } = useAuthCheckQuery();
 
   const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
+
+  const isUser = userId === authUser?._id;
 
   const goToNewPost = () => {
     navigate('/newpost');
@@ -60,7 +64,13 @@ const Profile = () => {
     <>
       <Grid bg={'bg0101'} h="100vh" gridTemplateColumns={'1fr 3.5fr'}>
         <GridItem>
-          <ProfileBar image={user?.image} username={user?.username} email={user?.email} introduce={user?.introduce} />
+          <ProfileBar
+            image={user?.image}
+            username={user?.username}
+            email={user?.email}
+            introduce={user?.introduce}
+            isUser={isUser}
+          />
         </GridItem>
         <GridItem>
           <Stack h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} ml={6} px={6}>
@@ -68,9 +78,11 @@ const Profile = () => {
               {user?.username}의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 5마리가 기다리고
               있어요!
             </Text>
-            <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
-              새로운 머쓱이 추가
-            </Button>
+            {isUser ? (
+              <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
+                새로운 머쓱이 추가
+              </Button>
+            ) : null}
           </Stack>
           <Grid gridTemplateColumns={isSmallerThan768 ? '1fr' : 'repeat(3, 1fr)'} gap={5} p={6} justifyItems={'center'}>
             {postList?.map((post) => (
@@ -86,7 +98,7 @@ const Profile = () => {
                 />
               </GridItem>
             ))}
-            <AddCard goToNewPost={goToNewPost}></AddCard>
+            {isUser ? <AddCard goToNewPost={goToNewPost}></AddCard> : null}
           </Grid>
         </GridItem>
       </Grid>

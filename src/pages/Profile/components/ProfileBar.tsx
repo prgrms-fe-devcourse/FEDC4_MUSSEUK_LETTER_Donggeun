@@ -11,9 +11,10 @@ interface ProfileProps {
   username: string | undefined;
   email: string | undefined;
   introduce: string | undefined;
+  isUser: boolean;
 }
 
-const ProfileBar = ({ image, username, email, introduce }: ProfileProps) => {
+const ProfileBar = ({ image, username, email, introduce, isUser }: ProfileProps) => {
   const { mutate: putUser } = useUpdateUserMutation();
   const { mutate: postPhoto } = useProfileImageMutation();
   const [isEditProfile, setIsEditProfile] = useState(false);
@@ -67,9 +68,11 @@ const ProfileBar = ({ image, username, email, introduce }: ProfileProps) => {
       <VStack py={4}>
         <Avatar size={'2xl'} src={imgFile ?? image} rounded={'full'} />
         <Input type="file" hidden accept="image/*" onChange={onImgChange} ref={fileInput} />
-        <Button h={8} colorScheme="primary" onClick={onClickImageBtn}>
-          {isEditImage ? '이미지업로드' : '이미지변경'}
-        </Button>
+        {isUser ? (
+          <Button h={8} colorScheme="primary" onClick={onClickImageBtn}>
+            {isEditImage ? '이미지업로드' : '이미지변경'}
+          </Button>
+        ) : null}
       </VStack>
       {/* 사용자 정보 변경 */}
       <VStack>
@@ -98,9 +101,11 @@ const ProfileBar = ({ image, username, email, introduce }: ProfileProps) => {
             <Textarea placeholder="자기소개를 작성해주세요" h={6} {...register('introduce')} defaultValue={introduce} />
           </HStack>
         </FormControl>
-        <Button colorScheme="primary" onClick={handleSubmit(onSubmit)}>
-          {isEditProfile ? '프로필편집완료' : '프로필편집하기'}
-        </Button>
+        {isUser ? (
+          <Button colorScheme="primary" onClick={handleSubmit(onSubmit)}>
+            {isEditProfile ? '프로필편집완료' : '프로필편집하기'}
+          </Button>
+        ) : null}
       </VStack>
     </VStack>
   );
