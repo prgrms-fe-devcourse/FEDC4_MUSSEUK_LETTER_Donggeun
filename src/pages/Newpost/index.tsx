@@ -1,10 +1,11 @@
 import { ChangeEvent, MouseEvent } from 'react';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
-import Musseuk from '@/assets/images/musseuk_semicolon.png';
-import MusseukLaptop from '@/assets/images/musseuk_laptop.png';
-import MusseukHood from '@/assets/images/musseuk_hood.png';
-import MusseukHeart from '@/assets/images/musseuk_heart.png';
-import MusseukDefault from '@/assets/images/musseuk_default.png';
+import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
+import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
+import musseuk_hood from '@/assets/images/musseuk_hood.png';
+import musseuk_heart from '@/assets/images/musseuk_heart.png';
+import musseuk_default from '@/assets/images/musseuk_default.png';
+import table from '@/assets/images/table.png';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
@@ -60,7 +61,8 @@ const NewPost = () => {
             머쓱이 테마
           </Text>
           <Box margin="auto" h="31rem" p={4}>
-            <Image src={Musseuk} alt="Musseuk" />
+            <Image marginBottom="-6.5rem" src={musseuk_semicolon} alt="musseuk_semicolon" />
+            <Image margin="auto" src={table} alt="table" />
           </Box>
           <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
             <Flex justify="center" align="center">
@@ -75,8 +77,8 @@ const NewPost = () => {
                   p="0.5rem 0 1.1rem 0"
                   objectFit="fill"
                   marginTop="0.7rem"
-                  src={Musseuk}
-                  alt="Musseuk"
+                  src={musseuk_semicolon}
+                  alt="musseuk_semicolon"
                 />
               </Box>
               <Box
@@ -85,7 +87,12 @@ const NewPost = () => {
                 _hover={{ borderColor: '#72D988' }}
                 width="50rem"
                 height="auto">
-                <Image onClick={clickMusseuk} p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLaptop} alt="MusseukLaptop" />
+                <Image
+                  onClick={clickMusseuk}
+                  p="1.3rem 1.7rem 1.9rem 1.3rem"
+                  src={musseuk_laptop}
+                  alt="musseuk_laptop"
+                />
               </Box>
               <Box
                 border="0.3rem solid transparent"
@@ -93,7 +100,7 @@ const NewPost = () => {
                 _hover={{ borderColor: '#72D988' }}
                 width="50rem"
                 height="auto">
-                <Image onClick={clickMusseuk} p="1.5rem" src={MusseukHood} alt="MusseukHood" />
+                <Image onClick={clickMusseuk} p="1.5rem" src={musseuk_hood} alt="musseuk_hood" />
               </Box>
               <Box
                 border="0.3rem solid transparent"
@@ -101,7 +108,7 @@ const NewPost = () => {
                 _hover={{ borderColor: '#72D988' }}
                 width="50rem"
                 height="auto">
-                <Image onClick={clickMusseuk} padding="0.8rem 0 1.9rem 0" src={MusseukHeart} alt="MusseukHeart" />
+                <Image onClick={clickMusseuk} padding="0.8rem 0 1.9rem 0" src={musseuk_heart} alt="musseuk_heart" />
               </Box>
               <Box
                 border="0.3rem solid transparent"
@@ -112,8 +119,8 @@ const NewPost = () => {
                 <Image
                   onClick={clickMusseuk}
                   p="0.8rem 1.5rem 0.9rem 0.3rem "
-                  src={MusseukDefault}
-                  alt="MusseukDefault"
+                  src={musseuk_default}
+                  alt="musseuk_default"
                 />
               </Box>
             </Flex>
