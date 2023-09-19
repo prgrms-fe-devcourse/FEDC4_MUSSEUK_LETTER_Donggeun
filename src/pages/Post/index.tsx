@@ -1,5 +1,5 @@
 import { Box, Heading, Text, VStack, useDisclosure } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import AnnouncementText from './components/AnnouncementText';
 import ListButton from './components/ListButton';
 import DescriptionText from './components/DescriptionText';
@@ -11,6 +11,13 @@ import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
 import { CommentInfoProvider } from './contexts/CommentInfoProvider';
+import storage from '@/utils/storage';
+import { AUTH_TOKEN } from '@/constants/storageKey';
+
+const links = {
+  notFound: '/notFound',
+  signin: '/signin'
+};
 
 const Post = () => {
   const { postId = '' } = useParams();
@@ -19,9 +26,11 @@ const Post = () => {
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
   const { data: postData } = usePostDetailQuery(postId);
-  const { data: userData } = useAuthCheckQuery();
+  const { data: userData, isError } = useAuthCheckQuery();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
+
+  if (isError) return <Navigate to={links.signin} />;
 
   return (
     <CommentInfoProvider>
