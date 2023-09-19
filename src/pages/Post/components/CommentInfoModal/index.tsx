@@ -11,9 +11,12 @@ import {
   VStack
 } from '@chakra-ui/react';
 import headerImage from '@/assets/images/comment-header.png';
-import decoImage from '@/assets/images/decoration_soju1.png';
+import { useCommentInfoState } from '../../contexts/CommentInfoContext';
+import { DECORATION_IMAGE } from '../../constants';
 
 const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
+  const { content, nickname, decorationImageName } = useCommentInfoState();
+
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
       <ModalContent borderRadius={20}>
@@ -27,20 +30,17 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
               position={'inherit'}
               top={'2rem'}
               alt="comment-header"
-              src={decoImage}
+              src={DECORATION_IMAGE[decorationImageName]}
             />
           </Box>
         </ModalHeader>
         <ModalBody p={'3rem'}>
           <VStack gap={6} alignItems={'end'}>
-            <Box minH={'14rem'} borderRadius={6} p={'1.5rem'} bg={'bg01'}>
-              <Text lineHeight={'150%'}>
-                안녕 프롱아...디자인 너무 고생했어. 미안해 내가 디자인 감각이 없어서 도움을 줄 수 없어서 그래서 옆에서
-                응원만 했단다. 하지만 너의 디자인 감각 나는 좋은 것 같아 그니까 자신감 가져!!!!
-              </Text>
+            <Box w={'100%'} minH={'14rem'} borderRadius={6} p={'1.5rem'} bg={'bg01'}>
+              <Text lineHeight={'150%'}>{content}</Text>
             </Box>
             <Text textAlign={'right'} fontWeight={'bold'} fontSize={'xl'}>
-              From. 익명의 머쓱이
+              From. {nickname}
             </Text>
           </VStack>
         </ModalBody>

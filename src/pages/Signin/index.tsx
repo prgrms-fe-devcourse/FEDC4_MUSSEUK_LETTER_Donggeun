@@ -7,8 +7,9 @@ import { EmailIcon } from '@chakra-ui/icons';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useSigninMutation from '@/apis/mutations/useSigninMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
+import PageTemplate from '@/components/WhiteCard/PageTemplate';
 import InputField from '@/pages/Signup/components/InputField';
-import { PageTemplate, LinkTemplate } from '@/pages/Signup/templates';
+import { LinkTemplate } from '@/pages/Signup/templates';
 
 const links = {
   main: '/',

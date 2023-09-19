@@ -1,7 +1,7 @@
 import Header from '@/components/header';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import Musseuk from '@/assets/images/musseuk_semicolon.png';
-import MusseukLabtop from '@/assets/images/musseuk_labtop.png';
+import MusseukLaptop from '@/assets/images/musseuk_laptop.png';
 import MusseukHood from '@/assets/images/musseuk_hood.png';
 import MusseukHeart from '@/assets/images/musseuk_heart.png';
 import MusseukDefault from '@/assets/images/musseuk_default.png';
@@ -47,7 +47,7 @@ const NewPost = () => {
                 _hover={{ borderColor: '#72D988' }}
                 width="50rem"
                 height="auto">
-                <Image p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLabtop} alt="MusseukLabtop" />
+                <Image p="1.3rem 1.7rem 1.9rem 1.3rem" src={MusseukLaptop} alt="MusseukLabtop" />
               </Box>
               <Box
                 border="0.3rem solid transparent"

@@ -1,41 +1,22 @@
 import { Comment, CommentField } from '@/types';
 import { CommentResponse } from '../types';
 
-const parseComment = (rawComment: CommentResponse) => {
-  const { _id, comment: commentJSON } = rawComment;
+const parseComment = (rawComment: CommentResponse): Comment => {
+  let commentField;
 
-  let commentData: CommentField;
   try {
-    commentData = JSON.parse(commentJSON) as CommentField;
+    commentField = JSON.parse(rawComment.comment) as CommentField;
   } catch (err) {
-    if (err instanceof SyntaxError) {
-      commentData = {
-        content: '',
-        pos: [0, 0],
-        nickname: '익명의 머쓱이',
-        decorationImageName: 'decoration_soju1'
-      };
-    } else {
-      throw err;
-    }
+    console.error(err);
   }
 
-  const {
-    content = '',
-    pos = [0, 0],
-    nickname = '익명의 머쓱이',
-    decorationImageName = 'decoration_soju1'
-  } = commentData;
-
-  const comment: Comment = {
-    _id,
-    content,
-    pos,
-    nickname,
-    decorationImageName
+  return {
+    _id: rawComment._id,
+    content: commentField?.content ?? '',
+    position: commentField?.position ?? [0, 0],
+    nickname: commentField?.nickname || '익명의 머쓱이',
+    decorationImageName: commentField?.decorationImageName ?? 'decoration_soju1'
   };
-
-  return comment;
 };
 
 export default parseComment;
