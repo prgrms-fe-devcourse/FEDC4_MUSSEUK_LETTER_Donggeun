@@ -54,7 +54,7 @@ const Post = () => {
       </VStack>
       <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
-      <CommentListModal isOpen={isListOpen} onClose={onListClose} />
+      <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
     </CommentInfoProvider>
   );
 };

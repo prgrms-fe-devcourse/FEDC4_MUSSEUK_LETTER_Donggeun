@@ -7,9 +7,10 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useSignupMutation from '@/apis/mutations/useSignupMutation';
 import musseuk from '@/assets/images/musseuk_hood.png';
+import PageTemplate from '@/components/WhiteCard/PageTemplate';
 import { isPasswordTooShort, isPasswordContainNumber } from './helpers/password';
 import InputField from './components/InputField';
-import { PageTemplate, LinkTemplate } from './templates';
+import { LinkTemplate } from './templates';
 
 const links = {
   main: '/',
