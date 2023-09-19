@@ -1,13 +1,8 @@
 import { Card, CardBody, CardFooter, CardHeader, Heading, Image, Stack, Text } from '@chakra-ui/react';
-import musseuk_deault from '@/assets/images/musseuk_default.png';
-import musseuk_heart from '@/assets/images/musseuk_heart.png';
-import musseuk_hood from '@/assets/images/musseuk_hood.png';
-import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
-import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import { EmailIcon } from '@chakra-ui/icons';
 import { UseMutationResult } from '@tanstack/react-query';
 
-export type Props = {
+type Props = {
   imgName: string;
   musseukName: string;
   userName?: string;

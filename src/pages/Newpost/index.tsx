@@ -9,7 +9,7 @@ import table from '@/assets/images/table.png';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
-const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
+const channelId = import.meta.env.VITE_CHANNEL_ID;
 
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
@@ -25,7 +25,7 @@ const NewPost = () => {
     console.log('musseukTitle이 바뀌는 중이에요', musseukTitle);
   };
 
-  const handlemusseukIntroduce = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleMusseukIntroduce = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setMusseukIntroduce(event.target.value);
     console.log('musseukIntroduce 바뀌는 중이에요', musseukIntroduce);
   };
@@ -42,12 +42,12 @@ const NewPost = () => {
 
   const handleCreateMusseukPost = () => {
     const title = JSON.stringify({
-      musseukTitle: `${musseukTitle || '머쓱이'}`,
-      musseukIntroduce: `${musseukIntroduce || ''}`,
+      title: `${musseukTitle || '머쓱이'}`,
+      content: `${musseukIntroduce || ''}`,
       musseukImageName: `${musseukImage || 'musseuk_default'}`
     });
     mutate(
-      { title, musseukImage, CHANNEL_ID },
+      { title, musseukImage, channelId },
       {
         onSuccess: (data) => {
           navigate(`/post/${data._id}`);
@@ -155,7 +155,7 @@ const NewPost = () => {
           </Text>
           <Textarea
             value={musseukIntroduce}
-            onChange={handlemusseukIntroduce}
+            onChange={handleMusseukIntroduce}
             minHeight="14rem"
             maxHeight="20rem"
             fontSize="1.2rem"

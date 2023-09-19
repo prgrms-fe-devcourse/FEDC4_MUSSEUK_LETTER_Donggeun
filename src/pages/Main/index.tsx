@@ -85,30 +85,14 @@ const Main = () => {
                       }
                     }}
                     imgName={JSON.parse(slideContent.title).musseukImageName}
-                    musseukName={JSON.parse(slideContent.title).musseukTitle}
+                    musseukName={JSON.parse(slideContent.title).title}
                     userName={slideContent.author.fullName}
-                    musseukContent={JSON.parse(slideContent.title).musseukIntroduce}
+                    musseukContent={JSON.parse(slideContent.title).content}
                     letter={slideContent.comments.length}
                   />
                 </Box>
               </SwiperSlide>
             ))}
-          {/* 포스트 카드 참조 예시 코드 */}
-
-          {/* <PostCard
-            onClick={() => {
-              if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
-                navigate('/signin');
-              } else {
-                navigate(`/post/${slideContent._id}`);
-              }
-            }}
-            imgName="null"
-            musseukName={slideContent.title}
-            userName={slideContent.author.fullName}
-            musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
-            letter={slideContent.comments.length}
-          /> */}
         </Swiper>
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
