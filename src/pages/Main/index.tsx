@@ -60,13 +60,29 @@ const Main = () => {
       </Box>
       <Box bgColor="bg01" paddingTop="5rem">
         <Swiper
+          breakpoints={{
+            '0': {
+              slidesPerView: 1
+            },
+            '750': {
+              slidesPerView: 2
+            },
+            '1080': {
+              slidesPerView: 3
+            },
+            '1450': {
+              slidesPerView: 4
+            },
+            '1700': {
+              slidesPerView: 5
+            }
+          }}
           loop={true}
           modules={[Virtual, Navigation, Pagination]}
-          slidesPerView={5}
-          slidesPerGroup={5}
+          slidesPerGroup={1}
           centeredSlides={false}
           spaceBetween={0}
-          speed={1000}
+          speed={800}
           pagination={{
             type: 'bullets'
           }}
@@ -76,7 +92,7 @@ const Main = () => {
             data
               .slice(0, 50)
               .sort((a, b) => b.comments.length - a.comments.length)
-              .slice(0, 25)
+              .slice(0, 15)
               .map((slideContent, index) => (
                 <SwiperSlide key={slideContent._id} virtualIndex={index}>
                   <Box ml="4rem" mb="3.5rem" cursor="pointer">
