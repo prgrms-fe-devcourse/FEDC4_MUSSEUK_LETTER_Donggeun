@@ -9,6 +9,8 @@ import table from '@/assets/images/table.png';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
+import { useMediaQuery } from 'react-responsive';
+
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
 const NewPost = () => {
@@ -19,6 +21,8 @@ const NewPost = () => {
   const [musseukIntroduce, setMusseukIntroduce] = useState('');
 
   const musseukImageRef = useRef<HTMLImageElement>(null);
+
+  const navigate = useNavigate();
 
   const handleMusseukTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setMusseukTitle(event.target.value);
@@ -56,132 +60,382 @@ const NewPost = () => {
     );
   };
 
-  const navigate = useNavigate();
+  const isPc = useMediaQuery({
+    query: '(min-width:1400px)'
+  });
+  const isTablet = useMediaQuery({
+    query: '(min-width : 810px) and (max-width :1400px)'
+  });
+  const isMobile = useMediaQuery({
+    query: '(max-width:810px)'
+  });
 
   return (
     <>
-      <Box bgColor="bg01">
-        <Box p="2rem" margin="auto" w="42%" textAlign="center">
-          <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
-            머쓱이 이름
-          </Text>
-          <Input
-            value={musseukTitle}
-            onChange={handleMusseukTitle}
-            fontSize="1.2rem"
-            height="4rem"
-            bgColor="white"
-            borderRadius="0.3rem"
-            marginBottom="2rem"
-            placeholder="머쓱이 이름을 작성해 주세요!"
-            size="md"
-          />
-          <Text marginBottom="1rem" textAlign="left" fontSize="1.5rem" color="black">
-            머쓱이 테마
-          </Text>
-          <Box margin="auto" h="30rem" p={4}>
-            <Image
-              objectFit="cover"
-              w="25rem"
-              margin="auto"
-              ref={musseukImageRef}
-              src={musseukImage || musseuk_semicolon}
-              alt="musseukImage"
+      {isPc && (
+        <Box bgColor="bg01">
+          <Box p="2rem" margin="auto" w="42%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 이름
+            </Text>
+            <Input
+              value={musseukTitle}
+              onChange={handleMusseukTitle}
+              fontSize="1.1rem"
+              height="3rem"
+              bgColor="white"
+              borderRadius="0.3rem"
+              marginBottom="1.5rem"
+              placeholder="머쓱이 이름을 작성해 주세요!"
+              size="md"
             />
-            {/* <Image margin="auto" src={table} alt="table" /> */}
-          </Box>
-          <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
-            <Flex justify="center" align="center">
-              <Box
-                border="0.3rem solid transparent"
-                borderRadius="10px"
-                _hover={{ borderColor: '#72D988' }}
-                width="50rem"
-                height="auto">
-                <Image
-                  onClick={clickMusseuk}
-                  p="0.5rem 0 1.1rem 0"
-                  objectFit="fill"
-                  marginTop="0.7rem"
-                  src={musseuk_semicolon}
-                  alt="musseuk_semicolon"
-                />
-              </Box>
-              <Box
-                border="0.3rem solid transparent"
-                borderRadius="10px"
-                _hover={{ borderColor: '#72D988' }}
-                width="50rem"
-                height="auto">
-                <Image
-                  onClick={clickMusseuk}
-                  p="1.3rem 1.7rem 1.9rem 1.3rem"
-                  src={musseuk_laptop}
-                  alt="musseuk_laptop"
-                />
-              </Box>
-              <Box
-                border="0.3rem solid transparent"
-                borderRadius="10px"
-                _hover={{ borderColor: '#72D988' }}
-                width="50rem"
-                height="auto">
-                <Image onClick={clickMusseuk} p="1.5rem" src={musseuk_hood} alt="musseuk_hood" />
-              </Box>
-              <Box
-                border="0.3rem solid transparent"
-                borderRadius="10px"
-                _hover={{ borderColor: '#72D988' }}
-                width="50rem"
-                height="auto">
-                <Image onClick={clickMusseuk} padding="0.8rem 0 1.9rem 0" src={musseuk_heart} alt="musseuk_heart" />
-              </Box>
-              <Box
-                border="0.3rem solid transparent"
-                borderRadius="10px"
-                _hover={{ borderColor: '#72D988' }}
-                width="50rem"
-                height="auto">
-                <Image
-                  onClick={clickMusseuk}
-                  p="0.8rem 1.5rem 0.9rem 0.3rem "
-                  src={musseuk_default}
-                  alt="musseuk_default"
-                />
-              </Box>
+            <Text textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 테마
+            </Text>
+            <Box margin="auto" h="27rem" p={4}>
+              <Image
+                objectFit="cover"
+                w="25rem"
+                margin="auto"
+                ref={musseukImageRef}
+                src={musseukImage || musseuk_semicolon}
+                alt="musseukImage"
+              />
+              {/* <Image margin="auto" src={table} alt="table" /> */}
+            </Box>
+            <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
+              <Flex justify="center">
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="scale(1.6) translateY(0.1rem)"
+                    src={musseuk_semicolon}
+                    alt="musseuk_semicolon"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.4rem) scale(1.1)"
+                    src={musseuk_laptop}
+                    alt="musseuk_laptop"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    onClick={clickMusseuk}
+                    src={musseuk_hood}
+                    alt="musseuk_hood"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.7rem) scale(1.1)"
+                    onClick={clickMusseuk}
+                    src={musseuk_heart}
+                    alt="musseuk_heart"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(0.3rem) scale(1.2)"
+                    onClick={clickMusseuk}
+                    src={musseuk_default}
+                    alt="musseuk_default"
+                  />
+                </Box>
+              </Flex>
+            </Box>
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+              편지를 쓸 사람들에게 보여줄 멘트
+            </Text>
+            <Textarea
+              value={musseukIntroduce}
+              onChange={handleMusseukIntroduce}
+              minHeight="14rem"
+              maxHeight="20rem"
+              fontSize="1.1rem"
+              bgColor="white"
+              size="lg"
+              marginBottom="3rem"
+              placeholder="머쓱이에 대한 소개를 작성해주세요"
+            />
+            <Flex justifyContent="space-between">
+              <Button
+                width="10rem"
+                bgColor="gray.400"
+                color="white"
+                onClick={() => {
+                  navigate('/');
+                }}
+                colorScheme="gray">
+                뒤로가기
+              </Button>
+              <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
+                생성하기
+              </Button>
             </Flex>
           </Box>
-          <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.5rem" color="black">
-            편지를 쓸 사람들에게 보여줄 멘트
-          </Text>
-          <Textarea
-            value={musseukIntroduce}
-            onChange={handleMusseukIntroduce}
-            minHeight="14rem"
-            maxHeight="20rem"
-            fontSize="1.2rem"
-            bgColor="white"
-            size="lg"
-            marginBottom="4rem"
-            placeholder="머쓱이에 대한 소개를 작성해주세요"
-          />
-          <Flex justifyContent="space-between">
-            <Button
-              width="10rem"
-              bgColor="gray.400"
-              color="white"
-              onClick={() => {
-                navigate('/');
-              }}
-              colorScheme="gray">
-              뒤로가기
-            </Button>
-            <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
-              생성하기
-            </Button>
-          </Flex>
         </Box>
-      </Box>
+      )}
+      {isTablet && (
+        <Box bgColor="bg01">
+          <Box p="2rem" margin="auto" w="70%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 이름
+            </Text>
+            <Input
+              value={musseukTitle}
+              onChange={handleMusseukTitle}
+              fontSize="1.1rem"
+              height="3rem"
+              bgColor="white"
+              borderRadius="0.3rem"
+              marginBottom="1.5rem"
+              placeholder="머쓱이 이름을 작성해 주세요!"
+              size="md"
+            />
+            <Text textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 테마
+            </Text>
+            <Box margin="auto" h="27rem" p={4}>
+              <Image
+                objectFit="cover"
+                w="25rem"
+                margin="auto"
+                ref={musseukImageRef}
+                src={musseukImage || musseuk_semicolon}
+                alt="musseukImage"
+              />
+              {/* <Image margin="auto" src={table} alt="table" /> */}
+            </Box>
+            <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
+              <Flex justify="center">
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="scale(1.6) translateY(0.1rem)"
+                    src={musseuk_semicolon}
+                    alt="musseuk_semicolon"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.4rem) scale(1.1)"
+                    src={musseuk_laptop}
+                    alt="musseuk_laptop"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    onClick={clickMusseuk}
+                    src={musseuk_hood}
+                    alt="musseuk_hood"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.7rem) scale(1.1)"
+                    onClick={clickMusseuk}
+                    src={musseuk_heart}
+                    alt="musseuk_heart"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(0.3rem) scale(1.2)"
+                    onClick={clickMusseuk}
+                    src={musseuk_default}
+                    alt="musseuk_default"
+                  />
+                </Box>
+              </Flex>
+            </Box>
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+              편지를 쓸 사람들에게 보여줄 멘트
+            </Text>
+            <Textarea
+              value={musseukIntroduce}
+              onChange={handleMusseukIntroduce}
+              minHeight="14rem"
+              maxHeight="20rem"
+              fontSize="1.1rem"
+              bgColor="white"
+              size="lg"
+              marginBottom="3rem"
+              placeholder="머쓱이에 대한 소개를 작성해주세요"
+            />
+            <Flex justifyContent="space-between">
+              <Button
+                width="10rem"
+                bgColor="gray.400"
+                color="white"
+                onClick={() => {
+                  navigate('/');
+                }}
+                colorScheme="gray">
+                뒤로가기
+              </Button>
+              <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
+                생성하기
+              </Button>
+            </Flex>
+          </Box>
+        </Box>
+      )}
+      {isMobile && (
+        <Box bgColor="bg01">
+          <Box p="2rem" margin="auto" w="100%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 이름
+            </Text>
+            <Input
+              value={musseukTitle}
+              onChange={handleMusseukTitle}
+              fontSize="1.1rem"
+              height="3rem"
+              bgColor="white"
+              borderRadius="0.3rem"
+              marginBottom="1.5rem"
+              placeholder="머쓱이 이름을 작성해 주세요!"
+              size="md"
+            />
+            <Text textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 테마
+            </Text>
+            <Box margin="auto" h="20%" p={4}>
+              <Image
+                objectFit="cover"
+                w="25rem"
+                margin="auto"
+                ref={musseukImageRef}
+                src={musseukImage || musseuk_semicolon}
+                alt="musseukImage"
+              />
+              {/* <Image margin="auto" src={table} alt="table" /> */}
+            </Box>
+            <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
+              <Flex justify="center">
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="scale(1.6) translateY(0.1rem)"
+                    src={musseuk_semicolon}
+                    alt="musseuk_semicolon"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.1rem) scale(1.1)"
+                    src={musseuk_laptop}
+                    alt="musseuk_laptop"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    onClick={clickMusseuk}
+                    src={musseuk_hood}
+                    alt="musseuk_hood"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.4rem) scale(1.1)"
+                    onClick={clickMusseuk}
+                    src={musseuk_heart}
+                    alt="musseuk_heart"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(0.1rem) scale(1.2)"
+                    onClick={clickMusseuk}
+                    src={musseuk_default}
+                    alt="musseuk_default"
+                  />
+                </Box>
+              </Flex>
+            </Box>
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+              편지를 쓸 사람들에게 보여줄 멘트
+            </Text>
+            <Textarea
+              value={musseukIntroduce}
+              onChange={handleMusseukIntroduce}
+              minHeight="14rem"
+              maxHeight="20rem"
+              fontSize="1.1rem"
+              bgColor="white"
+              size="lg"
+              marginBottom="3rem"
+              placeholder="머쓱이에 대한 소개를 작성해주세요"
+            />
+            <Flex flexDirection="column" alignItems="center">
+              <Button
+                width="100%"
+                marginBottom="2rem"
+                bgColor="gray.400"
+                color="white"
+                onClick={() => {
+                  navigate('/');
+                }}
+                colorScheme="gray">
+                뒤로가기
+              </Button>
+              <Button onClick={handleCreateMusseukPost} width="100%" colorScheme="primary">
+                생성하기
+              </Button>
+            </Flex>
+          </Box>
+        </Box>
+      )}
     </>
   );
 };
