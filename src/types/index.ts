@@ -1,4 +1,5 @@
 import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from '@/constants/imageNames';
+import { SLACK_WORKSPACE } from '@/constants/slack';
 
 export interface User extends UserFullName {
   _id: string;
@@ -12,7 +13,7 @@ export interface UserFullName {
   username: string; // 사용자 실명
   introduce: string; // default: "안녕하세요 000입니다"
   slackId?: string; // default: undefined
-  slackWorkspace?: 'Frontend' | 'Backend'; // default: undefined
+  slackWorkspace?: SlackWorkspace; // default: undefined
 }
 
 export interface Post extends PostTitle {
@@ -41,3 +42,5 @@ export interface CommentField {
 }
 
 export type DecorationType = (typeof DECORATION_IMAGE_NAME)[keyof typeof DECORATION_IMAGE_NAME];
+
+export type SlackWorkspace = (typeof SLACK_WORKSPACE)[keyof typeof SLACK_WORKSPACE];

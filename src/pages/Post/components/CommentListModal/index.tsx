@@ -13,46 +13,13 @@ import {
   ModalFooter
 } from '@chakra-ui/react';
 import AccordionItems from './AccordionItems';
+import { Comment } from '@/types';
 
-const CommentListModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
-  const mockData = [
-    {
-      _id: '1',
-      nickname: '익명1',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    },
-    {
-      _id: '2',
-      nickname: '익명2',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    },
-    {
-      _id: '3',
-      nickname: '익명3',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    },
-    {
-      _id: '4',
-      nickname: '익명4',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    },
-    {
-      _id: '5',
-      nickname: '익명5',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    },
-    {
-      _id: '6',
-      nickname: '익명6',
-      content:
-        '딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요. 딥다이브 잘 들었습니다!! 많은 도움이 되었어요.'
-    }
-  ];
+const CommentListModal = ({
+  isOpen,
+  onClose,
+  comments
+}: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'> & { comments: Comment[] }) => {
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
       <ModalContent borderRadius={20} h={'25rem'}>
@@ -82,9 +49,9 @@ const CommentListModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
             }
           }}
           pt={'3rem'}
-          box-boxSizing="border-box">
+          box-boxsizing="border-box">
           <Accordion allowMultiple>
-            {mockData.map((comment) => (
+            {comments.map((comment) => (
               <AccordionItems key={comment._id} nickname={comment.nickname} content={comment.content} />
             ))}
           </Accordion>
