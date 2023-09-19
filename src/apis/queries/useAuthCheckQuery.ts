@@ -17,6 +17,7 @@ const useAuthCheckQuery = (options?: QueryOptions<User>) => {
   return useQuery<User>({
     queryKey: queryKey.auth,
     queryFn: getAuthUser,
+    staleTime: Infinity,
     ...options
   });
 };
