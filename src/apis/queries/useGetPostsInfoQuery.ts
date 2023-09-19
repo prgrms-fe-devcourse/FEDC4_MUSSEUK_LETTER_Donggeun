@@ -6,7 +6,7 @@ import queryKey from '@/apis/queryKeys';
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
 export const getPostsInfo = async () => {
-  const { data } = await baseInstance.get<ChannelResponse[]>(`/posts/channel/${CHANNEL_ID}`);
+  const { data } = await baseInstance.get<[ChannelResponse]>(`/posts/channel/${CHANNEL_ID}`);
 
   return data;
 };

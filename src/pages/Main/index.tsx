@@ -18,7 +18,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
-  // console.log(data);
+  console.log(data);
   const { data: user } = useAuthCheckQuery();
 
   return (
@@ -86,7 +86,7 @@ const Main = () => {
                     }}
                     imgName={JSON.parse(slideContent.title).musseukImageName}
                     musseukName={JSON.parse(slideContent.title).title}
-                    userName={slideContent.author.fullName}
+                    userName={JSON.parse(slideContent.author.fullName).username}
                     musseukContent={JSON.parse(slideContent.title).content}
                     letter={slideContent.comments.length}
                   />
