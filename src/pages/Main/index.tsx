@@ -1,6 +1,6 @@
 import Museeukhood from '@/assets/images/musseuk_hood.png';
 import rightarrow from '@/assets/images/rightarrow.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Heading, Box, Image, Text, Button } from '@chakra-ui/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,11 +10,16 @@ import 'swiper/css/navigation';
 import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import PostCard from '@/components/PostCard';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import storage from '@/utils/storage';
+import { AUTH_TOKEN } from '@/constants/storageKey';
 
 const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
+  const { data: user } = useAuthCheckQuery();
+
   // console.log(data);
 
   return (
@@ -45,7 +50,11 @@ const Main = () => {
         <Text fontSize="xl"> 또는, 당신의 머쓱이를 만들어서 공유해보세요! </Text>
         <Button
           onClick={() => {
-            navigate('/newpost');
+            if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+              navigate('/signin');
+            } else {
+              navigate('/newpost');
+            }
           }}
           display="flex"
           m="auto"
@@ -78,7 +87,11 @@ const Main = () => {
                 <Box ml="4rem" mb="3.5rem" cursor="pointer">
                   <PostCard
                     onClick={() => {
-                      navigate(`/post/${slideContent._id}`);
+                      if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+                        navigate('/signin');
+                      } else {
+                        navigate(`/post/${slideContent._id}`);
+                      }
                     }}
                     imgName="null"
                     musseukName={slideContent.title}

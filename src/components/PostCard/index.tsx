@@ -29,7 +29,7 @@ const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onCl
       <CardHeader textAlign="center" p={0}>
         <Image
           display={'inline-block'}
-          w="10rem"
+          w="8rem"
           h="8rem"
           alt="musseukAvatar"
           src={`src/assets/images/${imgName}.png`}
