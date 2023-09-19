@@ -20,7 +20,8 @@ const useSlackTokenCheckQuery = (slackToken: string) => {
   return useQuery<User>({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: queryKey.auth,
-    queryFn: () => getTokenResult(slackToken)
+    queryFn: () => getTokenResult(slackToken),
+    suspense: true
   });
 };
 
