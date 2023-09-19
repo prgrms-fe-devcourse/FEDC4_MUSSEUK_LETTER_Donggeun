@@ -18,20 +18,11 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
-  const { data: user } = useAuthCheckQuery();
-
   // console.log(data);
+  const { data: user } = useAuthCheckQuery();
 
   return (
     <>
-      {/* 포스트 카드 참조 예시 코드 */}
-      {/* <PostCard
-        imgName={JSON.parse(data[0].title).musseukImageName}
-        musseukName={JSON.parse(data[0].title).musseukTitle}
-        userName={data[0].author.fullName}
-        musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
-        letter={data[0].comments.length}
-      /> */}
       <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
         <Image
           top="3.3rem"
@@ -82,7 +73,7 @@ const Main = () => {
           navigation={true}
           virtual>
           {status === 'success' &&
-            data.map((slideContent, index) => (
+            data.slice(0, 25).map((slideContent, index) => (
               <SwiperSlide key={slideContent._id} virtualIndex={index}>
                 <Box ml="4rem" mb="3.5rem" cursor="pointer">
                   <PostCard
@@ -93,15 +84,31 @@ const Main = () => {
                         navigate(`/post/${slideContent._id}`);
                       }
                     }}
-                    imgName="null"
-                    musseukName={slideContent.title}
+                    imgName={JSON.parse(slideContent.title).musseukImageName}
+                    musseukName={JSON.parse(slideContent.title).musseukTitle}
                     userName={slideContent.author.fullName}
-                    musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
+                    musseukContent={JSON.parse(slideContent.title).musseukIntroduce}
                     letter={slideContent.comments.length}
                   />
                 </Box>
               </SwiperSlide>
             ))}
+          {/* 포스트 카드 참조 예시 코드 */}
+
+          {/* <PostCard
+            onClick={() => {
+              if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+                navigate('/signin');
+              } else {
+                navigate(`/post/${slideContent._id}`);
+              }
+            }}
+            imgName="null"
+            musseukName={slideContent.title}
+            userName={slideContent.author.fullName}
+            musseukContent="content 내용 어떻게 불러오면 좋을지 생각해보자"
+            letter={slideContent.comments.length}
+          /> */}
         </Swiper>
       </Box>
       <Box bgColor="color(display-p3 0.9765 0.9765 0.9569);">&nbsp;</Box>
