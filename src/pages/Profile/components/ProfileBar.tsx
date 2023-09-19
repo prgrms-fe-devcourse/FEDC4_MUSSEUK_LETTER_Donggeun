@@ -1,45 +1,45 @@
-import { VStack, HStack, Avatar, Button, Text, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import hoodMusseuk from '@/assets/images/musseuk_hood.png';
+import { VStack, HStack, Avatar, Button, FormControl, FormLabel, Input, Image, Textarea } from '@chakra-ui/react';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdComment } from 'react-icons/md';
 
-type UserInfoFieldProps = {
-  icon: React.ReactNode;
-  type: string;
-  value: string;
-};
+interface ProfileProps {
+  image: string | undefined;
+  username: string | undefined;
+  email: string | undefined;
+  introduce: string | undefined;
+}
 
-type ProfileBarProps = {
-  userName: string;
-};
-
-const UserInfoField = ({ icon, type, value }: UserInfoFieldProps) => {
-  return (
-    <FormControl>
-      <HStack my={4} justify={'center'} align={'center'}>
-        <FormLabel my={0} fontSize={'1.2rem'}>
-          {icon}
-        </FormLabel>
-        <Input type={type} w={'80%'} h={6} value={value} border={'none'} />
-      </HStack>
-    </FormControl>
-  );
-};
-
-const ProfileBar = ({ userName }: ProfileBarProps) => {
+const ProfileBar = ({ image, username, email, introduce }: ProfileProps) => {
   return (
     <VStack h={'100%'} my={10} pt={4} px={6} borderRight="1px solid #B6B6B6">
+      {/* 이미지업로드 */}
       <VStack py={4}>
-        <Avatar size={'2xl'} src={hoodMusseuk} />
+        <Avatar size={'2xl'} src={image} rounded={'full'} />
         <Button h={8} colorScheme="primary">
-          이미지 업로드
+          이미지업로드
         </Button>
-        <Text>{userName} 님</Text>
       </VStack>
+      {/* 사용자 정보 변경 */}
       <VStack>
-        <UserInfoField icon={<BiEnvelope />} type={'email'} value={'prong@gmail.com'} />
-        <UserInfoField icon={<MdComment />} type={'text'} value={'Introduce~'} />
-        <Button colorScheme="primary">프로필 편집하기</Button>
+        <Input type="text" placeholder={username} defaultValue={username} border={'none'} textAlign={'center'} />
+        <FormControl>
+          <HStack my={4} justify={'center'} align={'center'}>
+            <FormLabel my={0} fontSize={'1.2rem'}>
+              <BiEnvelope />
+            </FormLabel>
+            <Input type="email" value={email} h={6} border={'none'} isReadOnly={true} />
+          </HStack>
+        </FormControl>
+
+        <FormControl>
+          <HStack my={4} justify={'center'} align={'center'}>
+            <FormLabel my={0} fontSize={'1.2rem'}>
+              <MdComment />
+            </FormLabel>
+            <Textarea placeholder="자기소개를 작성해주세요" h={6} defaultValue={introduce} />
+          </HStack>
+        </FormControl>
+        <Button colorScheme="primary">프로필편집하기</Button>
       </VStack>
     </VStack>
   );

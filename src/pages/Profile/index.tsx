@@ -16,6 +16,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import ProfileBar from './components/ProfileBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUserPostListQuery from '@/apis/queries/useUserPostListQuery';
+import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
 
 export type AddCardProps = {
   goToNewPost: () => void;
@@ -46,6 +47,8 @@ const AddCard = ({ goToNewPost }: AddCardProps) => {
 const Profile = () => {
   const { userId } = useParams();
   const { data: postList } = useUserPostListQuery(userId);
+  const { data: user } = useUserInfoQuery(userId);
+
   const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
   const navigate = useNavigate();
 
@@ -57,7 +60,7 @@ const Profile = () => {
     <>
       <Grid bg={'bg0101'} h="100vh" gridTemplateColumns={'1fr 3.5fr'}>
         <GridItem>
-          <ProfileBar />
+          <ProfileBar image={user?.image} username={user?.username} email={user?.email} introduce={user?.introduce} />
         </GridItem>
         <GridItem>
           <Stack h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} ml={6} px={6}>
