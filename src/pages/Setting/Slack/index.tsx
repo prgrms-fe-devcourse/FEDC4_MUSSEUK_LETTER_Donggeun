@@ -6,7 +6,6 @@ import { QuestionIcon } from '@chakra-ui/icons';
 import useGenerateSlackLinkMutation from '@/apis/mutations/useGenerateSlackLinkMutation';
 import { SubmitHandler, useForm, Controller, SubmitErrorHandler } from 'react-hook-form';
 import LinkField from './components/LinkField';
-import { SLACK_ID_DESCRIPTION } from '@/pages/Setting/Slack/constants/index';
 import { z } from 'zod';
 import { SLACK_WORKSPACE } from '@/constants/slack';
 
@@ -19,6 +18,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const SettingSlack = () => {
   const { mutate } = useGenerateSlackLinkMutation();
+  const notionURL = import.meta.env.VITE_SLACK_ID_DESCRIPTION;
 
   const {
     handleSubmit,
@@ -28,7 +28,6 @@ const SettingSlack = () => {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     mutate(
       { slackId: data.slackId, slackWorkspace: data.slackWorkspace },
       {
@@ -58,7 +57,7 @@ const SettingSlack = () => {
                   <Radio colorScheme="primary" borderColor={'gray.200'} value="Frontend">
                     프론트엔드
                   </Radio>
-                  <Radio colorScheme="primary" borderColor={'gray.200'} value="Backend">
+                  <Radio colorScheme="primary" borderColor={'gray.200'} value="Backend" isDisabled>
                     백엔드
                   </Radio>
                 </Stack>
@@ -75,7 +74,7 @@ const SettingSlack = () => {
         maxLength={40}
         error={errors.slackId}
       />
-      <LinkField title="노션 페이지로 이동" href={SLACK_ID_DESCRIPTION}>
+      <LinkField title="노션 페이지로 이동" href={notionURL}>
         <QuestionIcon color={'primary.700'} mr={1} />
         슬랙 아이디 찾기
       </LinkField>
