@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent } from 'react';
-import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
+import { Flex, Button, Image, Textarea, Box, Text, Input, useMergeRefs } from '@chakra-ui/react';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
 import musseuk_hood from '@/assets/images/musseuk_hood.png';
@@ -7,7 +7,7 @@ import musseuk_heart from '@/assets/images/musseuk_heart.png';
 import musseuk_default from '@/assets/images/musseuk_default.png';
 import table from '@/assets/images/table.png';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
 
@@ -17,6 +17,8 @@ const NewPost = () => {
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
   const [musseukIntroduce, setMusseukIntroduce] = useState('');
+
+  const musseukImageRef = useRef<HTMLImageElement>(null);
 
   const handleMusseukTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setMusseukTitle(event.target.value);
@@ -34,6 +36,7 @@ const NewPost = () => {
     if (result) {
       setMuseukImage(result[0]);
       console.log('선택한 머쓱이미지는', musseukImage);
+      musseukImageRef.current?.setAttribute('src', e.target.src);
     }
   };
 
@@ -61,7 +64,7 @@ const NewPost = () => {
             머쓱이 테마
           </Text>
           <Box margin="auto" h="31rem" p={4}>
-            <Image marginBottom="-6.5rem" src={musseuk_semicolon} alt="musseuk_semicolon" />
+            <Image ref={musseukImageRef} marginBottom="-6.5rem" src={musseuk_semicolon} alt="musseukImage" />
             <Image margin="auto" src={table} alt="table" />
           </Box>
           <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
