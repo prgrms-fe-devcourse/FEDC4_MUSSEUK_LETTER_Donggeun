@@ -18,7 +18,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
-  console.log(data);
+  // console.log(data);
   const { data: user } = useAuthCheckQuery();
 
   return (
