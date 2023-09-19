@@ -23,12 +23,14 @@ const Post = () => {
   const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
-  const { data: postData } = usePostDetailQuery(postId);
-  const { data: userData, isError } = useAuthCheckQuery();
+  const { data: postData, isError: isPostError } = usePostDetailQuery(postId);
+  const { data: userData, isError: isUserError } = useAuthCheckQuery();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isError) return <Navigate to={links.signin} />;
+  if (isUserError) return <Navigate to={links.signin} />;
+
+  if (isPostError) return <Navigate to={links.notFound} />;
 
   return (
     <CommentInfoProvider>
