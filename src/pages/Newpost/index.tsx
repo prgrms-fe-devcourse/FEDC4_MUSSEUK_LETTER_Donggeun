@@ -81,6 +81,7 @@ const NewPost = () => {
           </Text>
           <Box margin="auto" h="30rem" p={4}>
             <Image
+              objectFit="cover"
               w="25rem"
               margin="auto"
               ref={musseukImageRef}
