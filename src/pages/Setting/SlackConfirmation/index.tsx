@@ -1,10 +1,9 @@
 import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 import { Heading, Image, Text, Button } from '@chakra-ui/react';
 import musseuk_box from '@/assets/images/musseuk_box.png';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useSlackTokenCheckQuery from '@/apis/queries/useSlackTokenCheckQuery';
 import qs from 'qs';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import { Suspense } from 'react';
 import Loading from '@/components/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -16,9 +15,6 @@ const SlackConfirmation = () => {
   const slackToken = String(queryString.token);
 
   const { data: slackResponseData } = useSlackTokenCheckQuery(slackToken);
-  const { data: userData } = useAuthCheckQuery();
-
-  if (!slackResponseData && !userData) return <Navigate to={'/notFound'} />;
 
   return (
     <PageTemplateWithHeader>
