@@ -9,7 +9,7 @@ const parsePost = (rawPost: PostResponse): Post => {
   try {
     titleField = JSON.parse(rawPost.title) as PostTitle;
   } catch (err) {
-    console.error(err);
+    //console.error(err);
   }
 
   return {

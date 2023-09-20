@@ -8,7 +8,7 @@ const parseComment = (rawComment: CommentResponse): Comment => {
   try {
     commentField = JSON.parse(rawComment.comment) as CommentField;
   } catch (err) {
-    console.error(err);
+    //console.error(err);
   }
 
   return {
