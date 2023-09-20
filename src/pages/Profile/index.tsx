@@ -75,11 +75,11 @@ const Profile = () => {
               {user?.username}의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 {postList?.length}{' '}
               마리가 기다리고 있어요!
             </Text>
-            {isUser ? (
+            {isUser && (
               <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
                 새로운 머쓱이 추가
               </Button>
-            ) : null}
+            )}
           </Stack>
           <Grid gridTemplateColumns={isSmallerThan768 ? '1fr' : 'repeat(3, 1fr)'} gap={5} p={6} justifyItems={'center'}>
             {postList?.map((post) => (
