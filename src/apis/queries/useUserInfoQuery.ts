@@ -8,9 +8,6 @@ import { User } from '@/types';
 export const getUserInfo = async (userId: string) => {
   const { data } = await baseInstance.get<UserResponse>(`/users/${userId}`);
 
-  // if (typeof data.fullName === 'string') {
-  //   data.fullName = JSON.parse(data.fullName);
-  // }
   return parseUser(data);
 };
 
