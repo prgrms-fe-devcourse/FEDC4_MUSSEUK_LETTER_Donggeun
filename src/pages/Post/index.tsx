@@ -13,6 +13,7 @@ import { CommentInfoProvider } from './contexts/CommentInfoProvider';
 import { Suspense } from 'react';
 import Introduction from './components/Introduction';
 import IntroductionSkeleton from './components/Skeletons/IntroductionSkeleton';
+import CommentBoardSkeleton from './components/Skeletons/CommentBoardSkeleton';
 
 const links = {
   notFound: '/notFound',
@@ -45,12 +46,14 @@ const Post = () => {
         backgroundSize="contain"
         backgroundRepeat="no-repeat">
         <Box w="100%">
-          <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} />}>
+          <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />
             {isAuthor && <ListButton onClick={onListOpen} />}
           </Suspense>
         </Box>
-        <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} isAuthor={isAuthor} />
+        <Suspense fallback={<CommentBoardSkeleton />}>
+          <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} />
+        </Suspense>
         <Suspense fallback={<IntroductionSkeleton />}>
           <Introduction postId={postId} />
         </Suspense>

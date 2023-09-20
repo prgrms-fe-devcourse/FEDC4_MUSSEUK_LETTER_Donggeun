@@ -6,22 +6,24 @@ import React, { useRef } from 'react';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
-import type { Comment as CommentType, CommentField } from '@/types';
+import type { Comment as CommentType } from '@/types';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
 type CommentBoardProps = {
   postId: string;
   onInfoOpen: () => void;
   onWriteOpen: () => void;
-  isAuthor: boolean;
 };
 
-const CommentBoard = ({ postId, onInfoOpen, onWriteOpen, isAuthor }: CommentBoardProps) => {
+const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) => {
   const musseukRef = useRef<HTMLImageElement | null>(null);
-  const { data } = usePostDetailQuery(postId);
-  const { data: userData } = useAuthCheckQuery();
   const dispatch = useCommentInfoDispatch();
   const toast = useToast();
+
+  const { data: postData } = usePostDetailQuery(postId, { suspense: true });
+  const { data: userData } = useAuthCheckQuery({ suspense: true });
+
+  const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
   const handleMusseukClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!musseukRef.current) return;
@@ -76,10 +78,10 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen, isAuthor }: CommentBoar
       border={isAuthor ? 'none' : '4px dashed'}
       borderColor={'green01'}
       boxSizing="border-box">
-      <Musseuk ref={musseukRef} musseukImageName={data?.musseukImageName ?? 'musseuk_default'} />
+      <Musseuk ref={musseukRef} musseukImageName={postData?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
-        {data &&
-          data.comments.map(({ _id, author, content, position, nickname, decorationImageName }) => (
+        {postData &&
+          postData.comments.map(({ _id, author, content, position, nickname, decorationImageName }) => (
             <Comment
               key={_id}
               top={position[1]}
