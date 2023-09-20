@@ -8,13 +8,16 @@ import { Post } from '@/types';
 export const getPostDetail = async (id: string) => {
   const { data } = await baseInstance.get<PostResponse>(`/posts/${id}`);
 
+  if (!data) throw new Error('Unvalid post ID');
+
   return parsePost(data);
 };
 
 const usePostDetailQuery = (id: string) => {
   return useQuery<Post>({
     queryKey: queryKey.posts.detail(id),
-    queryFn: () => getPostDetail(id)
+    queryFn: () => getPostDetail(id),
+    retry: 0
   });
 };
 
