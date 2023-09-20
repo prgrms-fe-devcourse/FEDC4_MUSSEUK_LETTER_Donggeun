@@ -32,6 +32,7 @@ export type MusseukType = (typeof MUSSEUK_IMAGE_NAME)[keyof typeof MUSSEUK_IMAGE
 
 export interface Comment extends CommentField {
   _id: string;
+  author: User;
 }
 
 export interface CommentField {
