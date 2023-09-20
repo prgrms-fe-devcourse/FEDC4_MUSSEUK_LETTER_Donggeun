@@ -13,6 +13,14 @@ import { useMediaQuery } from 'react-responsive';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
+const MUSSEUK_IMAGE = {
+  SEMICOLON: 'musseuk_semicolon',
+  LAPTOP: 'musseuk_laptop',
+  HOOD: 'musseuk_hood',
+  HEART: 'musseuk_heart',
+  DEFAULT: 'musseuk_default'
+};
+
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
