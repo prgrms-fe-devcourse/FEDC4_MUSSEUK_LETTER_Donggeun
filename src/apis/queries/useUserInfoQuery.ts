@@ -14,7 +14,8 @@ export const getUserInfo = async (userId: string) => {
 const useUserInfoQuery = (userId: string) => {
   return useQuery<User>({
     queryKey: queryKey.users.detail(userId),
-    queryFn: () => getUserInfo(userId)
+    queryFn: () => getUserInfo(userId),
+    suspense: true
   });
 };
 
