@@ -63,11 +63,14 @@ const NewPost = () => {
   const isPc = useMediaQuery({
     query: '(min-width:1400px)'
   });
+  const isPC2 = useMediaQuery({
+    query: '(min-width : 914px) and (max-width :1400px)'
+  });
   const isTablet = useMediaQuery({
-    query: '(min-width : 810px) and (max-width :1400px)'
+    query: '(min-width : 500px) and (max-width:913px)'
   });
   const isMobile = useMediaQuery({
-    query: '(max-width:810px)'
+    query: '(max-width:499px)'
   });
 
   return (
@@ -111,7 +114,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="scale(1.6) translateY(0.1rem)"
+                    transform="scale(1.4) translateY(0.1rem)"
                     src={musseuk_semicolon}
                     alt="musseuk_semicolon"
                   />
@@ -122,7 +125,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(-0.4rem) scale(1.1)"
+                    transform="translateY(-0.4rem)"
                     src={musseuk_laptop}
                     alt="musseuk_laptop"
                   />
@@ -132,6 +135,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
+                    transform="scale(0.9)"
                     onClick={clickMusseuk}
                     src={musseuk_hood}
                     alt="musseuk_hood"
@@ -142,7 +146,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(-0.7rem) scale(1.1)"
+                    transform="translateY(-0.7rem)"
                     onClick={clickMusseuk}
                     src={musseuk_heart}
                     alt="musseuk_heart"
@@ -153,7 +157,129 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(0.3rem) scale(1.2)"
+                    transform="translateY(0.3rem) scale(1.1)"
+                    onClick={clickMusseuk}
+                    src={musseuk_default}
+                    alt="musseuk_default"
+                  />
+                </Box>
+              </Flex>
+            </Box>
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+              편지를 쓸 사람들에게 보여줄 멘트
+            </Text>
+            <Textarea
+              value={musseukIntroduce}
+              onChange={handleMusseukIntroduce}
+              minHeight="14rem"
+              maxHeight="20rem"
+              fontSize="1.1rem"
+              bgColor="white"
+              size="lg"
+              marginBottom="3rem"
+              placeholder="머쓱이에 대한 소개를 작성해주세요"
+            />
+            <Flex justifyContent="space-between">
+              <Button
+                width="10rem"
+                bgColor="gray.400"
+                color="white"
+                onClick={() => {
+                  navigate('/');
+                }}
+                colorScheme="gray">
+                뒤로가기
+              </Button>
+              <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
+                생성하기
+              </Button>
+            </Flex>
+          </Box>
+        </Box>
+      )}
+      {isPC2 && (
+        <Box bgColor="bg01">
+          <Box p="2rem" margin="auto" w="70%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 이름
+            </Text>
+            <Input
+              value={musseukTitle}
+              onChange={handleMusseukTitle}
+              fontSize="1.1rem"
+              height="3rem"
+              bgColor="white"
+              borderRadius="0.3rem"
+              marginBottom="1.5rem"
+              placeholder="머쓱이 이름을 작성해 주세요!"
+              size="md"
+            />
+            <Text textAlign="left" fontSize="1.4rem" color="black">
+              머쓱이 테마
+            </Text>
+            <Box margin="auto" h="27rem" p={4}>
+              <Image
+                objectFit="cover"
+                w="25rem"
+                margin="auto"
+                ref={musseukImageRef}
+                src={musseukImage || musseuk_semicolon}
+                alt="musseukImage"
+              />
+              {/* <Image margin="auto" src={table} alt="table" /> */}
+            </Box>
+            <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
+              <Flex justify="center">
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="scale(1.4) translateY(0.1rem)"
+                    src={musseuk_semicolon}
+                    alt="musseuk_semicolon"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    onClick={clickMusseuk}
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.4rem)"
+                    src={musseuk_laptop}
+                    alt="musseuk_laptop"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="scale(0.9)"
+                    onClick={clickMusseuk}
+                    src={musseuk_hood}
+                    alt="musseuk_hood"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(-0.7rem)"
+                    onClick={clickMusseuk}
+                    src={musseuk_heart}
+                    alt="musseuk_heart"
+                  />
+                </Box>
+                <Box flex="1" border="0.3rem solid transparent" borderRadius="10px" _hover={{ borderColor: '#72D988' }}>
+                  <Image
+                    objectFit="cover"
+                    w="100%"
+                    h="100%"
+                    transform="translateY(0.3rem) scale(1.1)"
                     onClick={clickMusseuk}
                     src={musseuk_default}
                     alt="musseuk_default"
@@ -195,14 +321,14 @@ const NewPost = () => {
       )}
       {isTablet && (
         <Box bgColor="bg01">
-          <Box p="2rem" margin="auto" w="70%" textAlign="center">
-            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+          <Box p="2rem" margin="auto" w="100%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.6rem" color="black">
               머쓱이 이름
             </Text>
             <Input
               value={musseukTitle}
               onChange={handleMusseukTitle}
-              fontSize="1.1rem"
+              fontSize="1.3rem"
               height="3rem"
               bgColor="white"
               borderRadius="0.3rem"
@@ -210,10 +336,10 @@ const NewPost = () => {
               placeholder="머쓱이 이름을 작성해 주세요!"
               size="md"
             />
-            <Text textAlign="left" fontSize="1.4rem" color="black">
+            <Text textAlign="left" fontSize="1.6rem" color="black">
               머쓱이 테마
             </Text>
-            <Box margin="auto" h="27rem" p={4}>
+            <Box margin="auto" h="20%" p={4}>
               <Image
                 objectFit="cover"
                 w="25rem"
@@ -232,7 +358,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="scale(1.6) translateY(0.1rem)"
+                    transform="scale(1.4) translateY(0.1rem)"
                     src={musseuk_semicolon}
                     alt="musseuk_semicolon"
                   />
@@ -243,7 +369,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(-0.4rem) scale(1.1)"
+                    transform="translateY(-0.1rem)"
                     src={musseuk_laptop}
                     alt="musseuk_laptop"
                   />
@@ -253,6 +379,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
+                    transform="scale(0.9)"
                     onClick={clickMusseuk}
                     src={musseuk_hood}
                     alt="musseuk_hood"
@@ -263,7 +390,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(-0.7rem) scale(1.1)"
+                    transform="translateY(-0.4rem) "
                     onClick={clickMusseuk}
                     src={musseuk_heart}
                     alt="musseuk_heart"
@@ -274,7 +401,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(0.3rem) scale(1.2)"
+                    transform="translateY(0.1rem) scale(1.1)"
                     onClick={clickMusseuk}
                     src={musseuk_default}
                     alt="musseuk_default"
@@ -282,7 +409,7 @@ const NewPost = () => {
                 </Box>
               </Flex>
             </Box>
-            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.6rem" color="black">
               편지를 쓸 사람들에게 보여줄 멘트
             </Text>
             <Textarea
@@ -290,15 +417,18 @@ const NewPost = () => {
               onChange={handleMusseukIntroduce}
               minHeight="14rem"
               maxHeight="20rem"
-              fontSize="1.1rem"
+              fontSize="1.3rem"
               bgColor="white"
               size="lg"
               marginBottom="3rem"
               placeholder="머쓱이에 대한 소개를 작성해주세요"
             />
-            <Flex justifyContent="space-between">
+            <Flex flexDirection="column" alignItems="center">
               <Button
-                width="10rem"
+                fontSize="1.3rem"
+                width="100%"
+                height="3rem"
+                marginBottom="2rem"
                 bgColor="gray.400"
                 color="white"
                 onClick={() => {
@@ -307,7 +437,12 @@ const NewPost = () => {
                 colorScheme="gray">
                 뒤로가기
               </Button>
-              <Button onClick={handleCreateMusseukPost} width="10rem" colorScheme="primary">
+              <Button
+                fontSize="1.3rem"
+                onClick={handleCreateMusseukPost}
+                width="100%"
+                height="3rem"
+                colorScheme="primary">
                 생성하기
               </Button>
             </Flex>
@@ -316,14 +451,14 @@ const NewPost = () => {
       )}
       {isMobile && (
         <Box bgColor="bg01">
-          <Box p="2rem" margin="auto" w="100%" textAlign="center">
-            <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
+          <Box p="1rem" margin="auto" w="100%" textAlign="center">
+            <Text marginBottom="1rem" textAlign="left" fontSize="1.2rem" color="black">
               머쓱이 이름
             </Text>
             <Input
               value={musseukTitle}
               onChange={handleMusseukTitle}
-              fontSize="1.1rem"
+              fontSize="1rem"
               height="3rem"
               bgColor="white"
               borderRadius="0.3rem"
@@ -331,7 +466,7 @@ const NewPost = () => {
               placeholder="머쓱이 이름을 작성해 주세요!"
               size="md"
             />
-            <Text textAlign="left" fontSize="1.4rem" color="black">
+            <Text textAlign="left" fontSize="1.2rem" color="black">
               머쓱이 테마
             </Text>
             <Box margin="auto" h="20%" p={4}>
@@ -384,7 +519,7 @@ const NewPost = () => {
                     objectFit="cover"
                     w="100%"
                     h="100%"
-                    transform="translateY(-0.4rem) scale(1.1)"
+                    transform="translateY(-0.3rem) scale(1.1)"
                     onClick={clickMusseuk}
                     src={musseuk_heart}
                     alt="musseuk_heart"
@@ -403,7 +538,7 @@ const NewPost = () => {
                 </Box>
               </Flex>
             </Box>
-            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.4rem" color="black">
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.2rem" color="black">
               편지를 쓸 사람들에게 보여줄 멘트
             </Text>
             <Textarea
@@ -411,16 +546,16 @@ const NewPost = () => {
               onChange={handleMusseukIntroduce}
               minHeight="14rem"
               maxHeight="20rem"
-              fontSize="1.1rem"
+              fontSize="1rem"
               bgColor="white"
               size="lg"
-              marginBottom="3rem"
+              marginBottom="1.5rem"
               placeholder="머쓱이에 대한 소개를 작성해주세요"
             />
             <Flex flexDirection="column" alignItems="center">
               <Button
                 width="100%"
-                marginBottom="2rem"
+                marginBottom="1rem"
                 bgColor="gray.400"
                 color="white"
                 onClick={() => {
