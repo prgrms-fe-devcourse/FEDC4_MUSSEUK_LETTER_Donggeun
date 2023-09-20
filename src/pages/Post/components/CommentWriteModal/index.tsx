@@ -28,7 +28,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
   const { position } = useCommentInfoState();
   const toast = useToast();
 
-  const { mutate } = useWriteCommentMutation();
+  const { mutate } = useWriteCommentMutation(postId);
   const {
     register,
     handleSubmit,

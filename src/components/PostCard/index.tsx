@@ -1,5 +1,7 @@
 import { Card, CardBody, CardFooter, CardHeader, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
+import { MusseukType } from '@/types';
+import { MUSSEUK_IMAGE } from '@/pages/Post/constants';
 
 export type Props = {
   imgUrl: string;
@@ -10,7 +12,7 @@ export type Props = {
   onClick?: () => void;
 };
 
-const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName, onClick }: Props) => {
+const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Props) => {
   return (
     <Card
       onClick={onClick}
@@ -25,11 +27,15 @@ const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName, onCli
       </CardHeader>
       <CardBody p={0}>
         <Stack textAlign="center">
-          <Heading fontSize="1.3rem">{musseukName}</Heading>
+          <Heading fontSize="1.3rem">
+            {musseukName.length > 10 ? musseukName.slice(0, 10) + '...' : musseukName}
+          </Heading>
           <Text color="#6D8198" pb="0.3rem" fontSize="0.6rem">
             {userName}
           </Text>
-          <Text fontSize="0.8rem">{musseukContent}</Text>
+          <Text fontSize="0.8rem">
+            {musseukContent.length > 50 ? musseukContent.slice(0, 50) + '...' : musseukContent}
+          </Text>
         </Stack>
       </CardBody>
       <CardFooter fontSize="1.1rem" p={0} justify="flex-end" alignItems="center" color={'blue03'}>

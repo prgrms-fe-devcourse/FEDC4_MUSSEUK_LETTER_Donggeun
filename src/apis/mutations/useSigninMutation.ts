@@ -4,7 +4,8 @@ import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import type { User } from '@/types';
+import parseUser from '../utils/parseUser';
+import { UserResponse } from '../types';
 
 interface RequestData {
   email: string;
@@ -12,12 +13,12 @@ interface RequestData {
 }
 
 interface ResponseData {
-  user: User;
+  user: UserResponse;
   token: string;
 }
 
 const postLogin = async (params: RequestData) => {
-  const { data } = await baseInstance.post('/login', params);
+  const { data } = await baseInstance.post<ResponseData>('/login', params);
 
   return data;
 };
@@ -28,8 +29,8 @@ const useSigninMutation = () => {
   return useMutation<ResponseData, AxiosError, RequestData>({
     mutationFn: postLogin,
     onSuccess: (data) => {
-      queryClient.setQueryData(queryKey.auth, data.user);
       storage('session').setItem(AUTH_TOKEN, data.token);
+      queryClient.setQueryData(queryKey.auth, parseUser(data.user));
     }
   });
 };
