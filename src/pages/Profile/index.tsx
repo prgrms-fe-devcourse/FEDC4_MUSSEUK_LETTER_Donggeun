@@ -75,8 +75,8 @@ const Profile = () => {
         <GridItem>
           <Stack h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} ml={6} px={6}>
             <Text fontSize={isSmallerThan768 ? '1.2rem' : '1.6rem'} mt={14} py={0}>
-              {user?.username}의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 5마리가 기다리고
-              있어요!
+              {user?.username}의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 {postList?.length}{' '}
+              마리가 기다리고 있어요!
             </Text>
             {isUser ? (
               <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
