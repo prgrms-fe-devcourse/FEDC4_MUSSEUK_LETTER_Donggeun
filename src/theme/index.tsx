@@ -1,6 +1,10 @@
 import { StyleFunctionProps, extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
+  breakpoints: {
+    mobile: '48em',
+    pc: '96em'
+  },
   styles: {
     global: (props: StyleFunctionProps) => ({
       body: {
