@@ -12,6 +12,7 @@ const queryKey = {
   posts: {
     all: ['posts'] as const,
     detail: (postId: string) => ['posts', postId] as const,
+    list: ['posts', 'list'] as const,
     search: (userId: string) => ['posts', 'search', userId] as const
   }
 };
