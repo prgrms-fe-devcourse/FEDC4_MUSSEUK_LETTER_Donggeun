@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
@@ -8,6 +9,8 @@ import musseuk_hood from '@/assets/images/musseuk_hood.png';
 import musseuk_heart from '@/assets/images/musseuk_heart.png';
 import musseuk_default from '@/assets/images/musseuk_default.png';
 import MusseukItem from './components/MusseukItem';
+import storage from '@/utils/storage';
+import { AUTH_TOKEN } from '@/constants/storageKey';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
@@ -62,6 +65,8 @@ const MUSSEUK_IMAGE = {
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
+  const { data: user } = useAuthCheckQuery();
+
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
   const [musseukIntroduce, setMusseukIntroduce] = useState('');
@@ -100,6 +105,10 @@ const NewPost = () => {
       }
     );
   };
+
+  if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+    return <Navigate to={'/signin'} replace={true} />;
+  }
 
   return (
     <Box bgColor="bg01">
