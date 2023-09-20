@@ -1,6 +1,20 @@
-import { Box, Button, Flex, Image, Stack, Menu, MenuButton, MenuList, MenuItem, Avatar, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Stack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Icon,
+  useMediaQuery
+} from '@chakra-ui/react';
 import { BellIcon, SearchIcon } from '@chakra-ui/icons';
 import logo from '@/assets/images/logo.png';
+import logo_mobile from '@/assets/images/logo_mobile.png';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
 import InputField from '@/components/header/components/Input';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +31,8 @@ type InputValue = {
 };
 
 const Header = () => {
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  const logoSrc = isMobile ? logo_mobile : logo;
   const navigate = useNavigate();
 
   const { handleSubmit, register, reset } = useForm<InputValue>();
@@ -88,9 +104,9 @@ const Header = () => {
   );
 
   return (
-    <Box h={HEADER_HEIGHT} px={6} bg={'white'}>
+    <Box h={HEADER_HEIGHT} px={5} bg={'white'}>
       <Flex gap={4} alignItems={'center'} h="100%" justifyContent={'space-between'}>
-        <Image h={8} cursor="pointer" src={logo} alt="logo" onClick={() => navigate('/')} />
+        <Image h={8} cursor="pointer" src={logoSrc} alt="logo" onClick={() => navigate('/')} />
         <form style={{ width: '65rem' }} onSubmit={handleSubmit(onSubmit)}>
           <InputField
             {...register('keyword')}
