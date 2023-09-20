@@ -4,6 +4,8 @@ import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import type { CommentField } from '@/types';
 import type { CommentResponse } from '../types';
+import useSlackMessageMutation from './useSlackMessageMutation';
+import usePostDetailQuery from '../queries/usePostDetailQuery';
 
 interface CustomRequestData extends CommentField {
   postId: string;
@@ -25,18 +27,28 @@ const postWriteComment = async ({ content, position, nickname, decorationImageNa
     postId
   };
 
-  const { data } = await authInstance.post('/comments/create', params);
+  const { data } = await authInstance.post<CommentResponse>('/comments/create', params);
 
   return data;
 };
 
-const useWriteCommentMutation = () => {
+const useWriteCommentMutation = (postId: string) => {
   const queryClient = useQueryClient();
+  const { mutate: slackMessage } = useSlackMessageMutation();
+  const { data: postData } = usePostDetailQuery(postId);
 
   return useMutation<CommentResponse, AxiosError, CustomRequestData>({
     mutationFn: postWriteComment,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries(queryKey.posts.all);
+
+      const postAuthor = postData?.author;
+      if (postAuthor?.slackId === undefined) return;
+
+      slackMessage({
+        postId: data.post,
+        commentId: data._id
+      });
     }
   });
 };
