@@ -6,7 +6,7 @@ const queryKey = {
   },
   users: {
     all: ['users'] as const,
-    detail: (userId: number) => ['users', userId] as const,
+    detail: (userId: string) => ['users', userId] as const,
     search: (keyword: string) => ['users', 'search', keyword] as const
   },
   posts: {

@@ -1,9 +1,10 @@
 import { Card, CardBody, CardFooter, CardHeader, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
-import { UseMutationResult } from '@tanstack/react-query';
+import { MusseukType } from '@/types';
+import { MUSSEUK_IMAGE } from '@/pages/Post/constants';
 
-type Props = {
-  imgName: string;
+export type Props = {
+  imgName: MusseukType;
   musseukName: string;
   userName?: string;
   musseukContent: string;
@@ -22,14 +23,7 @@ const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onCl
       borderColor={'green01'}
       boxShadow={' 0px 4px 7px 0px rgba(0, 0, 0, 0.25)'}>
       <CardHeader textAlign="center" p={0}>
-        <Image
-          display={'inline-block'}
-          objectFit="cover"
-          w="7rem"
-          h="7rem"
-          alt="Musseuk"
-          src={`src/assets/images/${imgName}.png`}
-        />
+        <Image display={'inline-block'} w="10rem" h="8rem" alt="musseukAvatar" src={MUSSEUK_IMAGE[imgName]} />
       </CardHeader>
       <CardBody p={0}>
         <Stack textAlign="center">
