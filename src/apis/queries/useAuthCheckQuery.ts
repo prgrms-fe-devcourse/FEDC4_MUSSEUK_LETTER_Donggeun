@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
+import parseUser from '@/apis/utils/parseUser';
+import type { User } from '@/types';
 import type { QueryOptions, UserResponse } from '@/apis/types';
 
 export const getAuthUser = async () => {
@@ -8,17 +10,14 @@ export const getAuthUser = async () => {
 
   if (data === '') throw new Error('Not authenticated yet');
 
-  return data;
+  return parseUser(data);
 };
 
-const useAuthCheckQuery = (options?: QueryOptions<UserResponse>) => {
-  return useQuery<UserResponse>({
+const useAuthCheckQuery = (options?: QueryOptions<User>) => {
+  return useQuery<User>({
     queryKey: queryKey.auth,
     queryFn: getAuthUser,
-    cacheTime: Infinity,
-    retry: 0,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
+    staleTime: Infinity,
     ...options
   });
 };
