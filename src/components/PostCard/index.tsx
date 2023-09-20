@@ -4,7 +4,7 @@ import { MusseukType } from '@/types';
 import { MUSSEUK_IMAGE } from '@/pages/Post/constants';
 
 export type Props = {
-  imgUrl: string;
+  imgName: MusseukType;
   musseukName: string;
   userName?: string;
   musseukContent: string;
@@ -12,7 +12,7 @@ export type Props = {
   onClick?: () => void;
 };
 
-const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Props) => {
+const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onClick }: Props) => {
   return (
     <Card
       onClick={onClick}
@@ -23,7 +23,7 @@ const PostCard = ({ imgUrl, letter, musseukContent, musseukName, userName }: Pro
       borderColor={'green01'}
       boxShadow={' 0px 4px 7px 0px rgba(0, 0, 0, 0.25)'}>
       <CardHeader textAlign="center" p={0}>
-        <Image display={'inline-block'} w="10rem" h="8rem" alt="musseukAvatar" src={imgUrl} />
+        <Image display={'inline-block'} w="10rem" h="8rem" alt="musseukAvatar" src={MUSSEUK_IMAGE[imgName]} />
       </CardHeader>
       <CardBody p={0}>
         <Stack textAlign="center">

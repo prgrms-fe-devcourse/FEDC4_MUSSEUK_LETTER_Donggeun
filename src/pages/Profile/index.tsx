@@ -81,7 +81,7 @@ const Profile = () => {
             {postList?.map((post) => (
               <GridItem key={post._id}>
                 <PostCard
-                  imgUrl={post.musseukImageName}
+                  imgName={post.musseukImageName}
                   musseukName={post.title}
                   musseukContent={post.content}
                   letter={post.comments.length}
