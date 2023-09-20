@@ -19,7 +19,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const { data, status } = useGetPostsInfoQuery();
-  // console.log(data);
+  console.log(data);
   const { data: user } = useAuthCheckQuery();
 
   const isPc = useMediaQuery({
@@ -184,10 +184,10 @@ const Main = () => {
             type: 'bullets'
           }}
           navigation={true}
-          virtual>
+          virtual={true}>
           {status === 'success' &&
             data
-              .slice(0, 50)
+              .slice(0, 100)
               .sort((a, b) => b.comments.length - a.comments.length)
               .slice(0, 15)
               .map((slideContent, index) => (

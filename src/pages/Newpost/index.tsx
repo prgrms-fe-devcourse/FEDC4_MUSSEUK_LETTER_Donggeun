@@ -322,13 +322,13 @@ const NewPost = () => {
       {isTablet && (
         <Box bgColor="bg01">
           <Box p="2rem" margin="auto" w="100%" textAlign="center">
-            <Text marginBottom="1rem" textAlign="left" fontSize="1.6rem" color="black">
+            <Text marginBottom="1rem" textAlign="left" fontSize="24px" color="black">
               머쓱이 이름
             </Text>
             <Input
               value={musseukTitle}
               onChange={handleMusseukTitle}
-              fontSize="1.3rem"
+              fontSize="18px"
               height="3rem"
               bgColor="white"
               borderRadius="0.3rem"
@@ -336,7 +336,7 @@ const NewPost = () => {
               placeholder="머쓱이 이름을 작성해 주세요!"
               size="md"
             />
-            <Text textAlign="left" fontSize="1.6rem" color="black">
+            <Text textAlign="left" fontSize="24px" color="black">
               머쓱이 테마
             </Text>
             <Box margin="auto" h="20%" p={4}>
@@ -409,7 +409,7 @@ const NewPost = () => {
                 </Box>
               </Flex>
             </Box>
-            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.6rem" color="black">
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="24px" color="black">
               편지를 쓸 사람들에게 보여줄 멘트
             </Text>
             <Textarea
@@ -417,7 +417,7 @@ const NewPost = () => {
               onChange={handleMusseukIntroduce}
               minHeight="14rem"
               maxHeight="20rem"
-              fontSize="1.3rem"
+              fontSize="18px"
               bgColor="white"
               size="lg"
               marginBottom="3rem"
@@ -425,7 +425,7 @@ const NewPost = () => {
             />
             <Flex flexDirection="column" alignItems="center">
               <Button
-                fontSize="1.3rem"
+                fontSize="18px"
                 width="100%"
                 height="3rem"
                 marginBottom="2rem"
@@ -438,7 +438,7 @@ const NewPost = () => {
                 뒤로가기
               </Button>
               <Button
-                fontSize="1.3rem"
+                fontSize="18px"
                 onClick={handleCreateMusseukPost}
                 width="100%"
                 height="3rem"
@@ -452,13 +452,13 @@ const NewPost = () => {
       {isMobile && (
         <Box bgColor="bg01">
           <Box p="1rem" margin="auto" w="100%" textAlign="center">
-            <Text marginBottom="1rem" textAlign="left" fontSize="1.2rem" color="black">
+            <Text marginBottom="1rem" textAlign="left" fontSize="24px" color="black">
               머쓱이 이름
             </Text>
             <Input
               value={musseukTitle}
               onChange={handleMusseukTitle}
-              fontSize="1rem"
+              fontSize="0.9rem"
               height="3rem"
               bgColor="white"
               borderRadius="0.3rem"
@@ -466,7 +466,7 @@ const NewPost = () => {
               placeholder="머쓱이 이름을 작성해 주세요!"
               size="md"
             />
-            <Text textAlign="left" fontSize="1.2rem" color="black">
+            <Text textAlign="left" fontSize="24px" color="black">
               머쓱이 테마
             </Text>
             <Box margin="auto" h="20%" p={4}>
@@ -538,7 +538,7 @@ const NewPost = () => {
                 </Box>
               </Flex>
             </Box>
-            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="1.2rem" color="black">
+            <Text marginBottom="1rem" marginTop="2rem" textAlign="left" fontSize="24px" color="black">
               편지를 쓸 사람들에게 보여줄 멘트
             </Text>
             <Textarea
@@ -546,7 +546,7 @@ const NewPost = () => {
               onChange={handleMusseukIntroduce}
               minHeight="14rem"
               maxHeight="20rem"
-              fontSize="1rem"
+              fontSize="0.9rem"
               bgColor="white"
               size="lg"
               marginBottom="1.5rem"
@@ -554,6 +554,7 @@ const NewPost = () => {
             />
             <Flex flexDirection="column" alignItems="center">
               <Button
+                fontSize="18px"
                 width="100%"
                 marginBottom="1rem"
                 bgColor="gray.400"
@@ -564,7 +565,7 @@ const NewPost = () => {
                 colorScheme="gray">
                 뒤로가기
               </Button>
-              <Button onClick={handleCreateMusseukPost} width="100%" colorScheme="primary">
+              <Button fontSize="18px" onClick={handleCreateMusseukPost} width="100%" colorScheme="primary">
                 생성하기
               </Button>
             </Flex>
