@@ -19,11 +19,8 @@ import useUserPostListQuery from '@/apis/queries/useUserPostListQuery';
 import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
-export type AddCardProps = {
-  goToNewPost: () => void;
-};
-
-const AddCard = ({ goToNewPost }: AddCardProps) => {
+const AddCard = () => {
+  const navigate = useNavigate();
   return (
     <Card w={56} h={64} p={4} textAlign={'center'} align={'center'} border={'2px'} borderColor={'green01'}>
       <CardHeader>
@@ -34,7 +31,7 @@ const AddCard = ({ goToNewPost }: AddCardProps) => {
           justifyContent="center"
           m={0}
           display={'inline-flex'}
-          onClick={goToNewPost}>
+          onClick={() => navigate('/newpost')}>
           <AddIcon color={'white'} boxSize={8} />
         </Circle>
       </CardHeader>
@@ -98,7 +95,7 @@ const Profile = () => {
                 />
               </GridItem>
             ))}
-            {isUser ? <AddCard goToNewPost={goToNewPost}></AddCard> : null}
+            {isUser && <AddCard />}
           </Grid>
         </GridItem>
       </Grid>
