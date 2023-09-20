@@ -7,7 +7,7 @@ const parseUser = (rawUser: UserResponse): User => {
   try {
     fullNameField = JSON.parse(rawUser.fullName) as UserFullName;
   } catch (err) {
-    console.error(err);
+    //console.error(err);
   }
 
   return {

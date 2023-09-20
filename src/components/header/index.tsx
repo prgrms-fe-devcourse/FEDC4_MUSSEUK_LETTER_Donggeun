@@ -116,6 +116,7 @@ const Header = () => {
             size="md"
             fontSize="14px"
             fontWeight="normal"
+            defaultValue={''}
           />
         </form>
         {data?._id ? headerMenu() : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
