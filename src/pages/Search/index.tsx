@@ -31,10 +31,10 @@ const Search = () => {
             <List width={'100%'} key={user.email}>
               <UserCard
                 id={user._id}
-                name={user.fullName}
+                name={user.username}
                 email={user.email}
-                post={user.posts.length}
-                comment={user.comments.length}
+                post={user.postCount}
+                comment={user.commentCount}
               />
             </List>
           ))}
