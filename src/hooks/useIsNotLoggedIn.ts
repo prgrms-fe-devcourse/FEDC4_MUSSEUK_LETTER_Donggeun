@@ -1,9 +1,11 @@
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
+import type { User } from '@/types';
+import type { QueryOptions } from '@/apis/types';
 
-const useIsNotLoggedIn = () => {
-  const { data: auth } = useAuthCheckQuery();
+const useIsNotLoggedIn = (options?: QueryOptions<User>) => {
+  const { data: auth } = useAuthCheckQuery(options);
 
   return {
     auth,
