@@ -29,7 +29,7 @@ const useSigninMutation = () => {
   return useMutation<ResponseData, AxiosError, RequestData>({
     mutationFn: postLogin,
     onSuccess: (data) => {
-      storage('session').setItem(AUTH_TOKEN, data.token);
+      storage('local').setItem(AUTH_TOKEN, data.token);
       queryClient.setQueryData(queryKey.auth, parseUser(data.user));
     }
   });
