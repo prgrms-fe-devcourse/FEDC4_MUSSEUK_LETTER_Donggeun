@@ -12,6 +12,12 @@ import { isPasswordTooShort, isPasswordContainNumber } from './helpers/password'
 import InputField from './components/InputField';
 import { LinkTemplate } from './templates';
 
+const ERROR_MESSAGE: {
+  [key: string]: string;
+} = {
+  'The email address is already being used.': '이미 사용중인 이메일 주소에요'
+};
+
 const links = {
   main: '/',
   signin: '/signin'
@@ -19,20 +25,20 @@ const links = {
 
 const formSchema = z
   .object({
-    email: z.string().email(),
+    email: z.string().email('이메일 주소 형태로만 입력할 수 있어요'),
     username: z
       .string()
-      .min(2, 'Length must be greater than 2 characters')
-      .max(4, 'Length must be smaller than 4 characters')
-      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력해주세요'),
+      .min(2, '2글자에서 4글자로만 입력할 수 있어요')
+      .max(4, '2글자에서 4글자로만 입력할 수 있어요')
+      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력할 수 있어요'),
     password: z
       .string()
-      .min(8, 'Length must be greater than 8 characters')
-      .refine((value) => /\d/.test(value), 'Password must contain numbers'),
+      .min(8, '8글자 이상으로만 입력할 수 있어요')
+      .refine((value) => /\d/.test(value), '숫자를 반드시 포함해야 해요'),
     confirmPassword: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
+    message: '비밀번호가 일치하지 않아요',
     path: ['confirmPassword']
   });
 
@@ -63,7 +69,7 @@ const SignUp = () => {
       {
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          setError('email', { type: 'server', message: errorMessage });
+          setError('email', { type: 'server', message: ERROR_MESSAGE[errorMessage] || errorMessage });
         }
       }
     );
@@ -104,8 +110,8 @@ const SignUp = () => {
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
       />
       <Box w="100%" fontSize="sm">
-        {isPasswordTooShort(password) && <Text fontWeight="light">· Length must be greater than 8 characters</Text>}
-        {!isPasswordContainNumber(password) && <Text fontWeight="light">· Password must contain numbers</Text>}
+        {isPasswordTooShort(password) && <Text fontWeight="light">· 8글자 이상으로만 입력할 수 있어요</Text>}
+        {!isPasswordContainNumber(password) && <Text fontWeight="light">· 숫자를 반드시 포함해야 해요</Text>}
       </Box>
       <InputField
         {...register('confirmPassword')}
