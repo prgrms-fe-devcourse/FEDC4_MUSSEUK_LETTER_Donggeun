@@ -15,6 +15,7 @@ export type Props = {
 const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onClick }: Props) => {
   return (
     <Card
+      cursor="pointer"
       onClick={onClick}
       w="15.5rem"
       h="19.5rem"

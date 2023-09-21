@@ -123,6 +123,7 @@ const NewPost = () => {
           height="3rem"
           bgColor="white"
           borderRadius="0.3rem"
+          borderColor="#D4D8CA"
           marginBottom="1.5rem"
           placeholder="머쓱이 이름을 작성해 주세요!"
           size="md"
@@ -170,13 +171,14 @@ const NewPost = () => {
         <Textarea
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
-          minHeight="14rem"
-          maxHeight="20rem"
+          height="14rem"
           fontSize="1.1rem"
           bgColor="white"
+          borderColor="#D4D8CA"
           size="lg"
           marginBottom="1.5rem"
           placeholder="머쓱이에 대한 소개를 작성해주세요"
+          resize="none"
         />
         <Flex
           direction={{
