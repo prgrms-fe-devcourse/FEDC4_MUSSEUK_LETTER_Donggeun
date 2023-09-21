@@ -7,7 +7,8 @@ import { User } from '@/types';
 
 export const getSearchResult = async (keyword: string) => {
   const { data } = await baseInstance.get<UserResponse[]>(`/search/users/${keyword}`);
-  return data.map((user) => parseUser(user));
+  console.log(data);
+  return data.map((user) => parseUser(user)).filter((user) => user.username.includes(keyword));
 };
 
 const useSearchUserQuery = (keyword: string) => {
