@@ -15,12 +15,21 @@ import {
 } from '@chakra-ui/react';
 import headerImage from '@/assets/images/comment-header.png';
 import musseukBye from '@/assets/images/musseuk_bye.png';
+import useDeletePostMutation from '@/apis/mutations/useDeletePostMutation';
+import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 
 type PostDeleteModalProps = {
-  postTitle: string;
+  postId: string;
 } & Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>;
 
-const PostDeleteModal = ({ isOpen, onClose, postTitle }: PostDeleteModalProps) => {
+const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
+  const { data } = usePostDetailQuery(postId);
+  const { mutate } = useDeletePostMutation(postId);
+
+  const handleDeleteClick = () => {
+    mutate({ postId });
+  };
+
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
       <ModalContent borderRadius={20}>
@@ -62,13 +71,13 @@ const PostDeleteModal = ({ isOpen, onClose, postTitle }: PostDeleteModalProps) =
             </Box>
             <Flex justifyContent={'space-between'} w={'100%'}>
               <Text fontWeight={'bold'} fontSize={'xl'}>
-                From. {postTitle}
+                From. {data?.title ?? '머쓱이'}
               </Text>
               <HStack gap={6}>
                 <Button colorScheme={'gray'} size={'lg'} onClick={onClose}>
                   취소
                 </Button>
-                <Button colorScheme={'red'} size={'lg'}>
+                <Button colorScheme={'red'} size={'lg'} onClick={handleDeleteClick}>
                   삭제
                 </Button>
               </HStack>

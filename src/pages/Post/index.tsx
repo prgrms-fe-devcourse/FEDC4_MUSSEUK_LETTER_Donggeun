@@ -65,7 +65,7 @@ const Post = () => {
       <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
       <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
-      <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postTitle={postData?.title ?? '머쓱이'} />
+      <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postId={postId} />
     </CommentInfoProvider>
   );
 };
