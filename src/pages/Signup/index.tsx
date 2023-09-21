@@ -82,12 +82,12 @@ const SignUp = () => {
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk} alt="머쓱이" />
-      <Heading textAlign="center">Sign up</Heading>
+      <Heading textAlign="center">회원가입</Heading>
       <InputField
         {...register('email')}
         id="email"
         type="email"
-        label="Email"
+        label="이메일"
         error={errors.email}
         placeholder="이메일을 입력해주세요"
       />
@@ -95,16 +95,16 @@ const SignUp = () => {
         {...register('username')}
         id="username"
         type="text"
-        label="Username"
+        label="이름"
         error={errors.username}
-        placeholder="실명을 입력해주세요"
+        placeholder="이름을 입력해주세요"
         maxLength={4}
       />
       <InputField
         {...register('password')}
         id="password"
         type={showPassword ? 'text' : 'password'}
-        label="Password"
+        label="비밀번호"
         placeholder="비밀번호를 입력해주세요"
         maxLength={30}
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
@@ -117,17 +117,17 @@ const SignUp = () => {
         {...register('confirmPassword')}
         id="confirm-password"
         type={showConfirmPassword ? 'text' : 'password'}
-        label="Confirm Password"
+        label="비밀번호 확인"
         placeholder="비밀번호를 재확인해주세요"
         maxLength={30}
         error={errors.confirmPassword}
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
       />
       <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        Create account
+        회원가입
       </Button>
       <LinkTemplate>
-        <Text color="gray.400">Already have an account?</Text>
+        <Text color="gray.400">이미 가입하셨었나요?</Text>
         <Link to={links.signin}>
           <Text
             color="green.500"
@@ -140,7 +140,7 @@ const SignUp = () => {
             fontWeight="semibold"
             cursor="pointer"
             userSelect="none">
-            Sign in
+            로그인
           </Text>
         </Link>
       </LinkTemplate>

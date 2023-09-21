@@ -63,7 +63,7 @@ const SignIn = () => {
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk} alt="머쓱이" />
-      <Heading textAlign="center">Sign in</Heading>
+      <Heading textAlign="center">로그인</Heading>
       <Flex
         color="gray.500"
         justifyContent="center"
@@ -73,13 +73,13 @@ const SignIn = () => {
         fontSize="lg"
         textAlign="center"
         fontWeight="light">
-        Welcome to 머쓱레터 <EmailIcon />
+        당신의 마음을 전달하는 머쓱레터 <EmailIcon />
       </Flex>
       <InputField
         {...register('email')}
         id="email"
         type="email"
-        label="Email"
+        label="이메일"
         error={errors.email}
         placeholder="이메일을 입력해주세요"
       />
@@ -87,16 +87,16 @@ const SignIn = () => {
         {...register('password')}
         id="password"
         type="password"
-        label="Password"
+        label="비밀번호"
         error={errors.password}
         placeholder="비밀번호를 입력해주세요"
         maxLength={30}
       />
       <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        Sign in
+        로그인
       </Button>
       <LinkTemplate>
-        <Text color="gray.400">No account yet?</Text>
+        <Text color="gray.400">아직 가입하지 않으셨나요?</Text>
         <Link to={links.signup}>
           <Text
             color="green.500"
@@ -109,7 +109,7 @@ const SignIn = () => {
             fontWeight="semibold"
             cursor="pointer"
             userSelect="none">
-            Create an account
+            회원가입
           </Text>
         </Link>
       </LinkTemplate>
