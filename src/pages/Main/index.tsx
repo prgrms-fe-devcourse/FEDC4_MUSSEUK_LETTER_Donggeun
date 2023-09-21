@@ -48,7 +48,8 @@ const Main = () => {
           spaceBetween={0}
           speed={800}
           pagination={{
-            type: 'bullets'
+            type: 'bullets',
+            clickable: true
           }}
           navigation={true}
           virtual={true}>
