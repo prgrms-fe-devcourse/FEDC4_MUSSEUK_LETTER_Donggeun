@@ -12,7 +12,7 @@ export const slackInstance = axios.create({ baseURL: slackURL });
 
 authInstance.interceptors.request.use(
   (config) => {
-    const token = storage('session').getItem(AUTH_TOKEN, '');
+    const token = storage('local').getItem(AUTH_TOKEN, '');
 
     config.headers['Authorization'] = `Bearer ${token}`;
 
@@ -25,7 +25,7 @@ authInstance.interceptors.request.use(
 
 formDataInstance.interceptors.request.use(
   (config) => {
-    const token = storage('session').getItem(AUTH_TOKEN, '');
+    const token = storage('local').getItem(AUTH_TOKEN, '');
 
     config.headers['Authorization'] = `Bearer ${token}`;
     config.headers['Content-Type'] = 'multipart/form-data';
@@ -39,7 +39,7 @@ formDataInstance.interceptors.request.use(
 
 slackInstance.interceptors.request.use(
   (config) => {
-    const token = storage('session').getItem(AUTH_TOKEN, '');
+    const token = storage('local').getItem(AUTH_TOKEN, '');
 
     config.headers['Authorization'] = `Bearer ${token}`;
 

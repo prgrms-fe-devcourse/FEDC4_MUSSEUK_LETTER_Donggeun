@@ -9,7 +9,7 @@ const useIsNotLoggedIn = (options?: QueryOptions<User>) => {
 
   return {
     auth,
-    isNotLoggedIn: !auth && !storage('session').getItem(AUTH_TOKEN, null)
+    isNotLoggedIn: !auth && !storage('local').getItem(AUTH_TOKEN, null)
   };
 };
 
