@@ -45,7 +45,6 @@ const Main = () => {
           loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerGroup={1}
-          centeredSlides={false}
           spaceBetween={0}
           speed={800}
           pagination={{
@@ -60,7 +59,7 @@ const Main = () => {
               .slice(0, 15)
               .map((post, index) => (
                 <SwiperSlide key={post._id} virtualIndex={index}>
-                  <Box ml="4rem" mb="3.5rem">
+                  <Box mb="3.5rem">
                     <PostCard
                       onClick={() => navigate(`/post/${post._id}`)}
                       imgName={post.musseukImageName}
