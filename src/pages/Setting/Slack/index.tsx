@@ -8,6 +8,10 @@ import { SubmitHandler, useForm, Controller, SubmitErrorHandler } from 'react-ho
 import LinkField from './components/LinkField';
 import { z } from 'zod';
 import { SLACK_WORKSPACE } from '@/constants/slack';
+import { useEffect, useState } from 'react';
+import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
+import { Navigate } from 'react-router-dom';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 
 const formSchema = z.object({
   slackId: z.string(),
@@ -17,8 +21,18 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const SettingSlack = () => {
+  const { isNotLoggedIn } = useIsNotLoggedIn();
+  const { data: userData } = useAuthCheckQuery();
+  const isSlackIdExist = typeof userData?.slackId === 'string';
   const { mutate } = useGenerateSlackLinkMutation();
   const notionURL = import.meta.env.VITE_SLACK_ID_DESCRIPTION;
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (userData?.slackId) {
+      setMessage('이미 인증이 완료되었습니다.');
+    }
+  }, [userData?.slackId]);
 
   const {
     handleSubmit,
@@ -31,13 +45,16 @@ const SettingSlack = () => {
     mutate(
       { slackId: data.slackId, slackWorkspace: data.slackWorkspace },
       {
-        onSuccess: (res) => console.log(res)
+        onSuccess: () => {
+          setMessage('인증 링크가 전송되었습니다.');
+        }
       }
     );
   };
 
   const onError: SubmitErrorHandler<FormValues> = (errors) => console.error(errors);
 
+  if (isNotLoggedIn) return <Navigate to="/signin" />;
   return (
     <PageTemplateWithHeader onSubmit={handleSubmit(onSubmit, onError)}>
       <Image maxW="32" src={musseuk_slack} alt="머쓱이" />
@@ -73,12 +90,17 @@ const SettingSlack = () => {
         placeholder="슬랙 아이디를 입력해주세요"
         maxLength={40}
         error={errors.slackId}
+        disabled={isSlackIdExist}
+        required={true}
       />
+      <Text w={'100%'} fontSize={'sm'} color={'red.500'}>
+        {message}
+      </Text>
       <LinkField title="노션 페이지로 이동" href={notionURL}>
         <QuestionIcon color={'primary.700'} mr={1} />
         슬랙 아이디 찾기
       </LinkField>
-      <Button type="submit" mt="6" w="100%" colorScheme="primary">
+      <Button type="submit" mt="6" w="100%" colorScheme="primary" isDisabled={isSlackIdExist}>
         슬랙 인증하기
       </Button>
     </PageTemplateWithHeader>

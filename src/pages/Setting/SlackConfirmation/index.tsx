@@ -13,7 +13,6 @@ const SlackConfirmation = () => {
   const navigate = useNavigate();
   const queryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });
   const slackToken = String(queryString.token);
-
   const { data: slackResponseData } = useSlackTokenCheckQuery(slackToken);
 
   return (
