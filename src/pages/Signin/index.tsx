@@ -16,7 +16,7 @@ const ERROR_MESSAGE: {
   [key: string]: string;
 } = {
   'Your email and password combination does not match an account.':
-    '해당 이메일과 비밀번호로 일치하는 계정이 존재하지 않아요.'
+    '해당 이메일과 비밀번호로 일치하는 계정이 존재하지 않습니다.'
 };
 
 const links = {
@@ -24,7 +24,10 @@ const links = {
   signup: '/signup'
 };
 
-const formSchema = z.object({ email: z.string().email('이메일 주소 형태로만 입력할 수 있어요'), password: z.string() });
+const formSchema = z.object({
+  email: z.string().email('이메일 주소 형태로만 입력할 수 있습니다.'),
+  password: z.string()
+});
 
 type Inputs = z.infer<typeof formSchema>;
 

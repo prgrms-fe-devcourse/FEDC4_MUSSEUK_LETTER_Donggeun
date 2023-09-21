@@ -15,7 +15,7 @@ import { LinkTemplate } from './templates';
 const ERROR_MESSAGE: {
   [key: string]: string;
 } = {
-  'The email address is already being used.': '이미 사용중인 이메일 주소에요'
+  'The email address is already being used.': '이미 사용중인 이메일 주소입니다.'
 };
 
 const links = {
@@ -25,20 +25,20 @@ const links = {
 
 const formSchema = z
   .object({
-    email: z.string().email('이메일 주소 형태로만 입력할 수 있어요'),
+    email: z.string().email('이메일 주소 형태로만 입력할 수 있습니다.'),
     username: z
       .string()
-      .min(2, '2글자에서 4글자로만 입력할 수 있어요')
-      .max(4, '2글자에서 4글자로만 입력할 수 있어요')
-      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력할 수 있어요'),
+      .min(2, '2글자에서 4글자로만 입력할 수 있습니다.')
+      .max(4, '2글자에서 4글자로만 입력할 수 있습니다.')
+      .refine((value) => /^[가-힣]*$/.test(value), '한글만 입력할 수 있습니다.'),
     password: z
       .string()
-      .min(8, '8글자 이상으로만 입력할 수 있어요')
-      .refine((value) => /\d/.test(value), '숫자를 반드시 포함해야 해요'),
+      .min(8, '8글자 이상으로만 입력할 수 있습니다.')
+      .refine((value) => /\d/.test(value), '숫자를 반드시 포함해야 합니다.'),
     confirmPassword: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: '비밀번호가 일치하지 않아요',
+    message: '비밀번호가 일치하지 않습니다.',
     path: ['confirmPassword']
   });
 
@@ -110,8 +110,8 @@ const SignUp = () => {
         icon={<Icon as={showPassword ? ViewOffIcon : ViewIcon} onClick={setShowPassword.toggle} />}
       />
       <Box w="100%" fontSize="sm">
-        {isPasswordTooShort(password) && <Text fontWeight="light">· 8글자 이상으로만 입력할 수 있어요</Text>}
-        {!isPasswordContainNumber(password) && <Text fontWeight="light">· 숫자를 반드시 포함해야 해요</Text>}
+        {isPasswordTooShort(password) && <Text fontWeight="light">· 8글자 이상으로만 입력할 수 있습니다.</Text>}
+        {!isPasswordContainNumber(password) && <Text fontWeight="light">· 숫자를 반드시 포함해야 합니다.</Text>}
       </Box>
       <InputField
         {...register('confirmPassword')}
