@@ -12,7 +12,7 @@ interface FormData {
 const postProfile = async (params: FormData) => {
   const { data } = await formDataInstance.post<UserResponse>('/users/upload-photo', params);
 
-  return data;
+  return parseUser(data);
 };
 
 const useProfileImageMutation = () => {
@@ -21,7 +21,7 @@ const useProfileImageMutation = () => {
   return useMutation({
     mutationFn: postProfile,
     onSuccess: (data) => {
-      queryClient.setQueryData(queryKey.auth, parseUser(data));
+      queryClient.setQueryData(queryKey.auth, data);
     }
   });
 };
