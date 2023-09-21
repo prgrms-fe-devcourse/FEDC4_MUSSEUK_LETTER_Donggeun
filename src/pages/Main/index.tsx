@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
@@ -25,21 +26,31 @@ const Main = () => {
       </Box>
       <Box bgColor="bg01" paddingTop="5rem">
         <Swiper
+          style={
+            {
+              '--swiper-pagination-bullet-size': '10px'
+            } as CSSProperties
+          }
           breakpoints={{
             '0': {
-              slidesPerView: 1
+              slidesPerView: 1,
+              initialSlide: 0
             },
             '750': {
-              slidesPerView: 2
+              slidesPerView: 2,
+              initialSlide: 1
             },
             '1080': {
-              slidesPerView: 3
+              slidesPerView: 3,
+              initialSlide: 2
             },
             '1450': {
-              slidesPerView: 4
+              slidesPerView: 4,
+              initialSlide: 3
             },
             '1700': {
-              slidesPerView: 5
+              slidesPerView: 5,
+              initialSlide: 4
             }
           }}
           loop={true}
@@ -49,7 +60,8 @@ const Main = () => {
           speed={800}
           pagination={{
             type: 'bullets',
-            clickable: true
+            clickable: true,
+            bulletClass: `swiper-pagination-bullet`
           }}
           navigation={true}
           virtual={true}>
