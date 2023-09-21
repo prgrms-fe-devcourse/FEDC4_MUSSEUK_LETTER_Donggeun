@@ -12,12 +12,19 @@ import PageTemplate from '@/components/WhiteCard/PageTemplate';
 import InputField from '@/pages/Signup/components/InputField';
 import { LinkTemplate } from '@/pages/Signup/templates';
 
+const ERROR_MESSAGE: {
+  [key: string]: string;
+} = {
+  'Your email and password combination does not match an account.':
+    '해당 이메일과 비밀번호로 일치하는 계정이 존재하지 않아요.'
+};
+
 const links = {
   main: '/',
   signup: '/signup'
 };
 
-const formSchema = z.object({ email: z.string().email('이메일 주소 형태로 입력해주세요.'), password: z.string() });
+const formSchema = z.object({ email: z.string().email('이메일 주소 형태로만 입력할 수 있어요'), password: z.string() });
 
 type Inputs = z.infer<typeof formSchema>;
 
@@ -41,8 +48,9 @@ const SignIn = () => {
     mutate(
       { email: data.email, password: data.password },
       {
-        onError: () => {
-          setError('email', { type: 'server', message: '해당 이메일과 비밀번호로 일치하는 계정이 존재하지 않아요.' });
+        onError: (error) => {
+          const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
+          setError('email', { type: 'server', message: ERROR_MESSAGE[errorMessage] || errorMessage });
         }
       }
     );
