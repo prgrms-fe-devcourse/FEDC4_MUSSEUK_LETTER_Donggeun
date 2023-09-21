@@ -14,6 +14,7 @@ import Introduction from './components/Introduction';
 import IntroductionSkeleton from './components/Skeletons/IntroductionSkeleton';
 import CommentBoardSkeleton from './components/Skeletons/CommentBoardSkeleton';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
+import DeleteButton from './components/DeleteButton';
 
 const links = {
   notFound: '/notFound',
@@ -45,10 +46,11 @@ const Post = () => {
         backgroundPosition="center"
         backgroundSize="contain"
         backgroundRepeat="no-repeat">
-        <Box w="100%">
+        <Box w="100%" position={'relative'}>
           <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />
             {isAuthor && <ListButton onClick={onListOpen} />}
+            {isAuthor && <DeleteButton />}
           </Suspense>
         </Box>
         <Suspense fallback={<CommentBoardSkeleton />}>
