@@ -76,12 +76,10 @@ const NewPost = () => {
 
   const handleMusseukTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setMusseukTitle(event.target.value);
-    console.log('musseukTitle이 바뀌는 중이에요', musseukTitle);
   };
 
   const handleMusseukIntroduce = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setMusseukIntroduce(event.target.value);
-    console.log('musseukIntroduce 바뀌는 중이에요', musseukIntroduce);
   };
 
   const handleClickMusseuk = (e: MouseEvent<HTMLImageElement>) => {
