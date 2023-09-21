@@ -65,7 +65,7 @@ const Main = () => {
                       onClick={() => navigate(`/post/${post._id}`)}
                       imgName={post.musseukImageName}
                       musseukContent={post.content}
-                      musseukName={post.musseukImageName}
+                      musseukName={post.title}
                       userName={post.author.username}
                       letter={post.comments.length}
                     />
