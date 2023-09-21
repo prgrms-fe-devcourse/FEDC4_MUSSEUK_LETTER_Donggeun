@@ -19,6 +19,7 @@ const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onCl
       onClick={onClick}
       w="15.5rem"
       h="19.5rem"
+      margin="auto"
       p={4}
       border={'2px'}
       borderColor={'green01'}
