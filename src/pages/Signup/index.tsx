@@ -1,11 +1,11 @@
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useSignupMutation from '@/apis/mutations/useSignupMutation';
+import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import musseuk from '@/assets/images/musseuk_hood.png';
 import PageTemplate from '@/components/WhiteCard/PageTemplate';
 import { isPasswordTooShort, isPasswordContainNumber } from './helpers/password';
@@ -39,13 +39,12 @@ const formSchema = z
 type Inputs = z.infer<typeof formSchema>;
 
 const SignUp = () => {
-  const navigate = useNavigate();
-
-  const { data: user } = useAuthCheckQuery();
+  const { isNotLoggedIn } = useIsNotLoggedIn();
   const { mutate } = useSignupMutation();
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
+
   const {
     register,
     handleSubmit,
@@ -55,13 +54,13 @@ const SignUp = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(formSchema)
   });
+
   const password = watch('password');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
       { email: data.email, password: data.password, username: data.username },
       {
-        onSuccess: () => navigate(links.main),
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
           setError('email', { type: 'server', message: errorMessage });
@@ -72,7 +71,7 @@ const SignUp = () => {
 
   const onError: SubmitErrorHandler<Inputs> = (errors) => console.error(errors);
 
-  if (user) return <Navigate to={links.main} />;
+  if (!isNotLoggedIn) return <Navigate to={links.main} />;
 
   return (
     <PageTemplate onSubmit={handleSubmit(onSubmit, onError)}>
