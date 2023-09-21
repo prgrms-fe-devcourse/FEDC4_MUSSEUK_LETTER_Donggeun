@@ -11,23 +11,41 @@ import {
   VStack,
   Button,
   HStack,
-  Flex
+  Flex,
+  useToast
 } from '@chakra-ui/react';
 import headerImage from '@/assets/images/comment-header.png';
 import musseukBye from '@/assets/images/musseuk_bye.png';
 import useDeletePostMutation from '@/apis/mutations/useDeletePostMutation';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useNavigate } from 'react-router-dom';
 
 type PostDeleteModalProps = {
   postId: string;
 } & Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>;
 
 const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const { data } = usePostDetailQuery(postId);
   const { mutate } = useDeletePostMutation(postId);
 
   const handleDeleteClick = () => {
-    mutate({ postId });
+    mutate(
+      { postId },
+      {
+        onSuccess: () => {
+          toast({
+            title: '머쓱이가 결국 떠났어요.',
+            status: 'success',
+            position: 'top'
+          });
+
+          navigate('/');
+        }
+      }
+    );
   };
 
   return (
