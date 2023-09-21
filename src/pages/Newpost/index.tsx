@@ -104,7 +104,7 @@ const NewPost = () => {
     );
   };
 
-  if (!user && !storage('session').getItem(AUTH_TOKEN, null)) {
+  if (!user && !storage('local').getItem(AUTH_TOKEN, null)) {
     return <Navigate to={'/signin'} replace={true} />;
   }
 
