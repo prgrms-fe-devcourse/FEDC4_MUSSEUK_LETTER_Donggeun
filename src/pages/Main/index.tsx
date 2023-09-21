@@ -33,19 +33,24 @@ const Main = () => {
           }
           breakpoints={{
             '0': {
-              slidesPerView: 1
+              slidesPerView: 1,
+              initialSlide: 0
             },
             '750': {
-              slidesPerView: 2
+              slidesPerView: 2,
+              initialSlide: 1
             },
             '1080': {
-              slidesPerView: 3
+              slidesPerView: 3,
+              initialSlide: 2
             },
             '1450': {
-              slidesPerView: 4
+              slidesPerView: 4,
+              initialSlide: 3
             },
             '1700': {
-              slidesPerView: 5
+              slidesPerView: 5,
+              initialSlide: 4
             }
           }}
           loop={true}
