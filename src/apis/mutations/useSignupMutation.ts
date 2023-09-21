@@ -28,7 +28,7 @@ interface ResponseData {
 const postSignup = async (customParams: CustomRequestData) => {
   const fullName: UserFullName = {
     username: customParams.username,
-    introduce: ''
+    introduce: `안녕하세요 ${customParams.username}입니다.`
   };
 
   const params: RequestData = {
@@ -48,7 +48,7 @@ const useSignupMutation = () => {
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postSignup,
     onSuccess: (data) => {
-      storage('session').setItem(AUTH_TOKEN, data.token);
+      storage('local').setItem(AUTH_TOKEN, data.token);
       queryClient.setQueryData(queryKey.auth, parseUser(data.user));
     }
   });

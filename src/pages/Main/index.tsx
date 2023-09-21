@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
@@ -25,31 +26,42 @@ const Main = () => {
       </Box>
       <Box bgColor="bg01" paddingTop="5rem">
         <Swiper
+          style={
+            {
+              '--swiper-pagination-bullet-size': '10px'
+            } as CSSProperties
+          }
           breakpoints={{
             '0': {
-              slidesPerView: 1
+              slidesPerView: 1,
+              initialSlide: 0
             },
             '750': {
-              slidesPerView: 2
+              slidesPerView: 2,
+              initialSlide: 1
             },
             '1080': {
-              slidesPerView: 3
+              slidesPerView: 3,
+              initialSlide: 2
             },
             '1450': {
-              slidesPerView: 4
+              slidesPerView: 4,
+              initialSlide: 3
             },
             '1700': {
-              slidesPerView: 5
+              slidesPerView: 5,
+              initialSlide: 4
             }
           }}
           loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerGroup={1}
-          centeredSlides={false}
           spaceBetween={0}
           speed={800}
           pagination={{
-            type: 'bullets'
+            type: 'bullets',
+            clickable: true,
+            bulletClass: `swiper-pagination-bullet`
           }}
           navigation={true}
           virtual={true}>
@@ -60,12 +72,12 @@ const Main = () => {
               .slice(0, 15)
               .map((post, index) => (
                 <SwiperSlide key={post._id} virtualIndex={index}>
-                  <Box ml="4rem" mb="3.5rem" cursor="pointer">
+                  <Box mb="3.5rem">
                     <PostCard
                       onClick={() => navigate(`/post/${post._id}`)}
                       imgName={post.musseukImageName}
                       musseukContent={post.content}
-                      musseukName={post.musseukImageName}
+                      musseukName={post.title}
                       userName={post.author.username}
                       letter={post.comments.length}
                     />
