@@ -60,7 +60,7 @@ const Main = () => {
               .slice(0, 15)
               .map((post, index) => (
                 <SwiperSlide key={post._id} virtualIndex={index}>
-                  <Box ml="4rem" mb="3.5rem" cursor="pointer">
+                  <Box ml="4rem" mb="3.5rem">
                     <PostCard
                       onClick={() => navigate(`/post/${post._id}`)}
                       imgName={post.musseukImageName}
