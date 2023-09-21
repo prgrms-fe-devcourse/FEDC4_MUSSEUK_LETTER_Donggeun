@@ -1,13 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Flex, Button, Heading, Text, Image } from '@chakra-ui/react';
 import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 import notfound from '@/assets/images/404_notfound.png';
 
-const links = {
-  back: '..'
-};
-
 const NotFound = () => {
+  const navigate = useNavigate();
+
   return (
     <PageTemplateWithHeader>
       <Image
@@ -27,11 +25,9 @@ const NotFound = () => {
         <Text>아쉽지만</Text>
         <Text>여긴 당신이 찾는 주소가 아니에요.</Text>
       </Flex>
-      <Link css={{ width: '100%' }} to={links.back}>
-        <Button mt="6" w="100%" colorScheme="primary">
-          이전 페이지로 돌아가기
-        </Button>
-      </Link>
+      <Button mt="6" w="100%" colorScheme="primary" onClick={() => navigate(-1)}>
+        이전 페이지로 돌아가기
+      </Button>
     </PageTemplateWithHeader>
   );
 };
