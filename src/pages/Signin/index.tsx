@@ -17,7 +17,7 @@ const links = {
   signup: '/signup'
 };
 
-const formSchema = z.object({ email: z.string().email(), password: z.string() });
+const formSchema = z.object({ email: z.string().email('이메일 주소 형태로 입력해주세요.'), password: z.string() });
 
 type Inputs = z.infer<typeof formSchema>;
 
@@ -41,10 +41,8 @@ const SignIn = () => {
     mutate(
       { email: data.email, password: data.password },
       {
-        onError: (error) => {
-          const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          setError('email', { type: 'server', message: errorMessage });
-          setError('password', { type: 'server', message: errorMessage });
+        onError: () => {
+          setError('email', { type: 'server', message: '해당 이메일과 비밀번호로 일치하는 계정이 존재하지 않아요.' });
         }
       }
     );
