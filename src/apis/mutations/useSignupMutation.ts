@@ -48,7 +48,7 @@ const useSignupMutation = () => {
   return useMutation<ResponseData, AxiosError, CustomRequestData>({
     mutationFn: postSignup,
     onSuccess: (data) => {
-      storage('session').setItem(AUTH_TOKEN, data.token);
+      storage('local').setItem(AUTH_TOKEN, data.token);
       queryClient.setQueryData(queryKey.auth, parseUser(data.user));
     }
   });

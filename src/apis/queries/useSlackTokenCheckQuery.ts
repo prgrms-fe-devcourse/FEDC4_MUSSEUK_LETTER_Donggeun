@@ -14,7 +14,7 @@ type ResponseData = {
 export const getTokenResult = async (slackToken: string) => {
   const { data } = await slackInstance.get<ResponseData>(`/slack/verification/user?token=${slackToken}`);
 
-  storage('session').setItem(AUTH_TOKEN, data.token);
+  storage('local').setItem(AUTH_TOKEN, data.token);
   queryClient.setQueryData(queryKey.auth, data.user);
 
   return data.user;
