@@ -1,4 +1,4 @@
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -13,7 +13,6 @@ import { LinkTemplate } from '@/pages/Signup/templates';
 import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 
 const links = {
-  back: '..',
   signin: '/signin'
 };
 
@@ -63,7 +62,7 @@ const ChangePassword = () => {
             status: 'success',
             position: 'top'
           });
-          navigate(links.back);
+          navigate(-1);
         },
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
@@ -115,21 +114,20 @@ const ChangePassword = () => {
       </Button>
       <LinkTemplate>
         <Text color="gray.400">비밀번호 변경을 원하지 않으신가요?</Text>
-        <Link to={links.back}>
-          <Text
-            color="green.500"
-            _hover={{
-              color: 'green.600'
-            }}
-            _active={{
-              color: 'green.700'
-            }}
-            fontWeight="semibold"
-            cursor="pointer"
-            userSelect="none">
-            돌아가기
-          </Text>
-        </Link>
+        <Text
+          onClick={() => navigate(-1)}
+          color="green.500"
+          _hover={{
+            color: 'green.600'
+          }}
+          _active={{
+            color: 'green.700'
+          }}
+          fontWeight="semibold"
+          cursor="pointer"
+          userSelect="none">
+          돌아가기
+        </Text>
       </LinkTemplate>
     </PageTemplateWithHeader>
   );
