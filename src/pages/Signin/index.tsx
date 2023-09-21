@@ -50,7 +50,7 @@ const SignIn = () => {
       {
         onError: (error) => {
           const errorMessage = typeof error.response?.data === 'string' ? error.response?.data : '';
-          setError('email', { type: 'server', message: ERROR_MESSAGE[errorMessage] || errorMessage });
+          setError('password', { type: 'server', message: ERROR_MESSAGE[errorMessage] || errorMessage });
         }
       }
     );
