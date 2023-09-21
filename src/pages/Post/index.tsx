@@ -6,7 +6,6 @@ import BackgroundHome from '@/assets/images/background_home.png';
 import CommentBoard from './components/CommentBoard';
 import CommentWriteModal from './components/CommentWriteModal';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
 import { CommentInfoProvider } from './contexts/CommentInfoProvider';
@@ -14,6 +13,7 @@ import { Suspense } from 'react';
 import Introduction from './components/Introduction';
 import IntroductionSkeleton from './components/Skeletons/IntroductionSkeleton';
 import CommentBoardSkeleton from './components/Skeletons/CommentBoardSkeleton';
+import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 
 const links = {
   notFound: '/notFound',
@@ -28,11 +28,11 @@ const Post = () => {
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
 
   const { data: postData, isError: isPostError } = usePostDetailQuery(postId);
-  const { data: userData, isError: isUserError } = useAuthCheckQuery();
+  const { auth: userData, isNotLoggedIn } = useIsNotLoggedIn();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isUserError) return <Navigate to={links.signin} />;
+  if (isNotLoggedIn) return <Navigate to={links.signin} />;
 
   if (isPostError) return <Navigate to={links.notFound} />;
 
@@ -46,7 +46,7 @@ const Post = () => {
         backgroundSize="contain"
         backgroundRepeat="no-repeat">
         <Box w="100%">
-          <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} />}>
+          <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />
             {isAuthor && <ListButton onClick={onListOpen} />}
           </Suspense>
