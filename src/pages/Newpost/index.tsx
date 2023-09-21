@@ -170,13 +170,13 @@ const NewPost = () => {
         <Textarea
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
-          minHeight="14rem"
-          maxHeight="20rem"
+          height="14rem"
           fontSize="1.1rem"
           bgColor="white"
           size="lg"
           marginBottom="1.5rem"
           placeholder="머쓱이에 대한 소개를 작성해주세요"
+          resize="none"
         />
         <Flex
           direction={{
