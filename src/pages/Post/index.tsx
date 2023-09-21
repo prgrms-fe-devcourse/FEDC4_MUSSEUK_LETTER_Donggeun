@@ -14,6 +14,8 @@ import Introduction from './components/Introduction';
 import IntroductionSkeleton from './components/Skeletons/IntroductionSkeleton';
 import CommentBoardSkeleton from './components/Skeletons/CommentBoardSkeleton';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
+import DeleteButton from './components/DeleteButton';
+import PostDeleteModal from './components/PostDeleteModal';
 
 const links = {
   notFound: '/notFound',
@@ -26,6 +28,7 @@ const Post = () => {
   const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
+  const { isOpen: isPostDeleteOpen, onOpen: onPostDeleteOpen, onClose: onPostDeleteClose } = useDisclosure();
 
   const { data: postData, isError: isPostError } = usePostDetailQuery(postId);
   const { auth: userData, isNotLoggedIn } = useIsNotLoggedIn();
@@ -45,10 +48,11 @@ const Post = () => {
         backgroundPosition="center"
         backgroundSize="contain"
         backgroundRepeat="no-repeat">
-        <Box w="100%">
+        <Box w="100%" position={'relative'}>
           <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />
             {isAuthor && <ListButton onClick={onListOpen} />}
+            {isAuthor && <DeleteButton onClick={onPostDeleteOpen} />}
           </Suspense>
         </Box>
         <Suspense fallback={<CommentBoardSkeleton />}>
@@ -61,6 +65,7 @@ const Post = () => {
       <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
       <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
       <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
+      <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postId={postId} />
     </CommentInfoProvider>
   );
 };
