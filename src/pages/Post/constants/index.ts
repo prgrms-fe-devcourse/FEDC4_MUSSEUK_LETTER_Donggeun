@@ -16,12 +16,8 @@ import Soju1 from '@/assets/images/decoration_soju1.png';
 import Uh1 from '@/assets/images/decoration_uh1.png';
 
 export const COMMENT_INFO_ACTION = {
-  CONTENT: 'SET_CONTENT',
-  POSITION: 'SET_POSITION',
-  NICKNAME: 'SET_NICKNAME',
-  DECORATION: 'SET_DECORATION_IMAGE_NAME',
-  AUTHOR: 'SET_AUTHOR',
-  ID: 'SET_ID'
+  INFO: 'SET_INFO',
+  POSITION: 'SET_POSITION'
 } as const;
 
 export const MUSSEUK_IMAGE = {

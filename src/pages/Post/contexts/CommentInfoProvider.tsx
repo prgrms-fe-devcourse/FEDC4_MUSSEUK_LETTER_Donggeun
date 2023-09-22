@@ -32,35 +32,19 @@ export const CommentInfoProvider = ({ children }: { children: React.ReactNode })
 
 const commentInfoReducer = (state: Comment, action: CommentInfoAction): Comment => {
   switch (action.type) {
-    case COMMENT_INFO_ACTION.CONTENT:
+    case COMMENT_INFO_ACTION.INFO:
       return {
         ...state,
-        content: action.content
+        _id: action._id,
+        author: action.author,
+        content: action.content,
+        nickname: action.nickname,
+        decorationImageName: action.decorationImageName
       };
     case COMMENT_INFO_ACTION.POSITION:
       return {
         ...state,
         position: action.position
-      };
-    case COMMENT_INFO_ACTION.NICKNAME:
-      return {
-        ...state,
-        nickname: action.nickname
-      };
-    case COMMENT_INFO_ACTION.DECORATION:
-      return {
-        ...state,
-        decorationImageName: action.decorationImageName
-      };
-    case COMMENT_INFO_ACTION.AUTHOR:
-      return {
-        ...state,
-        author: action.author
-      };
-    case COMMENT_INFO_ACTION.ID:
-      return {
-        ...state,
-        _id: action._id
       };
     default:
       throw new Error('Unhandled action');

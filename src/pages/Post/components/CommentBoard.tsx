@@ -55,11 +55,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
       e.stopPropagation();
 
       if (isAuthor || isMyComment) {
-        dispatch({ type: COMMENT_INFO_ACTION.CONTENT, content });
-        dispatch({ type: COMMENT_INFO_ACTION.NICKNAME, nickname });
-        dispatch({ type: COMMENT_INFO_ACTION.DECORATION, decorationImageName });
-        dispatch({ type: COMMENT_INFO_ACTION.AUTHOR, author });
-        dispatch({ type: COMMENT_INFO_ACTION.ID, _id });
+        dispatch({ type: COMMENT_INFO_ACTION.INFO, _id, author, content, nickname, decorationImageName });
 
         onInfoOpen();
       } else {
