@@ -2,12 +2,13 @@ import { Box, useToast } from '@chakra-ui/react';
 import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
 import type { Comment as CommentType } from '@/types';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import qs from 'qs';
 
 type CommentBoardProps = {
   postId: string;
@@ -24,6 +25,8 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   const { data: userData } = useAuthCheckQuery({ suspense: true });
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
+  const queryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+  const urlCommentId = queryString.commentId;
 
   const handleMusseukClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!musseukRef.current) return;
@@ -43,20 +46,19 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   };
 
   const handleCommentClick = ({
+    _id,
     author,
     content,
     nickname,
     decorationImageName
-  }: Omit<CommentType, '_id' | 'position'>) => {
+  }: Omit<CommentType, 'position'>) => {
     const isMyComment = userData?._id === author._id;
 
     return (e: React.MouseEvent) => {
       e.stopPropagation();
 
       if (isAuthor || isMyComment) {
-        dispatch({ type: COMMENT_INFO_ACTION.CONTENT, content });
-        dispatch({ type: COMMENT_INFO_ACTION.NICKNAME, nickname });
-        dispatch({ type: COMMENT_INFO_ACTION.DECORATION, decorationImageName });
+        dispatch({ type: COMMENT_INFO_ACTION.INFO, _id, author, content, nickname, decorationImageName });
 
         onInfoOpen();
       } else {
@@ -70,6 +72,21 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
       }
     };
   };
+
+  useEffect(() => {
+    if (urlCommentId && postData) {
+      const comment = postData.comments.find((comment) => comment._id === urlCommentId);
+      if (comment) {
+        const { _id, author, content, nickname, decorationImageName } = comment;
+        const isMyComment = userData?._id === author._id;
+
+        if (isAuthor || isMyComment) {
+          dispatch({ type: COMMENT_INFO_ACTION.INFO, _id, author, content, nickname, decorationImageName });
+          onInfoOpen();
+        }
+      }
+    }
+  }, [dispatch, isAuthor, onInfoOpen, postData, toast, urlCommentId, userData?._id]);
 
   return (
     <Box
@@ -87,7 +104,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
               top={position[1]}
               left={position[0]}
               decorationImageName={decorationImageName}
-              onClick={handleCommentClick({ author, content, nickname, decorationImageName })}
+              onClick={handleCommentClick({ _id, author, content, nickname, decorationImageName })}
             />
           ))}
       </CommentList>
