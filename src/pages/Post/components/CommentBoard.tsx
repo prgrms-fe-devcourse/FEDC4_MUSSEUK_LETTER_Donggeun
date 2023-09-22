@@ -76,7 +76,8 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
       onClick={handleMusseukClick}
       border={isAuthor ? 'none' : '4px dashed'}
       borderColor={'green01'}
-      boxSizing="border-box">
+      boxSizing="border-box"
+      my={'3rem'}>
       <Musseuk ref={musseukRef} musseukImageName={postData?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
         {postData &&
