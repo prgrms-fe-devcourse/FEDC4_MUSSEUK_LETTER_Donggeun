@@ -2,6 +2,10 @@
   "name": "FEDC4_MUSSEUK_LETTER_Donggeun",
   "packageManager": "yarn@3.6.3",
   "private": true,
+  "scripts": {
+    "common": "yarn workspace @mono-repo/common",
+    "slack": "yarn workspace @mono-repo/slack"
+  },
   "workspaces": [
     "packages/*"
   ],

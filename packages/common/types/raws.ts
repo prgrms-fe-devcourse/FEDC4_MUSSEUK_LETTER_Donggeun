@@ -19,7 +19,7 @@ export interface UserResponse {
       __v: 0;
     }
   ];
-  notifications: Notification[];
+  notifications: NotificationResponse[];
   messages: MessageResponse[];
   _id: string;
   fullName: string;
@@ -78,7 +78,7 @@ export interface NotificationResponse {
   user: UserResponse | string;
   post?: string; // 포스트 id
   follow?: string; // 사용자 id
-  comment?: Comment;
+  comment?: CommentResponse;
   message?: string; // 메시지 id
   createdAt: string;
   updatedAt: string;
