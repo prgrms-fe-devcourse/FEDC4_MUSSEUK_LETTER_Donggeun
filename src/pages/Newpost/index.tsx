@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent, useCallback } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
@@ -78,18 +78,18 @@ const NewPost = () => {
 
   const navigate = useNavigate();
 
-  const handleMusseukTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleMusseukTitle = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setMusseukTitle(event.target.value);
-  };
+  }, []);
 
-  const handleMusseukIntroduce = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleMusseukIntroduce = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     setMusseukIntroduce(event.target.value);
-  };
+  }, []);
 
-  const handleClickMusseuk = (e: MouseEvent<HTMLImageElement>) => {
+  const handleClickMusseuk = useCallback((e: MouseEvent<HTMLImageElement>) => {
     const alt = e.currentTarget.alt as keyof typeof MUSSEUK_IMAGE;
     setSelected(alt);
-  };
+  }, []);
 
   const handleCreateMusseukPost = () => {
     const title = JSON.stringify({
