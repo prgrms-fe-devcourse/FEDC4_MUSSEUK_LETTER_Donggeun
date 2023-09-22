@@ -30,6 +30,9 @@ const useNewPostMutation = () => {
     mutationFn: postNewPost,
     onSuccess: () => {
       queryClient.invalidateQueries(queryKey.posts.list);
+    },
+    onError: (error) => {
+      console.log(error);
     }
   });
 };

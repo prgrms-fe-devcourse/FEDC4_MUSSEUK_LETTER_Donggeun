@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { PostResponse } from '@/apis/types';
+import { PostResponse, QueryOptions } from '@/apis/types';
 import queryKey from '@/apis/queryKeys';
 import parsePost from '../utils/parsePost';
 import { Post } from '@/types';
@@ -13,10 +13,11 @@ export const getPostsInfo = async () => {
   return data.map((post) => parsePost(post));
 };
 
-const useGetPostsInfoQuery = () => {
+const useGetPostsInfoQuery = (options?: QueryOptions<Post[]>) => {
   return useQuery<Post[]>({
     queryKey: queryKey.posts.all,
-    queryFn: () => getPostsInfo()
+    queryFn: () => getPostsInfo(),
+    ...options
   });
 };
 

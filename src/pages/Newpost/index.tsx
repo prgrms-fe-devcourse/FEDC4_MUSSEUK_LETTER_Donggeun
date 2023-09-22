@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent, useCallback } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
@@ -11,6 +11,10 @@ import musseuk_default from '@/assets/images/musseuk_default.png';
 import MusseukItem from './components/MusseukItem';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
+import { Suspense } from 'react';
+import Loading from '@/components/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import NotFound from '@/pages/NotFound';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
@@ -74,18 +78,18 @@ const NewPost = () => {
 
   const navigate = useNavigate();
 
-  const handleMusseukTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleMusseukTitle = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setMusseukTitle(event.target.value);
-  };
+  }, []);
 
-  const handleMusseukIntroduce = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleMusseukIntroduce = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     setMusseukIntroduce(event.target.value);
-  };
+  }, []);
 
-  const handleClickMusseuk = (e: MouseEvent<HTMLImageElement>) => {
+  const handleClickMusseuk = useCallback((e: MouseEvent<HTMLImageElement>) => {
     const alt = e.currentTarget.alt as keyof typeof MUSSEUK_IMAGE;
     setSelected(alt);
-  };
+  }, []);
 
   const handleCreateMusseukPost = () => {
     const title = JSON.stringify({
@@ -117,7 +121,7 @@ const NewPost = () => {
         <Input
           value={musseukTitle}
           onChange={handleMusseukTitle}
-          fontSize="1.1rem"
+          fontSize="16px"
           height="3rem"
           bgColor="white"
           borderRadius="0.3rem"
@@ -170,7 +174,7 @@ const NewPost = () => {
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
           height="14rem"
-          fontSize="1.1rem"
+          fontSize="16px"
           bgColor="white"
           borderColor="#D4D8CA"
           size="lg"
@@ -211,4 +215,14 @@ const NewPost = () => {
   );
 };
 
-export default NewPost;
+const NewPostWrapper = () => {
+  return (
+    <ErrorBoundary fallback={<NotFound />}>
+      <Suspense fallback={<Loading />}>
+        <NewPost />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+export default NewPostWrapper;
