@@ -4,14 +4,24 @@
   "private": true,
   "scripts": {
     "common": "yarn workspace @mono-repo/common",
-    "slack": "yarn workspace @mono-repo/slack"
+    "slack": "yarn workspace @mono-repo/slack",
+    "postinstall": "husky install",
+    "lint-staged": "lint-staged"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "eslint": "^8.49.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
     "typescript": "^5.2.2"
+  },
+  "lint-staged": {
+    "packages/**/*.{cjs,js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
