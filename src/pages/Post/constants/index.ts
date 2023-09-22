@@ -38,3 +38,8 @@ export const DECORATION_IMAGE = {
   [DECORATION_IMAGE_NAME.SOJU1]: Soju1,
   [DECORATION_IMAGE_NAME.UH1]: Uh1
 } as const;
+
+export const MAX_LENGTH = {
+  CONTENT: 400,
+  NICKNAME: 10
+} as const;

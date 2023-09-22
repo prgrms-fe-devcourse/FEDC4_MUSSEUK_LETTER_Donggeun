@@ -7,6 +7,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
+  Text,
   Textarea,
   UseDisclosureReturn,
   VStack,
@@ -18,6 +19,8 @@ import { useCommentInfoState } from '../../contexts/CommentInfoContext';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import useWriteCommentMutation from '@/apis/mutations/useWriteCommentMutation';
 import { useState } from 'react';
+import { MAX_LENGTH } from '../../constants';
+import TextCount from '@/components/TextCount';
 
 type CommentWriteModalProps = {
   postId: string;
@@ -34,8 +37,12 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { isSubmitting, isSubmitted, errors }
   } = useForm<CommentField>();
+
+  const contentCount = watch('content')?.length ?? 0;
+  const nicknameCount = watch('nickname')?.length ?? 0;
 
   const onSubmit: SubmitHandler<CommentField> = (data) => {
     mutate(
@@ -70,6 +77,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
   const onError: SubmitErrorHandler<CommentField> = (errors) => setIsDecorationError(!!errors.decorationImageName);
 
   const handleClose = () => {
+    setIsDecorationError(false);
     reset();
     onClose();
   };
@@ -96,20 +104,28 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
               <Textarea
                 aria-invalid={isSubmitted ? !!errors.content : undefined}
                 {...register('content', {
-                  required: true
+                  required: true,
+                  maxLength: MAX_LENGTH.CONTENT
                 })}
                 w="90%"
                 h="10rem"
                 _placeholder={{ opacity: 1, color: 'gray03' }}
                 borderRadius="10px"
                 borderColor="gray03"
-                mb="1rem"
                 bgColor="white"
                 fontSize={18}
               />
-              <Heading fontSize={{ base: 24, md: 30 }}>수신자에게 보여줄 닉네임</Heading>
+              <TextCount count={contentCount} maxLength={MAX_LENGTH.CONTENT} />
+              <Heading
+                textColor={errors.nickname ? 'orange.400' : 'black01'}
+                fontSize={{ base: 24, md: 30 }}
+                mt={'1rem'}>
+                수신자에게 보여줄 닉네임
+              </Heading>
               <Input
-                {...register('nickname')}
+                {...register('nickname', {
+                  maxLength: MAX_LENGTH.NICKNAME
+                })}
                 placeholder="익명의 머쓱이"
                 w="90%"
                 _placeholder={{ opacity: 1, color: 'gray03' }}
@@ -118,6 +134,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
                 bgColor="white"
                 fontSize={16}
               />
+              <TextCount count={nicknameCount} maxLength={MAX_LENGTH.NICKNAME} />
             </VStack>
           </form>
         </ModalBody>
