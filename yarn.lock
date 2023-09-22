@@ -126,6 +126,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mono-repo/common@workspace:*, @mono-repo/common@workspace:packages/common":
+  version: 0.0.0-use.local
+  resolution: "@mono-repo/common@workspace:packages/common"
+  dependencies:
+    ts-node: ^10.9.1
+    typescript: ^5.2.2
+  languageName: unknown
+  linkType: soft
+
+"@mono-repo/slack@workspace:packages/slack":
+  version: 0.0.0-use.local
+  resolution: "@mono-repo/slack@workspace:packages/slack"
+  dependencies:
+    "@mono-repo/common": "workspace:*"
+    "@types/cors": ^2.8.14
+    "@types/crypto-js": ^4.1.2
+    "@types/express": ^4.17.17
+    "@types/node": ^20.6.0
+    "@typescript-eslint/eslint-plugin": ^6.7.0
+    "@typescript-eslint/parser": ^6.7.0
+    axios: ^1.5.0
+    cors: ^2.8.5
+    crypto-js: ^4.1.1
+    dotenv: ^16.3.1
+    eslint: ^8.49.0
+    eslint-config-prettier: ^9.0.0
+    eslint-plugin-prettier: ^5.0.0
+    express: ^4.18.2
+    express-async-errors: ^3.1.1
+    nodemon: ^3.0.1
+    redis: ^4.6.8
+    ts-node: ^10.9.1
+    tsconfig-paths: ^4.2.0
+    typescript: ^5.2.2
+    zod: ^3.22.2
+  languageName: unknown
+  linkType: soft
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -941,14 +979,6 @@ __metadata:
   checksum: 49fa4aeb4916567e33ea81d088f6584749fc90c7abec76fd516bf1c5aa5c79f3584b5ba3de6b86d26ddd64bae5329c4c7479343250cfe71c75bb366eae53bb7c
   languageName: node
   linkType: hard
-
-"common@workspace:packages/common":
-  version: 0.0.0-use.local
-  resolution: "common@workspace:packages/common"
-  dependencies:
-    typescript: ^5.2.2
-  languageName: unknown
-  linkType: soft
 
 "concat-map@npm:0.0.1":
   version: 0.0.1
@@ -3070,34 +3100,6 @@ __metadata:
   checksum: 9ba00d38ce6a29682f64a46213834e4eb01634c2f52c813a9a7b8873ca49cdbb703696f3290f3b27dc067de6d9418b0b84bef22c3eb074acf352529b2d6c27fd
   languageName: node
   linkType: hard
-
-"slack@workspace:packages/slack":
-  version: 0.0.0-use.local
-  resolution: "slack@workspace:packages/slack"
-  dependencies:
-    "@types/cors": ^2.8.14
-    "@types/crypto-js": ^4.1.2
-    "@types/express": ^4.17.17
-    "@types/node": ^20.6.0
-    "@typescript-eslint/eslint-plugin": ^6.7.0
-    "@typescript-eslint/parser": ^6.7.0
-    axios: ^1.5.0
-    cors: ^2.8.5
-    crypto-js: ^4.1.1
-    dotenv: ^16.3.1
-    eslint: ^8.49.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
-    express: ^4.18.2
-    express-async-errors: ^3.1.1
-    nodemon: ^3.0.1
-    redis: ^4.6.8
-    ts-node: ^10.9.1
-    tsconfig-paths: ^4.2.0
-    typescript: ^5.2.2
-    zod: ^3.22.2
-  languageName: unknown
-  linkType: soft
 
 "slash@npm:^3.0.0":
   version: 3.0.0
