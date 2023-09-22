@@ -95,7 +95,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
                   )}
                 </Flex>
               )}
-              <Text textAlign={'right'} fontWeight={'bold'} fontSize={'xl'} alignSelf={'center'}>
+              <Text textAlign={'right'} fontWeight={'bold'} fontSize={'xl'} alignSelf={'center'} ml={'auto'}>
                 From. {nickname}
               </Text>
             </Flex>
