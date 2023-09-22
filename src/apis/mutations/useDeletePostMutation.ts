@@ -3,8 +3,6 @@ import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import { PostResponse } from '../types';
-import { useToast } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
 
 interface CustomRequestData {
   postId: string;

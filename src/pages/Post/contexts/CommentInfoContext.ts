@@ -1,13 +1,18 @@
-import { CommentField, DecorationType } from '@/types';
+import { Comment, DecorationType, User } from '@/types';
 import { Dispatch, createContext, useContext } from 'react';
 
 export type CommentInfoAction =
-  | { type: 'SET_CONTENT'; content: string }
-  | { type: 'SET_POSITION'; position: [number, number] }
-  | { type: 'SET_NICKNAME'; nickname: string }
-  | { type: 'SET_DECORATION_IMAGE_NAME'; decorationImageName: DecorationType };
+  | {
+      type: 'SET_INFO';
+      _id: string;
+      author: User;
+      content: string;
+      nickname: string;
+      decorationImageName: DecorationType;
+    }
+  | { type: 'SET_POSITION'; position: [number, number] };
 
-export const CommentInfoContext = createContext<CommentField | null>(null);
+export const CommentInfoContext = createContext<Comment | null>(null);
 
 export const CommentInfoDispatchContext = createContext<Dispatch<CommentInfoAction> | null>(null);
 

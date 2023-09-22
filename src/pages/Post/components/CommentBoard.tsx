@@ -46,20 +46,19 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   };
 
   const handleCommentClick = ({
+    _id,
     author,
     content,
     nickname,
     decorationImageName
-  }: Omit<CommentType, '_id' | 'position'>) => {
+  }: Omit<CommentType, 'position'>) => {
     const isMyComment = userData?._id === author._id;
 
     return (e: React.MouseEvent) => {
       e.stopPropagation();
 
       if (isAuthor || isMyComment) {
-        dispatch({ type: COMMENT_INFO_ACTION.CONTENT, content });
-        dispatch({ type: COMMENT_INFO_ACTION.NICKNAME, nickname });
-        dispatch({ type: COMMENT_INFO_ACTION.DECORATION, decorationImageName });
+        dispatch({ type: COMMENT_INFO_ACTION.INFO, _id, author, content, nickname, decorationImageName });
 
         onInfoOpen();
       } else {
@@ -90,7 +89,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
               top={position[1]}
               left={position[0]}
               decorationImageName={decorationImageName}
-              onClick={handleCommentClick({ author, content, nickname, decorationImageName })}
+              onClick={handleCommentClick({ _id, author, content, nickname, decorationImageName })}
             />
           ))}
       </CommentList>
