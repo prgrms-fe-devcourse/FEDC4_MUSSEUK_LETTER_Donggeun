@@ -121,7 +121,7 @@ const NewPost = () => {
         <Input
           value={musseukTitle}
           onChange={handleMusseukTitle}
-          fontSize="1.1rem"
+          fontSize="16px"
           height="3rem"
           bgColor="white"
           borderRadius="0.3rem"
@@ -174,7 +174,7 @@ const NewPost = () => {
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
           height="14rem"
-          fontSize="1.1rem"
+          fontSize="16px"
           bgColor="white"
           borderColor="#D4D8CA"
           size="lg"
