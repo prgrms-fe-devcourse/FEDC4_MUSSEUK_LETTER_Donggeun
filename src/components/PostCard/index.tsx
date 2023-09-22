@@ -25,7 +25,14 @@ const PostCard = ({ imgName, letter, musseukContent, musseukName, userName, onCl
       borderColor={'green01'}
       boxShadow={' 0px 4px 7px 0px rgba(0, 0, 0, 0.25)'}>
       <CardHeader textAlign="center" p={0}>
-        <Image display={'inline-block'} w="10rem" h="8rem" alt="musseukAvatar" src={MUSSEUK_IMAGE[imgName]} />
+        <Image
+          display={'inline-block'}
+          objectFit="cover"
+          w="8rem"
+          h="8rem"
+          alt="musseukAvatar"
+          src={MUSSEUK_IMAGE[imgName]}
+        />
       </CardHeader>
       <CardBody p={0}>
         <Stack textAlign="center">
