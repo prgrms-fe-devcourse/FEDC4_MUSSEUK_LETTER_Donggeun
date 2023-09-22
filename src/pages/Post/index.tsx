@@ -36,9 +36,9 @@ const Post = () => {
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isNotLoggedIn) return <Navigate to={links.signin} />;
+  if (isNotLoggedIn) return <Navigate to={links.signin} replace />;
 
-  if (isPostError) return <Navigate to={links.notFound} />;
+  if (isPostError) return <Navigate to={links.notFound} replace />;
 
   return (
     <CommentInfoProvider>
