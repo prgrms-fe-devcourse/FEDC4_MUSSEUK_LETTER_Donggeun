@@ -11,6 +11,10 @@ import musseuk_default from '@/assets/images/musseuk_default.png';
 import MusseukItem from './components/MusseukItem';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
+import { Suspense } from 'react';
+import Loading from '@/components/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import NotFound from '@/pages/NotFound';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
@@ -211,4 +215,14 @@ const NewPost = () => {
   );
 };
 
-export default NewPost;
+const NewPostWrapper = () => {
+  return (
+    <ErrorBoundary fallback={<NotFound />}>
+      <Suspense fallback={<Loading />}>
+        <NewPost />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+export default NewPostWrapper;

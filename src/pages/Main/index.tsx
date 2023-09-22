@@ -11,6 +11,10 @@ import PostCard from '@/components/PostCard';
 import Description from './components/Description';
 import MusseukButton from './components/MusseukButton';
 import MusseukImage from './components/MusseukImage';
+import { Suspense } from 'react';
+import Loading from '@/components/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import NotFound from '@/pages/NotFound';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -90,4 +94,14 @@ const Main = () => {
   );
 };
 
-export default Main;
+const MainWrapper = () => {
+  return (
+    <ErrorBoundary fallback={<NotFound />}>
+      <Suspense fallback={<Loading />}>
+        <Main />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+export default MainWrapper;
