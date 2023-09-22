@@ -5,6 +5,7 @@
   "scripts": {
     "common": "yarn workspace @mono-repo/common",
     "slack": "yarn workspace @mono-repo/slack",
+    "web": "yarn workspace @mono-repo/web",
     "postinstall": "husky install",
     "lint-staged": "lint-staged"
   },

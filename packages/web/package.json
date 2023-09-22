@@ -1,5 +1,6 @@
 {
-  "name": "web",
+  "name": "@mono-repo/web",
+  "packageManager": "yarn@3.6.3",
   "private": true,
   "version": "0.0.0",
   "type": "module",
