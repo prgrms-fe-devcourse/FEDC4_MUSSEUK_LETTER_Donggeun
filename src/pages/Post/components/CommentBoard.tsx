@@ -8,6 +8,7 @@ import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
 import type { Comment as CommentType } from '@/types';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import qs from 'qs';
 
 type CommentBoardProps = {
   postId: string;
@@ -24,6 +25,8 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   const { data: userData } = useAuthCheckQuery({ suspense: true });
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
+  const queryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+  const urlCommentId = queryString.commentId;
 
   const handleMusseukClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!musseukRef.current) return;
