@@ -52,7 +52,7 @@ const Post = () => {
           <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />
             {isAuthor && <ListButton onClick={onListOpen} />}
-            {isAuthor && <DeleteButton onClick={onPostDeleteOpen} />}
+            {isAuthor && <DeleteButton onClick={onPostDeleteOpen} position={'absolute'} top={0} right={0} />}
           </Suspense>
         </Box>
         <Suspense fallback={<CommentBoardSkeleton />}>

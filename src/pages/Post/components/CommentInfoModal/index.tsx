@@ -8,17 +8,61 @@ import {
   UseDisclosureReturn,
   ModalBody,
   Text,
-  VStack
+  VStack,
+  Flex,
+  useToast
 } from '@chakra-ui/react';
 import headerImage from '@/assets/images/comment-header.png';
 import { useCommentInfoState } from '../../contexts/CommentInfoContext';
 import { DECORATION_IMAGE } from '../../constants';
+import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import DeleteButton from '../DeleteButton';
+import { useState } from 'react';
+import useDeleteCommentMutation from '@/apis/mutations/useDeleteCommentMutation';
+import DeleteConfirmText from './DeleteConfirmText';
 
 const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>) => {
-  const { content, nickname, decorationImageName } = useCommentInfoState();
+  const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
+  const { content, nickname, decorationImageName, author, _id: commentId } = useCommentInfoState();
+  const toast = useToast();
+
+  const { data: userData } = useAuthCheckQuery();
+  const { mutate } = useDeleteCommentMutation(commentId);
+
+  const isMyComment = userData?._id === author._id;
+
+  const handleDeleteClick = () => {
+    if (isDeleteConfirm) {
+      mutate(
+        { commentId },
+        {
+          onSuccess: () => {
+            toast({
+              title: '편지가 삭제됐어요.',
+              status: 'success',
+              position: 'top'
+            });
+
+            handleCloseClick();
+          }
+        }
+      );
+    } else {
+      setIsDeleteConfirm(true);
+    }
+  };
+
+  const handleDeleteCancelClick = () => {
+    setIsDeleteConfirm(false);
+  };
+
+  const handleCloseClick = () => {
+    setIsDeleteConfirm(false);
+    onClose();
+  };
 
   return (
-    <BasicModal isOpen={isOpen} onClose={onClose}>
+    <BasicModal isOpen={isOpen} onClose={handleCloseClick}>
       <ModalContent borderRadius={20}>
         <ModalCloseButton size={'lg'} top={3} color={'white'} zIndex={1} />
         <ModalHeader h={'4rem'} p={0} bgImage={headerImage} borderTopLeftRadius={20} borderTopRightRadius={20}>
@@ -39,9 +83,29 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
             <Box w={'100%'} minH={'14rem'} borderRadius={6} p={'1.5rem'} bg={'bg01'}>
               <Text lineHeight={'150%'}>{content}</Text>
             </Box>
-            <Text textAlign={'right'} fontWeight={'bold'} fontSize={'xl'}>
-              From. {nickname}
-            </Text>
+            <Flex w={'100%'} justifyContent={'space-between'}>
+              {isMyComment && (
+                <Flex alignItems={'center'}>
+                  <DeleteButton onClick={handleDeleteClick} mr={3} colorScheme={isDeleteConfirm ? 'red' : 'primary'} />
+                  {isDeleteConfirm && (
+                    <DeleteConfirmText
+                      display={{ base: 'none', md: 'inline' }}
+                      onCancelClick={handleDeleteCancelClick}
+                    />
+                  )}
+                </Flex>
+              )}
+              <Text textAlign={'right'} fontWeight={'bold'} fontSize={'xl'} alignSelf={'center'}>
+                From. {nickname}
+              </Text>
+            </Flex>
+            {isDeleteConfirm && (
+              <DeleteConfirmText
+                display={{ base: 'block', md: 'none' }}
+                alignSelf={'baseline'}
+                onCancelClick={handleDeleteCancelClick}
+              />
+            )}
           </VStack>
         </ModalBody>
       </ModalContent>
