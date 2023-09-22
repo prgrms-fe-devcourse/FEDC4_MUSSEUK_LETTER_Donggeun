@@ -16,6 +16,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
+        "name": "common",\
+        "reference": "workspace:packages/common"\
+      },\
+      {\
         "name": "slack",\
         "reference": "workspace:packages/slack"\
       }\
@@ -24,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["FEDC4_MUSSEUK_LETTER_Donggeun", ["workspace:."]],\
+      ["common", ["workspace:packages/common"]],\
       ["slack", ["workspace:packages/slack"]]\
     ],\
     "fallbackPool": [\
@@ -1278,6 +1283,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["delayed-stream", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["common", [\
+        ["workspace:packages/common", {\
+          "packageLocation": "./packages/common/",\
+          "packageDependencies": [\
+            ["common", "workspace:packages/common"],\
+            ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["concat-map", [\
