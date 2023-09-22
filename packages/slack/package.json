@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.6.3",
   "scripts": {
     "build": "tsc",
-    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/app.js",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/slack/src/app.js",
     "dev": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/app.ts"
   },
   "devDependencies": {
