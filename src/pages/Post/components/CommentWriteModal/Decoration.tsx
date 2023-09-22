@@ -26,7 +26,8 @@ const Decoration = ({ decoId, ...props }: DecorationProps) => {
       borderRadius="1rem"
       backgroundColor={state.isChecked ? 'yellow.50' : 'white'}
       mb="2rem"
-      mx="auto">
+      mx="auto"
+      cursor={'pointer'}>
       <input {...input} />
       <Box {...checkbox}>
         <Image src={DECORATION_IMAGE[decoId]} alt={decoId} h="5rem" userSelect="none" {...getLabelProps()} />

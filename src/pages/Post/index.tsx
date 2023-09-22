@@ -16,6 +16,7 @@ import CommentBoardSkeleton from './components/Skeletons/CommentBoardSkeleton';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import DeleteButton from './components/DeleteButton';
 import PostDeleteModal from './components/PostDeleteModal';
+import { HEADER_HEIGHT } from '@/components/header';
 
 const links = {
   notFound: '/notFound',
@@ -35,19 +36,20 @@ const Post = () => {
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isNotLoggedIn) return <Navigate to={links.signin} />;
+  if (isNotLoggedIn) return <Navigate to={links.signin} replace />;
 
-  if (isPostError) return <Navigate to={links.notFound} />;
+  if (isPostError) return <Navigate to={links.notFound} replace />;
 
   return (
     <CommentInfoProvider>
       <VStack
         p="2rem 2rem 5rem 2rem"
+        minH={`calc(100% - ${HEADER_HEIGHT})`}
         backgroundColor="bg01"
         backgroundImage={BackgroundHome}
-        backgroundPosition="center"
-        backgroundSize="contain"
-        backgroundRepeat="no-repeat">
+        backgroundPosition="center 30%"
+        backgroundSize="min(80% + 384px, 1920px) auto"
+        backgroundRepeat="repeat-x">
         <Box w="100%" position={'relative'}>
           <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
             <AnnouncementText postId={postId} mb="1rem" />

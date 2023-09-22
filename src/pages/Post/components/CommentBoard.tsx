@@ -37,6 +37,8 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
     const xRatio = ((clientX - x) / width) * 100;
     const yRatio = ((clientY - y) / height) * 100;
 
+    if (xRatio < 0 || xRatio > 100 || yRatio < 0 || yRatio > 100) return;
+
     dispatch({
       type: COMMENT_INFO_ACTION.POSITION,
       position: [xRatio, yRatio]
@@ -94,7 +96,10 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
       onClick={handleMusseukClick}
       border={isAuthor ? 'none' : '4px dashed'}
       borderColor={'green01'}
-      boxSizing="border-box">
+      boxSizing="border-box"
+      mt={{ base: 'min(7.5%, 3rem)', '2xl': '0' }}
+      mb={'min(7.5%, 3rem)'}
+      cursor={isAuthor ? 'default' : 'pointer'}>
       <Musseuk ref={musseukRef} musseukImageName={postData?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
         {postData &&
@@ -105,6 +110,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
               left={position[0]}
               decorationImageName={decorationImageName}
               onClick={handleCommentClick({ _id, author, content, nickname, decorationImageName })}
+              cursor={isAuthor || author._id === userData?._id ? 'pointer' : 'default'}
             />
           ))}
       </CommentList>

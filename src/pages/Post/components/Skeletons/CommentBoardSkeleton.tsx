@@ -1,8 +1,8 @@
-import { Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { Box, Skeleton } from '@chakra-ui/react';
 
 const CommentBoardSkeleton = () => {
   return (
-    <Box position={'relative'} w={'90vw'} maxW={'45rem'} h={'90vw'} maxH={'45rem'}>
+    <Box position={'relative'} w={'80vw'} maxW={'40rem'} h={'80vw'} maxH={'40rem'} my={'3rem'}>
       <Skeleton
         position={'absolute'}
         top={'20%'}

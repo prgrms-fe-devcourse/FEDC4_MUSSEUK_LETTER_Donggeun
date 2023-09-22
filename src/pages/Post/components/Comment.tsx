@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, ImageProps } from '@chakra-ui/react';
 import React from 'react';
 import { DecorationType } from '@/types';
 import { DECORATION_IMAGE } from '../constants';
@@ -8,18 +8,24 @@ type CommentType = {
   left: number;
   decorationImageName: DecorationType;
   onClick: (e: React.MouseEvent) => void;
-};
+} & ImageProps;
 
-const Comment = ({ top = 0, left = 0, decorationImageName, onClick }: CommentType) => {
+const Comment = ({ top = 0, left = 0, decorationImageName, onClick, ...props }: CommentType) => {
   return (
-    <Box position="absolute" top={`${top}%`} left={`${left}%`} w="10%" h="10%">
+    <Box position="absolute" top={`${top}%`} left={`${left}%`} w="7.5%" h="7.5%">
       <Image
         src={DECORATION_IMAGE[decorationImageName]}
         alt={decorationImageName}
-        position="absolute"
-        top="-50%"
-        left="-50%"
+        position="relative"
+        top="-100%"
+        left="-100%"
+        w={'200%'}
+        h={'200%'}
+        maxW={'none'}
+        objectFit={'contain'}
         onClick={onClick}
+        zIndex={5}
+        {...props}
       />
     </Box>
   );
