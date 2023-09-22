@@ -13,12 +13,12 @@ const Musseuk = forwardRef<HTMLImageElement, MusseukProps>(
       <Image
         src={MUSSEUK_IMAGE[musseukImageName]}
         alt="musseuk"
+        ref={ref}
         w="80vw"
         maxW="40rem"
         h="80vw"
         maxH="40rem"
         objectFit={'cover'}
-        ref={ref}
         {...props}
       />
     );
