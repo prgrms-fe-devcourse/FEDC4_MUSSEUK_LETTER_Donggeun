@@ -1,4 +1,15 @@
-import { VStack, HStack, Avatar, Button, FormControl, FormLabel, Input, Textarea, useToast } from '@chakra-ui/react';
+import {
+  HStack,
+  Avatar,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  useToast,
+  Grid,
+  GridItem
+} from '@chakra-ui/react';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdComment } from 'react-icons/md';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
@@ -104,9 +115,14 @@ const ProfileBar = ({ userId }: ProfileProps) => {
   };
 
   return (
-    <VStack h={'100%'} pt={4} px={6} borderRight="1px solid #B6B6B6">
+    <Grid
+      h={'100%'}
+      pt={4}
+      px={6}
+      borderRight="1px solid #B6B6B6"
+      gridTemplateColumns={{ base: '1fr 3.5fr', md: '1fr' }}>
       {/* 이미지업로드 */}
-      <VStack py={4}>
+      <GridItem>
         <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
         <Input
           type="file"
@@ -136,9 +152,9 @@ const ProfileBar = ({ userId }: ProfileProps) => {
             {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
           </HStack>
         )}
-      </VStack>
+      </GridItem>
       {/* 사용자 정보 변경 */}
-      <VStack>
+      <GridItem>
         <Input
           type="text"
           placeholder={isEditProfile ? '실명을 작성해주세요' : ''}
@@ -179,8 +195,8 @@ const ProfileBar = ({ userId }: ProfileProps) => {
             {isEditProfile ? '프로필편집완료' : '프로필편집하기'}
           </Button>
         )}
-      </VStack>
-    </VStack>
+      </GridItem>
+    </Grid>
   );
 };
 
