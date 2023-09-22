@@ -81,14 +81,18 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
         <ModalBody>
           <form id="write" onSubmit={handleSubmit(onSubmit, onError)}>
             <VStack spacing="1rem">
-              <Heading textColor={isDecorationError ? 'orange.400' : 'black01'}>장식을 선택해주세요</Heading>
+              <Heading textColor={isDecorationError ? 'orange.400' : 'black01'} fontSize={{ base: 24, md: 30 }}>
+                장식을 선택해주세요
+              </Heading>
               <DecorationList
                 {...register('decorationImageName', { required: true })}
                 isError={isDecorationError}
                 setValue={setValue}
                 setIsError={setIsDecorationError}
               />
-              <Heading textColor={errors.content ? 'orange.400' : 'black01'}>메세지를 작성해주세요</Heading>
+              <Heading textColor={errors.content ? 'orange.400' : 'black01'} fontSize={{ base: 24, md: 30 }}>
+                메세지를 작성해주세요
+              </Heading>
               <Textarea
                 aria-invalid={isSubmitted ? !!errors.content : undefined}
                 {...register('content', {
@@ -101,8 +105,9 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
                 borderColor="gray03"
                 mb="1rem"
                 bgColor="white"
+                fontSize={18}
               />
-              <Heading>작성자에게 보여줄 닉네임</Heading>
+              <Heading fontSize={{ base: 24, md: 30 }}>수신자에게 보여줄 닉네임</Heading>
               <Input
                 {...register('nickname')}
                 placeholder="익명의 머쓱이"
@@ -111,6 +116,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
                 borderRadius="10px"
                 borderColor="gray03"
                 bgColor="white"
+                fontSize={16}
               />
             </VStack>
           </form>

@@ -13,7 +13,7 @@ const AnnouncementText = ({ postId, ...props }: AnnouncementTextProps) => {
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
   return (
-    <Heading size="xl" w={'70vw'} maxW="45rem" wordBreak={'keep-all'} {...props}>
+    <Heading fontSize={{ base: 24, md: 30 }} w={'70vw'} maxW="45rem" wordBreak={'keep-all'} {...props}>
       {isAuthor ? (
         <>
           {postData?.author.username} 님에게{' '}

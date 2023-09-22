@@ -10,8 +10,10 @@ const Introduction = ({ postId }: IntroductionProps) => {
 
   return (
     <>
-      <Heading mb="1rem">{data?.title}</Heading>
-      <Text maxW="40rem" fontSize="lg" wordBreak="keep-all">
+      <Heading maxW={'min(80vw, 40rem)'} fontSize={{ base: 24, md: 30 }} mb="1rem">
+        {data?.title}
+      </Heading>
+      <Text maxW={'min(80vw, 40rem)'} fontSize={{ base: 18, md: 24 }} wordBreak="keep-all">
         {data?.content}
       </Text>
     </>

@@ -77,7 +77,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
       border={isAuthor ? 'none' : '4px dashed'}
       borderColor={'green01'}
       boxSizing="border-box"
-      my={'3rem'}>
+      my={{ base: 'min(7.5%, 3rem)', '2xl': '0' }}>
       <Musseuk ref={musseukRef} musseukImageName={postData?.musseukImageName ?? 'musseuk_default'} />
       <CommentList>
         {postData &&
