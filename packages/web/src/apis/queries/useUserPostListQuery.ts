@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
-import { PostResponse } from '@/apis/types';
+import { PostResponse } from '@common/types/raws';
 import { Post } from '@/types';
-import parsePost from '../utils/parsePost';
+import parsePost from '@common/utils/parsePost';
 
 export const getUserPostList = async (userId: string) => {
   const { data } = await baseInstance.get<PostResponse[]>(`/posts/author/${userId}`);

@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import type { CommentField } from '@/types';
-import type { CommentResponse } from '../types';
+import type { CommentResponse } from '@common/types/raws';
 import useSlackMessageMutation from './useSlackMessageMutation';
 import usePostDetailQuery from '../queries/usePostDetailQuery';
 

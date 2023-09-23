@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { UserResponse } from '@/apis/types';
+import { UserResponse } from '@common/types/raws';
 import queryKey from '@/apis/queryKeys';
-import parseUser from '../utils/parseUser';
+import parseUser from '@common/utils/parseUser';
 import { User } from '@/types';
 
 export const getSearchResult = async (keyword: string) => {

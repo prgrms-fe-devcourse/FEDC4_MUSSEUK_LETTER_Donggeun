@@ -5,8 +5,8 @@ import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
 import type { UserFullName } from '@/types';
-import { UserResponse } from '../types';
-import parseUser from '../utils/parseUser';
+import { UserResponse } from '@common/types/raws';
+import parseUser from '@common/utils/parseUser';
 
 interface CustomRequestData {
   email: string;

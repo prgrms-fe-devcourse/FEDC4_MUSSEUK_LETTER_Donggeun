@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formDataInstance } from '../instance';
 import queryKey from '@/apis/queryKeys';
-import parseUser from '../utils/parseUser';
-import { UserResponse } from '../types';
+import parseUser from '@common/utils/parseUser';
+import { UserResponse } from '@common/types/raws';
 
 interface FormData {
   isCover: false;

@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { PostResponse, QueryOptions } from '@/apis/types';
+import { QueryOptions } from '@/apis/types';
+import { PostResponse } from '@common/types/raws';
 import queryKey from '@/apis/queryKeys';
-import parsePost from '../utils/parsePost';
+import parsePost from '@common/utils/parsePost';
 import { Post } from '@/types';
 
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
