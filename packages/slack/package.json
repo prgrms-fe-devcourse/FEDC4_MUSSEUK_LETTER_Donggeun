@@ -1,5 +1,5 @@
 {
-  "name": "@mono-repo/slack",
+  "name": "slack",
   "packageManager": "yarn@3.6.3",
   "scripts": {
     "build": "tsc",

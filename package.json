@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "common": "yarn workspace common",
-    "slack": "yarn workspace @mono-repo/slack",
-    "web": "yarn workspace @mono-repo/web",
+    "slack": "yarn workspace slack",
+    "web": "yarn workspace web",
     "postinstall": "husky install",
     "lint-staged": "lint-staged"
   },
