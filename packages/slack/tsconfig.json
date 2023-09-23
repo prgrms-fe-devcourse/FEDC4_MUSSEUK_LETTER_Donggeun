@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "ts-node": {
+    "files": true
+  },
+  "files": [
+    "src/types/env.d.ts",
+    "src/types/express.d.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "rootDir": "src",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./*"],
+    },
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "lib": ["ES2020"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "./src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
