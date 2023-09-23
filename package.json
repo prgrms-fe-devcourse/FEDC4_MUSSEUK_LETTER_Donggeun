@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.6.3",
   "private": true,
   "scripts": {
-    "common": "yarn workspace @mono-repo/common",
+    "common": "yarn workspace common",
     "slack": "yarn workspace @mono-repo/slack",
     "web": "yarn workspace @mono-repo/web",
     "postinstall": "husky install",

@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.6.3",
   "scripts": {
     "build": "tsc",
-    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/slack/src/app.js",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/app.js",
     "dev": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/app.ts"
   },
   "devDependencies": {
@@ -15,12 +15,12 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "@mono-repo/common": "workspace:*",
     "@types/cors": "^2.8.14",
     "@types/crypto-js": "^4.1.2",
     "@types/express": "^4.17.17",
     "@types/node": "^20.6.0",
     "axios": "^1.5.0",
+    "common": "workspace:packages/common",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.3.1",

@@ -16,7 +16,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
-        "name": "@mono-repo/common",\
+        "name": "common",\
         "reference": "workspace:packages/common"\
       },\
       {\
@@ -31,10 +31,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["@mono-repo/common", ["workspace:packages/common"]],\
       ["@mono-repo/slack", ["workspace:packages/slack"]],\
       ["@mono-repo/web", ["workspace:packages/web"]],\
-      ["FEDC4_MUSSEUK_LETTER_Donggeun", ["workspace:."]]\
+      ["FEDC4_MUSSEUK_LETTER_Donggeun", ["workspace:."]],\
+      ["common", ["workspace:packages/common"]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -3355,23 +3355,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@mono-repo/common", [\
-        ["workspace:packages/common", {\
-          "packageLocation": "./packages/common/",\
-          "packageDependencies": [\
-            ["@mono-repo/common", "workspace:packages/common"],\
-            ["ts-node", "virtual:1111d76c503588e31aaad6ab1533b4917bbb5e2d2f711005853566ba3ebe58af960301d01a1da0b69e296b0f4191f4f23ec45de95ef7f9749531cc697416a928#npm:10.9.1"],\
-            ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
-          ],\
-          "linkType": "SOFT"\
-        }]\
-      ]],\
       ["@mono-repo/slack", [\
         ["workspace:packages/slack", {\
           "packageLocation": "./packages/slack/",\
           "packageDependencies": [\
             ["@mono-repo/slack", "workspace:packages/slack"],\
-            ["@mono-repo/common", "workspace:packages/common"],\
             ["@types/cors", "npm:2.8.14"],\
             ["@types/crypto-js", "npm:4.1.2"],\
             ["@types/express", "npm:4.17.17"],\
@@ -3379,6 +3367,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:29624615ef186b5175f0e9635cebf27d5e12b1298f94d72b866ff74fc344e3b975d0a9e7625ff2001107901c87026062104a1e20c64b3a7b6ff23f3ab4057838#npm:6.7.2"],\
             ["@typescript-eslint/parser", "virtual:29624615ef186b5175f0e9635cebf27d5e12b1298f94d72b866ff74fc344e3b975d0a9e7625ff2001107901c87026062104a1e20c64b3a7b6ff23f3ab4057838#npm:6.7.2"],\
             ["axios", "npm:1.5.0"],\
+            ["common", "workspace:packages/common"],\
             ["cors", "npm:2.8.5"],\
             ["crypto-js", "npm:4.1.1"],\
             ["dotenv", "npm:16.3.1"],\
@@ -5023,6 +5012,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commander", "npm:11.0.0"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["common", [\
+        ["workspace:packages/common", {\
+          "packageLocation": "./packages/common/",\
+          "packageDependencies": [\
+            ["common", "workspace:packages/common"],\
+            ["ts-node", "virtual:281b7ec5658d805f88196484313c874810ad4b28fdb3886a7f2b6292faec9bee3b9a92af4348cfaefb8b484dd7e409e815eac63879fbb0501eb0b5d3afa613d1#npm:10.9.1"],\
+            ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["compute-scroll-into-view", [\
@@ -9588,10 +9588,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:1111d76c503588e31aaad6ab1533b4917bbb5e2d2f711005853566ba3ebe58af960301d01a1da0b69e296b0f4191f4f23ec45de95ef7f9749531cc697416a928#npm:10.9.1", {\
-          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-29a9229708/0/cache/ts-node-npm-10.9.1-6c268be7f4-090adff130.zip/node_modules/ts-node/",\
+        ["virtual:281b7ec5658d805f88196484313c874810ad4b28fdb3886a7f2b6292faec9bee3b9a92af4348cfaefb8b484dd7e409e815eac63879fbb0501eb0b5d3afa613d1#npm:10.9.1", {\
+          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-aad142dfc8/0/cache/ts-node-npm-10.9.1-6c268be7f4-090adff130.zip/node_modules/ts-node/",\
           "packageDependencies": [\
-            ["ts-node", "virtual:1111d76c503588e31aaad6ab1533b4917bbb5e2d2f711005853566ba3ebe58af960301d01a1da0b69e296b0f4191f4f23ec45de95ef7f9749531cc697416a928#npm:10.9.1"],\
+            ["ts-node", "virtual:281b7ec5658d805f88196484313c874810ad4b28fdb3886a7f2b6292faec9bee3b9a92af4348cfaefb8b484dd7e409e815eac63879fbb0501eb0b5d3afa613d1#npm:10.9.1"],\
             ["@cspotcode/source-map-support", "npm:0.8.1"],\
             ["@swc/core", null],\
             ["@swc/wasm", null],\

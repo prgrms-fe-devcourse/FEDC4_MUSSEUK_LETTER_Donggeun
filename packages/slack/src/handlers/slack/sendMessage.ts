@@ -3,7 +3,7 @@ import { z } from 'zod';
 import snsApi from '@/apis/sns';
 import slackApi from '@/apis/slack';
 import { zodValidator } from '@/utils/zod';
-import type { Post, Comment } from '@common/types';
+import type { Post, Comment } from 'common/types';
 
 const TITLE_DEFAULT = '머쓱이';
 const NICKNAME_DEFAULT = '익명의 머쓱이';

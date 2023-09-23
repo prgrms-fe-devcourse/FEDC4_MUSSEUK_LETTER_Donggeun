@@ -1956,20 +1956,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mono-repo/common@workspace:*, @mono-repo/common@workspace:packages/common":
-  version: 0.0.0-use.local
-  resolution: "@mono-repo/common@workspace:packages/common"
-  dependencies:
-    ts-node: ^10.9.1
-    typescript: ^5.2.2
-  languageName: unknown
-  linkType: soft
-
 "@mono-repo/slack@workspace:packages/slack":
   version: 0.0.0-use.local
   resolution: "@mono-repo/slack@workspace:packages/slack"
   dependencies:
-    "@mono-repo/common": "workspace:*"
     "@types/cors": ^2.8.14
     "@types/crypto-js": ^4.1.2
     "@types/express": ^4.17.17
@@ -1977,6 +1967,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.7.0
     "@typescript-eslint/parser": ^6.7.0
     axios: ^1.5.0
+    common: "workspace:packages/common"
     cors: ^2.8.5
     crypto-js: ^4.1.1
     dotenv: ^16.3.1
@@ -3258,6 +3249,15 @@ __metadata:
   checksum: 6621954e1e1d078b4991c1f5bbd9439ad37aa7768d6ab4842de1dbd4d222c8a27e1b8e62108b3a92988614af45031d5bb2a2aaa92951f4d0c934d1a1ac564bb4
   languageName: node
   linkType: hard
+
+"common@workspace:packages/common":
+  version: 0.0.0-use.local
+  resolution: "common@workspace:packages/common"
+  dependencies:
+    ts-node: ^10.9.1
+    typescript: ^5.2.2
+  languageName: unknown
+  linkType: soft
 
 "compute-scroll-into-view@npm:3.0.3":
   version: 3.0.3

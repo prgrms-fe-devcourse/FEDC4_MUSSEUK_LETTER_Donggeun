@@ -1,10 +1,9 @@
 import { SnsApiInstance } from '@/apis/instance';
 import { HEADERS_AUTHORIZATION } from '@/apis/sns';
-import { UserResponse } from '@common/types/raws';
-import { User } from '@common/types';
-import parseUser from '@common/utils/parseUser';
+import { UserResponse } from 'common/types/raws';
+import parseUser from 'common/utils/parseUser';
 
-const getAuthCheck = async (accessToken: string): Promise<User> => {
+const getAuthCheck = async (accessToken: string) => {
   const { data } = await SnsApiInstance<UserResponse | ''>({
     ...HEADERS_AUTHORIZATION(accessToken),
     method: 'GET',

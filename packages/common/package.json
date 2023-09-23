@@ -1,5 +1,5 @@
 {
-  "name": "@mono-repo/common",
+  "name": "common",
   "packageManager": "yarn@3.6.3",
   "devDependencies": {
     "ts-node": "^10.9.1",

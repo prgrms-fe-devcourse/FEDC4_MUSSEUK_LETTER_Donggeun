@@ -3,7 +3,7 @@ import { z } from 'zod';
 import snsApi from '@/apis/sns';
 import { zodValidator } from '@/utils/zod';
 import redis from '@/utils/redis';
-import { User } from '@common/types';
+import { User } from 'common/types';
 
 const requestSchema = z.object({
   query: z.object({

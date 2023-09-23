@@ -1,4 +1,4 @@
-import { SlackWorkspace } from '@common/types';
+import { SlackWorkspace } from 'common/types';
 
 interface SlackItem {
   accessToken: string;

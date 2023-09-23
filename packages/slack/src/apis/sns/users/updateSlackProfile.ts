@@ -1,5 +1,5 @@
 import { SnsApiInstance } from '@/apis/instance';
-import { SlackWorkspace, UserFullName } from '@common/types';
+import { SlackWorkspace, UserFullName } from 'common/types';
 import { HEADERS_AUTHORIZATION } from '@/apis/sns';
 
 interface Props {
