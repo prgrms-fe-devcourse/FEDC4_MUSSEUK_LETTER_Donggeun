@@ -1,6 +1,6 @@
 import { Box, Image, ImageProps } from '@chakra-ui/react';
 import React from 'react';
-import { DecorationType } from '@/types';
+import { DecorationType } from '@common/types';
 import { DECORATION_IMAGE } from '../constants';
 
 type CommentType = {

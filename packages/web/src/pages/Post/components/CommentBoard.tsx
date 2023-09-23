@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
-import type { Comment as CommentType } from '@/types';
+import type { Comment as CommentType } from '@common/types';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import qs from 'qs';
 

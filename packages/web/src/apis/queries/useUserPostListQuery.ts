@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import { PostResponse } from '@common/types/raws';
-import { Post } from '@/types';
+import { Post } from '@common/types';
 import parsePost from '@common/utils/parsePost';
 
 export const getUserPostList = async (userId: string) => {

@@ -10,7 +10,7 @@ import './decoSwiper.css';
 import { Box, BoxProps, Input, useRadioGroup } from '@chakra-ui/react';
 import { Dispatch, ForwardedRef, SetStateAction, forwardRef } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
-import { CommentField, DecorationType } from '@/types';
+import { CommentField, DecorationType } from '@common/types';
 
 type DecorationListProps = {
   isError: boolean;

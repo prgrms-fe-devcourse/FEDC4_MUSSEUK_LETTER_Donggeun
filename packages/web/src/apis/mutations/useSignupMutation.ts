@@ -4,7 +4,7 @@ import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import type { UserFullName } from '@/types';
+import type { UserFullName } from '@common/types';
 import { UserResponse } from '@common/types/raws';
 import parseUser from '@common/utils/parseUser';
 

@@ -1,4 +1,4 @@
-import { Comment, DecorationType, User } from '@/types';
+import { Comment, DecorationType, User } from '@common/types';
 import { Dispatch, createContext, useContext } from 'react';
 
 export type CommentInfoAction =

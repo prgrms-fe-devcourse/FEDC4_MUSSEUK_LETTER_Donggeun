@@ -1,6 +1,6 @@
 import { Card, CardBody, CardFooter, CardHeader, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
-import { MusseukType } from '@/types';
+import { MusseukType } from '@common/types';
 import { MUSSEUK_IMAGE } from '@/pages/Post/constants';
 
 export type Props = {

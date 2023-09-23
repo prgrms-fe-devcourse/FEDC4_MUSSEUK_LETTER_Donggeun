@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { slackInstance } from '@/apis/instance';
-import type { SlackWorkspace } from '@/types';
+import type { SlackWorkspace } from '@common/types';
 
 interface RequestData {
   slackId: string;

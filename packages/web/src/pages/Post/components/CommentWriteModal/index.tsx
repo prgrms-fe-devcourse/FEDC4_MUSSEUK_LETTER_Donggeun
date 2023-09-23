@@ -14,7 +14,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 import DecorationList from './DecorationList';
-import { CommentField } from '@/types';
+import { CommentField } from '@common/types';
 import { useCommentInfoState } from '../../contexts/CommentInfoContext';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import useWriteCommentMutation from '@/apis/mutations/useWriteCommentMutation';

@@ -1,6 +1,6 @@
 import { Image, ImageProps } from '@chakra-ui/react';
 import { ForwardedRef, forwardRef } from 'react';
-import { MusseukType } from '@/types';
+import { MusseukType } from '@common/types';
 import { MUSSEUK_IMAGE } from '../constants';
 
 type MusseukProps = {

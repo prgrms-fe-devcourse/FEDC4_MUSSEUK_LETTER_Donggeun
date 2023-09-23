@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { authInstance } from '../instance';
 import { AxiosError } from 'axios';
-import { UserFullName, SlackWorkspace } from '@/types';
+import { UserFullName, SlackWorkspace } from '@common/types';
 
 interface RequestData {
   //api에 보내는 데이터

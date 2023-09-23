@@ -3,7 +3,7 @@ import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import { UserResponse } from '@common/types/raws';
 import parseUser from '@common/utils/parseUser';
-import { User } from '@/types';
+import { User } from '@common/types';
 
 export const getUserInfo = async (userId: string) => {
   const { data } = await baseInstance.get<UserResponse>(`/users/${userId}`);

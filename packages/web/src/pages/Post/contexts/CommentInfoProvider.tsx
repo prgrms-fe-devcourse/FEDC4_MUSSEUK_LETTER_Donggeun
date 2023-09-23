@@ -1,4 +1,4 @@
-import { Comment } from '@/types';
+import { Comment } from '@common/types';
 import React, { useReducer } from 'react';
 import { COMMENT_INFO_ACTION } from '../constants';
 import { CommentInfoAction, CommentInfoContext, CommentInfoDispatchContext } from './CommentInfoContext';

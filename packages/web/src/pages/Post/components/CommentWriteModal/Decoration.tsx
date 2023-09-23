@@ -1,5 +1,5 @@
 import { Box, BoxProps, Image, useRadio } from '@chakra-ui/react';
-import { DecorationType } from '@/types';
+import { DecorationType } from '@common/types';
 import { DECORATION_IMAGE } from '../../constants';
 
 type DecorationProps = {
