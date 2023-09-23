@@ -1,4 +1,4 @@
-import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from '@common/constants/imageNames';
+import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from 'common/constants/imageNames';
 
 import MusseukDefault from '@/assets/images/musseuk_default.png';
 import MusseukHeart from '@/assets/images/musseuk_heart.png';

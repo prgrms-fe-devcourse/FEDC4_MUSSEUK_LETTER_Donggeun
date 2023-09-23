@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { UserResponse } from '@common/types/raws';
+import { UserResponse } from 'common/types/raws';
 import queryKey from '@/apis/queryKeys';
-import parseUser from '@common/utils/parseUser';
-import { User } from '@common/types';
+import parseUser from 'common/utils/parseUser';
+import { User } from 'common/types';
 
 export const getSearchResult = async (keyword: string) => {
   const { data } = await baseInstance.get<UserResponse[]>(`/search/users/${keyword}`);

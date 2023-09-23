@@ -1,4 +1,4 @@
-import { CommentField } from '@common/types';
+import { CommentField } from 'common/types';
 import { AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel } from '@chakra-ui/react';
 
 const AccordionItems = ({ nickname, content }: Pick<CommentField, 'nickname' | 'content'>) => {

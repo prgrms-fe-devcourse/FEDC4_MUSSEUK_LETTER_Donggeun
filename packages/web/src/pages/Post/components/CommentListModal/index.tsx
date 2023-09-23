@@ -13,7 +13,7 @@ import {
   ModalFooter
 } from '@chakra-ui/react';
 import AccordionItems from './AccordionItems';
-import { Comment } from '@common/types';
+import { Comment } from 'common/types';
 
 const CommentListModal = ({
   isOpen,

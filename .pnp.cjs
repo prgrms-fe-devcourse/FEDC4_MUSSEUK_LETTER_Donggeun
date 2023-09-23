@@ -3410,6 +3410,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:29624615ef186b5175f0e9635cebf27d5e12b1298f94d72b866ff74fc344e3b975d0a9e7625ff2001107901c87026062104a1e20c64b3a7b6ff23f3ab4057838#npm:6.7.2"],\
             ["@vitejs/plugin-react", "virtual:a48a5c7512d0875d57256e219a214bd979b781e3287e994101249c070cea4d1cdc7f1b759300176c742eead15104b4a073f893a4581e439685ee8ab5d9d91f9c#npm:4.0.4"],\
             ["axios", "npm:1.5.0"],\
+            ["common", "workspace:packages/common"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.49.0"],\
             ["eslint-config-prettier", "virtual:29624615ef186b5175f0e9635cebf27d5e12b1298f94d72b866ff74fc344e3b975d0a9e7625ff2001107901c87026062104a1e20c64b3a7b6ff23f3ab4057838#npm:9.0.0"],\

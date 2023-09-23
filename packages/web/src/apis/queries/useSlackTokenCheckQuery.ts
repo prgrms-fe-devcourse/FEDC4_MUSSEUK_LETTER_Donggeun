@@ -3,7 +3,7 @@ import { slackInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import { User } from '@common/types';
+import { User } from 'common/types';
 import queryClient from '@/apis/queryClient';
 
 type ResponseData = {

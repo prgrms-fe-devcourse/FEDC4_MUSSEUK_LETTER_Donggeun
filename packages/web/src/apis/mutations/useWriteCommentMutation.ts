@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
-import type { CommentField } from '@common/types';
-import type { CommentResponse } from '@common/types/raws';
+import type { CommentField } from 'common/types';
+import type { CommentResponse } from 'common/types/raws';
 import useSlackMessageMutation from './useSlackMessageMutation';
 import usePostDetailQuery from '../queries/usePostDetailQuery';
 

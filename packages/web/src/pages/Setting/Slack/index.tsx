@@ -7,7 +7,7 @@ import useGenerateSlackLinkMutation from '@/apis/mutations/useGenerateSlackLinkM
 import { SubmitHandler, useForm, Controller, SubmitErrorHandler } from 'react-hook-form';
 import LinkField from './components/LinkField';
 import { z } from 'zod';
-import { SLACK_WORKSPACE } from '@/constants/slack';
+import { SLACK_WORKSPACE } from 'common/constants/slack';
 import { useEffect, useState } from 'react';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import { Navigate } from 'react-router-dom';

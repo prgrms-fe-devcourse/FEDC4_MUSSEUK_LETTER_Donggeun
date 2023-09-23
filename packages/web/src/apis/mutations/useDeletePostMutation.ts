@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
-import { PostResponse } from '../types';
+import { PostResponse } from 'common/types/raws';
 
 interface CustomRequestData {
   postId: string;
