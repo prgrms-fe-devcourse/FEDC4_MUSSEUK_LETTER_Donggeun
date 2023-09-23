@@ -1,5 +1,5 @@
-import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from '@/constants/imageNames';
-import { SLACK_WORKSPACE } from '@/constants/slack';
+import { DECORATION_IMAGE_NAME, MUSSEUK_IMAGE_NAME } from '@common/constants/imageNames';
+import { SLACK_WORKSPACE } from '@common/constants/slack';
 
 export interface User extends UserFullName {
   _id: string;

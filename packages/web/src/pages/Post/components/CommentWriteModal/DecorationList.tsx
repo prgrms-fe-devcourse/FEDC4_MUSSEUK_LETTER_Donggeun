@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Pagination, Navigation } from 'swiper/modules';
-import { DECORATION_IMAGE_NAME } from '@/constants/imageNames';
+import { DECORATION_IMAGE_NAME } from '@common/constants/imageNames';
 import Decoration from './Decoration';
 import 'swiper/css';
 import 'swiper/css/grid';
