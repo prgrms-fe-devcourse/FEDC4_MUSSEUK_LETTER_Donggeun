@@ -71,10 +71,9 @@ const Profile = () => {
         <ProfileBar userId={userId} />
       </GridItem>
       <GridItem area={'description'}>
-        <Stack h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} ml={6} px={6}>
+        <Stack h={64} bg={'linear-gradient(93deg, #CCFFB4 10.51%, #F8FFCF 81.79%)'} ml={{ md: 6 }} px={6}>
           <Text fontSize={{ base: '1.2rem', md: '1.6rem' }} mt={14} py={0}>
-            {user?.username}님의 편지를 전달해주는 {isSmallerThan768 ? undefined : <br />} 머쓱이 {user?.postCount}{' '}
-            마리가 기다리고 있어요!
+            {user?.username}님의 편지를 전달해주는 <br /> 머쓱이 {user?.postCount} 마리가 기다리고 있어요!
           </Text>
           {isUser && (
             <Button leftIcon={<AddIcon />} w={56} mt={4} colorScheme="primary" onClick={goToNewPost}>
