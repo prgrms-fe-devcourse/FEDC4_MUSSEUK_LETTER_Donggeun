@@ -49,7 +49,13 @@ const Header = () => {
             fontWeight="normal"
           />
         </form>
-        {data?._id ? <HeaderMenu /> : <PrimaryButton onClick={() => navigate('/signin')}>로그인</PrimaryButton>}
+        {data?._id ? (
+          <HeaderMenu />
+        ) : (
+          <PrimaryButton px={6} onClick={() => navigate('/signin')}>
+            로그인
+          </PrimaryButton>
+        )}
       </Flex>
     </Box>
   );
