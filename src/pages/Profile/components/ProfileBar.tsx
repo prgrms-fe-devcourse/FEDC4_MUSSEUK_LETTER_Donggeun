@@ -8,7 +8,8 @@ import {
   Textarea,
   useToast,
   Grid,
-  GridItem
+  GridItem,
+  Square
 } from '@chakra-ui/react';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdComment } from 'react-icons/md';
@@ -62,14 +63,10 @@ const ProfileBar = ({ userId }: ProfileProps) => {
     );
   };
 
-  const onClickImageBtn = () => {
-    //btn name 이 이미지 변경 (isEditImage === false)
-    if (!isEditImage) {
-      setIsEditImage(!isEditImage); //이미지변경 -> 프로필 업로드
-      fileInput.current?.click();
-      setIsEditImage(!isEditImage);
-    }
-    //btn name 이 이미지 업로드 (isEditImage === true )
+  const onClickImgBtn = () => {
+    setIsEditImage(!isEditImage);
+    fileInput.current?.click();
+    setIsEditImage(!isEditImage);
   };
 
   const onImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,43 +115,24 @@ const ProfileBar = ({ userId }: ProfileProps) => {
     <Grid
       h={'100%'}
       pt={4}
-      px={6}
-      borderRight="1px solid #B6B6B6"
-      gridTemplateColumns={{ base: '1fr 3.5fr', md: '1fr' }}>
+      px={{ base: 0, md: 6 }}
+      borderRight={{ md: '2px solid #B6B6B6' }}
+      templateAreas={{ base: `"profile edit"`, md: `"profile" "edit"` }}
+      gridTemplateColumns={{ base: '1fr 3.5fr', md: '1fr' }}
+      gridTemplateRows={{ base: '1fr', md: '1fr 3.5fr' }}>
       {/* 이미지업로드 */}
-      <GridItem>
-        <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
-        <Input
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={onImgChange}
-          ref={fileInput}
-          onInput={(e) => {
-            console.log(e);
-          }}
-        />
-        {isMyProfile && (
-          <HStack>
-            {isEditImage ? (
-              <Button
-                h={8}
-                isLoading
-                loadingText="Loading"
-                colorScheme="primary"
-                variant="outline"
-                spinnerPlacement="start"></Button>
-            ) : (
-              <Button h={8} colorScheme="primary" onClick={onClickImageBtn}>
-                이미지변경
-              </Button>
-            )}
-            {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
-          </HStack>
-        )}
+      <GridItem gridArea={'profile'} textAlign="center">
+        <Square m={2}>
+          <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
+        </Square>
+        <Input type="file" accept="image/*" hidden onChange={onImgChange} ref={fileInput} />
+        <Button isLoading={isEditImage} colorScheme="primary" onClick={onClickImgBtn}>
+          이미지변경
+        </Button>
+        {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
       </GridItem>
       {/* 사용자 정보 변경 */}
-      <GridItem>
+      <GridItem area={'edit'} textAlign="center">
         <Input
           type="text"
           placeholder={isEditProfile ? '실명을 작성해주세요' : ''}
@@ -167,7 +145,7 @@ const ProfileBar = ({ userId }: ProfileProps) => {
         />
         <FormControl>
           <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel my={0} fontSize={'1.2rem'}>
+            <FormLabel mx={0} fontSize={'1.2rem'}>
               <BiEnvelope />
             </FormLabel>
             <Input type="email" value={user?.email ?? ''} h={6} border={'none'} isReadOnly={true} />
@@ -176,17 +154,17 @@ const ProfileBar = ({ userId }: ProfileProps) => {
 
         <FormControl>
           <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel my={0} fontSize={'1.2rem'}>
+            <FormLabel mx={0} fontSize={'1.2rem'}>
               <MdComment />
             </FormLabel>
             <Textarea
               placeholder={isEditProfile ? '자기소개를 작성해주세요' : ''}
-              h={6}
               resize="none"
               {...register('introduce')}
               defaultValue={user?.introduce}
               isReadOnly={!isEditProfile}
               border={`${isEditProfile ? 'solid' : 'none'}`}
+              maxLength={80}
             />
           </HStack>
         </FormControl>
