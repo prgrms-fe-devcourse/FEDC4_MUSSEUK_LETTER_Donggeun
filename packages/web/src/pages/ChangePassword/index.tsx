@@ -2,7 +2,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Box, Button, Icon, Heading, Text, Image, useBoolean, useToast } from '@chakra-ui/react';
+import { useBoolean, useToast, Box, Button, Icon, Heading, Text, Image, Spinner } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import useChangePasswordMutation from '@/apis/mutations/useChangePasswordMutation';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
@@ -36,7 +36,7 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate } = useChangePasswordMutation();
+  const { mutate, isLoading } = useChangePasswordMutation();
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
@@ -109,8 +109,9 @@ const ChangePassword = () => {
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
         error={errors.confirmPassword}
       />
-      <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        비밀번호 변경
+      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
+        {isLoading && <Spinner size="sm" mr="2" />}
+        <Text>비밀번호 변경</Text>
       </Button>
       <LinkTemplate>
         <Text color="gray.400">비밀번호 변경을 원하지 않으신가요?</Text>

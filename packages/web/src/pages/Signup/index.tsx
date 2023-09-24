@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Box, Button, Icon, Heading, Text, Image, useBoolean } from '@chakra-ui/react';
+import { useBoolean, Box, Button, Icon, Heading, Text, Image, Spinner } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import useSignupMutation from '@/apis/mutations/useSignupMutation';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
@@ -46,7 +46,7 @@ type Inputs = z.infer<typeof formSchema>;
 
 const SignUp = () => {
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate } = useSignupMutation();
+  const { mutate, isLoading } = useSignupMutation();
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
@@ -123,8 +123,9 @@ const SignUp = () => {
         error={errors.confirmPassword}
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
       />
-      <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        회원가입
+      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
+        {isLoading && <Spinner size="sm" mr="2" />}
+        <Text>회원가입</Text>
       </Button>
       <LinkTemplate>
         <Text color="gray.400">이미 가입하셨었나요?</Text>

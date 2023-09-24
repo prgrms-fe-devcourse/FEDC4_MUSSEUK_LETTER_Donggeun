@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import qs from 'qs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Image, Heading, Button, Text, Flex } from '@chakra-ui/react';
+import { Image, Heading, Button, Text, Flex, Spinner } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
 import useSigninMutation from '@/apis/mutations/useSigninMutation';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
@@ -36,7 +36,7 @@ const SignIn = () => {
   const redirectTo = String(queryString.redirectTo || links.main);
 
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate } = useSigninMutation();
+  const { mutate, isLoading } = useSigninMutation();
 
   const {
     register,
@@ -95,8 +95,10 @@ const SignIn = () => {
         placeholder="비밀번호를 입력해주세요"
         maxLength={30}
       />
-      <Button type="submit" mt="6" w="100%" colorScheme="primary">
-        로그인
+
+      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
+        {isLoading && <Spinner size="sm" mr="2" />}
+        <Text>로그인</Text>
       </Button>
       <LinkTemplate>
         <Text color="gray.400">아직 가입하지 않으셨나요?</Text>
