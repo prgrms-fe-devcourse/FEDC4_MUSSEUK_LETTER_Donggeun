@@ -3675,6 +3675,63 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@toss/async-boundary", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/@toss-async-boundary-npm-1.4.4-0bdc39e30a-a1ac3b2f94.zip/node_modules/@toss/async-boundary/",\
+          "packageDependencies": [\
+            ["@toss/async-boundary", "npm:1.4.4"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:1.4.4", {\
+          "packageLocation": "./.yarn/__virtual__/@toss-async-boundary-virtual-b2226aafec/0/cache/@toss-async-boundary-npm-1.4.4-0bdc39e30a-a1ac3b2f94.zip/node_modules/@toss/async-boundary/",\
+          "packageDependencies": [\
+            ["@toss/async-boundary", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:1.4.4"],\
+            ["@toss/error-boundary", "virtual:b2226aafec6e97a691dc2d7482118acf89ace92fa2c096f66cdfce46777358bd7471d8320fa5e744fbc95f190cbbd92a512226c880df8c8a3de16d61564d30fe#npm:1.4.4"],\
+            ["@types/react", "npm:18.2.22"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@toss/error-boundary", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/@toss-error-boundary-npm-1.4.4-ac67b4182d-84843cd644.zip/node_modules/@toss/error-boundary/",\
+          "packageDependencies": [\
+            ["@toss/error-boundary", "npm:1.4.4"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b2226aafec6e97a691dc2d7482118acf89ace92fa2c096f66cdfce46777358bd7471d8320fa5e744fbc95f190cbbd92a512226c880df8c8a3de16d61564d30fe#npm:1.4.4", {\
+          "packageLocation": "./.yarn/__virtual__/@toss-error-boundary-virtual-643b5808b1/0/cache/@toss-error-boundary-npm-1.4.4-ac67b4182d-84843cd644.zip/node_modules/@toss/error-boundary/",\
+          "packageDependencies": [\
+            ["@toss/error-boundary", "virtual:b2226aafec6e97a691dc2d7482118acf89ace92fa2c096f66cdfce46777358bd7471d8320fa5e744fbc95f190cbbd92a512226c880df8c8a3de16d61564d30fe#npm:1.4.4"],\
+            ["@toss/utils", "npm:1.4.4"],\
+            ["@types/react", "npm:18.2.22"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@toss/utils", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/@toss-utils-npm-1.4.4-4da0dd0dcb-7013b5eb19.zip/node_modules/@toss/utils/",\
+          "packageDependencies": [\
+            ["@toss/utils", "npm:1.4.4"],\
+            ["@babel/runtime", "npm:7.22.15"],\
+            ["date-fns", "npm:2.30.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@tsconfig/node10", [\
         ["npm:1.0.9", {\
           "packageLocation": "./.yarn/cache/@tsconfig-node10-npm-1.0.9-f2e2d20feb-a33ae4dc2a.zip/node_modules/@tsconfig/node10/",\
@@ -5117,6 +5174,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/csstype-npm-3.1.2-cead7d99b2-e1a52e6c25.zip/node_modules/csstype/",\
           "packageDependencies": [\
             ["csstype", "npm:3.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["date-fns", [\
+        ["npm:2.30.0", {\
+          "packageLocation": "./.yarn/cache/date-fns-npm-2.30.0-895c790e0f-f7be015232.zip/node_modules/date-fns/",\
+          "packageDependencies": [\
+            ["date-fns", "npm:2.30.0"],\
+            ["@babel/runtime", "npm:7.22.15"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7376,15 +7443,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["locate-path", "npm:6.0.0"],\
             ["p-locate", "npm:5.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["lodash", [\
-        ["npm:4.17.21", {\
-          "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
-          "packageDependencies": [\
-            ["lodash", "npm:4.17.21"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9998,6 +10056,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tanstack/eslint-plugin-query", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.34.1"],\
             ["@tanstack/react-query", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.35.3"],\
             ["@tanstack/react-query-devtools", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.35.3"],\
+            ["@toss/async-boundary", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:1.4.4"],\
             ["@types/lodash", "npm:4.14.198"],\
             ["@types/node", "npm:20.6.3"],\
             ["@types/qs", "npm:6.9.8"],\
@@ -10017,7 +10076,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.6.0"],\
             ["eslint-plugin-react-refresh", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:0.4.3"],\
             ["framer-motion", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:10.16.4"],\
-            ["lodash", "npm:4.17.21"],\
             ["qs", "npm:6.11.2"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:18.2.0"],\
