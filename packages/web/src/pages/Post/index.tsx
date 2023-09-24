@@ -17,6 +17,7 @@ import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import DeleteButton from './components/DeleteButton';
 import PostDeleteModal from './components/PostDeleteModal';
 import { HEADER_HEIGHT } from '@/components/header';
+import qs from 'qs';
 
 const links = {
   notFound: '/notFound',
@@ -25,6 +26,10 @@ const links = {
 
 const Post = () => {
   const { postId = '' } = useParams();
+  const queryString =
+    '?redirectTo=' +
+    window.location.pathname +
+    qs.stringify(qs.parse(window.location.search, { ignoreQueryPrefix: true }), { addQueryPrefix: true });
 
   const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
@@ -36,7 +41,7 @@ const Post = () => {
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isNotLoggedIn) return <Navigate to={links.signin} replace />;
+  if (isNotLoggedIn) return <Navigate to={links.signin + queryString} replace />;
 
   if (isPostError) return <Navigate to={links.notFound} replace />;
 
