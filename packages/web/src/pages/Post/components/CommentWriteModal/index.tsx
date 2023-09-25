@@ -7,7 +7,6 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  Text,
   Textarea,
   UseDisclosureReturn,
   VStack,
@@ -107,6 +106,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
                   required: true,
                   maxLength: MAX_LENGTH.CONTENT
                 })}
+                maxLength={MAX_LENGTH.CONTENT}
                 w="90%"
                 h="10rem"
                 _placeholder={{ opacity: 1, color: 'gray03' }}
@@ -126,6 +126,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
                 {...register('nickname', {
                   maxLength: MAX_LENGTH.NICKNAME
                 })}
+                maxLength={MAX_LENGTH.NICKNAME}
                 placeholder="익명의 머쓱이"
                 w="90%"
                 _placeholder={{ opacity: 1, color: 'gray03' }}
