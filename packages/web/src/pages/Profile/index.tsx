@@ -61,8 +61,6 @@ const AddCard = () => {
   );
 };
 
-const border = { border: '1px solid red' };
-
 const Profile = () => {
   const { userId = '' } = useParams();
   const { data: postList } = useUserPostListQuery(userId);
