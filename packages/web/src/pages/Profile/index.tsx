@@ -32,7 +32,16 @@ import 'swiper/css/navigation';
 const AddCard = () => {
   const navigate = useNavigate();
   return (
-    <Card w={56} h={64} p={4} textAlign={'center'} align={'center'} border={'2px'} borderColor={'green01'}>
+    <Card
+      w="15.5rem"
+      h="19.5rem"
+      p={4}
+      textAlign={'center'}
+      align={'center'}
+      border={'2px'}
+      margin="auto"
+      borderColor={'green01'}
+      boxShadow=" 0px 4px 7px 0px rgba(0, 0, 0, 0.25)">
       <CardHeader>
         <Circle
           as="button"
@@ -112,6 +121,9 @@ const Profile = () => {
                 />
               </SwiperSlide>
             ))}
+            <SwiperSlide>
+              <AddCard />
+            </SwiperSlide>
           </Swiper>
         ) : (
           <Grid gridTemplateColumns={{ md: 'repeat(3, 1fr)' }} gap={5} p={6} justifyItems={'center'}>
