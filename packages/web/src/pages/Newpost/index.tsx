@@ -77,7 +77,7 @@ const TIP_MESSAGE = [
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
-  const { data: user } = useAuthCheckQuery();
+  const { data: user } = useAuthCheckQuery({ suspense: true });
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
