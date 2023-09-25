@@ -122,7 +122,7 @@ const NewPost = () => {
 
   return (
     <Box bgColor="bg01">
-      <Box p="2rem" margin="auto" w="100%" maxW="50rem" textAlign="center">
+      <Box p={{ base: '0.5rem', sm: '1rem', md: '2rem' }} margin="auto" w="100%" maxW="50rem" textAlign="center">
         <Text marginBottom="1rem" textAlign="left" fontSize="1.4rem" color="black">
           머쓱이 이름
         </Text>
@@ -158,22 +158,23 @@ const NewPost = () => {
         <Text textAlign="left" fontSize="1.4rem" color="black">
           머쓱이 테마
         </Text>
-        <Box
-          margin="auto"
-          h={{
-            base: '5rem',
-            '2xs': '16rem',
-            xs: '20rem',
-            sm: '25rem'
-          }}
-          p={4}>
+        <Box margin="auto" p={4} h={'90vw'} maxH={'25rem'} w={'90vw'} maxW={'25rem'} position={'relative'}>
           <Image
-            w="100%"
-            maxW="25rem"
-            margin="auto"
             src={MUSSEUK[selected].src || musseuk_semicolon}
-            transform={MUSSEUK[selected].selectedTransform}
             alt="musseukImage"
+            m={'auto'}
+            position={'relative'}
+            zIndex={1}
+          />
+          <Box w={'50%'} h={'12%'} position={'absolute'} left={'25%'} bottom={'0%'} backgroundColor={'yellow.400'} />
+          <Box
+            w={'50%'}
+            h={'10%'}
+            borderRadius={'50%'}
+            bottom={'7%'}
+            left={'25%'}
+            position={'absolute'}
+            backgroundColor={'yellow.300'}
           />
         </Box>
         <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
