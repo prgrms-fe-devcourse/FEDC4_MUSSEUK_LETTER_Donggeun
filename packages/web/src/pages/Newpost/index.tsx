@@ -127,6 +127,7 @@ const NewPost = () => {
           머쓱이 이름
         </Text>
         <Input
+          maxLength={20}
           value={musseukTitle}
           onChange={handleMusseukTitle}
           fontSize="16px"
@@ -199,6 +200,7 @@ const NewPost = () => {
           편지를 쓸 사람들에게 보여줄 멘트
         </Text>
         <Textarea
+          maxLength={80}
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
           height="14rem"
