@@ -29,7 +29,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
   const navigate = useNavigate();
 
   const { data } = usePostDetailQuery(postId);
-  const { mutate } = useDeletePostMutation(postId);
+  const { mutate, isLoading } = useDeletePostMutation(postId);
 
   const handleDeleteClick = () => {
     mutate(
@@ -95,7 +95,12 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
                 <Button colorScheme={'gray'} size={'lg'} onClick={onClose}>
                   취소
                 </Button>
-                <Button colorScheme={'red'} size={'lg'} onClick={handleDeleteClick}>
+                <Button
+                  colorScheme={'red'}
+                  size={'lg'}
+                  onClick={handleDeleteClick}
+                  isLoading={isLoading}
+                  loadingText={'삭제 중..'}>
                   삭제
                 </Button>
               </HStack>
