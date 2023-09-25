@@ -23,7 +23,11 @@ const Main = () => {
 
   return (
     <>
-      <Box w="100%" bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)" p="3rem">
+      <Box
+        w="100%"
+        bgGradient="linear-gradient(180deg, #C6FFC1 0%, #F5FFE2 100%)"
+        p={{ base: '1.5rem', md: '3rem' }}
+        overflow={'hidden'}>
         <Description />
         <MusseukImage />
         <MusseukButton />
