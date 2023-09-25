@@ -90,18 +90,18 @@ const ProfileBar = ({ userId }: ProfileProps) => {
       {
         onSuccess: () => {
           setIsEditImage(!isEditImage);
-          // console.log('성공');
           return toast({
             title: '프로필 변경 완료',
+            status: 'success',
             description: '프로필이 변경되었습니다.',
             position: 'top',
             colorScheme: 'primary'
           });
         },
         onError: () => {
-          console.log('error');
           toast({
             title: '프로필 변경 취소',
+            status: 'error',
             description: '프로필이 변경이 취소되었습니다.',
             position: 'top',
             isClosable: true
@@ -120,7 +120,6 @@ const ProfileBar = ({ userId }: ProfileProps) => {
       templateAreas={{ base: `"profile edit"`, md: `"profile" "edit"` }}
       gridTemplateColumns={{ base: '1fr 3.5fr', md: '1fr' }}
       gridTemplateRows={{ base: '1fr', md: '1fr 3.5fr' }}>
-      {/* 이미지업로드 */}
       <GridItem gridArea={'profile'} textAlign="center">
         <Square m={2}>
           <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
@@ -131,7 +130,7 @@ const ProfileBar = ({ userId }: ProfileProps) => {
         </Button>
         {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
       </GridItem>
-      {/* 사용자 정보 변경 */}
+
       <GridItem area={'edit'} textAlign="center">
         <Input
           type="text"
@@ -139,9 +138,10 @@ const ProfileBar = ({ userId }: ProfileProps) => {
           defaultValue={user?.username}
           {...register('username')}
           border={`${isEditProfile ? 'solid' : 'none'}`}
+          borderColor={'green01'}
           textAlign={'center'}
           isReadOnly={!isEditProfile}
-          isInvalid={true}
+          isRequired={true}
         />
         <FormControl>
           <HStack my={4} justify={'center'} align={'center'}>
@@ -164,6 +164,7 @@ const ProfileBar = ({ userId }: ProfileProps) => {
               defaultValue={user?.introduce}
               isReadOnly={!isEditProfile}
               border={`${isEditProfile ? 'solid' : 'none'}`}
+              borderColor={'green01'}
               maxLength={80}
             />
           </HStack>
