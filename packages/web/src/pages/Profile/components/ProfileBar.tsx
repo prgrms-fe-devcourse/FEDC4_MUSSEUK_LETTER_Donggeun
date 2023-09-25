@@ -1,4 +1,16 @@
-import { VStack, HStack, Avatar, Button, FormControl, FormLabel, Input, Textarea, useToast } from '@chakra-ui/react';
+import {
+  HStack,
+  Avatar,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  useToast,
+  Grid,
+  GridItem,
+  Square
+} from '@chakra-ui/react';
 import { BiEnvelope } from 'react-icons/bi';
 import { MdComment } from 'react-icons/md';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
@@ -18,6 +30,7 @@ interface FormData {
   introduce: string;
 }
 
+const border = { border: '1px solid black' };
 const ProfileBar = ({ userId }: ProfileProps) => {
   const { data: user } = useUserInfoQuery(userId);
   const { data: authUser } = useAuthCheckQuery({ suspense: true });
@@ -51,14 +64,10 @@ const ProfileBar = ({ userId }: ProfileProps) => {
     );
   };
 
-  const onClickImageBtn = () => {
-    //btn name 이 이미지 변경 (isEditImage === false)
-    if (!isEditImage) {
-      setIsEditImage(!isEditImage); //이미지변경 -> 프로필 업로드
-      fileInput.current?.click();
-      setIsEditImage(!isEditImage);
-    }
-    //btn name 이 이미지 업로드 (isEditImage === true )
+  const onClickImgBtn = () => {
+    setIsEditImage(!isEditImage);
+    fileInput.current?.click();
+    setIsEditImage(!isEditImage);
   };
 
   const onImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,18 +91,18 @@ const ProfileBar = ({ userId }: ProfileProps) => {
       {
         onSuccess: () => {
           setIsEditImage(!isEditImage);
-          // console.log('성공');
           return toast({
             title: '프로필 변경 완료',
+            status: 'success',
             description: '프로필이 변경되었습니다.',
             position: 'top',
             colorScheme: 'primary'
           });
         },
         onError: () => {
-          console.log('error');
           toast({
             title: '프로필 변경 취소',
+            status: 'error',
             description: '프로필이 변경이 취소되었습니다.',
             position: 'top',
             isClosable: true
@@ -104,54 +113,41 @@ const ProfileBar = ({ userId }: ProfileProps) => {
   };
 
   return (
-    <VStack h={'100%'} pt={4} px={6} borderRight="1px solid #B6B6B6">
-      {/* 이미지업로드 */}
-      <VStack py={4}>
-        <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
-        <Input
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={onImgChange}
-          ref={fileInput}
-          onInput={(e) => {
-            console.log(e);
-          }}
-        />
-        {isMyProfile && (
-          <HStack>
-            {isEditImage ? (
-              <Button
-                h={8}
-                isLoading
-                loadingText="Loading"
-                colorScheme="primary"
-                variant="outline"
-                spinnerPlacement="start"></Button>
-            ) : (
-              <Button h={8} colorScheme="primary" onClick={onClickImageBtn}>
-                이미지변경
-              </Button>
-            )}
-            {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
-          </HStack>
-        )}
-      </VStack>
-      {/* 사용자 정보 변경 */}
-      <VStack>
+    <Grid
+      h={'100%'}
+      pt={4}
+      px={{ base: 0, md: 6 }}
+      borderRight={{ md: '2px solid #B6B6B6' }}
+      templateAreas={{ base: `"profile edit"`, md: `"profile" "edit"` }}
+      gridTemplateColumns={{ base: '1fr 3.5fr', md: '1fr' }}
+      gridTemplateRows={{ base: '1fr', md: '1fr 3.5fr' }}>
+      <GridItem gridArea={'profile'} textAlign="center">
+        <Square m={2}>
+          <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
+        </Square>
+        <Input type="file" accept="image/*" hidden onChange={onImgChange} ref={fileInput} />
+        <Button isLoading={isEditImage} colorScheme="primary" onClick={onClickImgBtn}>
+          이미지변경
+        </Button>
+        {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
+      </GridItem>
+
+      <GridItem area={'edit'} textAlign="center">
         <Input
           type="text"
           placeholder={isEditProfile ? '실명을 작성해주세요' : ''}
           defaultValue={user?.username}
           {...register('username')}
           border={`${isEditProfile ? 'solid' : 'none'}`}
+          borderColor={'green01'}
           textAlign={'center'}
           isReadOnly={!isEditProfile}
-          isInvalid={true}
+          isRequired={true}
+          my={2}
         />
         <FormControl>
-          <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel my={0} fontSize={'1.2rem'}>
+          <HStack my={4} align={'center'}>
+            <FormLabel mx={0} fontSize={'1.2rem'} p={2}>
               <BiEnvelope />
             </FormLabel>
             <Input type="email" value={user?.email ?? ''} h={6} border={'none'} isReadOnly={true} />
@@ -159,18 +155,19 @@ const ProfileBar = ({ userId }: ProfileProps) => {
         </FormControl>
 
         <FormControl>
-          <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel my={0} fontSize={'1.2rem'}>
+          <HStack my={4} align="flex-start">
+            <FormLabel mx={0} fontSize={'1.2rem'} p={2}>
               <MdComment />
             </FormLabel>
             <Textarea
               placeholder={isEditProfile ? '자기소개를 작성해주세요' : ''}
-              h={6}
               resize="none"
               {...register('introduce')}
               defaultValue={user?.introduce}
               isReadOnly={!isEditProfile}
               border={`${isEditProfile ? 'solid' : 'none'}`}
+              borderColor={'green01'}
+              maxLength={80}
             />
           </HStack>
         </FormControl>
@@ -179,8 +176,8 @@ const ProfileBar = ({ userId }: ProfileProps) => {
             {isEditProfile ? '프로필편집완료' : '프로필편집하기'}
           </Button>
         )}
-      </VStack>
-    </VStack>
+      </GridItem>
+    </Grid>
   );
 };
 
