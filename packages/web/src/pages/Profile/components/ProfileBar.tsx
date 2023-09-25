@@ -30,6 +30,7 @@ interface FormData {
   introduce: string;
 }
 
+const border = { border: '1px solid black' };
 const ProfileBar = ({ userId }: ProfileProps) => {
   const { data: user } = useUserInfoQuery(userId);
   const { data: authUser } = useAuthCheckQuery({ suspense: true });
@@ -142,10 +143,11 @@ const ProfileBar = ({ userId }: ProfileProps) => {
           textAlign={'center'}
           isReadOnly={!isEditProfile}
           isRequired={true}
+          my={2}
         />
         <FormControl>
-          <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel mx={0} fontSize={'1.2rem'}>
+          <HStack my={4} align={'center'}>
+            <FormLabel mx={0} fontSize={'1.2rem'} p={2}>
               <BiEnvelope />
             </FormLabel>
             <Input type="email" value={user?.email ?? ''} h={6} border={'none'} isReadOnly={true} />
@@ -153,8 +155,8 @@ const ProfileBar = ({ userId }: ProfileProps) => {
         </FormControl>
 
         <FormControl>
-          <HStack my={4} justify={'center'} align={'center'}>
-            <FormLabel mx={0} fontSize={'1.2rem'}>
+          <HStack my={4} align="flex-start">
+            <FormLabel mx={0} fontSize={'1.2rem'} p={2}>
               <MdComment />
             </FormLabel>
             <Textarea
