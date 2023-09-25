@@ -22,6 +22,12 @@ import { Suspense } from 'react';
 import NotFound from '../NotFound';
 import Loading from '@/components/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Grid as SwiperGrid, Pagination, Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const AddCard = () => {
   const navigate = useNavigate();
@@ -46,6 +52,8 @@ const AddCard = () => {
   );
 };
 
+const border = { border: '1px solid red' };
+
 const Profile = () => {
   const { userId = '' } = useParams();
   const { data: postList } = useUserPostListQuery(userId);
@@ -66,7 +74,7 @@ const Profile = () => {
       bg={'bg0101'}
       h="100vh"
       templateAreas={{ base: `"description" "profile" "postCard"`, md: `"profile description" "profile postCard"` }}
-      gridTemplateColumns={{ base: '1fr', md: '1fr 3.5fr' }}>
+      gridTemplateColumns={{ base: '100%', md: '1fr 3.5fr' }}>
       <GridItem area={'profile'}>
         <ProfileBar userId={userId} />
       </GridItem>
@@ -82,23 +90,47 @@ const Profile = () => {
           )}
         </Stack>
       </GridItem>
-      <GridItem area={'postCard'}>
-        <Grid gridTemplateColumns={isSmallerThan768 ? '1fr' : 'repeat(3, 1fr)'} gap={5} p={6} justifyItems={'center'}>
-          {postList?.map((post) => (
-            <GridItem key={post._id}>
-              <PostCard
-                imgName={post.musseukImageName}
-                musseukName={post.title}
-                musseukContent={post.content}
-                letter={post.comments.length}
-                onClick={() => {
-                  navigate(`/post/${post._id}`);
-                }}
-              />
-            </GridItem>
-          ))}
-          {isUser && <AddCard />}
-        </Grid>
+      <GridItem area={'postCard'} my={{ base: 10 }}>
+        {isSmallerThan768 ? (
+          <Swiper
+            loop
+            slidesPerView={1}
+            grid={{ rows: 1, fill: 'row' }}
+            navigation
+            pagination={{ clickable: true }}
+            modules={[SwiperGrid, Pagination, Navigation]}>
+            {postList?.map((post) => (
+              <SwiperSlide key={post._id}>
+                <PostCard
+                  imgName={post.musseukImageName}
+                  musseukName={post.title}
+                  musseukContent={post.content}
+                  letter={post.comments.length}
+                  onClick={() => {
+                    navigate(`/post/${post._id}`);
+                  }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <Grid gridTemplateColumns={{ md: 'repeat(3, 1fr)' }} gap={5} p={6} justifyItems={'center'}>
+            {postList?.map((post) => (
+              <GridItem key={post._id}>
+                <PostCard
+                  imgName={post.musseukImageName}
+                  musseukName={post.title}
+                  musseukContent={post.content}
+                  letter={post.comments.length}
+                  onClick={() => {
+                    navigate(`/post/${post._id}`);
+                  }}
+                />
+              </GridItem>
+            ))}
+            {isUser && <AddCard />}
+          </Grid>
+        )}
       </GridItem>
     </Grid>
   );
