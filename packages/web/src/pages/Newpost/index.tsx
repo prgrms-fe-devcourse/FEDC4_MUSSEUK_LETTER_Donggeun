@@ -180,16 +180,7 @@ const NewPost = () => {
         <Box cursor="pointer" bgColor="white" width="auto" borderRadius="10px" border="1px" borderColor="#D4D8CA">
           <Flex justify="center">
             {Object.entries(MUSSEUK).map(([key, value]) => (
-              <MusseukItem
-                key={key}
-                alt={key}
-                src={value.src}
-                transform={{
-                  base: value.smallTransform,
-                  sm: value.transform
-                }}
-                onClick={handleClickMusseuk}
-              />
+              <MusseukItem key={key} alt={key} src={value.src} onClick={handleClickMusseuk} />
             ))}
           </Flex>
         </Box>

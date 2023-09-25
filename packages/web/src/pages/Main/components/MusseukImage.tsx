@@ -15,13 +15,13 @@ const MusseukImage = () => {
         }}
         w={{
           base: '90%',
-          lg: '40rem'
+          lg: 'auto'
         }}
         h={{
           base: 'auto',
           lg: '30rem'
         }}
-        top="3.3rem"
+        top="8rem"
         right="1rem"
         src={musseuk_semicolon}
         alt="musseuk_semicolon"
