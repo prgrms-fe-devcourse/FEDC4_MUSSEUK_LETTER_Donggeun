@@ -170,6 +170,9 @@ const NewPost = () => {
           <Image
             w="100%"
             maxW="25rem"
+            mt={{
+              '2xs': '2rem'
+            }}
             margin="auto"
             src={MUSSEUK[selected].src || musseuk_semicolon}
             transform={MUSSEUK[selected].selectedTransform}
