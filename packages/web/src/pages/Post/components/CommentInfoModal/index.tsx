@@ -81,7 +81,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
         <ModalBody p={'3rem'}>
           <VStack gap={6} alignItems={'end'}>
             <Box w={'100%'} minH={'14rem'} borderRadius={6} p={'1.5rem'} bg={'bg01'}>
-              <Text lineHeight={'150%'} fontSize={18}>
+              <Text lineHeight={'150%'} fontSize={18} whiteSpace={'pre-wrap'}>
                 {content}
               </Text>
             </Box>
