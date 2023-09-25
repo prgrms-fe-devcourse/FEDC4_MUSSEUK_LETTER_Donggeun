@@ -78,7 +78,6 @@ const Profile = () => {
 
   return (
     <Grid
-      bg={'bg0101'}
       h="100vh"
       templateAreas={{ base: `"description" "profile" "postCard"`, md: `"profile description" "profile postCard"` }}
       gridTemplateColumns={{ base: '100%', md: '1fr 3.5fr' }}>
