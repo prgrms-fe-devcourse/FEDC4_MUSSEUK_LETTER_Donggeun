@@ -30,14 +30,14 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
   const { position } = useCommentInfoState();
   const toast = useToast();
 
-  const { mutate } = useWriteCommentMutation(postId);
+  const { mutate, isLoading } = useWriteCommentMutation(postId);
   const {
     register,
     handleSubmit,
     reset,
     setValue,
     watch,
-    formState: { isSubmitting, isSubmitted, errors }
+    formState: { isSubmitted, errors }
   } = useForm<CommentField>();
 
   const contentCount = watch('content')?.length ?? 0;
@@ -143,7 +143,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
           <Button onClick={handleClose} mr="1.5rem">
             돌아가기
           </Button>
-          <Button type="submit" form="write" colorScheme="primary" disabled={isSubmitting}>
+          <Button type="submit" form="write" colorScheme="primary" isLoading={isLoading} loadingText={'작성 중..'}>
             작성하기
           </Button>
         </ModalFooter>

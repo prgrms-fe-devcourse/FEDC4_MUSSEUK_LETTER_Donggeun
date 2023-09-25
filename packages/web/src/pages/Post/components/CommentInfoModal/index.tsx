@@ -27,7 +27,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
   const toast = useToast();
 
   const { data: userData } = useAuthCheckQuery();
-  const { mutate } = useDeleteCommentMutation(commentId);
+  const { mutate, isLoading } = useDeleteCommentMutation(commentId);
 
   const isMyComment = userData?._id === author._id;
 
@@ -88,7 +88,12 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
             <Flex w={'100%'} justifyContent={'space-between'}>
               {isMyComment && (
                 <Flex alignItems={'center'}>
-                  <DeleteButton onClick={handleDeleteClick} mr={3} colorScheme={isDeleteConfirm ? 'red' : 'primary'} />
+                  <DeleteButton
+                    onClick={handleDeleteClick}
+                    isLoading={isLoading}
+                    mr={3}
+                    colorScheme={isDeleteConfirm ? 'red' : 'primary'}
+                  />
                   {isDeleteConfirm && (
                     <DeleteConfirmText
                       display={{ base: 'none', md: 'inline' }}
