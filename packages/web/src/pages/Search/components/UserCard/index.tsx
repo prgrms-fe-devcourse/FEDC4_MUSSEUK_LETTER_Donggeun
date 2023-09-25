@@ -1,4 +1,4 @@
-import { Card, Text, Avatar, CardBody, CardFooter, VStack, HStack } from '@chakra-ui/react';
+import { Card, Text, Avatar, CardBody, CardFooter, VStack, HStack, useMediaQuery } from '@chakra-ui/react';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
 import { EmailIcon } from '@chakra-ui/icons';
 import { FiFileText } from 'react-icons/fi';
@@ -15,6 +15,8 @@ type CardProps = {
 
 const UserCard = ({ id, name, email, post, comment, image }: CardProps) => {
   const navigate = useNavigate();
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
+
   return (
     <Card
       direction={'row'}
@@ -34,7 +36,13 @@ const UserCard = ({ id, name, email, post, comment, image }: CardProps) => {
         <Text color="#6D8198">{email}</Text>
       </CardBody>
       <CardFooter>
-        <VStack gap={4} color={'blue03'} fontSize={'lg'} alignItems={'start'} justifyContent={'center'}>
+        <VStack
+          gap={4}
+          color={'blue03'}
+          fontSize={'lg'}
+          alignItems={'start'}
+          justifyContent={'center'}
+          display={isMobile ? 'none' : 'flex'}>
           <HStack>
             <FiFileText style={{ width: '26px', height: '26px', marginRight: '10px' }} />
             <Text>{post}</Text>
