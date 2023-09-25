@@ -30,7 +30,6 @@ interface FormData {
   introduce: string;
 }
 
-const border = { border: '1px solid black' };
 const ProfileBar = ({ userId }: ProfileProps) => {
   const { data: user } = useUserInfoQuery(userId);
   const { data: authUser } = useAuthCheckQuery({ suspense: true });
@@ -126,9 +125,11 @@ const ProfileBar = ({ userId }: ProfileProps) => {
           <Avatar size={'2xl'} src={imgFile ?? user?.image ?? defaultProfile} rounded={'full'} />
         </Square>
         <Input type="file" accept="image/*" hidden onChange={onImgChange} ref={fileInput} />
-        <Button isLoading={isEditImage} colorScheme="primary" onClick={onClickImgBtn}>
-          이미지변경
-        </Button>
+        {isMyProfile && (
+          <Button isLoading={isEditImage} colorScheme="primary" onClick={onClickImgBtn}>
+            이미지변경
+          </Button>
+        )}
         {isEditImage && <Button onClick={() => setIsEditImage(!isEditImage)}>프로필삭제</Button>}
       </GridItem>
 
