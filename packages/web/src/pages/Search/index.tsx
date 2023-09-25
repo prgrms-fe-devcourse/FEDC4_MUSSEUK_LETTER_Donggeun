@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Flex, VStack, List, HStack, Container } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, List, HStack, Container } from '@chakra-ui/react';
 import UserCard from './components/UserCard';
 import { useParams } from 'react-router-dom';
 import useSearchUserQuery from '@/apis/queries/useSearchUserQuery';
@@ -25,7 +25,7 @@ const Search = () => {
           검색결과
         </Text>
       </HStack>
-      <Container centerContent minW={'28rem'} maxW={'54rem'} gap={8}>
+      <Container centerContent maxW={'54rem'} gap={8}>
         {searchList &&
           searchList.map((user) => (
             <List width={'100%'} key={user.email}>
