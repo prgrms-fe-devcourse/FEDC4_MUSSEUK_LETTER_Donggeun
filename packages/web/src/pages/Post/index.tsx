@@ -17,6 +17,8 @@ import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import DeleteButton from './components/DeleteButton';
 import PostDeleteModal from './components/PostDeleteModal';
 import { HEADER_HEIGHT } from '@/components/header';
+import qs from 'qs';
+import ErrorBoundaryCard from '@/components/ErrorBoundaryCard';
 
 const links = {
   notFound: '/notFound',
@@ -25,6 +27,10 @@ const links = {
 
 const Post = () => {
   const { postId = '' } = useParams();
+  const queryString =
+    '?redirectTo=' +
+    window.location.pathname +
+    qs.stringify(qs.parse(window.location.search, { ignoreQueryPrefix: true }), { addQueryPrefix: true });
 
   const { isOpen: isWriteOpen, onOpen: onWriteOpen, onClose: onWriteClose } = useDisclosure();
   const { isOpen: isInfoOpen, onOpen: onInfoOpen, onClose: onInfoClose } = useDisclosure();
@@ -36,39 +42,41 @@ const Post = () => {
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
-  if (isNotLoggedIn) return <Navigate to={links.signin} replace />;
+  if (isNotLoggedIn) return <Navigate to={links.signin + queryString} replace />;
 
   if (isPostError) return <Navigate to={links.notFound} replace />;
 
   return (
-    <CommentInfoProvider>
-      <VStack
-        p="2rem 2rem 5rem 2rem"
-        minH={`calc(100% - ${HEADER_HEIGHT})`}
-        backgroundColor="bg01"
-        backgroundImage={BackgroundHome}
-        backgroundPosition="center 30%"
-        backgroundSize="min(80% + 384px, 1920px) auto"
-        backgroundRepeat="repeat-x">
-        <Box w="100%" position={'relative'}>
-          <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
-            <AnnouncementText postId={postId} mb="1rem" />
-            {isAuthor && <ListButton onClick={onListOpen} />}
-            {isAuthor && <DeleteButton onClick={onPostDeleteOpen} position={'absolute'} top={0} right={0} />}
+    <ErrorBoundaryCard>
+      <CommentInfoProvider>
+        <VStack
+          p="2rem 2rem 5rem 2rem"
+          minH={`calc(100% - ${HEADER_HEIGHT})`}
+          backgroundColor="bg01"
+          backgroundImage={BackgroundHome}
+          backgroundPosition="center 30%"
+          backgroundSize="min(80% + 384px, 1920px) auto"
+          backgroundRepeat="repeat-x">
+          <Box w="100%" position={'relative'}>
+            <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
+              <AnnouncementText postId={postId} mb="1rem" />
+              {isAuthor && <ListButton onClick={onListOpen} />}
+              {isAuthor && <DeleteButton onClick={onPostDeleteOpen} position={'absolute'} top={0} right={0} />}
+            </Suspense>
+          </Box>
+          <Suspense fallback={<CommentBoardSkeleton />}>
+            <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} />
           </Suspense>
-        </Box>
-        <Suspense fallback={<CommentBoardSkeleton />}>
-          <CommentBoard onInfoOpen={onInfoOpen} onWriteOpen={onWriteOpen} postId={postId} />
-        </Suspense>
-        <Suspense fallback={<IntroductionSkeleton />}>
-          <Introduction postId={postId} />
-        </Suspense>
-      </VStack>
-      <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
-      <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
-      <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
-      <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postId={postId} />
-    </CommentInfoProvider>
+          <Suspense fallback={<IntroductionSkeleton />}>
+            <Introduction postId={postId} />
+          </Suspense>
+        </VStack>
+        <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
+        <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
+        <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
+        <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postId={postId} />
+      </CommentInfoProvider>
+    </ErrorBoundaryCard>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent, useCallback } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { Flex, Button, Image, Textarea, Box, Text, Input } from '@chakra-ui/react';
+import { Flex, Button, Image, Textarea, Box, Text, Input, HStack, UnorderedList, ListItem } from '@chakra-ui/react';
 import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
@@ -66,6 +66,14 @@ const MUSSEUK_IMAGE = {
   DEFAULT: musseuk_default
 };
 
+const TIP_MESSAGE = [
+  '칭찬이 받고 싶은 머쓱이',
+  '프로토타입 딥다이브 핃피드백 머쓱이',
+  'SNS 프로젝트 피드백 머쓱이',
+  '아무말 대잔치 머쓱이',
+  '면접 스터디 1주차 피드백 머쓱이'
+];
+
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
@@ -126,10 +134,27 @@ const NewPost = () => {
           bgColor="white"
           borderRadius="0.3rem"
           borderColor="#D4D8CA"
-          marginBottom="1.5rem"
+          marginBottom="2.5rem"
           placeholder="머쓱이 이름을 작성해 주세요!"
           size="md"
         />
+        <HStack>
+          <Box bg={'green01'} borderRadius={20} px={3}>
+            <Text fontWeight={'bold'} color={'white'}>
+              TIP
+            </Text>
+          </Box>
+          <Text>이렇게도 머쓱이를 만들어 볼 수 있어요.</Text>
+        </HStack>
+        <Box bg="rgba(113, 210, 88, 0.1)" borderRadius={10} p={3} mt={3} mb={16}>
+          <UnorderedList spacing={3} fontWeight={'light'}>
+            {TIP_MESSAGE.map((message, idx) => (
+              <ListItem key={idx} textAlign={'start'}>
+                {message}
+              </ListItem>
+            ))}
+          </UnorderedList>
+        </Box>
         <Text textAlign="left" fontSize="1.4rem" color="black">
           머쓱이 테마
         </Text>
