@@ -71,7 +71,6 @@ const Main = () => {
           virtual={true}>
           {status === 'success' &&
             data
-              .slice(0, 100)
               .sort((a, b) => b.comments.length - a.comments.length)
               .slice(0, 15)
               .map((post, index) => (
