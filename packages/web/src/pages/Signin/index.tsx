@@ -96,9 +96,16 @@ const SignIn = () => {
         maxLength={30}
       />
 
-      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
-        {isLoading && <Spinner size="sm" mr="2" />}
-        <Text>로그인</Text>
+      <Button
+        type="submit"
+        isLoading={isLoading}
+        isDisabled={isLoading}
+        spinner={<Spinner size="sm" mr="2" />}
+        loadingText="로그인 중..."
+        mt="6"
+        w="100%"
+        colorScheme="primary">
+        로그인
       </Button>
       <LinkTemplate>
         <Text color="gray.400">아직 가입하지 않으셨나요?</Text>

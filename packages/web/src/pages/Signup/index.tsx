@@ -123,9 +123,16 @@ const SignUp = () => {
         error={errors.confirmPassword}
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
       />
-      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
-        {isLoading && <Spinner size="sm" mr="2" />}
-        <Text>회원가입</Text>
+      <Button
+        type="submit"
+        isLoading={isLoading}
+        isDisabled={isLoading}
+        spinner={<Spinner size="sm" mr="2" />}
+        loadingText="회원가입 중..."
+        mt="6"
+        w="100%"
+        colorScheme="primary">
+        회원가입
       </Button>
       <LinkTemplate>
         <Text color="gray.400">이미 가입하셨었나요?</Text>

@@ -109,9 +109,16 @@ const ChangePassword = () => {
         icon={<Icon as={showConfirmPassword ? ViewOffIcon : ViewIcon} onClick={setShowConfirmPassword.toggle} />}
         error={errors.confirmPassword}
       />
-      <Button type="submit" isDisabled={isLoading} mt="6" w="100%" colorScheme="primary">
-        {isLoading && <Spinner size="sm" mr="2" />}
-        <Text>비밀번호 변경</Text>
+      <Button
+        type="submit"
+        isLoading={isLoading}
+        isDisabled={isLoading}
+        spinner={<Spinner size="sm" mr="2" />}
+        loadingText="변경중..."
+        mt="6"
+        w="100%"
+        colorScheme="primary">
+        비밀번호 변경
       </Button>
       <LinkTemplate>
         <Text color="gray.400">비밀번호 변경을 원하지 않으신가요?</Text>
