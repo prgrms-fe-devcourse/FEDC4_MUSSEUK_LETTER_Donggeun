@@ -1,7 +1,11 @@
 import { Flex, Button, Heading, Text } from '@chakra-ui/react';
 import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeader';
 
-const ErrorFallback = () => {
+type ErrorFallbackProps = {
+  reload: () => void;
+};
+
+const ErrorFallback = ({ reload }: ErrorFallbackProps) => {
   return (
     <PageTemplateWithHeader>
       <Heading textAlign="center">저런!</Heading>
@@ -12,7 +16,7 @@ const ErrorFallback = () => {
         <Text>아쉽지만</Text>
         <Text>데이터 로딩 중 에러가 발생했어요..</Text>
       </Flex>
-      <Button mt="6" w="100%" colorScheme="primary" onClick={() => window.location.reload()}>
+      <Button mt="6" w="100%" colorScheme="primary" onClick={reload}>
         새로고침 하기
       </Button>
     </PageTemplateWithHeader>

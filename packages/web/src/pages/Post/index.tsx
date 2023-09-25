@@ -19,7 +19,8 @@ import PostDeleteModal from './components/PostDeleteModal';
 import { HEADER_HEIGHT } from '@/components/header';
 import qs from 'qs';
 import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallback from './ErrorFallback';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import ErrorFallback from '@/components/ErrorFallback';
 
 const links = {
   notFound: '/notFound',
@@ -41,6 +42,8 @@ const Post = () => {
   const { data: postData, isError: isPostError } = usePostDetailQuery(postId);
   const { auth: userData, isNotLoggedIn } = useIsNotLoggedIn();
 
+  const { reset } = useQueryErrorResetBoundary();
+
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
 
   if (isNotLoggedIn) return <Navigate to={links.signin + queryString} replace />;
@@ -48,7 +51,9 @@ const Post = () => {
   if (isPostError) return <Navigate to={links.notFound} replace />;
 
   return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
+    <ErrorBoundary
+      onReset={reset}
+      fallbackRender={({ resetErrorBoundary }) => <ErrorFallback reload={resetErrorBoundary} />}>
       <CommentInfoProvider>
         <VStack
           p="2rem 2rem 5rem 2rem"
