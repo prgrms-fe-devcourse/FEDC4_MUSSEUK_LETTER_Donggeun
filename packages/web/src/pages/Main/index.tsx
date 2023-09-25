@@ -37,27 +37,21 @@ const Main = () => {
           }
           breakpoints={{
             '0': {
-              slidesPerView: 1,
-              initialSlide: 0
+              slidesPerView: 1
             },
             '750': {
-              slidesPerView: 2,
-              initialSlide: 1
+              slidesPerView: 2
             },
             '1080': {
-              slidesPerView: 3,
-              initialSlide: 2
+              slidesPerView: 3
             },
             '1450': {
-              slidesPerView: 4,
-              initialSlide: 3
+              slidesPerView: 4
             },
             '1700': {
-              slidesPerView: 5,
-              initialSlide: 4
+              slidesPerView: 5
             }
           }}
-          loop={true}
           modules={[Virtual, Navigation, Pagination]}
           slidesPerGroup={1}
           spaceBetween={0}
@@ -67,11 +61,9 @@ const Main = () => {
             clickable: true,
             bulletClass: `swiper-pagination-bullet`
           }}
-          navigation={true}
-          virtual={true}>
+          navigation={true}>
           {status === 'success' &&
             data
-              .slice(0, 100)
               .sort((a, b) => b.comments.length - a.comments.length)
               .slice(0, 15)
               .map((post, index) => (

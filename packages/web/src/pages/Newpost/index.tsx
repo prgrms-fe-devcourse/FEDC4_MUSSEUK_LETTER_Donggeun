@@ -77,7 +77,7 @@ const TIP_MESSAGE = [
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
-  const { data: user } = useAuthCheckQuery();
+  const { data: user } = useAuthCheckQuery({ suspense: true });
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
@@ -127,6 +127,7 @@ const NewPost = () => {
           머쓱이 이름
         </Text>
         <Input
+          maxLength={20}
           value={musseukTitle}
           onChange={handleMusseukTitle}
           fontSize="16px"
@@ -134,10 +135,13 @@ const NewPost = () => {
           bgColor="white"
           borderRadius="0.3rem"
           borderColor="#D4D8CA"
-          marginBottom="2.5rem"
+          marginBottom="1rem"
           placeholder="머쓱이 이름을 작성해 주세요!"
           size="md"
         />
+        <Text marginBottom={'1.5rem'} textAlign={'end'} color={'gray'} fontSize="16px">
+          {musseukTitle.length}/20자
+        </Text>
         <HStack>
           <Box bg={'green01'} borderRadius={20} px={3}>
             <Text fontWeight={'bold'} color={'white'}>
@@ -188,6 +192,7 @@ const NewPost = () => {
           편지를 쓸 사람들에게 보여줄 멘트
         </Text>
         <Textarea
+          maxLength={80}
           value={musseukIntroduce}
           onChange={handleMusseukIntroduce}
           height="14rem"
@@ -195,10 +200,13 @@ const NewPost = () => {
           bgColor="white"
           borderColor="#D4D8CA"
           size="lg"
-          marginBottom="1.5rem"
+          marginBottom="1rem"
           placeholder="머쓱이에 대한 소개를 작성해주세요"
           resize="none"
         />
+        <Text marginBottom={'2rem'} textAlign={'end'} color={'gray'} fontSize="16px">
+          {musseukIntroduce.length}/80자
+        </Text>
         <Flex
           direction={{
             base: 'column',
