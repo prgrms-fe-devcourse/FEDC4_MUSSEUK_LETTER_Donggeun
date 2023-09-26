@@ -63,7 +63,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
 
   return (
     <BasicModal isOpen={isOpen} onClose={handleCloseClick}>
-      <ModalContent borderRadius={20}>
+      <ModalContent borderRadius={20} m="0.5rem">
         <ModalCloseButton size={'lg'} top={3} color={'white'} zIndex={1} />
         <ModalHeader h={'4rem'} p={0} bgImage={headerImage} borderTopLeftRadius={20} borderTopRightRadius={20}>
           <Box w={'100%'} h={'100%'} position={'relative'}>
