@@ -50,7 +50,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
 
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
-      <ModalContent borderRadius={20}>
+      <ModalContent borderRadius={20} m="0.5rem">
         <ModalCloseButton size={'lg'} top={3} color={'white'} zIndex={1} />
         <ModalHeader
           h={'4rem'}
@@ -91,7 +91,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
               <Text fontWeight={'bold'} fontSize={'xl'}>
                 From. {data?.title ?? '머쓱이'}
               </Text>
-              <HStack gap={6}>
+              <Flex gap={6} flexDirection={{ base: 'column', sm: 'row' }} ml={'1rem'}>
                 <Button colorScheme={'gray'} size={'lg'} onClick={onClose}>
                   취소
                 </Button>
@@ -103,7 +103,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
                   loadingText={'삭제 중..'}>
                   삭제
                 </Button>
-              </HStack>
+              </Flex>
             </Flex>
           </VStack>
         </ModalBody>

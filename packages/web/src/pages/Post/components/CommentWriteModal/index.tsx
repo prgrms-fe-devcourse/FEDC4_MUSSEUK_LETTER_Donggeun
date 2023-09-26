@@ -83,7 +83,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
 
   return (
     <BasicModal isOpen={isOpen} onClose={handleClose}>
-      <ModalContent borderRadius="1rem" p="1.5rem 0.5rem 0.5rem 0.5rem" bgColor="bg01">
+      <ModalContent borderRadius="1rem" p="1.5rem 0.5rem 0.5rem 0.5rem" bgColor="bg01" m="0.5rem">
         <ModalCloseButton />
         <ModalBody>
           <form id="write" onSubmit={handleSubmit(onSubmit, onError)}>
