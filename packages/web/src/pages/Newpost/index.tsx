@@ -77,7 +77,7 @@ const TIP_MESSAGE = [
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
-  const { data: user } = useAuthCheckQuery({ suspense: true });
+  const { data: user } = useAuthCheckQuery();
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
@@ -253,13 +253,7 @@ const NewPost = () => {
 };
 
 const NewPostWrapper = () => {
-  return (
-    <ErrorBoundary fallback={<NotFound />}>
-      <Suspense fallback={<Loading />}>
-        <NewPost />
-      </Suspense>
-    </ErrorBoundary>
-  );
+  return <NewPost />;
 };
 
 export default NewPostWrapper;
