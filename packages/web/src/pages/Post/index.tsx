@@ -19,6 +19,7 @@ import PostDeleteModal from './components/PostDeleteModal';
 import { HEADER_HEIGHT } from '@/components/header';
 import qs from 'qs';
 import ErrorBoundaryCard from '@/components/ErrorBoundaryCard';
+import ShareButton from './components/ShareButton';
 
 const links = {
   notFound: '/notFound',
@@ -61,6 +62,7 @@ const Post = () => {
             <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
               <AnnouncementText postId={postId} mb="1rem" />
               {isAuthor && <ListButton onClick={onListOpen} />}
+              <ShareButton position={'absolute'} top={0} right={isAuthor ? '4rem' : 0} />
               {isAuthor && <DeleteButton onClick={onPostDeleteOpen} position={'absolute'} top={0} right={0} />}
             </Suspense>
           </Box>
