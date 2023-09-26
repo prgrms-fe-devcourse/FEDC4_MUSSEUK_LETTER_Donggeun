@@ -11,10 +11,6 @@ import musseuk_default from '@/assets/images/musseuk_default.png';
 import MusseukItem from './components/MusseukItem';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import { Suspense } from 'react';
-import Loading from '@/components/Loading';
-import { ErrorBoundary } from 'react-error-boundary';
-import NotFound from '@/pages/NotFound';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
@@ -142,9 +138,6 @@ const NewPost = () => {
         <Text marginBottom={'1.5rem'} textAlign={'end'} color={'gray'} fontSize="16px">
           {musseukTitle.length}/20자
         </Text>
-        <Text marginBottom={'1.5rem'} textAlign={'end'} color={'gray'} fontSize="16px">
-          {musseukTitle.length}/20자
-        </Text>
         <HStack>
           <Box bg={'green01'} borderRadius={20} px={3}>
             <Text fontWeight={'bold'} color={'white'}>
@@ -169,9 +162,6 @@ const NewPost = () => {
           <Image
             w="100%"
             maxW="25rem"
-            mt={{
-              '2xs': '2rem'
-            }}
             margin="auto"
             src={MUSSEUK[selected].src || musseuk_semicolon}
             alt="musseukImage"
@@ -213,9 +203,6 @@ const NewPost = () => {
           placeholder="머쓱이에 대한 소개를 작성해주세요"
           resize="none"
         />
-        <Text marginBottom={'2rem'} textAlign={'end'} color={'gray'} fontSize="16px">
-          {musseukIntroduce.length}/80자
-        </Text>
         <Text marginBottom={'2rem'} textAlign={'end'} color={'gray'} fontSize="16px">
           {musseukIntroduce.length}/80자
         </Text>
