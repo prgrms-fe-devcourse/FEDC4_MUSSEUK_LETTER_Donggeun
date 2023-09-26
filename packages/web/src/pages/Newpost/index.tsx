@@ -162,7 +162,6 @@ const NewPost = () => {
           <Image
             w="100%"
             maxW="25rem"
-            margin="auto"
             src={MUSSEUK[selected].src || musseuk_semicolon}
             alt="musseukImage"
             m={'auto'}
