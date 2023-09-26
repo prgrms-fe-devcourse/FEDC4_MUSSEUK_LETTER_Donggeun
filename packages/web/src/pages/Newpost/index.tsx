@@ -11,10 +11,6 @@ import musseuk_default from '@/assets/images/musseuk_default.png';
 import MusseukItem from './components/MusseukItem';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import { Suspense } from 'react';
-import Loading from '@/components/Loading';
-import { ErrorBoundary } from 'react-error-boundary';
-import NotFound from '@/pages/NotFound';
 
 const channelId = import.meta.env.VITE_CHANNEL_ID;
 
@@ -77,7 +73,7 @@ const TIP_MESSAGE = [
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
-  const { data: user } = useAuthCheckQuery({ suspense: true });
+  const { data: user } = useAuthCheckQuery();
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');
@@ -164,6 +160,8 @@ const NewPost = () => {
         </Text>
         <Box margin="auto" p={4} h={'90vw'} maxH={'25rem'} w={'90vw'} maxW={'25rem'} position={'relative'}>
           <Image
+            w="100%"
+            maxW="25rem"
             src={MUSSEUK[selected].src || musseuk_semicolon}
             alt="musseukImage"
             m={'auto'}
@@ -241,13 +239,7 @@ const NewPost = () => {
 };
 
 const NewPostWrapper = () => {
-  return (
-    <ErrorBoundary fallback={<NotFound />}>
-      <Suspense fallback={<Loading />}>
-        <NewPost />
-      </Suspense>
-    </ErrorBoundary>
-  );
+  return <NewPost />;
 };
 
 export default NewPostWrapper;

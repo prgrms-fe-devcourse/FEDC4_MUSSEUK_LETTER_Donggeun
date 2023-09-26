@@ -51,7 +51,7 @@ const Post = () => {
     <ErrorBoundaryCard>
       <CommentInfoProvider>
         <VStack
-          p="2rem 2rem 5rem 2rem"
+          p={{ base: '1rem 1rem 3rem 1rem', md: '2rem 2rem 5rem 2rem' }}
           minH={`calc(100% - ${HEADER_HEIGHT})`}
           backgroundColor="bg01"
           backgroundImage={BackgroundHome}
@@ -62,7 +62,11 @@ const Post = () => {
             <Suspense fallback={<SkeletonText noOfLines={2} skeletonHeight={'2rem'} maxW={'45rem'} spacing={'1rem'} />}>
               <AnnouncementText postId={postId} mb="1rem" />
               {isAuthor && <ListButton onClick={onListOpen} />}
-              <ShareButton position={'absolute'} top={0} right={isAuthor ? '4rem' : 0} />
+              <ShareButton
+                position={'absolute'}
+                top={{ base: isAuthor ? '4rem' : 0, md: 0 }}
+                right={isAuthor ? { base: 0, md: '4rem' } : 0}
+              />
               {isAuthor && <DeleteButton onClick={onPostDeleteOpen} position={'absolute'} top={0} right={0} />}
             </Suspense>
           </Box>
