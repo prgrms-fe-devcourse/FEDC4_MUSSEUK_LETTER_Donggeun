@@ -12,7 +12,9 @@ const AccordionItems = ({ nickname, content }: Pick<CommentField, 'nickname' | '
           <AccordionIcon w={'24px'} h={'24px'} />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>{content}</AccordionPanel>
+      <AccordionPanel pb={4} whiteSpace={'pre-wrap'}>
+        {content}
+      </AccordionPanel>
     </AccordionItem>
   );
 };
