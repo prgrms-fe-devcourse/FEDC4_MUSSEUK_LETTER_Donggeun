@@ -10057,7 +10057,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tanstack/react-query", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.35.3"],\
             ["@tanstack/react-query-devtools", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.35.3"],\
             ["@toss/async-boundary", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:1.4.4"],\
-            ["@types/lodash", "npm:4.14.198"],\
             ["@types/node", "npm:20.6.3"],\
             ["@types/qs", "npm:6.9.8"],\
             ["@types/react", "npm:18.2.22"],\
