@@ -12,7 +12,7 @@ const LinkTemplate = ({ children }: { children: React.ReactNode }) => {
       justifyContent="space-around"
       alignItems="center"
       transition="color 0.2s"
-      gap="1"
+      gap="2"
       fontSize="sm"
       textAlign="center">
       {children}
