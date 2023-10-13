@@ -14,6 +14,11 @@ declare namespace NodeJS {
     SLACK_HOOK_ENDPOINT: string;
     SLACK_BOT_TOKEN: string;
     SLACK_SIGNING_SECRET: string;
-    SESSION_SECRET: string;
+    DB_DATABASE: string;
+    LOCAL_DB_USERNAME: string;
+    LOCAL_DB_PASSWORD: string;
+    DEPLOY_DB_HOST: string;
+    DEPLOY_DB_USERNAME: string;
+    DEPLOY_DB_PASSWORD: string;
   }
 }
