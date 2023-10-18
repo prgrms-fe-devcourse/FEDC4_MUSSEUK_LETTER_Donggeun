@@ -5,8 +5,16 @@ const WhiteCard = ({ children, ...props }: FlexProps) => {
   return (
     <Flex
       {...props}
-      px={['8', '16', '24']}
-      py={['6', '8', '12']}
+      px={{
+        base: '8',
+        sm: '16',
+        md: '24'
+      }}
+      py={{
+        base: '6',
+        sm: '8',
+        md: '12'
+      }}
       w="100%"
       maxW="xl"
       minH="3xl"
