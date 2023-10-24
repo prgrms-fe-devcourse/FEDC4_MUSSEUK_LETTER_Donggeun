@@ -22,7 +22,7 @@ const CommentListModal = ({
 }: Pick<UseDisclosureReturn, 'isOpen' | 'onClose'> & { comments: Comment[] }) => {
   return (
     <BasicModal isOpen={isOpen} onClose={onClose}>
-      <ModalContent borderRadius={20} h={'25rem'}>
+      <ModalContent borderRadius={20} h={'25rem'} m="0.5rem">
         <ModalCloseButton size={'lg'} top={3} color={'white'} zIndex={1} />
         <ModalHeader h={'4rem'} p={0} bgImage={headerImage} borderTopLeftRadius={20} borderTopRightRadius={20}>
           <Box w={'100%'} h={'100%'} position={'relative'}>
