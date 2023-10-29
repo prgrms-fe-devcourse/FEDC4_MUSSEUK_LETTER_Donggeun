@@ -24,6 +24,7 @@ jobs:
 
       - name: Setting .env
         run: |
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
           echo "PORT=${{ secrets.PORT }}" >> .env
           echo "LOCAL_API_ENDPOINT=${{ secrets.LOCAL_API_ENDPOINT }}" >> .env
           echo "DEPLOY_API_ENDPOINT=${{ secrets.DEPLOY_API_ENDPOINT }}" >> .env
@@ -49,6 +50,8 @@ jobs:
           echo "DEPLOY_DB_HOST=${{ secrets.DEPLOY_DB_HOST }}" >> .env
           echo "DEPLOY_DB_USERNAME=${{ secrets.DEPLOY_DB_USERNAME }}" >> .env
           echo "DEPLOY_DB_PASSWORD=${{ secrets.DEPLOY_DB_PASSWORD }}" >> .env
+
+          cat .env
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v4
