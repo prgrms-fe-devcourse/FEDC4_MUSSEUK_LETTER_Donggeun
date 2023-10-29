@@ -61,7 +61,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Compress Files
-        run: tar cvfz ./$GITHUB_SHA.gz dist appspec.yml scripts/*
+        run: tar cvfz ./$GITHUB_SHA.gz dist scripts appspec.yml .env package.json
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
