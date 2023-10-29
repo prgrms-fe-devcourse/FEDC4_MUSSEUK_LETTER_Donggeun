@@ -19,7 +19,7 @@ jobs:
           node-version: 18.x
 
       - run: yarn
-      - run: yarn slack build --if-present
+      - run: yarn slack build
 
       - name: Setting .env
         run: |
