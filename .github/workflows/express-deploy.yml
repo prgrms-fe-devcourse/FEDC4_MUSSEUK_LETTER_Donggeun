@@ -69,4 +69,4 @@ jobs:
           --application-name ${{secrets.AWS_BACKEND_CODEDEPLOY_APPLICATION_NAME}}
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name ${{secrets.AWS_BACKEND_CODEDEPLOY_GROUP_NAME}}
-          --s3-location bucket=${{secrets.AWS_BACKEND_S3_BUCKET}}, bundleType=tgz, key=${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
+          --s3-location bucket=${{secrets.AWS_BACKEND_S3_BUCKET}},bundleType=tgz,key=${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
