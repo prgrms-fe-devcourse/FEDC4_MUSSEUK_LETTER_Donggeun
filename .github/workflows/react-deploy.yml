@@ -1,0 +1,37 @@
+name: React App CI/CD
+
+on:
+  push:
+    branches: ['feature/210-react-ci']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Setting .env
+        run: |
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "VITE_API_ENDPOINT=${{ secrets.VITE_API_ENDPOINT }}" >> .env
+          echo "VITE_SLACK_API_ENDPOINT=${{ secrets.VITE_SLACK_API_ENDPOINT }}" >> .env
+          echo "VITE_CHANNEL_ID=${{ secrets.VITE_CHANNEL_ID }}" >> .env
+          echo "VITE_SLACK_ID_DESCRIPTION=${{ secrets.VITE_SLACK_ID_DESCRIPTION }}" >> .env
+
+      - run: yarn
+      - run: yarn web build
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 packages/web/dist s3://${{secrets.AWS_CLIENT_S3_BUCKET}}
