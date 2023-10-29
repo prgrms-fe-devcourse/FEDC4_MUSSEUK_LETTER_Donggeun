@@ -5,8 +5,6 @@ import { AUTH_TOKEN } from '@/constants/storageKey';
 const baseURL = import.meta.env.VITE_API_ENDPOINT;
 const slackURL = import.meta.env.VITE_SLACK_API_ENDPOINT;
 
-console.log(baseURL);
-
 export const baseInstance = axios.create({ baseURL });
 export const authInstance = axios.create({ baseURL });
 export const formDataInstance = axios.create({ baseURL });
