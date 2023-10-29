@@ -7,9 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/slack/
+    # defaults:
+    #   run:
+    #     working-directory: ./packages/slack/
     steps:
       - uses: actions/checkout@v3
 
@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 18.x
 
-      - run: yarn install
-      - run: yarn build
+      - run: yarn
+      - run: yarn slack build
       - run: ls -al
 
       - name: Setting .env
@@ -51,7 +51,8 @@ jobs:
           echo "DEPLOY_DB_USERNAME=${{ secrets.DEPLOY_DB_USERNAME }}" >> .env
           echo "DEPLOY_DB_PASSWORD=${{ secrets.DEPLOY_DB_PASSWORD }}" >> .env
 
-          cat .env
+          mv -r .env packages/slack/.env
+          cat packages/slack/.env
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -61,7 +62,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Compress Files
-        run: tar cvfz ./$GITHUB_SHA.gz dist scripts appspec.yml .env package.json
+        run: tar cvfz ./$GITHUB_SHA.gz package.json yarn.lock .yarnrc.yml .yarn packages/slack
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
