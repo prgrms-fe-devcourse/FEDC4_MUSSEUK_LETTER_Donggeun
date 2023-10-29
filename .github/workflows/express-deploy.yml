@@ -51,7 +51,7 @@ jobs:
           echo "DEPLOY_DB_USERNAME=${{ secrets.DEPLOY_DB_USERNAME }}" >> .env
           echo "DEPLOY_DB_PASSWORD=${{ secrets.DEPLOY_DB_PASSWORD }}" >> .env
 
-          mv -r .env packages/slack/.env
+          mv .env packages/slack/.env
           cat packages/slack/.env
 
       - name: AWS configure credentials
