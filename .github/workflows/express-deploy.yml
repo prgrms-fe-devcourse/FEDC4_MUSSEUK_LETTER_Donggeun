@@ -56,6 +56,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_BACKEND_SECRET_KEY }}
           aws-region: ap-northeast-2
 
+      - name: Compress Files
+        run: tar cvfz ./$GITHUB_SHA.gz ./packages/slack/dist
+
+      - run: ls -al
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/$GITHUB_SHA.gz
+
       # - uses: awact/s3-action@master
       #   with:
       #     args: --acl public-read --follow-symlinks --delete
