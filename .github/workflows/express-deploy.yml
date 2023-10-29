@@ -1,0 +1,64 @@
+name: Express CI/CD
+
+on:
+  push:
+    branches: ['feature/208-express-workflow']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/slack/
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - run: yarn
+      - run: yarn slack build --if-present
+
+      - name: Setting .env
+        run: |
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "LOCAL_API_ENDPOINT=${{ secrets.LOCAL_API_ENDPOINT }}" >> .env
+          echo "DEPLOY_API_ENDPOINT=${{ secrets.DEPLOY_API_ENDPOINT }}" >> .env
+
+          echo "LOCAL_CLIENT_ENDPOINT=${{ secrets.LOCAL_CLIENT_ENDPOINT }}" >> .env
+          echo "DEPLOY_CLIENT_ENDPOINT=${{ secrets.DEPLOY_CLIENT_ENDPOINT }}" >> .env
+
+          echo "LOCAL_REDIS_ENDPOINT=${{ secrets.LOCAL_REDIS_ENDPOINT }}" >> .env
+          echo "DEPLOY_REDIS_ENDPOINT=${{ secrets.DEPLOY_REDIS_ENDPOINT }}" >> .env
+          echo "DEPLOY_REDIS_PASSWORD=${{ secrets.DEPLOY_REDIS_PASSWORD }}" >> .env
+
+          echo "SNS_API_ENDPOINT=${{ secrets.SNS_API_ENDPOINT }}" >> .env
+
+          echo "SLACK_API_ENDPOINT=${{ secrets.SLACK_API_ENDPOINT }}" >> .env
+          echo "SLACK_HOOK_ENDPOINT=${{ secrets.SLACK_HOOK_ENDPOINT }}" >> .env
+          echo "SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}" >> .env
+          echo "SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }}" >> .env
+
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "LOCAL_DB_USERNAME=${{ secrets.LOCAL_DB_USERNAME }}" >> .env
+          echo "LOCAL_DB_PASSWORD=${{ secrets.LOCAL_DB_PASSWORD }}" >> .env
+
+          echo "DEPLOY_DB_HOST=${{ secrets.DEPLOY_DB_HOST }}" >> .env
+          echo "DEPLOY_DB_USERNAME=${{ secrets.DEPLOY_DB_USERNAME }}" >> .env
+          echo "DEPLOY_DB_PASSWORD=${{ secrets.DEPLOY_DB_PASSWORD }}" >> .env
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_BACKEND_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_BACKEND_SECRET_KEY }}
+          aws-region: ap-northeast-2
+
+      - uses: awact/s3-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          SOURCE_DIR: './packages/slack/dist'
+          AWS_S3_BUCKET: ${{ secrets.AWS_BACKEND_S3_BUCKET }}
