@@ -7,9 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: ./packages/slack/
+    defaults:
+      run:
+        working-directory: ./packages/slack/
     steps:
       - uses: actions/checkout@v3
 
@@ -19,7 +19,7 @@ jobs:
           node-version: 18.x
 
       - run: yarn
-      - run: yarn slack build
+      - run: yarn build
 
       - name: Setting .env
         run: |
@@ -58,8 +58,6 @@ jobs:
 
       - name: Compress Files
         run: tar cvfz ./$GITHUB_SHA.gz ./packages/slack/dist
-
-      - run: ls -al
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
