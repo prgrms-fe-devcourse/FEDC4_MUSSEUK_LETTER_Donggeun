@@ -54,6 +54,11 @@ jobs:
           mv .env packages/slack/.env
           cat packages/slack/.env
 
+      - name: Move appspec.yml
+        run: |
+          mv packages/slack/appspec.yml appspec.yml
+          mv packages/slack/scripts scripts
+
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
