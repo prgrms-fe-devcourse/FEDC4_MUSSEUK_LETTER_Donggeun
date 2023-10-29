@@ -67,7 +67,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Compress Files
-        run: tar cvfz ./$GITHUB_SHA.gz packages/slack scripts appspec.yml package.json yarn.lock .yarnrc.yml .yarn
+        run: tar cvfz ./$GITHUB_SHA.gz packages/common packages/slack scripts appspec.yml package.json yarn.lock .yarnrc.yml .yarn
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
