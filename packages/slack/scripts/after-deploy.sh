@@ -5,4 +5,4 @@ cd $REPOSITORY
 
 /usr/bin/yarn
 
-/usr/bin/pm2 start dist
+/usr/bin/pm2 start "yarn start"
