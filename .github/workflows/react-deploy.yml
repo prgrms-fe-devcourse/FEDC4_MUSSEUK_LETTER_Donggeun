@@ -23,7 +23,8 @@ jobs:
           echo "VITE_CHANNEL_ID=${{ secrets.VITE_CHANNEL_ID }}" >> .env
           echo "VITE_SLACK_ID_DESCRIPTION=${{ secrets.VITE_SLACK_ID_DESCRIPTION }}" >> .env
 
-          cat .env
+          mv .env packages/web/.env
+          cat packages/web/.env
 
       - run: yarn
       - run: yarn web build
