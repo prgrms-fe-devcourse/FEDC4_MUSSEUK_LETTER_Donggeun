@@ -26,14 +26,21 @@ jobs:
       - run: yarn
       - run: yarn web build
 
-      - name: AWS configure credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - uses: awact/s3-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
-          aws-region: ap-northeast-2
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          SOURCE_DIR: './packages/web/dist'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_S3_BUCKET: ${{ secrets.AWS_CLIENT_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
 
-      - run: ls -al packages/web/dist
-
-      - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 packages/web/dist s3://${{secrets.AWS_CLIENT_S3_BUCKET}} --acl public-read --follow-symlinks --recursive
+      # - name: Invalidate CloudFront
+      #   uses: chetan/invalidate-cloudfront-action@v2
+      #   env:
+      #     DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_ID }}
+      #     PATHS: '/*'
+      #     AWS_REGION: 'ap-northeast-2'
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
