@@ -7,9 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/slack/
+    # defaults:
+    #   run:
+    #     working-directory: ./packages/slack/
     steps:
       - uses: actions/checkout@v3
 
@@ -56,9 +56,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_BACKEND_SECRET_KEY }}
           aws-region: ap-northeast-2
 
-      - uses: awact/s3-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-        env:
-          SOURCE_DIR: './packages/slack/dist'
-          AWS_S3_BUCKET: ${{ secrets.AWS_BACKEND_S3_BUCKET }}
+      # - uses: awact/s3-action@master
+      #   with:
+      #     args: --acl public-read --follow-symlinks --delete
+      #   env:
+      #     SOURCE_DIR: './packages/slack/dist'
+      #     AWS_S3_BUCKET: ${{ secrets.AWS_BACKEND_S3_BUCKET }}
