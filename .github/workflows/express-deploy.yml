@@ -18,8 +18,9 @@ jobs:
         with:
           node-version: 18.x
 
-      - run: yarn
+      - run: yarn install
       - run: yarn build
+      - run: ls -al
 
       - name: Setting .env
         run: |
