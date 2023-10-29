@@ -10,9 +10,9 @@ permissions:
     pattern: '**'
     owner: ubuntu
     group: ubuntu
-    mode: 755
 
 hooks:
   AfterInstall:
     - location: scripts/after-deploy.sh
       timeout: 300
+      runas: ubuntu
