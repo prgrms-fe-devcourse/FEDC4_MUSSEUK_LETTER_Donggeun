@@ -2,7 +2,7 @@ name: Express CI/CD
 
 on:
   push:
-    branches: ['feature/208-express-workflow']
+    branches: ['main']
 
 jobs:
   build:
