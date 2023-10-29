@@ -36,11 +36,11 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
 
-      # - name: Invalidate CloudFront
-      #   uses: chetan/invalidate-cloudfront-action@v2
-      #   env:
-      #     DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_ID }}
-      #     PATHS: '/*'
-      #     AWS_REGION: 'ap-northeast-2'
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CLIENT_CLOUDFRONT_ID }}
+          PATHS: '/*'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
