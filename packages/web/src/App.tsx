@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/post/:postId" element={<Post />} />
           <Route path="/newpost" element={<NewPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/search/:keyword" element={<Search />} />
+          <Route path="/search/*" element={<Search />} />
           <Route path="/setting/slack" element={<SettingSlack />} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/setting/slack/confirmation" element={<SlackConfirmationWrapper />} />
