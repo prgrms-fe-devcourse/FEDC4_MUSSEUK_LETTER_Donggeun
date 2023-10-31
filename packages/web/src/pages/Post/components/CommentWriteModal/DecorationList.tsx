@@ -13,9 +13,9 @@ import { UseFormSetValue } from 'react-hook-form';
 import { CommentField, DecorationType } from 'common/types';
 
 type DecorationListProps = {
-  isError: boolean;
-  setValue: UseFormSetValue<CommentField>;
-  setIsError: Dispatch<SetStateAction<boolean>>;
+  isError?: boolean;
+  setValue?: UseFormSetValue<CommentField>;
+  setIsError?: Dispatch<SetStateAction<boolean>>;
 } & BoxProps;
 
 const DecorationList = forwardRef<HTMLInputElement, DecorationListProps>(
@@ -23,8 +23,8 @@ const DecorationList = forwardRef<HTMLInputElement, DecorationListProps>(
     const { getRadioProps, getRootProps } = useRadioGroup({
       name: 'decorationImageName',
       onChange: (value) => {
-        setValue('decorationImageName', value as DecorationType);
-        setIsError(false);
+        setValue?.('decorationImageName', value as DecorationType);
+        setIsError?.(false);
       }
     });
 

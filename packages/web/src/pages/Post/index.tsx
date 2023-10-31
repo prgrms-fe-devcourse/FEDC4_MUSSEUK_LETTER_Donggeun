@@ -20,6 +20,7 @@ import { HEADER_HEIGHT } from '@/components/header';
 import qs from 'qs';
 import ErrorBoundaryCard from '@/components/ErrorBoundaryCard';
 import ShareButton from './components/ShareButton';
+import CommentWriteDrawer from './components/CommentWriteDrawer';
 
 const links = {
   notFound: '/notFound',
@@ -77,7 +78,8 @@ const Post = () => {
             <Introduction postId={postId} />
           </Suspense>
         </VStack>
-        <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} />
+        <CommentWriteDrawer isOpen={isWriteOpen} onOpen={onWriteOpen} onClose={onWriteClose} postId={postId} />
+        {/* <CommentWriteModal isOpen={isWriteOpen} onClose={onWriteClose} postId={postId} /> */}
         <CommentInfoModal isOpen={isInfoOpen} onClose={onInfoClose} />
         <CommentListModal isOpen={isListOpen} onClose={onListClose} comments={postData?.comments ?? []} />
         <PostDeleteModal isOpen={isPostDeleteOpen} onClose={onPostDeleteClose} postId={postId} />
