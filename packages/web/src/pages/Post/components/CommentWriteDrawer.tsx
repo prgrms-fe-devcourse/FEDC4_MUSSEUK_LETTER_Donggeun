@@ -54,15 +54,20 @@ const CommentWriteDrawer = ({ isOpen, onOpen, onClose, postId }: CommentWriteDra
             </TabList>
             <TabPanels>
               <TabPanel>
-                <DrawerBody>
+                <DrawerBody
+                  textAlign={'center'}
+                  display={'flex'}
+                  flexDir={'column'}
+                  alignItems={'center'}
+                  h={'15rem'}
+                  overflowY={'auto'}>
                   <Suspense fallback={<IntroductionSkeleton />}>
                     <Introduction postId={postId} />
                   </Suspense>
                 </DrawerBody>
-                <DrawerFooter>
-                  <Button mr="1.5rem">돌아가기</Button>
-                  <Button type="submit" form="write" colorScheme="primary" loadingText={'작성 중..'}>
-                    작성하기
+                <DrawerFooter display={'flex'} justifyContent={'center'}>
+                  <Button colorScheme="primary" w={'15rem'} h={'3rem'} fontSize={20}>
+                    편지 작성하기
                   </Button>
                 </DrawerFooter>
               </TabPanel>
