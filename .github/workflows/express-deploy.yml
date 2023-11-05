@@ -2,7 +2,7 @@ name: Express CI/CD
 
 on:
   push:
-    branches: ['main']
+    branches: ['feature/208-express-workflow']
 
 jobs:
   build:
@@ -27,6 +27,7 @@ jobs:
 
           echo "LOCAL_CLIENT_ENDPOINT=${{ secrets.LOCAL_CLIENT_ENDPOINT }}" >> .env
           echo "DEPLOY_CLIENT_ENDPOINT=${{ secrets.DEPLOY_CLIENT_ENDPOINT }}" >> .env
+          echo "DEPLOY_CLIENT_ENDPOINT_LEGACY=${{ secrets.DEPLOY_CLIENT_ENDPOINT_LEGACY }}" >> .env
 
           echo "LOCAL_REDIS_ENDPOINT=${{ secrets.LOCAL_REDIS_ENDPOINT }}" >> .env
           echo "DEPLOY_REDIS_ENDPOINT=${{ secrets.DEPLOY_REDIS_ENDPOINT }}" >> .env

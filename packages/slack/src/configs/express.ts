@@ -7,7 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const whitelist = [process.env.LOCAL_CLIENT_ENDPOINT, process.env.DEPLOY_CLIENT_ENDPOINT];
+const whitelist = [
+  process.env.LOCAL_CLIENT_ENDPOINT,
+  process.env.DEPLOY_CLIENT_ENDPOINT,
+  process.env.DEPLOY_CLIENT_ENDPOINT_LEGACY
+];
 
 app.use(
   cors({
