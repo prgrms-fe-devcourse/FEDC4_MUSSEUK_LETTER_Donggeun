@@ -31,7 +31,7 @@ const DecorationList = forwardRef<HTMLInputElement, DecorationListProps>(
     const group = getRootProps();
 
     return (
-      <Box id="decorationImageName" w={'100%'} position={'relative'} {...group}>
+      <Box id="decorationImageName" w={'100%'} maxW={'50rem'} position={'relative'} {...group}>
         <Input
           ref={ref}
           isReadOnly
