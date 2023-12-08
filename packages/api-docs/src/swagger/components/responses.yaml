@@ -1,0 +1,55 @@
+Unauthorized:
+  description: 액세스 토큰이 없거나 만료되었을 때
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+        required:
+          - message
+      example:
+        message: 로그인이 필요해요.
+
+NotFoundUser:
+  description: 해당 사용자가 없는 경우<br/>요청에 대한 권한이 없는 경우 ex) 타인의 정보 수정
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+        required:
+          - message
+      example:
+        message: 사용자를 찾을 수 없어요.
+
+NotFoundComment:
+  description: 해당 편지가 없는 경우<br/>해당 머쓱이의 편지를 읽을 권한이 없는 경우 ex) 타인이 생성한 머쓱이
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+        required:
+          - message
+      example:
+        message: 편지를 찾을 수 없어요.
+
+NotFoundPost:
+  description: 해당 머쓱이가 없는 경우<br/>요청에 대한 권한이 없는 경우 ex) 타인의 머쓱이 수정
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          message:
+            type: string
+        required:
+          - message
+      example:
+        message: 머쓱이를 찾을 수 없어요.

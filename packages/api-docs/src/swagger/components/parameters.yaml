@@ -1,0 +1,35 @@
+Authorization:
+  name: Authorization
+  in: header
+  description: 액세스 토큰
+  schema:
+    type: string
+    example: Bearer {accessToken}
+  required: true
+
+postId:
+  name: postId
+  in: path
+  description: 머쓱이의 postId
+  schema:
+    type: integer
+    format: int64
+  required: true
+
+commentId:
+  name: commentId
+  in: path
+  required: true
+  description: 편지의 commentId
+  schema:
+    type: integer
+    format: int64
+
+userId:
+  name: userId
+  in: path
+  description: 사용자의 ID
+  schema:
+    type: integer
+    format: int64
+  required: true

@@ -1,0 +1,147 @@
+get:
+  tags:
+    - 머쓱이
+  summary: 머쓱이 목록 조회
+  description: 머쓱이 목록을 조회합니다.
+  parameters:
+    - name: page
+      in: query
+      description: 페이지 번호
+      schema:
+        type: integer
+        default: 0
+    - name: orderby
+      in: query
+      description: 정렬 기준 (인기순, 최신순)
+      schema:
+        type: string
+        enum: [popular, latest]
+        default: popular
+    - name: authorId
+      in: query
+      description: 특정 유저가 작성한 머쓱이만 조회할 때 사용 (userId)
+      schema:
+        type: integer
+        default: null
+    - name: keyword
+      in: query
+      description: 특정 키워드가 제목이나 내용에 포함된 머쓱이만 조회할 때 사용
+      schema:
+        type: string
+        default: null
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../index.yaml#/components/schemas/Post'
+          example:
+            - postId: 1
+              title: 피드백 머쓱이
+              content: 저에게 피드백을 주세요
+              imageName: musseuk_default.png
+              comments:
+                - commentId: 1
+                  positionX: 55
+                  positionY: 413
+                  imageName: decoration_beer1.png
+                - commentId: 2
+                  positionX: 23
+                  positionY: 333
+                  imageName: decoration_chicken1.png
+            - postId: 2
+              title: 잡담 머쓱이
+              content: 우하하 잡담용 머쓱이에요
+              imageName: musseuk_default.png
+              comments: []
+            - postId: 3
+              title: 스터디 머쓱이
+              content: 스터디를 함께하실 분을 찾습니다
+              imageName: musseuk_default.png
+              comments:
+                - commentId: 3
+                  positionX: 55
+                  positionY: 413
+                  imageName: decoration_beer1.png
+                - commentId: 4
+                  positionX: 23
+                  positionY: 333
+                  imageName: decoration_chicken1.png
+                - commentId: 5
+                  positionX: 21
+                  positionY: 111
+                  imageName: decoration_chicken1.png
+post:
+  tags:
+    - 머쓱이
+  summary: 머쓱이 생성
+  description: 머쓱이를 생성합니다.
+  parameters:
+    - name: Authorization
+      $ref: '../../index.yaml#/components/parameters/Authorization'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+            content:
+              type: string
+            imageName:
+              type: string
+          required:
+            - title
+            - content
+            - imageName
+        example:
+          title: 피드백 머쓱이
+          content: 저에게 피드백을 주세요
+          imageName: musseuk_default.png
+  responses:
+    '201':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              postId:
+                type: integer
+            required:
+              - postId
+          example:
+            postId: 5
+    '400':
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              validation:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  content:
+                    type: string
+                  imageName:
+                    type: string
+            required:
+              - message
+          example:
+            message: 잘못된 요청이에요.
+            validation:
+              title: 제목을 입력해주세요.
+              content: 내용을 입력해주세요.
+              imageName: 테마를 선택해주세요.
+    '401':
+      $ref: '../../index.yaml#/components/responses/Unauthorized'

@@ -1,0 +1,90 @@
+User:
+  type: object
+  properties:
+    userId:
+      type: integer
+    username:
+      type: string
+    name:
+      type: string
+    introduce:
+      type: string
+    slackId:
+      type: string
+    slackWorkspace:
+      type: string
+    imageName:
+      type: string
+    postCount:
+      type: integer
+    commentCount:
+      type: integer
+  required:
+    - userId
+    - username
+    - name
+    - introduce
+    - slackId
+    - slackWorkspace
+    - imageName
+    - postCount
+    - commentCount
+
+Post:
+  type: object
+  properties:
+    postId:
+      type: integer
+    title:
+      type: string
+    content:
+      type: string
+    imageName:
+      type: string
+    comments:
+      type: array
+      items:
+        type: object
+        properties:
+          commentId:
+            type: integer
+          positionX:
+            type: integer
+          positionY:
+            type: integer
+          imageName:
+            type: string
+        required:
+          - commentId
+          - positionX
+          - positionY
+          - imageName
+  required:
+    - postId
+    - title
+    - content
+    - imageName
+    - comments
+
+Comment:
+  type: object
+  properties:
+    commentId:
+      type: integer
+    author:
+      type: string
+    content:
+      type: string
+    positionX:
+      type: integer
+    positionY:
+      type: integer
+    imageName:
+      type: string
+  required:
+    - commentId
+    - author
+    - content
+    - positionX
+    - positionY
+    - imageName

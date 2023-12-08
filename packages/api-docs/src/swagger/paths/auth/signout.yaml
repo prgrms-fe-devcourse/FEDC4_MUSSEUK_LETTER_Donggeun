@@ -1,0 +1,24 @@
+post:
+  tags:
+    - 인증 / 인가
+  summary: 로그아웃
+  description: 로그아웃 합니다.
+  parameters:
+    - name: Authorization
+      $ref: '../../index.yaml#/components/parameters/Authorization'
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          example:
+            message: 로그아웃 되었습니다.
+    '401':
+      $ref: '../../index.yaml#/components/responses/Unauthorized'

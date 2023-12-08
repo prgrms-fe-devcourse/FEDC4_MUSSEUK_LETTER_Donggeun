@@ -1,0 +1,49 @@
+put:
+  tags:
+    - 사용자
+  summary: 사용자의 슬랙 연동 계정 수정
+  description: 사용자의 슬랙 연동 계정을 수정합니다.
+  parameters:
+    - name: Authorization
+      $ref: '../../../index.yaml#/components/parameters/Authorization'
+    - name: userId
+      $ref: '../../../index.yaml#/components/parameters/userId'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: string
+          required:
+            - code
+        example:
+          code: 0a450c7161050fb7eed51560c7d16a155aa2a85da09997d192d61ef21150e155
+  responses:
+    '200':
+      description: 요청 성공
+    '400':
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              validation:
+                type: object
+                properties:
+                  code:
+                    type: string
+            required:
+              - message
+            example:
+              message: 잘못된 요청이에요.
+              validation:
+                code: 인증 코드가 만료되었어요.
+    '401':
+      $ref: '../../../index.yaml#/components/responses/Unauthorized'
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundUser'

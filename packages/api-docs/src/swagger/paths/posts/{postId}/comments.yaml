@@ -1,0 +1,85 @@
+get:
+  tags:
+    - 머쓱이
+  summary: 특정 머쓱이의 편지 목록 조회
+  description: 특정 머쓱이의 편지 목록 조회을 조회합니다.
+  parameters:
+    - name: Authorization
+      $ref: '../../../index.yaml#/components/parameters/Authorization'
+    - name: postId
+      $ref: '../../../index.yaml#/components/parameters/postId'
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../../index.yaml#/components/schemas/Comment'
+          example:
+            - commentId: 1
+              author: 우주킹왕짱
+              content: 당신에게 마음을 전해요
+              positionX: 55
+              positionY: 413
+              imageName: decoration_beer1.png
+            - commentId: 2
+              author: 댓글조작단
+              content: 영차 영차
+              positionX: 23
+              positionY: 333
+              imageName: decoration_chicken1.png
+    '401':
+      $ref: '../../../index.yaml#/components/responses/Unauthorized'
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundComment'
+
+post:
+  tags:
+    - 머쓱이
+  summary: 특정 머쓱이에게 편지 작성
+  description: 특정 머쓱이에게 편지를 작성합니다.
+  parameters:
+    - name: postId
+      $ref: '../../../index.yaml#/components/parameters/postId'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            author:
+              type: string
+            content:
+              type: string
+            positionX:
+              type: integer
+            positionY:
+              type: integer
+            imageName:
+              type: string
+          required:
+            - author
+            - content
+            - positionX
+            - positionY
+            - imageName
+        example:
+          author: 우주킹왕짱
+          content: 당신에게 마음을 전해요
+          positionX: 55
+          positionY: 413
+          imageName: decoration_beer1.png
+  responses:
+    '201':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            $ref: '../../../index.yaml#/components/schemas/Comment'
+          example:
+            commentId: 7
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundPost'
