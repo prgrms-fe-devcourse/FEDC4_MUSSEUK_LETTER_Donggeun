@@ -1,7 +1,7 @@
 ## 📮 머-쓱레터
 데브코스 내에서 익명/기명으로 편지를 보내는 SNS 서비스
 
-[➡️ 서비스 이용하기](https://fedc-4-musseuk-letter-donggeun.vercel.app/)  
+[➡️ 서비스 이용하기](https://www.musseuk-letter.site/)  
 [➡️ 노션 페이지 보러가기](https://prgrms.notion.site/SNS-9a454521e03748d8a6adb105778922b3)  
 
 ## 기획 배경
@@ -13,6 +13,44 @@
 
 사용자는 다양한 머쓱이 테마를 선택해서 친구들에게 머쓱이를 꾸며달라고 공유할 수 있습니다. 
 머쓱이에게 장식스티커를 하나하나 붙이면서 평소에 하지 못했던 **응원과 피드백의 편지를 전송해 마음을 전달**해보세요📮
+
+## 패키지
+### yarn 설치 사전 작업
+1. yarn이 활성화 되어 있지 않다면 터미널에서 corepack enable 명령어를 입력합니다. (최초 한번)
+2. vscode에 ZipFS 익스텐션이 설치되어 있지 않다면 설치해야 합니다. (yarn berry가 패키지를 zip 파일로 관리하기 때문에, vscode에서 이 내용을 가져와서 쓰려면 익스텐션이 필요합니다.)
+
+![image](https://github.com/prgrms-fe-devcourse/FEDC4_MUSSEUK_LETTER_Donggeun/assets/50488780/882a7850-2782-42b6-8ba5-cc37bc5ed079)
+
+### VsCode 타입스크립트 버전 설정
+1. 레포지토리 클론 후 프로젝트의 루트 폴더로 들어가서 터미널에 `yarn` 명령어를 입력합니다.
+2. 타입스크립트 버전을 yarn sdk와 맞추기 위해 아무 .ts 파일이나 들어가서 `cmd + shift + p` 후에 `Select TypeScript Version` 를 입력 후 `Use Workspace Version` 을 선택합니다.
+
+![image](https://github.com/prgrms-fe-devcourse/FEDC4_MUSSEUK_LETTER_Donggeun/assets/50488780/195f731d-b269-4e49-8301-a468ed0c94d0)
+
+### 프론트엔드 개발 서버 실행 방법
+1. 프론트엔드에서 사용할 `.env` 파일 내용을 `/packages/web/.env` 파일로 작성합니다.
+2. `yarn web dev` 를 입력하면 개발 서버가 실행됩니다.
+3. `yarn web build` 를 입력하면 프론트엔드 코드를 빌드합니다.
+
+### 슬랙 서버 실행 방법
+1. 슬랙 서버에서 사용할 `.env` 파일 내용을 `/packages/slack/.env` 파일로 작성합니다.
+2. `yarn slack dev` 를 입력하면 개발 서버가 실행됩니다.
+3. `yarn slack build` 를 입력하면 슬랙 서버 코드를 빌드합니다.
+4. `yarn slack start` 를 입력하면 빌드한 코드로 서버를 실행합니다.
+
+
+### 패키지 설치
+루트 디렉토리의 package.json의 scripts로 이러한 내용을 적어두었습니다:
+
+```
+"common": "yarn workspace common",
+"slack": "yarn workspace slack", // Express 앱
+"web": "yarn workspace web", // React 앱
+```
+
+- React 앱에 대해서 axios를 설치: `yarn web add axios`
+- React 앱에 대해서 axios를 제거: `yarn web remove axios`
+- Express 앱에 대해서 dotenv를 설치: `yarn slack add dotenv`
 
 ## 기술 스택
 <table>
@@ -104,13 +142,6 @@
 
 ## 팀 소개
 <table>
-  <tr>
-    <th align="center">팀원</th>
-    <th align="center">팀원</th>
-    <th align="center">팀원</th>
-    <th align="center">팀장</th> 
-    <th align="center">팀원</th>
-  </tr>
   <tr>
     <td align="center"><a href="https://github.com/from1to2"><img src="https://avatars.githubusercontent.com/from1to2" width="125px;" alt=""></a></td>
     <td align="center"><a href="https://github.com/juyeon-park"><img src="https://avatars.githubusercontent.com/juyeon-park" width="125px;" alt=""></a></td>
