@@ -2,7 +2,7 @@ name: Build Test
 
 on:
   pull_request:
-    branches: ['refactor/218-library-version']
+    branches: ['main']
 
 jobs:
   build-react:
