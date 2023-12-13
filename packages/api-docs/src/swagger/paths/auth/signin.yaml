@@ -1,0 +1,62 @@
+post:
+  tags:
+    - 인증 / 인가
+  summary: 로그인
+  description: 로그인을 합니다.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+          required:
+            - username
+            - password
+          example:
+            username: bbearcookie
+            password: 12341234
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              userId:
+                type: integer
+              accessToken:
+                type: string
+            required:
+              - userId
+              - accessToken
+            example:
+              userId: 5
+              accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm
+    '400':
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              validation:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  password:
+                    type: string
+            required:
+              - message
+          example:
+            message: 잘못된 요청이에요.
+            validation:
+              username: 해당 아이디를 가진 사용자가 없어요.
+              password: 비밀번호가 틀렸어요.

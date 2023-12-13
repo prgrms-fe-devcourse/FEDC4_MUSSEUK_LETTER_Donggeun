@@ -69,14 +69,26 @@ const SignIn = () => {
       <Heading textAlign="center">로그인</Heading>
       <Flex
         color="gray.500"
+        direction={{
+          base: 'column',
+          sm: 'row'
+        }}
         justifyContent="center"
         alignItems="center"
-        flexWrap="wrap"
-        gap="2"
         fontSize="lg"
+        gap="1"
+        wordBreak="keep-all"
         textAlign="center"
         fontWeight="light">
-        당신의 마음을 전달하는 머쓱레터 <EmailIcon />
+        <Flex justifyContent="center" alignItems="center" flexWrap="wrap" gap="1">
+          <Text>당신의</Text>
+          <Text>마음을</Text>
+        </Flex>
+        <Flex justifyContent="center" alignItems="center" flexWrap="wrap" gap="1">
+          <Text>전달하는</Text>
+          <Text>머쓱;레터</Text>
+          <EmailIcon ml="1" />
+        </Flex>
       </Flex>
       <InputField
         {...register('email')}
@@ -95,7 +107,6 @@ const SignIn = () => {
         placeholder="비밀번호를 입력해주세요"
         maxLength={30}
       />
-
       <Button
         type="submit"
         isLoading={isLoading}

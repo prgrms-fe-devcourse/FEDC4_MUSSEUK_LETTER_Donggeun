@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Swagger Playground
+  description: For Swagger Studying
+  license:
+    name: bbearcookie
+servers:
+  - url: http://localhost:5010/
+
+components:
+  parameters:
+    $ref: './components/parameters.yaml'
+  responses:
+    $ref: './components/responses.yaml'
+  schemas:
+    $ref: './components/schemas.yaml'
+
+paths:
+  /auth/signup:
+    $ref: './paths/auth/signup.yaml'
+  /auth/signin:
+    $ref: './paths/auth/signin.yaml'
+  /auth/signout:
+    $ref: './paths/auth/signout.yaml'
+  /auth/check:
+    $ref: './paths/auth/check.yaml'
+  /auth/password:
+    $ref: './paths/auth/password.yaml'
+
+  /users:
+    $ref: './paths/users/_.yaml'
+  /users/{userId}:
+    $ref: './paths/users/{userId}/_.yaml'
+  /users/{userId}/photo:
+    $ref: './paths/users/{userId}/photo.yaml'
+  /users/{userId}/slack:
+    $ref: './paths/users/{userId}/slack.yaml'
+
+  /slack/verification:
+    $ref: './paths/slack/verification/_.yaml'
+
+  /posts:
+    $ref: './paths/posts/_.yaml'
+  /posts/{postId}:
+    $ref: './paths/posts/{postId}/_.yaml'
+  /posts/{postId}/comments:
+    $ref: './paths/posts/{postId}/comments.yaml'
+
+  /comments/{commentId}:
+    $ref: './paths/comments/{commentId}/_.yaml'

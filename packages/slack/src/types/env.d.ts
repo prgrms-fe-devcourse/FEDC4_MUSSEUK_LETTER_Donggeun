@@ -6,6 +6,7 @@ declare namespace NodeJS {
     DEPLOY_API_ENDPOINT: string;
     LOCAL_CLIENT_ENDPOINT: string;
     DEPLOY_CLIENT_ENDPOINT: string;
+    DEPLOY_CLIENT_ENDPOINT_LEGACY: string;
     LOCAL_REDIS_ENDPOINT: string;
     DEPLOY_REDIS_ENDPOINT: string;
     DEPLOY_REDIS_PASSWORD: string;

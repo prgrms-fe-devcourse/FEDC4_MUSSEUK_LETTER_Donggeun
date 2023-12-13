@@ -3,6 +3,7 @@
   "packageManager": "yarn@3.6.3",
   "private": true,
   "scripts": {
+    "api-docs": "yarn workspace api-docs",
     "common": "yarn workspace common",
     "slack": "yarn workspace slack",
     "web": "yarn workspace web",
@@ -20,7 +21,7 @@
     "typescript": "^5.2.2"
   },
   "lint-staged": {
-    "packages/**/*.{cjs,js,jsx,ts,tsx}": [
+    "packages/{slack,web}/*.{cjs,js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]
