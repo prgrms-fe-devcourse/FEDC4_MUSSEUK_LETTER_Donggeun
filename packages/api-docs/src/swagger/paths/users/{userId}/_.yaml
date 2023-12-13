@@ -1,0 +1,100 @@
+get:
+  tags:
+    - 사용자
+  summary: 특정 사용자의 정보 조회
+  description: 특정 사용자의 정보를 조회합니다.
+  parameters:
+    - name: userId
+      $ref: '../../../index.yaml#/components/parameters/userId'
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            $ref: '../../../index.yaml#/components/schemas/User'
+          example:
+            userId: 1
+            username: jjanggu123
+            name: 신짱구
+            introduce: 안녕하세요 짱구에요
+            slackId: U01H9QZJX1T
+            slackWorkspace: D9D8A7A7S
+            imageName: 짱구_이미지_링크.png
+            postCount: 3
+            commentCount: 5
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundUser'
+
+put:
+  tags:
+    - 사용자
+  summary: 사용자의 정보 수정
+  description: 사용자의 정보를 수정합니다.
+  parameters:
+    - name: userId
+      in: path
+      description: 수정할 사용자의 ID
+      schema:
+        type: integer
+      required: true
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            introduce:
+              type: string
+          required:
+            - name
+            - introduce
+          example:
+            name: 신짱구
+            introduce: 저는 짱구에요
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            $ref: '../../../index.yaml#/components/schemas/User'
+          example:
+            userId: 1
+            username: jjanggu123
+            name: 신짱구
+            introduce: 저는 짱구에요
+            slackId: U01H9QZJX1T
+            slackWorkspace: D9D8A7A7S
+            imageName: 짱구_이미지_링크.png
+            postCount: 3
+            commentCount: 5
+    '400':
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              validation:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  introduce:
+                    type: string
+            required:
+              - message
+          example:
+            message: 잘못된 요청이에요.
+            validation:
+              name: 이름은 최대 ~자까지 입력할 수 있어요.
+              introduce: 한줄 소개는 최대 ~자까지 입력할 수 있어요.
+    '401':
+      $ref: '../../../index.yaml#/components/responses/Unauthorized'
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundUser'

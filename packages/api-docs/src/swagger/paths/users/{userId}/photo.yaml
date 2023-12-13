@@ -1,0 +1,17 @@
+put:
+  tags:
+    - 사용자
+  summary: 사용자의 프로필 이미지 수정 (TODO- 작업이 필요함)
+  description: 사용자의 프로필 이미지 수정를 수정합니다.
+  parameters:
+    - name: Authorization
+      $ref: '../../../index.yaml#/components/parameters/Authorization'
+    - name: userId
+      $ref: '../../../index.yaml#/components/parameters/userId'
+  responses:
+    '200':
+      description: 요청 성공
+    '401':
+      $ref: '../../../index.yaml#/components/responses/Unauthorized'
+    '404':
+      $ref: '../../../index.yaml#/components/responses/NotFoundUser'
