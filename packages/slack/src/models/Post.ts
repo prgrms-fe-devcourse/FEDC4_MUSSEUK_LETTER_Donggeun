@@ -19,6 +19,9 @@ export class Post {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt!: Date;
+
   @ManyToOne(() => User, (user) => user.posts, {
     cascade: true
   })

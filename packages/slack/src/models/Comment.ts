@@ -24,6 +24,9 @@ export class Comment {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt!: Date;
+
   @ManyToOne(() => Post, (post) => post.comments, {
     cascade: true
   })
