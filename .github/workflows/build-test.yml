@@ -1,0 +1,43 @@
+name: Build Test
+
+on:
+  pull_request:
+    branches: ['refactor/218-library-version']
+
+jobs:
+  build-react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - run: yarn
+      - run: yarn web build
+  build-express:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - run: yarn
+      - run: yarn slack build
+  build-api-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - run: yarn
+      - run: yarn api-docs build
