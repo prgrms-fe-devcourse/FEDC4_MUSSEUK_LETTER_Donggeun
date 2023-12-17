@@ -6562,6 +6562,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["cross-env", [\
+        ["npm:7.0.3", {\
+          "packageLocation": "./.yarn/cache/cross-env-npm-7.0.3-96d81820f4-26f2f3ea2a.zip/node_modules/cross-env/",\
+          "packageDependencies": [\
+            ["cross-env", "npm:7.0.3"],\
+            ["cross-spawn", "npm:7.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["cross-spawn", [\
         ["npm:7.0.3", {\
           "packageLocation": "./.yarn/cache/cross-spawn-npm-7.0.3-e4ff3e65b3-671cc7c728.zip/node_modules/cross-spawn/",\
@@ -13125,6 +13135,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:569035de073023aa8b0b5018956311b227b0a904329a09033178811fc3e35e666a9055672cf1571918d7dc6006c37bb02ee20b7a6a08428927cea962afec4a25#npm:4.0.4"],\
             ["axios", "npm:1.5.0"],\
             ["common", "workspace:packages/common"],\
+            ["cross-env", "npm:7.0.3"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.49.0"],\
             ["eslint-config-prettier", "virtual:1b917b2da6b3def34adb6c9b40e49acd7bec77e25b6699671015c78090fe3389e20abb9a43a0b2749c46b1386d93e20a51cc3b06b0dfc93dc635cb2b3bd20d5b#npm:9.0.0"],\

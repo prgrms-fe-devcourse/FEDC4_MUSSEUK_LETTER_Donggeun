@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Swagger Playground
-  description: For Swagger Studying
+  title: Musseuk
+  description: Musseuk Letter API Docs
   license:
     name: bbearcookie
 servers:
