@@ -1,6 +1,6 @@
 import { Handler } from 'express';
 import { z } from 'zod';
-import slack from '@/apis/slack';
+import slack from '@/_apis/slack';
 import { SLACK_WORKSPACE } from 'common/constants/slack';
 import { zodValidator } from '@/utils/zod';
 import { makeRandomString } from '@/utils/crypto';

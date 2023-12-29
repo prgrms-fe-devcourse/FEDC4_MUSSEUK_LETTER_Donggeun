@@ -1,4 +1,4 @@
-import { SnsApiInstance } from '@/apis/instance';
+import { SnsApiInstance } from '@/_apis/instance';
 import { PostResponse } from 'common/types/raws';
 import parsePost from 'common/utils/parsePost';
 

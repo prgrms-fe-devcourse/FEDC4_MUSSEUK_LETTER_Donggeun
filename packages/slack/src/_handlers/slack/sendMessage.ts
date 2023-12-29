@@ -1,7 +1,7 @@
 import { Handler } from 'express';
 import { z } from 'zod';
-import snsApi from '@/apis/sns';
-import slackApi from '@/apis/slack';
+import snsApi from '@/_apis/sns';
+import slackApi from '@/_apis/slack';
 import { zodValidator } from '@/utils/zod';
 import type { Post, Comment } from 'common/types';
 

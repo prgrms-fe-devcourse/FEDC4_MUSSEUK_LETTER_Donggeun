@@ -2,7 +2,7 @@ import 'dotenv/config';
 import '@/configs/redis';
 import app from '@/configs/express';
 import AppDataSource from '@/configs/database';
-import router from '@/routes';
+import router from '@/_routes';
 
 const PORT = process.env.PORT;
 
@@ -13,5 +13,5 @@ AppDataSource.initialize()
   .catch((err) => console.log(err));
 
 app.listen(PORT, () => {
-  console.log(`Server is running in ${PORT} port.`);
+  console.log(`Server is running in http://localhost:${PORT}`);
 });

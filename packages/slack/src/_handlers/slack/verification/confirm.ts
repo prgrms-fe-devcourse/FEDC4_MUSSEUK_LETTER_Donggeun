@@ -1,6 +1,6 @@
 import { Handler } from 'express';
 import { z } from 'zod';
-import snsApi from '@/apis/sns';
+import snsApi from '@/_apis/sns';
 import { zodValidator } from '@/utils/zod';
 import { makeRandomString } from '@/utils/crypto';
 import redis from '@/utils/redis';

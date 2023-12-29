@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
-import sendMessageHandler from '@/handlers/slack/sendMessage';
-import { generateHandler, confirmHandler, findUserHandler } from '@/handlers/slack/verification';
+import sendMessageHandler from '@/_handlers/slack/sendMessage';
+import { generateHandler, confirmHandler, findUserHandler } from '@/_handlers/slack/verification';
 
 const router = express.Router();
 

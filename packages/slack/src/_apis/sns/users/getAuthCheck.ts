@@ -1,5 +1,5 @@
-import { SnsApiInstance } from '@/apis/instance';
-import { HEADERS_AUTHORIZATION } from '@/apis/sns';
+import { SnsApiInstance } from '@/_apis/instance';
+import { HEADERS_AUTHORIZATION } from '@/_apis/sns';
 import { UserResponse } from 'common/types/raws';
 import parseUser from 'common/utils/parseUser';
 
