@@ -1,15 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AnyZodObject } from 'zod';
 
-export type Validator = Record<
-  string,
-  Partial<{
-    params: AnyZodObject;
-    query: AnyZodObject;
-    body: AnyZodObject;
-  }>
->;
-
 /**
  * Zod Schema로 Body, Query, Params를 검증하는 미들웨어
  * @param schema 검증할 스키마

@@ -1,8 +1,6 @@
-// 여기에서 zod로 validation 한다.
 import { z } from 'zod';
-import { type Validator } from '@/utils/validator';
 
-const authValidator: Validator = {
+const authValidator = {
   signup: {
     body: z.object({
       username: z
@@ -30,7 +28,17 @@ const authValidator: Validator = {
       username: z.string(),
       password: z.string()
     })
+  },
+  password: {
+    body: z.object({
+      password: z
+        .string({
+          required_error: '비밀번호를 입력해주세요.'
+        })
+        .min(8, '8글자 이상으로만 입력할 수 있습니다.')
+        .refine((value) => /\d/.test(value), '숫자를 반드시 포함해야 합니다.')
+    })
   }
-};
+} as const;
 
 export default authValidator;
