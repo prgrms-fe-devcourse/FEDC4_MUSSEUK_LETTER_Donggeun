@@ -3,10 +3,12 @@ import '@/configs/redis';
 import app from '@/configs/express';
 import AppDataSource from '@/configs/database';
 import router from '@/_routes';
+import authController from '@/domains/auth/auth.controller';
 
 const PORT = process.env.PORT;
 
 app.use('/', router);
+app.use('/auth', authController);
 
 AppDataSource.initialize()
   .then(() => console.log('Database connected!'))

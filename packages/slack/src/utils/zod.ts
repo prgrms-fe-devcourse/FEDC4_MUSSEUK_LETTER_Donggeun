@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { z, AnyZodObject, ZodTypeAny } from 'zod';
 
 /**
- * Zod Schema로 Body, Query, Params를 검증하는 미들웨어
+ * Zod Schema로 Body, Query, Params를 검증하는 미들웨어 (deprecated)
+ * (현재 deprecated 되어 있습니다. @/utils/validator를 사용해주세요.)
  */
 export const zodValidator = (schema: AnyZodObject) => async (req: Request, res: Response, next: NextFunction) => {
   try {
