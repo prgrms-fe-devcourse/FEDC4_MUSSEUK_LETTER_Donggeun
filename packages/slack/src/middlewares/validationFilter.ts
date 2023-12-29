@@ -1,3 +1,4 @@
+import { ValidationError } from '@/utils/ResponseError';
 import { Request, Response, NextFunction } from 'express';
 import { AnyZodObject } from 'zod';
 
@@ -5,7 +6,7 @@ import { AnyZodObject } from 'zod';
  * Zod Schema로 Body, Query, Params를 검증하는 미들웨어
  * @param schema 검증할 스키마
  */
-export const validator =
+export const validationFilter =
   (schema: Partial<{ params: AnyZodObject; query: AnyZodObject; body: AnyZodObject }>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     const results = {
@@ -34,8 +35,6 @@ export const validator =
           }))
       );
 
-      return res.status(400).json({
-        validation: errorResult.reduce((acc, curr) => ({ ...acc, ...curr }), {})
-      });
+      throw new ValidationError(errorResult.reduce((acc, curr) => ({ ...acc, ...curr }), {}));
     }
   };
