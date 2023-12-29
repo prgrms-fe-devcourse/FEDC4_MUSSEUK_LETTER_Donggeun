@@ -2,13 +2,13 @@ import 'dotenv/config';
 import '@/configs/redis';
 import app from '@/configs/express';
 import AppDataSource from '@/configs/database';
-import router from '@/_routes';
-import authController from '@/domains/auth/auth.controller';
+import routerLegacy from './_router_legacy';
+import router from './router';
 
 const PORT = process.env.PORT;
 
+app.use('/', routerLegacy);
 app.use('/', router);
-app.use('/auth', authController);
 
 AppDataSource.initialize()
   .then(() => console.log('Database connected!'))

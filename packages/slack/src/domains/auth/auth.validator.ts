@@ -24,6 +24,12 @@ const authValidator: Validator = {
         .min(2, '실명을 최소 2글자 이상으로만 입력할 수 있습니다.')
         .max(4, '실명은 최대 4글자까지만 입력할 수 있습니다.')
     })
+  },
+  signin: {
+    body: z.object({
+      username: z.string(),
+      password: z.string()
+    })
   }
 };
 
