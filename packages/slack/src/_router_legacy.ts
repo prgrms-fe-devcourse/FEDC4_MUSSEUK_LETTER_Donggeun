@@ -1,3 +1,7 @@
+/**
+ * @file 이 파일은 추후 리팩토링이 완성되면 삭제될 예정입니다.
+ */
+
 import express from 'express';
 import sendMessageHandler from '@/_handlers/slack/sendMessage';
 import { generateHandler, confirmHandler, findUserHandler } from '@/_handlers/slack/verification';
