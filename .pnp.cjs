@@ -4770,20 +4770,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/cors", [\
-        ["npm:2.8.14", {\
-          "packageLocation": "./.yarn/cache/@types-cors-npm-2.8.14-28a22a5678-119b8ea576.zip/node_modules/@types/cors/",\
+        ["npm:2.8.17", {\
+          "packageLocation": "./.yarn/cache/@types-cors-npm-2.8.17-2556d16051-469bd85e29.zip/node_modules/@types/cors/",\
           "packageDependencies": [\
-            ["@types/cors", "npm:2.8.14"],\
+            ["@types/cors", "npm:2.8.17"],\
             ["@types/node", "npm:20.6.3"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@types/crypto-js", [\
-        ["npm:4.1.2", {\
-          "packageLocation": "./.yarn/cache/@types-crypto-js-npm-4.1.2-450346db06-9a39c66271.zip/node_modules/@types/crypto-js/",\
+        ["npm:4.2.1", {\
+          "packageLocation": "./.yarn/cache/@types-crypto-js-npm-4.2.1-e032b646fb-2111fb39a8.zip/node_modules/@types/crypto-js/",\
           "packageDependencies": [\
-            ["@types/crypto-js", "npm:4.1.2"]\
+            ["@types/crypto-js", "npm:4.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4799,17 +4799,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/express", [\
-        ["npm:4.17.17", {\
-          "packageLocation": "./.yarn/cache/@types-express-npm-4.17.17-46fe8173db-0196dacc27.zip/node_modules/@types/express/",\
-          "packageDependencies": [\
-            ["@types/express", "npm:4.17.17"],\
-            ["@types/body-parser", "npm:1.19.3"],\
-            ["@types/express-serve-static-core", "npm:4.17.36"],\
-            ["@types/qs", "npm:6.9.8"],\
-            ["@types/serve-static", "npm:1.15.2"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:4.17.21", {\
           "packageLocation": "./.yarn/cache/@types-express-npm-4.17.21-be92a0245e-fb23829863.zip/node_modules/@types/express/",\
           "packageDependencies": [\
@@ -4909,6 +4898,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-20.10.4-45b062d723-054b296417.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:20.10.4"],\
+            ["undici-types", "npm:5.26.5"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:20.10.5", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-20.10.5-9464a4540b-e216b679f5.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:20.10.5"],\
             ["undici-types", "npm:5.26.5"]\
           ],\
           "linkType": "HARD"\
@@ -7689,7 +7686,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/express-async-errors-virtual-241173bf7d/0/cache/express-async-errors-npm-3.1.1-c0a6b1e552-3a2a6df8ea.zip/node_modules/express-async-errors/",\
           "packageDependencies": [\
             ["express-async-errors", "virtual:1b917b2da6b3def34adb6c9b40e49acd7bec77e25b6699671015c78090fe3389e20abb9a43a0b2749c46b1386d93e20a51cc3b06b0dfc93dc635cb2b3bd20d5b#npm:3.1.1"],\
-            ["@types/express", "npm:4.17.17"],\
+            ["@types/express", "npm:4.17.21"],\
             ["express", "npm:4.18.2"]\
           ],\
           "packagePeers": [\
@@ -11943,10 +11940,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/slack/",\
           "packageDependencies": [\
             ["slack", "workspace:packages/slack"],\
-            ["@types/cors", "npm:2.8.14"],\
-            ["@types/crypto-js", "npm:4.1.2"],\
-            ["@types/express", "npm:4.17.17"],\
-            ["@types/node", "npm:20.6.3"],\
+            ["@types/cors", "npm:2.8.17"],\
+            ["@types/crypto-js", "npm:4.2.1"],\
+            ["@types/express", "npm:4.17.21"],\
+            ["@types/node", "npm:20.10.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1b917b2da6b3def34adb6c9b40e49acd7bec77e25b6699671015c78090fe3389e20abb9a43a0b2749c46b1386d93e20a51cc3b06b0dfc93dc635cb2b3bd20d5b#npm:6.7.2"],\
             ["@typescript-eslint/parser", "virtual:1b917b2da6b3def34adb6c9b40e49acd7bec77e25b6699671015c78090fe3389e20abb9a43a0b2749c46b1386d93e20a51cc3b06b0dfc93dc635cb2b3bd20d5b#npm:6.7.2"],\
             ["axios", "npm:1.5.0"],\
@@ -12616,7 +12613,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.4"],\
-            ["@types/node", "npm:20.6.3"],\
+            ["@types/node", "npm:20.10.5"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
