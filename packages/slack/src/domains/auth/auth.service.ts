@@ -4,7 +4,7 @@ import { ResponseError, ValidationError } from '@/utils/ResponseError';
 import { makeRandomString, encryptText } from '@/utils/crypto';
 
 const authService = {
-  async signup(username: string, password: string, name: string) {
+  async signUp(username: string, password: string, name: string) {
     if (await UserRepository.findOneBy({ username })) {
       throw new ResponseError(409, '이미 존재하는 회원입니다.');
     }
@@ -33,7 +33,7 @@ const authService = {
     };
   },
 
-  async signin(username: string, password: string) {
+  async signIn(username: string, password: string) {
     const user = await UserRepository.findOneBy({ username });
 
     if (!user) {

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 
 /**
  * 사용자의 로그인 여부를 확인하는 미들웨어
+ * (로그인이 되어있지 않으면 AuthorizationError를 발생시킵니다.)
  */
 export const authorizationFilter = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
@@ -22,6 +23,8 @@ export const authorizationFilter = async (req: Request, res: Response, next: Nex
       username: payload.username,
       role: payload.role
     };
+
+    req.accessToken = accessToken;
 
     return next();
   } catch (error) {
