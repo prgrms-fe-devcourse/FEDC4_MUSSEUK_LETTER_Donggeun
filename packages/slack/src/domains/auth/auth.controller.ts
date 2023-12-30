@@ -31,10 +31,12 @@ router.get('/check', authorizationFilter, async (req, res) => {
     throw new AuthorizationError();
   }
 
-  res.json({ userId: signedUser.id, accessToken });
+  const { userId } = await authService.signCheck(signedUser.id);
+
+  res.json({ userId, accessToken });
 });
 
-router.put('/password', validationFilter(authValidator.password), (req, res) => {
+router.put('/password', authorizationFilter, validationFilter(authValidator.password), (req, res) => {
   const body = req.body as z.infer<typeof authValidator.password.body>;
 
   res.json({ message: 'TODO: 비밀번호 변경 구현 필요..', body });

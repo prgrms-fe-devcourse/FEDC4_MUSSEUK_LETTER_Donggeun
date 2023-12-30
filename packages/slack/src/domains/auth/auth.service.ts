@@ -58,6 +58,18 @@ const authService = {
     };
   },
 
+  async signCheck(userId: number) {
+    const user = await UserRepository.findOneBy({ id: userId });
+
+    if (!user) {
+      throw new ResponseError(404, '사용자를 찾을 수 없어요.');
+    }
+
+    return {
+      userId: user.id
+    };
+  },
+
   generateAccessToken(id: number, username: string, role: string) {
     const accessToken = jwt.sign({ id, username, role }, process.env.JWT_SECRET_KEY, {
       expiresIn: process.env.JWT_EXPIRES_IN
