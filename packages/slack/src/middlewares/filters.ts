@@ -1,6 +1,33 @@
-import { ValidationError } from '@/utils/ResponseError';
 import { Request, Response, NextFunction } from 'express';
+import { AuthorizationError, ValidationError } from '@/utils/ResponseError';
 import { AnyZodObject } from 'zod';
+import jwt from 'jsonwebtoken';
+
+/**
+ * 사용자의 로그인 여부를 확인하는 미들웨어
+ */
+export const authorizationFilter = async (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  const accessToken = authorization?.replace('Bearer ', '') ?? '';
+
+  try {
+    const payload = jwt.verify(accessToken, process.env.JWT_SECRET_KEY) as {
+      id: number;
+      username: string;
+      role: string;
+    };
+
+    req.user = {
+      id: payload.id,
+      username: payload.username,
+      role: payload.role
+    };
+
+    return next();
+  } catch (error) {
+    throw new AuthorizationError();
+  }
+};
 
 /**
  * Zod Schema로 Body, Query, Params를 검증하는 미들웨어

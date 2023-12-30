@@ -1,5 +1,5 @@
 import express from 'express';
-import { validationFilter } from '@/middlewares/validationFilter';
+import { validationFilter, authorizationFilter } from '@/middlewares/filters';
 import authValidator from '@/domains/auth/auth.validator';
 import { z } from 'zod';
 import authService from './auth.service';
@@ -22,8 +22,10 @@ router.post('/signout', (req, res) => {
   res.json({ message: 'TODO: 로그아웃 구현 필요..' });
 });
 
-router.get('/check', (req, res) => {
-  res.json({ message: 'TODO: 로그인 상태 확인 구현 필요..' });
+router.get('/check', authorizationFilter, (req, res) => {
+  const signedUser = req.user;
+
+  res.json({ message: 'TODO: 로그인 상태 확인 구현 필요..', signedUser });
 });
 
 router.put('/password', validationFilter(authValidator.password), (req, res) => {
