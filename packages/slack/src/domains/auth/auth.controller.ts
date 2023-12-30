@@ -2,13 +2,14 @@ import express from 'express';
 import { validationFilter } from '@/middlewares/validationFilter';
 import authValidator from '@/domains/auth/auth.validator';
 import { z } from 'zod';
+import authService from './auth.service';
 
 const router = express.Router();
 
-router.post('/signup', validationFilter(authValidator.signup), (req, res) => {
-  const body = req.body as z.infer<typeof authValidator.signup.body>;
-
-  res.json({ message: 'TODO: 회원가입 구현 필요..', body });
+router.post('/signup', validationFilter(authValidator.signup), async (req, res) => {
+  const { name, password, username } = req.body as z.infer<typeof authValidator.signup.body>;
+  const user = await authService.signup(username, password, name);
+  res.json({ userId: user.id, accessToken: 'TODO: 토큰 발급해야함..' });
 });
 
 router.post('/signin', validationFilter(authValidator.signin), (req, res) => {
