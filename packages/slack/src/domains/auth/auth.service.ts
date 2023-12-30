@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import UserRepository from '@/domains/users/users.repository';
-import { ResponseError } from '@/utils/ResponseError';
+import { ResponseError, ValidationError } from '@/utils/ResponseError';
 import { makeRandomString, encryptText } from '@/utils/crypto';
 
 const authService = {
@@ -28,7 +28,32 @@ const authService = {
     const accessToken = authService.generateAccessToken(insertedUser.id, insertedUser.username, insertedUser.role);
 
     return {
-      user: insertedUser,
+      userId: insertedUser.id,
+      accessToken
+    };
+  },
+
+  async signin(username: string, password: string) {
+    const user = await UserRepository.findOneBy({ username });
+
+    if (!user) {
+      throw new ValidationError({
+        username: '존재하지 않는 회원입니다.'
+      });
+    }
+
+    const encryptedPassword = encryptText(password, user.salt);
+
+    if (user.password !== encryptedPassword) {
+      throw new ValidationError({
+        password: '비밀번호가 일치하지 않습니다.'
+      });
+    }
+
+    const accessToken = authService.generateAccessToken(user.id, user.username, user.role);
+
+    return {
+      userId: user.id,
       accessToken
     };
   },

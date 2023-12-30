@@ -8,14 +8,14 @@ const router = express.Router();
 
 router.post('/signup', validationFilter(authValidator.signup), async (req, res) => {
   const { name, password, username } = req.body as z.infer<typeof authValidator.signup.body>;
-  const { user, accessToken } = await authService.signup(username, password, name);
-  res.json({ userId: user.id, accessToken });
+  const { userId, accessToken } = await authService.signup(username, password, name);
+  res.json({ userId, accessToken });
 });
 
-router.post('/signin', validationFilter(authValidator.signin), (req, res) => {
-  const body = req.body as z.infer<typeof authValidator.signin.body>;
-
-  res.json({ message: 'TODO: 로그인 구현 필요..', body });
+router.post('/signin', validationFilter(authValidator.signin), async (req, res) => {
+  const { username, password } = req.body as z.infer<typeof authValidator.signin.body>;
+  const { userId, accessToken } = await authService.signin(username, password);
+  res.json({ userId, accessToken });
 });
 
 router.post('/signout', (req, res) => {
