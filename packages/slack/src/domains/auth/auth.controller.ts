@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/signup', validationFilter(authValidator.signup), async (req, res) => {
   const { name, password, username } = req.body as z.infer<typeof authValidator.signup.body>;
-  const user = await authService.signup(username, password, name);
-  res.json({ userId: user.id, accessToken: 'TODO: 토큰 발급해야함..' });
+  const { user, accessToken } = await authService.signup(username, password, name);
+  res.json({ userId: user.id, accessToken });
 });
 
 router.post('/signin', validationFilter(authValidator.signin), (req, res) => {

@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import UserRepository from '@/domains/users/users.repository';
 import { ResponseError } from '@/utils/ResponseError';
 import { makeRandomString, encryptText } from '@/utils/crypto';
@@ -24,14 +25,20 @@ const authService = {
       throw new ResponseError(500, '회원가입에 실패했습니다.');
     }
 
-    // TODO: 토큰 발급 로직 작성해야함.
-    this.generateJWTToken();
+    const accessToken = authService.generateAccessToken(insertedUser.id, insertedUser.username, insertedUser.role);
 
-    return insertedUser;
+    return {
+      user: insertedUser,
+      accessToken
+    };
   },
 
-  async generateJWTToken() {
-    // TODO: 토큰 발급 로직 작성해야함.
+  generateAccessToken(id: number, username: string, role: string) {
+    const accessToken = jwt.sign({ id, username, role }, process.env.JWT_SECRET_KEY, {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    });
+
+    return accessToken;
   }
 };
 
