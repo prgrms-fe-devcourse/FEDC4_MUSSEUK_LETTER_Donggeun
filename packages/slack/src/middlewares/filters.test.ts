@@ -1,23 +1,59 @@
 import { NextFunction, Request, Response } from 'express';
-import { ValidationError } from '@/utils/ResponseError';
+import { ValidationError, AuthorizationError } from '@/utils/ResponseError';
 import { z } from 'zod';
-import { validationFilter } from './filters';
+import jwt from 'jsonwebtoken';
+import { authorizationFilter, validationFilter } from './filters';
 
-describe('validationFilter', () => {
-  let req: Partial<Request>;
-  let res: Partial<Response>;
-  let next: NextFunction;
+let req: Partial<Request>;
+let res: Partial<Response>;
+let next: NextFunction;
 
-  beforeEach(() => {
+beforeEach(() => {
+  req = {
+    headers: {},
+    body: {},
+    query: {},
+    params: {}
+  };
+  res = {};
+  next = jest.fn();
+});
+
+describe('authorizationFilter', () => {
+  it('accessToken이 정상적이면 req 객체에 user와 accessToken이 담기고 다음 미들웨어가 실행된다', async () => {
     req = {
-      body: {},
-      query: {},
-      params: {}
+      headers: {
+        authorization: 'Bearer 유효한_토큰'
+      }
     };
-    res = {};
-    next = jest.fn();
+
+    jwt.verify = jest.fn().mockReturnValueOnce({ id: 1, username: '사용자', role: 'user' });
+    authorizationFilter(req as Request, res as Response, next);
+
+    expect(req.user).toEqual({ id: 1, username: '사용자', role: 'user' });
+    expect(req.accessToken).toEqual('유효한_토큰');
+
+    expect(next).toHaveBeenCalled();
   });
 
+  it('accessToken이 존재하지 않으면 AuthorizationError를 발생시킨다', async () => {
+    expect(authorizationFilter(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('accessToken이 유효하지 않으면 AuthorizationError를 발생시킨다', async () => {
+    req = {
+      headers: {
+        authorization: 'Bearer 유효하지_않은_토큰'
+      }
+    };
+
+    expect(authorizationFilter(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
+
+describe('validationFilter', () => {
   describe('body만 존재하는 경우', () => {
     const schema = {
       body: z.object({
