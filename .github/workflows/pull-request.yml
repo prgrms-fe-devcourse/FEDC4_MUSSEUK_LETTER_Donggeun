@@ -17,7 +17,7 @@ jobs:
         run: yarn api-docs build
 
       - name: API 문서로부터 타입 및 함수 자동 생성
-        run: yarn web orval-generate
+        run: yarn web orval
 
       - name: React 앱 빌드
         run: yarn web build
