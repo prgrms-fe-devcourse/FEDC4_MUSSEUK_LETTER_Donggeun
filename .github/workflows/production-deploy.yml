@@ -1,11 +1,53 @@
-name: Express CI/CD
+name: Production CD
 
 on:
   push:
     branches: ['refactor/228-github-actions']
 
 jobs:
-  build:
+  react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node.js 및 Yarn 설치
+        uses: ./.github/actions/setup
+
+      - name: .env 파일 생성
+        run: |
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "VITE_API_ENDPOINT=${{ secrets.VITE_API_ENDPOINT }}" >> .env
+          echo "VITE_SLACK_API_ENDPOINT=${{ secrets.VITE_SLACK_API_ENDPOINT }}" >> .env
+          echo "VITE_CHANNEL_ID=${{ secrets.VITE_CHANNEL_ID }}" >> .env
+          echo "VITE_SLACK_ID_DESCRIPTION=${{ secrets.VITE_SLACK_ID_DESCRIPTION }}" >> .env
+
+          mv .env packages/web/.env
+          cat packages/web/.env
+
+      - name: React 앱 빌드
+        run: yarn web build
+
+      - name: 빌드된 파일 S3에 배포
+        uses: awact/s3-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          SOURCE_DIR: './packages/web/dist'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_S3_BUCKET: ${{ secrets.AWS_CLIENT_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
+
+      - name: CloudFront 캐시 무효화
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CLIENT_CLOUDFRONT_ID }}
+          PATHS: '/*'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
+
+  express:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
