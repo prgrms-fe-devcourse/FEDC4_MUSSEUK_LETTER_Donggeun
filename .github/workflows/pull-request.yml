@@ -23,7 +23,7 @@ jobs:
       - name: Node.js 및 Yarn 설치
         uses: ./.github/actions/setup
 
-      - name: env 파일 생성
+      - name: .env 파일 생성
         run: |
           echo "${{ secrets.EXPRESS_ENV_FILE }}" >> .env
           mv .env packages/slack/.env
