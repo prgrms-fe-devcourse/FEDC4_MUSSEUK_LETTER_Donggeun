@@ -5,13 +5,19 @@ on:
     branches: ['main']
 
 jobs:
-  react:
+  api-docs-and-react:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - name: Node.js 및 Yarn 설치
         uses: ./.github/actions/setup
+
+      - name: API 문서 빌드
+        run: yarn api-docs build
+
+      - name: API 문서로부터 타입 및 함수 자동 생성
+        run: yarn web orval-generate
 
       - name: React 앱 빌드
         run: yarn web build
@@ -35,14 +41,3 @@ jobs:
 
       - name: Express 앱 테스트 코드 실행
         run: yarn slack test
-
-  api-docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Node.js 및 Yarn 설치
-        uses: ./.github/actions/setup
-
-      - name: API 문서 빌드
-        run: yarn api-docs build
