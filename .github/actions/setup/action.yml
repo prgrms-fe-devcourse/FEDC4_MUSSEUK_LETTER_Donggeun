@@ -1,0 +1,13 @@
+name: Setup
+description: 'Node.js와 Yarn 패키지를 설치합니다.'
+runs:
+  using: 'composite'
+  steps:
+    - name: Node.js 설정
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
+    - name: Yarn 패키지 설치
+      run: yarn
+      shell: bash
