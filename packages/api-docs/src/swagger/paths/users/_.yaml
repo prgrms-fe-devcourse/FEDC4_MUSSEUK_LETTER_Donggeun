@@ -1,0 +1,55 @@
+get:
+  tags:
+    - 사용자
+  summary: 사용자 목록 조회
+  description: 사용자 목록을 조회합니다.
+  parameters:
+    - name: page
+      in: query
+      description: 페이지 번호
+      schema:
+        type: integer
+        default: 0
+    - name: keyword
+      in: query
+      description: 특정 키워드가 포함된 사용자만 조회할 때 사용
+      schema:
+        type: string
+        default: null
+  responses:
+    '200':
+      description: 요청 성공
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../index.yaml#/components/schemas/User'
+          example:
+            - userId: 1
+              username: jjanggu123
+              name: 신짱구
+              introduce: 안녕하세요 짱구에요
+              slackId: U01H9QZJX1T
+              slackWorkspace: D9D8A7A7S
+              imageName: 짱구_이미지_링크.png
+              postCount: 3
+              commentCount: 5
+            - userId: 2
+              username: chulchul
+              name: 김철수
+              introduce: 안녕하세요 철수에요
+              slackId: U01H9QZJX2T
+              slackWorkspace: D9D8A7A7S
+              imageName: 철수_이미지_링크.png
+              postCount: 7
+              commentCount: 2
+            - userId: 3
+              username: chulchul
+              name: 이유리
+              introduce: 안녕하세요 유리에요
+              slackId: U01H9QZJX3T
+              slackWorkspace: D9D8A7A7S
+              imageName: 유리_이미지_링크.png
+              postCount: 2
+              commentCount: 15

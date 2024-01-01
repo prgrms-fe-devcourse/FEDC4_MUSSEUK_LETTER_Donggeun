@@ -3,16 +3,13 @@
   "ts-node": {
     "files": true
   },
-  "files": [
-    "src/types/env.d.ts",
-    "src/types/express.d.ts"
-  ],
+  "files": ["src/types/env.d.ts", "src/types/express.d.ts"],
   "compilerOptions": {
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -27,6 +24,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     // "noEmit": true,
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
 
     /* Linting */
     "strict": true,

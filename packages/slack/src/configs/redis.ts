@@ -5,7 +5,8 @@ const redisClient = createClient({
   password: process.env.NODE_ENV === 'production' ? process.env.DEPLOY_REDIS_PASSWORD : undefined
 });
 
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
+redisClient.on('connect', () => console.log('Redis Connected'));
+redisClient.on('error', (err) => console.log('Redis Error', err));
 redisClient.connect();
 
 export default redisClient;

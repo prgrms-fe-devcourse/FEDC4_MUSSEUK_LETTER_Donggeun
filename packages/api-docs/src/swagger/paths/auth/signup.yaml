@@ -1,0 +1,82 @@
+post:
+  tags:
+    - 인증 / 인가
+  summary: 회원가입
+  description: 회원가입을 합니다.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+            name:
+              type: string
+          required:
+            - username
+            - password
+            - name
+          example:
+            username: bbearcookie
+            password: 12341234
+            name: 김곰돌
+  responses:
+    '201':
+      description: 요청 성공 (TODO -> 회원 정보까지 보내줄지 고민해보기)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              userId:
+                type: integer
+              accessToken:
+                type: string
+            required:
+              - userId
+              - accessToken
+            example:
+              userId: 5
+              accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm
+    '400':
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              validation:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  password:
+                    type: string
+                  name:
+                    type: string
+            required:
+              - message
+          example:
+            message: 잘못된 요청이에요.
+            validation:
+              username: 아이디를 입력해주세요.
+              password: 비밀번호를 입력해주세요.
+              name: 실명을 입력해주세요.
+    '409':
+      description: 이미 존재하는 아이디인 경우
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          example:
+            message: 이미 존재하는 아이디에요.

@@ -6,6 +6,7 @@ declare namespace NodeJS {
     DEPLOY_API_ENDPOINT: string;
     LOCAL_CLIENT_ENDPOINT: string;
     DEPLOY_CLIENT_ENDPOINT: string;
+    DEPLOY_CLIENT_ENDPOINT_LEGACY: string;
     LOCAL_REDIS_ENDPOINT: string;
     DEPLOY_REDIS_ENDPOINT: string;
     DEPLOY_REDIS_PASSWORD: string;
@@ -14,6 +15,11 @@ declare namespace NodeJS {
     SLACK_HOOK_ENDPOINT: string;
     SLACK_BOT_TOKEN: string;
     SLACK_SIGNING_SECRET: string;
-    SESSION_SECRET: string;
+    DB_DATABASE: string;
+    LOCAL_DB_USERNAME: string;
+    LOCAL_DB_PASSWORD: string;
+    DEPLOY_DB_HOST: string;
+    DEPLOY_DB_USERNAME: string;
+    DEPLOY_DB_PASSWORD: string;
   }
 }

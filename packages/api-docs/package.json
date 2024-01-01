@@ -1,0 +1,22 @@
+{
+  "name": "api-docs",
+  "packageManager": "yarn@3.6.3",
+  "scripts": {
+    "build": "tsc && swagger-cli bundle ./src/swagger/index.yaml --outfile dist/swagger.yaml --type yaml",
+    "start": "swagger-cli bundle ./src/swagger/index.yaml --outfile dist/swagger.yaml --type yaml && ts-node src/app.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "swagger-cli": "^4.0.4",
+    "swagger-ui-express": "^5.0.0",
+    "yaml": "^2.3.4"
+  }
+}
