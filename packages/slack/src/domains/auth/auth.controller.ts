@@ -8,14 +8,14 @@ import authService from './auth.service';
 const router = express.Router();
 
 router.post('/signup', validationFilter(authValidator.signup), async (req, res) => {
-  const { name, password, username } = req.body as z.infer<typeof authValidator.signup.body>;
-  const { userId, accessToken } = await authService.signUp(username, password, name);
+  const { name, password, email } = req.body as z.infer<typeof authValidator.signup.body>;
+  const { userId, accessToken } = await authService.signUp(email, password, name);
   res.json({ userId, accessToken });
 });
 
 router.post('/signin', validationFilter(authValidator.signin), async (req, res) => {
-  const { username, password } = req.body as z.infer<typeof authValidator.signin.body>;
-  const { userId, accessToken } = await authService.signIn(username, password);
+  const { email, password } = req.body as z.infer<typeof authValidator.signin.body>;
+  const { userId, accessToken } = await authService.signIn(email, password);
   res.json({ userId, accessToken });
 });
 

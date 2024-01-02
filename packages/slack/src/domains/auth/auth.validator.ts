@@ -3,12 +3,13 @@ import { z } from 'zod';
 const authValidator = {
   signup: {
     body: z.object({
-      username: z
+      email: z
         .string({
-          required_error: '아이디를 입력해주세요.'
+          required_error: '이메일을 입력해주세요.'
         })
-        .min(1, '아이디를 입력해주세요.')
-        .max(20, '아이디는 최대 20글자까지만 입력할 수 있습니다.'),
+        .email({
+          message: '이메일 형식이 아닙니다.'
+        }),
       password: z
         .string({
           required_error: '비밀번호를 입력해주세요.'
@@ -25,9 +26,13 @@ const authValidator = {
   },
   signin: {
     body: z.object({
-      username: z.string({
-        required_error: '아이디를 입력해주세요.'
-      }),
+      email: z
+        .string({
+          required_error: '이메일을 입력해주세요.'
+        })
+        .email({
+          message: '이메일 형식이 아닙니다.'
+        }),
       password: z.string({
         required_error: '비밀번호를 입력해주세요.'
       })

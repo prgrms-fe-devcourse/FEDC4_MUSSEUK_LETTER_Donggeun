@@ -1,13 +1,26 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Post } from './Post';
+import { User } from './User';
 
 @Entity()
 export class Comment {
   @PrimaryGeneratedColumn()
-  id!: number;
+  commentId!: number;
 
-  @Column({ length: 50 })
-  author!: string;
+  @ManyToOne(() => Post, (post) => post.comments, {
+    cascade: true
+  })
+  @JoinColumn({ name: 'post_id' })
+  post!: Post;
+
+  @ManyToOne(() => User, (user) => user.comments, {
+    cascade: true
+  })
+  @JoinColumn({ name: 'author_id' })
+  author!: User;
+
+  @Column({ length: 50, default: '익명의 머쓱이' })
+  nickname!: string;
 
   @Column({ length: 500 })
   content!: string;
@@ -26,9 +39,4 @@ export class Comment {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
-
-  @ManyToOne(() => Post, (post) => post.comments, {
-    cascade: true
-  })
-  post!: Post;
 }
