@@ -2,7 +2,7 @@
   "name": "api-docs",
   "packageManager": "yarn@3.6.3",
   "scripts": {
-    "build": "tsc && swagger-cli bundle ./src/swagger/index.yaml --outfile dist/swagger.yaml --type yaml",
+    "build": "tsc && swagger-cli bundle ./src/swagger/index.yaml --outfile dist/swagger.yaml --type yaml && swagger-cli validate ./dist/swagger.yaml",
     "start": "swagger-cli bundle ./src/swagger/index.yaml --outfile dist/swagger.yaml --type yaml && ts-node src/app.ts"
   },
   "devDependencies": {

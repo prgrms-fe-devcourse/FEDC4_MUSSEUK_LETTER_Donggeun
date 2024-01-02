@@ -1,0 +1,90 @@
+name: Production CD
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node.js 및 Yarn 설치
+        uses: ./.github/actions/setup
+
+      - name: .env 파일 생성
+        run: |
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "VITE_API_ENDPOINT=${{ secrets.VITE_API_ENDPOINT }}" >> .env
+          echo "VITE_SLACK_API_ENDPOINT=${{ secrets.VITE_SLACK_API_ENDPOINT }}" >> .env
+          echo "VITE_CHANNEL_ID=${{ secrets.VITE_CHANNEL_ID }}" >> .env
+          echo "VITE_SLACK_ID_DESCRIPTION=${{ secrets.VITE_SLACK_ID_DESCRIPTION }}" >> .env
+
+          mv .env packages/web/.env
+          cat packages/web/.env
+
+      - name: React 앱 빌드
+        run: yarn web build
+
+      - name: 빌드된 파일 S3에 배포
+        uses: awact/s3-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          SOURCE_DIR: './packages/web/dist'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_S3_BUCKET: ${{ secrets.AWS_CLIENT_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
+
+      - name: CloudFront 캐시 무효화
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CLIENT_CLOUDFRONT_ID }}
+          PATHS: '/*'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CLIENT_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLIENT_SECRET_KEY }}
+
+  express:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node.js 및 Yarn 설치
+        uses: ./.github/actions/setup
+
+      - name: .env 파일 생성
+        run: |
+          echo "${{ secrets.EXPRESS_ENV_FILE }}" >> .env
+          mv .env packages/slack/.env
+          cat packages/slack/.env
+
+      - name: Express 앱 빌드
+        run: yarn slack build
+
+      - name: appspec.yml 파일을 루트 디렉토리로 이동
+        run: |
+          mv packages/slack/appspec.yml appspec.yml
+          mv packages/slack/scripts scripts
+
+      - name: AWS Credentials 설정
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_BACKEND_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_BACKEND_SECRET_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: 빌드 내용 및 배포 파일 압축
+        run: tar cvfz ./$GITHUB_SHA.gz packages/common packages/slack scripts appspec.yml package.json tsconfig.base.json yarn.lock .yarnrc.yml .yarn
+
+      - name: 압축 파일 S3 업로드
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.gz s3://${{secrets.AWS_BACKEND_S3_BUCKET}}/deployment/$GITHUB_SHA.gz
+
+      - name: CodeDeploy 배포
+        run: aws deploy create-deployment
+          --application-name ${{secrets.AWS_BACKEND_CODEDEPLOY_APPLICATION_NAME}}
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name ${{secrets.AWS_BACKEND_CODEDEPLOY_GROUP_NAME}}
+          --s3-location bucket=${{secrets.AWS_BACKEND_S3_BUCKET}},bundleType=tgz,key=deployment/$GITHUB_SHA.gz
