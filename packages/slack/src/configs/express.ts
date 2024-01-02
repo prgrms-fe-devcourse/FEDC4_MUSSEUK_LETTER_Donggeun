@@ -22,6 +22,9 @@ app.use(
   })
 );
 
+/**
+ * TODO: 리팩토링 완료 후에는 삭제될 코드입니다.
+ */
 app.use((req, res, next) => {
   const authorization = req.headers['authorization'];
 

@@ -2,7 +2,7 @@ import { Handler } from 'express';
 import { z } from 'zod';
 import snsApi from '@/_apis/sns';
 import slackApi from '@/_apis/slack';
-import { zodValidator } from '@/utils/zod';
+import { zodValidator } from '@/utils/_zod';
 import type { Post, Comment } from 'common/types';
 
 const TITLE_DEFAULT = '머쓱이';

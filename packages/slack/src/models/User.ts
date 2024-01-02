@@ -15,22 +15,22 @@ export class User {
   @Column()
   salt!: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 20, default: 'user' })
   role!: string;
 
   @Column({ length: 20 })
   name!: string;
 
-  @Column()
+  @Column({ nullable: true })
   introduce!: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   imageName!: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   slackId!: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 20, nullable: true })
   slackWorkspace!: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })

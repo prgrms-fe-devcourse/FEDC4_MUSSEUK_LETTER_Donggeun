@@ -1,7 +1,7 @@
 import { Handler } from 'express';
 import { z } from 'zod';
 import snsApi from '@/_apis/sns';
-import { zodValidator } from '@/utils/zod';
+import { zodValidator } from '@/utils/_zod';
 import redis from '@/utils/redis';
 import { User } from 'common/types';
 

@@ -26,3 +26,5 @@ get:
               accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm
     '401':
       $ref: '../../index.yaml#/components/responses/Unauthorized'
+    '404':
+      $ref: '../../index.yaml#/components/responses/NotFoundUser'
