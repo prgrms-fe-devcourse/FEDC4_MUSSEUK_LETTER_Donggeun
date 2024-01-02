@@ -30,11 +30,43 @@ User:
     - postCount
     - commentCount
 
-Post:
+PostList:
+  type: array
+  items:
+    type: object
+    properties:
+      postId:
+        type: integer
+      authorId:
+        type: integer
+      authorName:
+        type: string
+      title:
+        type: string
+      content:
+        type: string
+      imageName:
+        type: string
+      commentCount:
+        type: integer
+    required:
+      - postId
+      - authorId
+      - authorName
+      - title
+      - content
+      - imageName
+      - commentCount
+
+PostDetail:
   type: object
   properties:
     postId:
       type: integer
+    authorId:
+      type: integer
+    authorName:
+      type: string
     title:
       type: string
     content:
@@ -61,6 +93,8 @@ Post:
           - imageName
   required:
     - postId
+    - authorId
+    - authorName
     - title
     - content
     - imageName
