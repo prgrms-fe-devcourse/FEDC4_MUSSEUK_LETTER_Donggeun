@@ -94,30 +94,29 @@ export const getGetPostsPostIdMock = () => ({
 
 export const getGetPostsPostIdCommentsMock = () =>
   Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
-    author: faker.word.sample(),
+    authorId: faker.helpers.arrayElement([faker.number.int({ min: undefined, max: undefined }), undefined]),
     commentId: faker.number.int({ min: undefined, max: undefined }),
     content: faker.word.sample(),
     imageName: faker.word.sample(),
+    nickname: faker.word.sample(),
     positionX: faker.number.int({ min: undefined, max: undefined }),
-    positionY: faker.number.int({ min: undefined, max: undefined })
+    positionY: faker.number.int({ min: undefined, max: undefined }),
+    postId: faker.number.int({ min: undefined, max: undefined })
   }));
 
 export const getPostPostsPostIdCommentsMock = () => ({
-  author: faker.word.sample(),
-  commentId: faker.number.int({ min: undefined, max: undefined }),
-  content: faker.word.sample(),
-  imageName: faker.word.sample(),
-  positionX: faker.number.int({ min: undefined, max: undefined }),
-  positionY: faker.number.int({ min: undefined, max: undefined })
+  commentId: faker.number.int({ min: undefined, max: undefined })
 });
 
 export const getGetCommentsCommentIdMock = () => ({
-  author: faker.word.sample(),
+  authorId: faker.helpers.arrayElement([faker.number.int({ min: undefined, max: undefined }), undefined]),
   commentId: faker.number.int({ min: undefined, max: undefined }),
   content: faker.word.sample(),
   imageName: faker.word.sample(),
+  nickname: faker.word.sample(),
   positionX: faker.number.int({ min: undefined, max: undefined }),
-  positionY: faker.number.int({ min: undefined, max: undefined })
+  positionY: faker.number.int({ min: undefined, max: undefined }),
+  postId: faker.number.int({ min: undefined, max: undefined })
 });
 
 export const getMusseukMock = () => [

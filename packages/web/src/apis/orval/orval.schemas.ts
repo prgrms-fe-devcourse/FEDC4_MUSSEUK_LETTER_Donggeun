@@ -9,6 +9,10 @@ export type PostPostsPostIdComments401 = {
   message: string;
 };
 
+export type PostPostsPostIdComments201 = {
+  commentId: number;
+};
+
 export type PostPostsPostIdCommentsBody = {
   content: string;
   imageName: string;
@@ -220,12 +224,14 @@ export type UnauthorizedResponse = {
 };
 
 export interface Comment {
-  author: string;
+  authorId?: number;
   commentId: number;
   content: string;
   imageName: string;
+  nickname: string;
   positionX: number;
   positionY: number;
+  postId: number;
 }
 
 export type PostDetailCommentsItem = {

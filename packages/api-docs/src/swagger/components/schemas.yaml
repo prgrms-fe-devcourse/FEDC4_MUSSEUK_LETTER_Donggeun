@@ -105,7 +105,11 @@ Comment:
   properties:
     commentId:
       type: integer
-    author:
+    postId:
+      type: integer
+    authorId:
+      type: integer
+    nickname:
       type: string
     content:
       type: string
@@ -117,7 +121,8 @@ Comment:
       type: string
   required:
     - commentId
-    - author
+    - postId
+    - nickname
     - content
     - positionX
     - positionY

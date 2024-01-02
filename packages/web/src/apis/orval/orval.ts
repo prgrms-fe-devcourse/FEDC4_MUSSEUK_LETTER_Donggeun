@@ -21,6 +21,7 @@ import type {
   PostList,
   PostPosts201,
   PostPostsBody,
+  PostPostsPostIdComments201,
   PostPostsPostIdCommentsBody,
   PostPostsPostIdCommentsParams,
   PostSlackVerificationBody,
@@ -228,7 +229,7 @@ export const getPostsPostIdComments = <TData = AxiosResponse<Comment[]>>(
  * 특정 머쓱이에게 편지를 작성합니다.
  * @summary 특정 머쓱이에게 편지 작성
  */
-export const postPostsPostIdComments = <TData = AxiosResponse<Comment>>(
+export const postPostsPostIdComments = <TData = AxiosResponse<PostPostsPostIdComments201>>(
   postId: number,
   postPostsPostIdCommentsBody: PostPostsPostIdCommentsBody,
   params?: PostPostsPostIdCommentsParams,
@@ -279,6 +280,6 @@ export type GetPostsPostIdResult = AxiosResponse<PostDetail>;
 export type PutPostsPostIdResult = AxiosResponse<void>;
 export type DeletePostsPostIdResult = AxiosResponse<void>;
 export type GetPostsPostIdCommentsResult = AxiosResponse<Comment[]>;
-export type PostPostsPostIdCommentsResult = AxiosResponse<Comment>;
+export type PostPostsPostIdCommentsResult = AxiosResponse<PostPostsPostIdComments201>;
 export type GetCommentsCommentIdResult = AxiosResponse<Comment>;
 export type DeleteCommentsCommentIdResult = AxiosResponse<void>;

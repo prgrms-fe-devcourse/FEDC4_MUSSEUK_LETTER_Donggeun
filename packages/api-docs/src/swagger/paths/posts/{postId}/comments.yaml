@@ -19,13 +19,17 @@ get:
               $ref: '../../../index.yaml#/components/schemas/Comment'
           example:
             - commentId: 1
-              author: 우주킹왕짱
+              postId: 1
+              authorId: 1
+              nickname: 우주킹왕짱
               content: 당신에게 마음을 전해요
               positionX: 55
               positionY: 413
               imageName: decoration_beer1.png
             - commentId: 2
-              author: 댓글조작단
+              postId: 1
+              authorId: 2
+              nickname: 댓글조작단
               content: 영차 영차
               positionX: 23
               positionY: 333
@@ -90,7 +94,12 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../../index.yaml#/components/schemas/Comment'
+            type: object
+            properties:
+              commentId:
+                type: integer
+            required:
+              - commentId
           example:
             commentId: 7
     '401':
