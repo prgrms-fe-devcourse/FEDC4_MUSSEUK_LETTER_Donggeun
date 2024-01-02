@@ -4,38 +4,38 @@ import { encryptText } from '@/utils/crypto';
 jest.mock('@/domains/users/users.repository');
 
 describe('회원가입', () => {
-  const mockUser = { id: 1, username: '아이디', password: '12341234', name: '이름' };
+  const mockUser = { userId: 1, email: 'email@haha.com', password: '12341234', name: '이름' };
 
   it('회원가입 성공', async () => {
-    UserRepository.findUserByUsername = jest.fn().mockResolvedValueOnce(mockUser);
+    UserRepository.findUserByEmail = jest.fn().mockResolvedValueOnce(mockUser);
 
-    const user = await authService.signUp(mockUser.username, mockUser.password, mockUser.name);
+    const user = await authService.signUp(mockUser.email, mockUser.password, mockUser.name);
 
-    expect(user.userId).toBe(mockUser.id);
+    expect(user.userId).toBe(mockUser.userId);
   });
 
   it('이미 존재하는 회원일 경우 예외가 발생한다', async () => {
     UserRepository.findOneBy = jest.fn().mockResolvedValueOnce(mockUser);
 
-    expect(authService.signUp(mockUser.username, mockUser.password, mockUser.name)).rejects.toThrow();
+    expect(authService.signUp(mockUser.email, mockUser.password, mockUser.name)).rejects.toThrow();
   });
 
   it('생성된 유저 정보를 찾을 수 없을 경우 예외가 발생한다', async () => {
-    UserRepository.findUserByUsername = jest.fn().mockResolvedValueOnce(null);
+    UserRepository.findUserByEmail = jest.fn().mockResolvedValueOnce(null);
 
-    expect(authService.signUp(mockUser.username, mockUser.password, mockUser.name)).rejects.toThrow();
+    expect(authService.signUp(mockUser.email, mockUser.password, mockUser.name)).rejects.toThrow();
   });
 });
 
 describe('로그인', () => {
-  const mockUser = { id: 1, password: encryptText('12341234', '시크릿'), salt: '시크릿' };
+  const mockUser = { userId: 1, password: encryptText('12341234', '시크릿'), salt: '시크릿' };
 
   it('로그인 성공', async () => {
     UserRepository.findOneBy = jest.fn().mockResolvedValueOnce(mockUser);
 
     const user = await authService.signIn('아이디', '12341234');
 
-    expect(user.userId).toBe(mockUser.id);
+    expect(user.userId).toBe(mockUser.userId);
   });
 
   it('존재하지 않는 회원일 경우 예외가 발생한다', async () => {
@@ -52,20 +52,20 @@ describe('로그인', () => {
 });
 
 describe('로그인 확인', () => {
-  const mockUser = { id: 1 };
+  const mockUser = { userId: 1 };
 
   it('로그인 확인 성공', async () => {
     UserRepository.findOneBy = jest.fn().mockResolvedValueOnce(mockUser);
 
-    const user = await authService.signCheck(mockUser.id);
+    const user = await authService.signCheck(mockUser.userId);
 
-    expect(user.userId).toBe(mockUser.id);
+    expect(user.userId).toBe(mockUser.userId);
   });
 
   it('DB에 유저 정보가 없을 경우 예외가 발생한다', async () => {
     UserRepository.findOneBy = jest.fn().mockResolvedValueOnce(null);
 
-    expect(authService.signCheck(mockUser.id)).rejects.toThrow();
+    expect(authService.signCheck(mockUser.userId)).rejects.toThrow();
   });
 });
 
