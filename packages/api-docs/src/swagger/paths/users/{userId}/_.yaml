@@ -32,6 +32,8 @@ put:
   summary: 사용자의 정보 수정
   description: 사용자의 정보를 수정합니다.
   parameters:
+    - name: Authorization
+      $ref: '../../../index.yaml#/components/parameters/Authorization'
     - name: userId
       in: path
       description: 수정할 사용자의 ID
