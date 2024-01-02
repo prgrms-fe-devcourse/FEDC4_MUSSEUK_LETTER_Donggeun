@@ -66,12 +66,9 @@ export const getPutUsersUserIdMock = () => ({
 
 export const getGetPostsMock = () =>
   Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
-    comments: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
-      commentId: faker.number.int({ min: undefined, max: undefined }),
-      imageName: faker.word.sample(),
-      positionX: faker.number.int({ min: undefined, max: undefined }),
-      positionY: faker.number.int({ min: undefined, max: undefined })
-    })),
+    authorId: faker.number.int({ min: undefined, max: undefined }),
+    authorName: faker.word.sample(),
+    commentCount: faker.number.int({ min: undefined, max: undefined }),
     content: faker.word.sample(),
     imageName: faker.word.sample(),
     postId: faker.number.int({ min: undefined, max: undefined }),
@@ -81,6 +78,8 @@ export const getGetPostsMock = () =>
 export const getPostPostsMock = () => ({ postId: faker.number.int({ min: undefined, max: undefined }) });
 
 export const getGetPostsPostIdMock = () => ({
+  authorId: faker.number.int({ min: undefined, max: undefined }),
+  authorName: faker.word.sample(),
   comments: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
     commentId: faker.number.int({ min: undefined, max: undefined }),
     imageName: faker.word.sample(),
@@ -287,6 +286,15 @@ export const getMusseukMock = () => [
   http.get('*/comments/:commentId', async () => {
     await delay(1000);
     return new HttpResponse(JSON.stringify(getGetCommentsCommentIdMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }),
+  http.delete('*/comments/:commentId', async () => {
+    await delay(1000);
+    return new HttpResponse(null, {
       status: 200,
       headers: {
         'Content-Type': 'application/json'
