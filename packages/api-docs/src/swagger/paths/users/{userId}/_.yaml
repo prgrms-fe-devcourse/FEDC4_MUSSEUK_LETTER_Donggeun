@@ -20,7 +20,7 @@ get:
             introduce: 안녕하세요 짱구에요
             slackId: U01H9QZJX1T
             slackWorkspace: D9D8A7A7S
-            imageName: 짱구_이미지_링크.png
+            imageUrl: 짱구_이미지_링크.png
             postCount: 3
             commentCount: 5
     '404':
@@ -70,7 +70,7 @@ put:
             introduce: 저는 짱구에요
             slackId: U01H9QZJX1T
             slackWorkspace: D9D8A7A7S
-            imageName: 짱구_이미지_링크.png
+            imageUrl: 짱구_이미지_링크.png
             postCount: 3
             commentCount: 5
     '400':
