@@ -37,17 +37,13 @@ const authService = {
     const user = await UserRepository.findOneBy({ email });
 
     if (!user) {
-      throw new ValidationError({
-        email: '존재하지 않는 회원입니다.'
-      });
+      throw new ResponseError(400, '일치하는 회원이 없어요.');
     }
 
     const encryptedPassword = encryptText(password, user.salt);
 
     if (user.password !== encryptedPassword) {
-      throw new ValidationError({
-        password: '비밀번호가 일치하지 않습니다.'
-      });
+      throw new ResponseError(400, '일치하는 회원이 없어요.');
     }
 
     const accessToken = authService.generateAccessToken(user.userId, user.email, user.role);
@@ -62,7 +58,7 @@ const authService = {
     const user = await UserRepository.findOneBy({ userId });
 
     if (!user) {
-      throw new ResponseError(404, '사용자를 찾을 수 없어요.');
+      throw new ResponseError(500, '사용자를 찾을 수 없어요.');
     }
 
     return {
@@ -74,7 +70,7 @@ const authService = {
     const user = await UserRepository.findOneBy({ userId });
 
     if (!user) {
-      throw new ResponseError(404, '사용자를 찾을 수 없어요.');
+      throw new ResponseError(500, '사용자를 찾을 수 없어요.');
     }
 
     const salt = makeRandomString(64);
