@@ -12,15 +12,18 @@ import type {
   GetAuthCheck200,
   GetPostsParams,
   GetUsersParams,
-  Post,
   PostAuthSignin200,
   PostAuthSigninBody,
   PostAuthSignout200,
   PostAuthSignup201,
   PostAuthSignupBody,
+  PostDetail,
+  PostList,
   PostPosts201,
   PostPostsBody,
+  PostPostsPostIdComments201,
   PostPostsPostIdCommentsBody,
+  PostPostsPostIdCommentsParams,
   PostSlackVerificationBody,
   PutAuthPassword200,
   PutAuthPasswordBody,
@@ -156,7 +159,7 @@ export const postSlackVerification = <TData = AxiosResponse<void>>(
  * 머쓱이 목록을 조회합니다.
  * @summary 머쓱이 목록 조회
  */
-export const getPosts = <TData = AxiosResponse<Post[]>>(
+export const getPosts = <TData = AxiosResponse<PostList>>(
   params?: GetPostsParams,
   options?: AxiosRequestConfig
 ): Promise<TData> => {
@@ -181,7 +184,7 @@ export const postPosts = <TData = AxiosResponse<PostPosts201>>(
  * 머쓱이의 상세 정보를 조회합니다.
  * @summary 머쓱이 상세 조회
  */
-export const getPostsPostId = <TData = AxiosResponse<Post>>(
+export const getPostsPostId = <TData = AxiosResponse<PostDetail>>(
   postId: number,
   options?: AxiosRequestConfig
 ): Promise<TData> => {
@@ -226,12 +229,16 @@ export const getPostsPostIdComments = <TData = AxiosResponse<Comment[]>>(
  * 특정 머쓱이에게 편지를 작성합니다.
  * @summary 특정 머쓱이에게 편지 작성
  */
-export const postPostsPostIdComments = <TData = AxiosResponse<Comment>>(
+export const postPostsPostIdComments = <TData = AxiosResponse<PostPostsPostIdComments201>>(
   postId: number,
   postPostsPostIdCommentsBody: PostPostsPostIdCommentsBody,
+  params?: PostPostsPostIdCommentsParams,
   options?: AxiosRequestConfig
 ): Promise<TData> => {
-  return axios.default.post(`/posts/${postId}/comments`, postPostsPostIdCommentsBody, options);
+  return axios.default.post(`/posts/${postId}/comments`, postPostsPostIdCommentsBody, {
+    ...options,
+    params: { ...params, ...options?.params }
+  });
 };
 
 /**
@@ -245,6 +252,17 @@ export const getCommentsCommentId = <TData = AxiosResponse<Comment>>(
   return axios.default.get(`/comments/${commentId}`, options);
 };
 
+/**
+ * 특정 편지를 삭제합니다.
+ * @summary 편지 삭제
+ */
+export const deleteCommentsCommentId = <TData = AxiosResponse<void>>(
+  commentId: number,
+  options?: AxiosRequestConfig
+): Promise<TData> => {
+  return axios.default.delete(`/comments/${commentId}`, options);
+};
+
 export type PostAuthSignupResult = AxiosResponse<PostAuthSignup201>;
 export type PostAuthSigninResult = AxiosResponse<PostAuthSignin200>;
 export type PostAuthSignoutResult = AxiosResponse<PostAuthSignout200>;
@@ -256,11 +274,12 @@ export type PutUsersUserIdResult = AxiosResponse<User>;
 export type PutUsersUserIdPhotoResult = AxiosResponse<void>;
 export type PutUsersUserIdSlackResult = AxiosResponse<void>;
 export type PostSlackVerificationResult = AxiosResponse<void>;
-export type GetPostsResult = AxiosResponse<Post[]>;
+export type GetPostsResult = AxiosResponse<PostList>;
 export type PostPostsResult = AxiosResponse<PostPosts201>;
-export type GetPostsPostIdResult = AxiosResponse<Post>;
+export type GetPostsPostIdResult = AxiosResponse<PostDetail>;
 export type PutPostsPostIdResult = AxiosResponse<void>;
 export type DeletePostsPostIdResult = AxiosResponse<void>;
 export type GetPostsPostIdCommentsResult = AxiosResponse<Comment[]>;
-export type PostPostsPostIdCommentsResult = AxiosResponse<Comment>;
+export type PostPostsPostIdCommentsResult = AxiosResponse<PostPostsPostIdComments201>;
 export type GetCommentsCommentIdResult = AxiosResponse<Comment>;
+export type DeleteCommentsCommentIdResult = AxiosResponse<void>;

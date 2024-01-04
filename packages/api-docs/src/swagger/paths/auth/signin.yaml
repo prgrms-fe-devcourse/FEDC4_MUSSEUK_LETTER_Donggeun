@@ -46,17 +46,7 @@ post:
             properties:
               message:
                 type: string
-              validation:
-                type: object
-                properties:
-                  username:
-                    type: string
-                  password:
-                    type: string
             required:
               - message
           example:
-            message: 잘못된 요청이에요.
-            validation:
-              username: 해당 아이디를 가진 사용자가 없어요.
-              password: 비밀번호가 틀렸어요.
+            message: 일치하는 회원이 없어요.

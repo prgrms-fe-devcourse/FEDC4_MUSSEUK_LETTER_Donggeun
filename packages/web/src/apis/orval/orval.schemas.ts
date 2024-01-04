@@ -5,12 +5,27 @@
  * Musseuk Letter API Docs
  * OpenAPI spec version: 1.0.0
  */
+export type PostPostsPostIdComments401 = {
+  message: string;
+};
+
+export type PostPostsPostIdComments201 = {
+  commentId: number;
+};
+
 export type PostPostsPostIdCommentsBody = {
-  author: string;
   content: string;
   imageName: string;
+  nickname: string;
   positionX: number;
   positionY: number;
+};
+
+export type PostPostsPostIdCommentsParams = {
+  /**
+   * 로그인 된 상태로 요청하는지의 여부<br/>(true로 요청하는 경우 Authorization 헤더에 액세스 토큰을 담아 보내야 함)<br/><br/>true이면 테이블의 authorId에 로그인한 사용자의 ID가 들어감.<br/>false이면 테이블의 authorId에 NULL이 들어감.
+   */
+  asSignedUser?: boolean;
 };
 
 export type PutPostsPostId400Validation = {
@@ -122,6 +137,10 @@ export type GetUsersParams = {
   keyword?: string;
 };
 
+export type PutAuthPassword500 = {
+  message: string;
+};
+
 export type PutAuthPassword400Validation = {
   password?: string;
 };
@@ -148,14 +167,8 @@ export type PostAuthSignout200 = {
   message: string;
 };
 
-export type PostAuthSignin400Validation = {
-  password?: string;
-  username?: string;
-};
-
 export type PostAuthSignin400 = {
   message: string;
-  validation?: PostAuthSignin400Validation;
 };
 
 export type PostAuthSignin200 = {
@@ -211,28 +224,44 @@ export type UnauthorizedResponse = {
 };
 
 export interface Comment {
-  author: string;
+  authorId?: number;
   commentId: number;
   content: string;
   imageName: string;
+  nickname: string;
   positionX: number;
   positionY: number;
+  postId: number;
 }
 
-export type PostCommentsItem = {
+export type PostDetailCommentsItem = {
   commentId: number;
   imageName: string;
   positionX: number;
   positionY: number;
 };
 
-export interface Post {
-  comments: PostCommentsItem[];
+export interface PostDetail {
+  authorId: number;
+  authorName: string;
+  comments: PostDetailCommentsItem[];
   content: string;
   imageName: string;
   postId: number;
   title: string;
 }
+
+export type PostListItem = {
+  authorId: number;
+  authorName: string;
+  commentCount: number;
+  content: string;
+  imageName: string;
+  postId: number;
+  title: string;
+};
+
+export type PostList = PostListItem[];
 
 export interface User {
   commentCount: number;

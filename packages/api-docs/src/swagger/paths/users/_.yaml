@@ -32,7 +32,7 @@ get:
               introduce: 안녕하세요 짱구에요
               slackId: U01H9QZJX1T
               slackWorkspace: D9D8A7A7S
-              imageName: 짱구_이미지_링크.png
+              imageUrl: 짱구_이미지_링크.png
               postCount: 3
               commentCount: 5
             - userId: 2
@@ -41,7 +41,7 @@ get:
               introduce: 안녕하세요 철수에요
               slackId: U01H9QZJX2T
               slackWorkspace: D9D8A7A7S
-              imageName: 철수_이미지_링크.png
+              imageUrl: 철수_이미지_링크.png
               postCount: 7
               commentCount: 2
             - userId: 3
@@ -50,6 +50,6 @@ get:
               introduce: 안녕하세요 유리에요
               slackId: U01H9QZJX3T
               slackWorkspace: D9D8A7A7S
-              imageName: 유리_이미지_링크.png
+              imageUrl: 유리_이미지_링크.png
               postCount: 2
               commentCount: 15

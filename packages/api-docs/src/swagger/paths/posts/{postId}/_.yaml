@@ -4,8 +4,6 @@ get:
   summary: 머쓱이 상세 조회
   description: 머쓱이의 상세 정보를 조회합니다.
   parameters:
-    - name: Authorization
-      $ref: '../../../index.yaml#/components/parameters/Authorization'
     - name: postId
       $ref: '../../../index.yaml#/components/parameters/postId'
   responses:
@@ -14,9 +12,11 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../../../index.yaml#/components/schemas/Post'
+            $ref: '../../../index.yaml#/components/schemas/PostDetail'
           example:
             postId: 1
+            authorId: 10
+            authorName: 김영희
             title: 피드백 머쓱이
             content: 저에게 피드백을 주세요
             imageName: musseuk_default.png
