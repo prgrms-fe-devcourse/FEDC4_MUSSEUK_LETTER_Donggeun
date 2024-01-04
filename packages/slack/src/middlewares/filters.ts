@@ -4,33 +4,42 @@ import { AnyZodObject } from 'zod';
 import jwt from 'jsonwebtoken';
 
 /**
- * 사용자의 로그인 여부를 확인하는 미들웨어
- * (로그인이 되어있지 않으면 AuthorizationError를 발생시킵니다.)
+ * 사용자의 로그인 정보를 가공하는 미들웨어
+ * @param throwsOnError 로그인이 되어있지 않을 때 에러를 발생시킬지 여부
+ *
+ * true일 때: AuthorizationError를 발생시키고 다음 미들웨어로 넘어가지 않습니다.
+ * false일 때: 다음 미들웨어로 넘어갑니다.
  */
-export const authorizationFilter = async (req: Request, res: Response, next: NextFunction) => {
-  const { authorization } = req.headers;
-  const accessToken = authorization?.replace('Bearer ', '') ?? '';
+export const authorizationFilter =
+  (throwsOnError = true) =>
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { authorization } = req.headers;
+    const accessToken = authorization?.replace('Bearer ', '') ?? '';
 
-  try {
-    const payload = jwt.verify(accessToken, process.env.JWT_SECRET_KEY) as {
-      id: number;
-      username: string;
-      role: string;
-    };
+    try {
+      const payload = jwt.verify(accessToken, process.env.JWT_SECRET_KEY) as {
+        id: number;
+        username: string;
+        role: string;
+      };
 
-    req.user = {
-      id: payload.id,
-      username: payload.username,
-      role: payload.role
-    };
+      req.user = {
+        id: payload.id,
+        username: payload.username,
+        role: payload.role
+      };
 
-    req.accessToken = accessToken;
+      req.accessToken = accessToken;
 
-    return next();
-  } catch (error) {
-    throw new AuthorizationError();
-  }
-};
+      return next();
+    } catch (error) {
+      if (throwsOnError) {
+        throw new AuthorizationError();
+      } else {
+        return next();
+      }
+    }
+  };
 
 /**
  * Zod Schema로 Body, Query, Params를 검증하는 미들웨어
