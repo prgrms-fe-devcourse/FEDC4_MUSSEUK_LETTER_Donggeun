@@ -35,45 +35,29 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '../../index.yaml#/components/schemas/Post'
+            $ref: '../../index.yaml#/components/schemas/PostList'
           example:
             - postId: 1
+              authorId: 1
+              authorName: 신짱구
               title: 피드백 머쓱이
               content: 저에게 피드백을 주세요
               imageName: musseuk_default.png
-              comments:
-                - commentId: 1
-                  positionX: 55
-                  positionY: 413
-                  imageName: decoration_beer1.png
-                - commentId: 2
-                  positionX: 23
-                  positionY: 333
-                  imageName: decoration_chicken1.png
+              commentCount: 3
             - postId: 2
+              authorId: 5
+              authorName: 김철수
               title: 잡담 머쓱이
               content: 우하하 잡담용 머쓱이에요
               imageName: musseuk_default.png
-              comments: []
+              commentCount: 0
             - postId: 3
+              authorId: 10
+              authorName: 김영희
               title: 스터디 머쓱이
               content: 스터디를 함께하실 분을 찾습니다
               imageName: musseuk_default.png
-              comments:
-                - commentId: 3
-                  positionX: 55
-                  positionY: 413
-                  imageName: decoration_beer1.png
-                - commentId: 4
-                  positionX: 23
-                  positionY: 333
-                  imageName: decoration_chicken1.png
-                - commentId: 5
-                  positionX: 21
-                  positionY: 111
-                  imageName: decoration_chicken1.png
+              commentCount: 10
 post:
   tags:
     - 머쓱이
