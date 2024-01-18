@@ -4,7 +4,8 @@ import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
 import React, { useEffect, useRef } from 'react';
-import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { postDetailQueryOption } from '@/apis/queries/usePostDetailQuery';
 import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
 import type { Comment as CommentType } from 'common/types';
@@ -22,7 +23,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   const dispatch = useCommentInfoDispatch();
   const toast = useToast();
 
-  const { data: postData } = usePostDetailQuery(postId, { suspense: true });
+  const { data: postData } = useSuspenseQuery({ ...postDetailQueryOption(postId) });
   const { data: userData } = useSuspenseQuery({ ...authCheckOption });
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;

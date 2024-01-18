@@ -17,7 +17,8 @@ import {
 import headerImage from '@/assets/images/comment-header.png';
 import musseukBye from '@/assets/images/musseuk_bye.png';
 import useDeletePostMutation from '@/apis/mutations/useDeletePostMutation';
-import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useQuery } from '@tanstack/react-query';
+import { postDetailQueryOption } from '@/apis/queries/usePostDetailQuery';
 import { useNavigate } from 'react-router-dom';
 
 type PostDeleteModalProps = {
@@ -28,7 +29,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { data } = usePostDetailQuery(postId);
+  const { data } = useQuery({ ...postDetailQueryOption(postId) });
   const { mutate, isLoading } = useDeletePostMutation(postId);
 
   const handleDeleteClick = () => {

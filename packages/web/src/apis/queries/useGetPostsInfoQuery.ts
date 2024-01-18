@@ -1,6 +1,5 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery, queryOptions } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { QueryOptions } from '@/apis/types';
 import { PostResponse } from 'common/types/raws';
 import queryKey from '@/apis/queryKeys';
 import parsePost from 'common/utils/parsePost';
@@ -14,12 +13,17 @@ export const getPostsInfo = async () => {
   return data.map((post) => parsePost(post));
 };
 
-const useGetPostsInfoQuery = (options?: QueryOptions<Post[]>) => {
-  return useSuspenseQuery<Post[]>({
-    queryKey: queryKey.posts.all,
-    queryFn: () => getPostsInfo(),
-    ...options
-  });
-};
+export const getPostsInfoQueryOption = queryOptions({
+  queryKey: queryKey.posts.all,
+  queryFn: () => getPostsInfo()
+});
 
-export default useGetPostsInfoQuery;
+// const useGetPostsInfoQuery = (options?: QueryOptions<Post[]>) => {
+//   return useSuspenseQuery<Post[]>({
+//     queryKey: queryKey.posts.all,
+//     queryFn: () => getPostsInfo(),
+//     ...options
+//   });
+// };
+
+// export default useGetPostsInfoQuery;

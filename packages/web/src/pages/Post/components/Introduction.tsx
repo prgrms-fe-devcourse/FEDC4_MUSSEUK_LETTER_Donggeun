@@ -1,4 +1,5 @@
-import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { postDetailQueryOption } from '@/apis/queries/usePostDetailQuery';
 import { Heading, Text } from '@chakra-ui/react';
 
 type IntroductionProps = {
@@ -6,7 +7,7 @@ type IntroductionProps = {
 };
 
 const Introduction = ({ postId }: IntroductionProps) => {
-  const { data } = usePostDetailQuery(postId, { suspense: true });
+  const { data } = useSuspenseQuery({ ...postDetailQueryOption(postId) });
 
   return (
     <>

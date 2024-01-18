@@ -1,6 +1,6 @@
 import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { postDetailQueryOption } from '@/apis/queries/usePostDetailQuery';
 import { Heading, HeadingProps, Text } from '@chakra-ui/react';
 
 type AnnouncementTextProps = {
@@ -8,7 +8,7 @@ type AnnouncementTextProps = {
 } & HeadingProps;
 
 const AnnouncementText = ({ postId, ...props }: AnnouncementTextProps) => {
-  const { data: postData } = usePostDetailQuery(postId, { suspense: true });
+  const { data: postData } = useSuspenseQuery({ ...postDetailQueryOption(postId) });
   const { data: userData } = useSuspenseQuery({ ...authCheckOption });
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
