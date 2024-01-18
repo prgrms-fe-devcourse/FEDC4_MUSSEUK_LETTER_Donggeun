@@ -28,7 +28,7 @@ const useDeleteCommentMutation = (commentId: string) => {
   return useMutation<CommentResponse, AxiosError, CustomRequestData>({
     mutationFn: () => deleteComment({ commentId }),
     onSuccess: () => {
-      queryClient.invalidateQueries(queryKey.posts.all);
+      queryClient.invalidateQueries({ queryKey: queryKey.posts.all });
     }
   });
 };

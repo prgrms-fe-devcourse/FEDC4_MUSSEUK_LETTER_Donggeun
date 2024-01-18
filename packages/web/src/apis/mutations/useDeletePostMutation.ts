@@ -28,8 +28,12 @@ const useDeletePostMutation = (postId: string) => {
   return useMutation<PostResponse, AxiosError, CustomRequestData>({
     mutationFn: () => deletePost({ postId }),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(queryKey.posts.all);
-      queryClient.removeQueries(queryKey.posts.detail(data._id));
+      queryClient.invalidateQueries({
+        queryKey: queryKey.posts.all
+      });
+      queryClient.removeQueries({
+        queryKey: queryKey.posts.detail(data._id)
+      });
     }
   });
 };

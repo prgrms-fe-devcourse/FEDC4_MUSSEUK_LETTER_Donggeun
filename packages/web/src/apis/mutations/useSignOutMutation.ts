@@ -17,7 +17,9 @@ const useSignOutMutation = () => {
     mutationFn: postSignOut,
     onMutate: () => {
       storage('local').removeItem(AUTH_TOKEN);
-      queryClient.removeQueries(queryKey.auth);
+      queryClient.removeQueries({
+        queryKey: queryKey.auth
+      });
     }
   });
 };
