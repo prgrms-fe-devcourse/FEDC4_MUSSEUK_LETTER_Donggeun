@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { queryOptions } from '@tanstack/react-query';
 import { slackInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import storage from '@/utils/storage';
@@ -20,12 +20,9 @@ export const getTokenResult = async (slackToken: string) => {
   return data.user;
 };
 
-const useSlackTokenCheckQuery = (slackToken: string) => {
-  return useSuspenseQuery<User>({
+export const slackTokenCheckQueryOption = (slackToken: string) =>
+  queryOptions({
     queryKey: queryKey.slack.token(slackToken),
     queryFn: () => getTokenResult(slackToken),
     staleTime: Infinity
   });
-};
-
-export default useSlackTokenCheckQuery;

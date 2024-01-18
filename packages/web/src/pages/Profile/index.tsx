@@ -15,8 +15,9 @@ import {
 import { AddIcon } from '@chakra-ui/icons';
 import ProfileBar from './components/ProfileBar';
 import { useNavigate, useParams } from 'react-router-dom';
-import useUserPostListQuery from '@/apis/queries/useUserPostListQuery';
-import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
+import { userPostListQueryOption } from '@/apis/queries/useUserPostListQuery';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { userInfoQueryOption } from '@/apis/queries/useUserInfoQuery';
 import { useQuery } from '@tanstack/react-query';
 import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import { Suspense } from 'react';
@@ -64,8 +65,8 @@ const AddCard = () => {
 
 const Profile = () => {
   const { userId = '' } = useParams();
-  const { data: postList } = useUserPostListQuery(userId);
-  const { data: user } = useUserInfoQuery(userId);
+  const { data: postList } = useQuery({ ...userPostListQueryOption(userId) });
+  const { data: user } = useSuspenseQuery({ ...userInfoQueryOption(userId) });
   const { data: authUser } = useQuery({ ...authCheckOption });
 
   const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');

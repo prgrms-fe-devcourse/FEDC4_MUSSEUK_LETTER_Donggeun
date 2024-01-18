@@ -2,7 +2,8 @@ import PageTemplateWithHeader from '@/components/WhiteCard/PageTemplateWithHeade
 import { Heading, Image, Text, Button } from '@chakra-ui/react';
 import musseuk_box from '@/assets/images/musseuk_box.png';
 import { useNavigate } from 'react-router-dom';
-import useSlackTokenCheckQuery from '@/apis/queries/useSlackTokenCheckQuery';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { slackTokenCheckQueryOption } from '@/apis/queries/useSlackTokenCheckQuery';
 import qs from 'qs';
 import Loading from '@/components/Loading';
 import NotFound from '@/pages/NotFound';
@@ -13,7 +14,7 @@ const SlackConfirmation = withAsyncBoundary(
     const navigate = useNavigate();
     const queryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });
     const slackToken = String(queryString.token);
-    const { data: slackResponseData } = useSlackTokenCheckQuery(slackToken);
+    const { data: slackResponseData } = useSuspenseQuery({ ...slackTokenCheckQueryOption(slackToken) });
 
     return (
       <PageTemplateWithHeader>
