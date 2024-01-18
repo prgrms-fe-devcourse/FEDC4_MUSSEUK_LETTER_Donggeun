@@ -12,10 +12,11 @@ import {
   Flex,
   useToast
 } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import headerImage from '@/assets/images/comment-header.png';
 import { useCommentInfoState } from '../../contexts/CommentInfoContext';
 import { DECORATION_IMAGE } from '../../constants';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import DeleteButton from '../DeleteButton';
 import { useState } from 'react';
 import useDeleteCommentMutation from '@/apis/mutations/useDeleteCommentMutation';
@@ -26,7 +27,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
   const { content, nickname, decorationImageName, author, _id: commentId } = useCommentInfoState();
   const toast = useToast();
 
-  const { data: userData } = useAuthCheckQuery();
+  const { data: userData } = useQuery({ ...authCheckOption });
   const { mutate, isLoading } = useDeleteCommentMutation(commentId);
 
   const isMyComment = userData?._id === author._id;

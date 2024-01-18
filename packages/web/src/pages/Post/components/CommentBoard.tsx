@@ -1,4 +1,5 @@
 import { Box, useToast } from '@chakra-ui/react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import Musseuk from './Musseuk';
 import CommentList from './CommentList';
 import Comment from './Comment';
@@ -7,7 +8,7 @@ import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
 import { useCommentInfoDispatch } from '../contexts/CommentInfoContext';
 import { COMMENT_INFO_ACTION } from '../constants';
 import type { Comment as CommentType } from 'common/types';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import qs from 'qs';
 
 type CommentBoardProps = {
@@ -22,7 +23,7 @@ const CommentBoard = ({ postId, onInfoOpen, onWriteOpen }: CommentBoardProps) =>
   const toast = useToast();
 
   const { data: postData } = usePostDetailQuery(postId, { suspense: true });
-  const { data: userData } = useAuthCheckQuery({ suspense: true });
+  const { data: userData } = useSuspenseQuery({ ...authCheckOption });
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;
   const queryString = qs.parse(window.location.search, { ignoreQueryPrefix: true });

@@ -19,7 +19,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import useUpdateUserMutation from '@/apis/mutations/useUpdateUserMutation';
 import useProfileImageMutation from '@/apis/mutations/useProfileImageMutation';
 import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 
 interface ProfileProps {
   userId: string;
@@ -32,7 +33,7 @@ interface FormData {
 
 const ProfileBar = ({ userId }: ProfileProps) => {
   const { data: user } = useUserInfoQuery(userId);
-  const { data: authUser } = useAuthCheckQuery();
+  const { data: authUser } = useQuery({ ...authCheckOption });
   const isMyProfile = user?._id === authUser?._id;
 
   const { mutate: putUser } = useUpdateUserMutation();

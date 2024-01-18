@@ -1,15 +1,16 @@
 import { Button, Image, Stack, Menu, MenuButton, MenuList, MenuItem, Avatar } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import { BellIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import slackIcon from '@/assets/images/icon-slack.png';
 import defaultProfile from '@/assets/images/musseuk_hood.png';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import useSignOutMutation from '@/apis/mutations/useSignOutMutation';
 
 const HeaderMenu = () => {
   const navigate = useNavigate();
   const { mutate } = useSignOutMutation();
-  const { data } = useAuthCheckQuery();
+  const { data } = useQuery({ ...authCheckOption });
 
   const signOut = () => {
     mutate(undefined, {

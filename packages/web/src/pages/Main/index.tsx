@@ -19,7 +19,7 @@ import NotFound from '@/pages/NotFound';
 const Main = () => {
   const navigate = useNavigate();
 
-  const { data, status } = useGetPostsInfoQuery({ suspense: true });
+  const { data, status } = useGetPostsInfoQuery();
 
   return (
     <>

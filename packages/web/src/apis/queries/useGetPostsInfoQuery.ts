@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import { QueryOptions } from '@/apis/types';
 import { PostResponse } from 'common/types/raws';
@@ -15,7 +15,7 @@ export const getPostsInfo = async () => {
 };
 
 const useGetPostsInfoQuery = (options?: QueryOptions<Post[]>) => {
-  return useQuery<Post[]>({
+  return useSuspenseQuery<Post[]>({
     queryKey: queryKey.posts.all,
     queryFn: () => getPostsInfo(),
     ...options

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import SignIn from './pages/Signin';
 import SignUp from './pages/Signup';
 import MainLayout from './routes/layout';
@@ -14,7 +15,7 @@ import NotFound from './pages/NotFound';
 import SlackConfirmationWrapper from './pages/Setting/SlackConfirmation';
 
 const App = () => {
-  useAuthCheckQuery();
+  useQuery({ ...authCheckOption });
 
   return (
     <Router>

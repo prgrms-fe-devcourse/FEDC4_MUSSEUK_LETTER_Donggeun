@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import { UserResponse } from 'common/types/raws';
@@ -12,10 +12,9 @@ export const getUserInfo = async (userId: string) => {
 };
 
 const useUserInfoQuery = (userId: string) => {
-  return useQuery<User>({
+  return useSuspenseQuery<User>({
     queryKey: queryKey.users.detail(userId),
-    queryFn: () => getUserInfo(userId),
-    suspense: true
+    queryFn: () => getUserInfo(userId)
   });
 };
 

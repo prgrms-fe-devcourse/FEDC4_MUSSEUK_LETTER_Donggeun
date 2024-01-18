@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, queryOptions } from '@tanstack/react-query';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import parseUser from 'common/utils/parseUser';
@@ -19,13 +19,19 @@ export const getAuthUser = async () => {
   return parseUser(data);
 };
 
-const useAuthCheckQuery = (options?: QueryOptions<User>) => {
-  return useQuery<User>({
-    queryKey: queryKey.auth,
-    queryFn: getAuthUser,
-    staleTime: Infinity,
-    ...options
-  });
-};
+export const authCheckOption = queryOptions({
+  queryKey: queryKey.auth,
+  queryFn: getAuthUser,
+  staleTime: Infinity
+});
 
-export default useAuthCheckQuery;
+// const useAuthCheckQuery = (options?: QueryOptions<User>) => {
+//   return useQuery<User>({
+//     queryKey: queryKey.auth,
+//     queryFn: getAuthUser,
+//     staleTime: Infinity,
+//     ...options
+//   });
+// };
+
+// export default useAuthCheckQuery;

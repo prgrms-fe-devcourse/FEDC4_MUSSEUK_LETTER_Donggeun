@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, MouseEvent, useCallback } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Flex, Button, Image, Textarea, Box, Text, Input, HStack, UnorderedList, ListItem } from '@chakra-ui/react';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import useNewPostMutation from '@/apis/mutations/useNewPostMutation';
 import musseuk_semicolon from '@/assets/images/musseuk_semicolon.png';
 import musseuk_laptop from '@/assets/images/musseuk_laptop.png';
@@ -73,7 +74,7 @@ const TIP_MESSAGE = [
 const NewPost = () => {
   const { mutate } = useNewPostMutation();
 
-  const { data: user } = useAuthCheckQuery();
+  const { data: user } = useQuery({ ...authCheckOption });
 
   const [musseukTitle, setMusseukTitle] = useState('');
   const [musseukImage, setMuseukImage] = useState('');

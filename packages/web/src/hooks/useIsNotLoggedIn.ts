@@ -1,11 +1,12 @@
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import storage from '@/utils/storage';
 import { AUTH_TOKEN } from '@/constants/storageKey';
-import type { User } from 'common/types';
-import type { QueryOptions } from '@/apis/types';
 
-const useIsNotLoggedIn = (options?: QueryOptions<User>) => {
-  const { data: auth } = useAuthCheckQuery(options);
+const useIsNotLoggedIn = () => {
+  const { data: auth } = useQuery({
+    ...authCheckOption
+  });
 
   return {
     auth,
