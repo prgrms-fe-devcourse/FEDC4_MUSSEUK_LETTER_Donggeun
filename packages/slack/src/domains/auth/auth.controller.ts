@@ -23,7 +23,7 @@ router.post('/signout', (req, res) => {
   res.json({ message: 'TODO: 로그아웃 구현 필요..' });
 });
 
-router.get('/check', authorizationFilter, async (req, res) => {
+router.get('/check', authorizationFilter(true), async (req, res) => {
   const signedUser = req.user;
   const accessToken = req.accessToken;
 
@@ -36,7 +36,7 @@ router.get('/check', authorizationFilter, async (req, res) => {
   res.json({ userId, accessToken });
 });
 
-router.put('/password', authorizationFilter, validationFilter(authValidator.password), async (req, res) => {
+router.put('/password', authorizationFilter(true), validationFilter(authValidator.password), async (req, res) => {
   const { password } = req.body as z.infer<typeof authValidator.password.body>;
   const signedUser = req.user;
 
