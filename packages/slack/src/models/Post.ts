@@ -1,11 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './User';
 import { Comment } from './Comment';
 
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn()
-  id!: number;
+  postId!: number;
+
+  @ManyToOne(() => User, (user) => user.posts, {
+    cascade: true
+  })
+  @JoinColumn({ name: 'author_id' })
+  author!: User;
+
+  @OneToMany(() => Comment, (comment) => comment.commentId)
+  comments!: Comment[];
 
   @Column({ length: 50 })
   title!: string;
@@ -21,12 +30,4 @@ export class Post {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
-
-  @ManyToOne(() => User, (user) => user.posts, {
-    cascade: true
-  })
-  author!: User;
-
-  @OneToMany(() => Comment, (comment) => comment.id)
-  comments!: Comment[];
 }

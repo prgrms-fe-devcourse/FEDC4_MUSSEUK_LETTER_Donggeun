@@ -1,8 +1,5 @@
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { User } from '@/models/User';
-import { Post } from '@/models/Post';
-import { Comment } from '@/models/Comment';
 
 const AppDataSource = new DataSource({
   type: 'mysql',
@@ -12,8 +9,7 @@ const AppDataSource = new DataSource({
   password: process.env.NODE_ENV === 'production' ? process.env.DEPLOY_DB_PASSWORD : process.env.LOCAL_DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
-  // logging: true,
-  entities: [User, Post, Comment],
+  entities: [__dirname + '/../models/*.{js,ts}'],
   subscribers: [],
   migrations: [],
   namingStrategy: new SnakeNamingStrategy()

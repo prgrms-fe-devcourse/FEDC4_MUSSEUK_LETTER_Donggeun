@@ -2,13 +2,13 @@ import AppDataSource from '@/configs/database';
 import { User } from '@/models/User';
 
 const UserRepository = AppDataSource.getRepository(User).extend({
-  async findUserByUsername({ username }: { username: string }) {
+  async findUserByEmail({ email }: { email: string }) {
     const user: Pick<
       User,
-      'id' | 'username' | 'role' | 'name' | 'introduce' | 'imageName' | 'slackId' | 'slackWorkspace'
+      'userId' | 'email' | 'role' | 'name' | 'introduce' | 'imageUrl' | 'slackId' | 'slackWorkspace'
     > | null = await this.findOne({
-      select: ['id', 'username', 'role', 'name', 'introduce', 'imageName', 'slackId', 'slackWorkspace'],
-      where: { username }
+      select: ['userId', 'email', 'role', 'name', 'introduce', 'imageUrl', 'slackId', 'slackWorkspace'],
+      where: { email }
     });
 
     return user;

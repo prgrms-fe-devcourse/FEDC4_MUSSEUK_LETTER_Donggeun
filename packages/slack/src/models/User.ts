@@ -1,13 +1,20 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Post } from './Post';
+import { Comment } from './Comment';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id!: number;
+  userId!: number;
 
-  @Column({ length: 50, unique: true })
-  username!: string;
+  @OneToMany(() => Post, (post) => post.author)
+  posts!: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.author)
+  comments!: Post[];
+
+  @Column({ unique: true })
+  email!: string;
 
   @Column()
   password!: string;
@@ -24,13 +31,13 @@ export class User {
   @Column({ nullable: true })
   introduce!: string;
 
-  @Column({ length: 50, nullable: true })
-  imageName!: string;
+  @Column({ nullable: true })
+  imageUrl!: string;
 
   @Column({ length: 50, nullable: true })
   slackId!: string;
 
-  @Column({ length: 20, nullable: true })
+  @Column({ length: 50, nullable: true })
   slackWorkspace!: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
@@ -38,7 +45,4 @@ export class User {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
-
-  @OneToMany(() => Post, (post) => post.author)
-  posts!: Post[];
 }

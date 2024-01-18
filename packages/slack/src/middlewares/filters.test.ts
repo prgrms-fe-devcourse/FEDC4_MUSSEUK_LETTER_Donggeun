@@ -20,36 +20,61 @@ beforeEach(() => {
 });
 
 describe('authorizationFilter', () => {
-  it('accessToken이 정상적이면 req 객체에 user와 accessToken이 담기고 다음 미들웨어가 실행된다', async () => {
+  it('accessToken이 정상적일 때 req.user, req.accessToken이 담기고 다음 미들웨어가 실행된다.', async () => {
     req = {
       headers: {
         authorization: 'Bearer 유효한_토큰'
       }
     };
 
-    jwt.verify = jest.fn().mockReturnValueOnce({ id: 1, username: '사용자', role: 'user' });
-    authorizationFilter(req as Request, res as Response, next);
+    const mockUser = { id: 1, username: '사용자', role: 'user' };
+    jwt.verify = jest.fn().mockReturnValueOnce(mockUser).mockReturnValueOnce(mockUser);
 
-    expect(req.user).toEqual({ id: 1, username: '사용자', role: 'user' });
+    // throwsOnError가 true일 때
+    authorizationFilter(true)(req as Request, res as Response, next);
+    expect(req.user).toEqual(mockUser);
     expect(req.accessToken).toEqual('유효한_토큰');
+    expect(next).toHaveBeenCalledTimes(1);
 
-    expect(next).toHaveBeenCalled();
+    // throwsOnError가 false일 때
+    authorizationFilter(false)(req as Request, res as Response, next);
+    expect(req.user).toEqual(mockUser);
+    expect(req.accessToken).toEqual('유효한_토큰');
+    expect(next).toHaveBeenCalledTimes(2);
   });
 
-  it('accessToken이 존재하지 않으면 AuthorizationError를 발생시킨다', async () => {
-    expect(authorizationFilter(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
-    expect(next).not.toHaveBeenCalled();
+  it('accessToken이 존재하지 않을 때', async () => {
+    // throwsOnError가 true이면, AuthorizationError를 발생시킨다.
+    expect(authorizationFilter(true)(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).toHaveBeenCalledTimes(0);
+    expect(authorizationFilter()(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).toHaveBeenCalledTimes(0);
+
+    // throwsOnError가 false이면, 다음 미들웨어가 실행된다.
+    authorizationFilter(false)(req as Request, res as Response, next);
+    expect(req.user).toBeUndefined();
+    expect(req.accessToken).toBeUndefined();
+    expect(next).toHaveBeenCalledTimes(1);
   });
 
-  it('accessToken이 유효하지 않으면 AuthorizationError를 발생시킨다', async () => {
+  it('accessToken이 유효하지 않을 때', async () => {
     req = {
       headers: {
         authorization: 'Bearer 유효하지_않은_토큰'
       }
     };
 
-    expect(authorizationFilter(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
-    expect(next).not.toHaveBeenCalled();
+    // throwsOnError가 true이면, AuthorizationError를 발생시킨다.
+    expect(authorizationFilter(true)(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).toHaveBeenCalledTimes(0);
+    expect(authorizationFilter()(req as Request, res as Response, next)).rejects.toThrow(AuthorizationError);
+    expect(next).toHaveBeenCalledTimes(0);
+
+    // throwsOnError가 false이면, 다음 미들웨어가 실행된다.
+    authorizationFilter(false)(req as Request, res as Response, next);
+    expect(req.user).toBeUndefined();
+    expect(req.accessToken).toBeUndefined();
+    expect(next).toHaveBeenCalledTimes(1);
   });
 });
 
