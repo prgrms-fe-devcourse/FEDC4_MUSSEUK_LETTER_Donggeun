@@ -46,7 +46,7 @@ type Inputs = z.infer<typeof formSchema>;
 
 const SignUp = () => {
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate, isLoading } = useSignupMutation();
+  const { mutate, isPending } = useSignupMutation();
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
@@ -125,8 +125,8 @@ const SignUp = () => {
       />
       <Button
         type="submit"
-        isLoading={isLoading}
-        isDisabled={isLoading}
+        isLoading={isPending}
+        isDisabled={isPending}
         spinner={<Spinner size="sm" mr="2" />}
         loadingText="회원가입 중..."
         mt="6"

@@ -36,7 +36,7 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate, isLoading } = useChangePasswordMutation();
+  const { mutate, isPending } = useChangePasswordMutation();
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showConfirmPassword, setShowConfirmPassword] = useBoolean(false);
@@ -111,8 +111,8 @@ const ChangePassword = () => {
       />
       <Button
         type="submit"
-        isLoading={isLoading}
-        isDisabled={isLoading}
+        isLoading={isPending}
+        isDisabled={isPending}
         spinner={<Spinner size="sm" mr="2" />}
         loadingText="변경중..."
         mt="6"

@@ -28,7 +28,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
   const toast = useToast();
 
   const { data: userData } = useQuery({ ...authCheckOption });
-  const { mutate, isLoading } = useDeleteCommentMutation(commentId);
+  const { mutate, isPending } = useDeleteCommentMutation(commentId);
 
   const isMyComment = userData?._id === author._id;
 
@@ -91,7 +91,7 @@ const CommentInfoModal = ({ isOpen, onClose }: Pick<UseDisclosureReturn, 'isOpen
                 <Flex alignItems={'center'}>
                   <DeleteButton
                     onClick={handleDeleteClick}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     mr={3}
                     colorScheme={isDeleteConfirm ? 'red' : 'primary'}
                   />

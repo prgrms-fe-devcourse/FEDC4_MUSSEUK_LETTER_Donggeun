@@ -30,7 +30,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
   const navigate = useNavigate();
 
   const { data } = useQuery({ ...postDetailQueryOption(postId) });
-  const { mutate, isLoading } = useDeletePostMutation(postId);
+  const { mutate, isPending } = useDeletePostMutation(postId);
 
   const handleDeleteClick = () => {
     mutate(
@@ -100,7 +100,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
                   colorScheme={'red'}
                   size={'lg'}
                   onClick={handleDeleteClick}
-                  isLoading={isLoading}
+                  isLoading={isPending}
                   loadingText={'삭제 중..'}>
                   삭제
                 </Button>

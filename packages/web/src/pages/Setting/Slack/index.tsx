@@ -29,7 +29,7 @@ const SettingSlack = withAsyncBoundary(
     const { isNotLoggedIn } = useIsNotLoggedIn();
     const { data: userData } = useQuery({ ...authCheckOption });
     const isSlackIdExist = typeof userData?.slackId === 'string';
-    const { mutate, isLoading, isSuccess } = useGenerateSlackLinkMutation();
+    const { mutate, isPending, isSuccess } = useGenerateSlackLinkMutation();
     const notionURL = import.meta.env.VITE_SLACK_ID_DESCRIPTION;
     const [message, setMessage] = useState('');
 
@@ -106,7 +106,7 @@ const SettingSlack = withAsyncBoundary(
           슬랙 아이디 찾기
         </LinkField>
         <Button
-          isLoading={isLoading}
+          isLoading={isPending}
           type="submit"
           mt="6"
           w="100%"
