@@ -1,11 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { authInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import type { CommentField } from 'common/types';
 import type { CommentResponse } from 'common/types/raws';
 import useSlackMessageMutation from './useSlackMessageMutation';
-import usePostDetailQuery from '../queries/usePostDetailQuery';
+import { postDetailQueryOption } from '../queries/usePostDetailQuery';
 
 interface CustomRequestData extends CommentField {
   postId: string;
@@ -35,12 +35,14 @@ const postWriteComment = async ({ content, position, nickname, decorationImageNa
 const useWriteCommentMutation = (postId: string) => {
   const queryClient = useQueryClient();
   const { mutate: slackMessage } = useSlackMessageMutation();
-  const { data: postData } = usePostDetailQuery(postId);
+  const { data: postData } = useQuery({ ...postDetailQueryOption(postId) });
 
   return useMutation<CommentResponse, AxiosError, CustomRequestData>({
     mutationFn: postWriteComment,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(queryKey.posts.all);
+      queryClient.invalidateQueries({
+        queryKey: queryKey.posts.all
+      });
 
       const postAuthor = postData?.author;
       if (postAuthor?.slackId === undefined) return;

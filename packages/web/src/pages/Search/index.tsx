@@ -1,11 +1,12 @@
 import { Box, Heading, Text, VStack, List, HStack, Container } from '@chakra-ui/react';
 import UserCard from './components/UserCard';
 import { useParams } from 'react-router-dom';
-import useSearchUserQuery from '@/apis/queries/useSearchUserQuery';
+import { useQuery } from '@tanstack/react-query';
+import { searchUserQueryOption } from '@/apis/queries/useSearchUserQuery';
 
 const Search = () => {
   const { keyword = '' } = useParams();
-  const { data: searchList } = useSearchUserQuery(keyword);
+  const { data: searchList } = useQuery({ ...searchUserQueryOption(keyword) });
 
   return (
     <VStack spacing={12} mb={10}>

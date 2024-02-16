@@ -11,7 +11,8 @@ import { SLACK_WORKSPACE } from 'common/constants/slack';
 import { useEffect, useState } from 'react';
 import useIsNotLoggedIn from '@/hooks/useIsNotLoggedIn';
 import { Navigate } from 'react-router-dom';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import { withAsyncBoundary } from '@toss/async-boundary';
 import Loading from '@/components/Loading';
 import NotFound from '@/pages/NotFound';
@@ -26,9 +27,9 @@ type FormValues = z.infer<typeof formSchema>;
 const SettingSlack = withAsyncBoundary(
   () => {
     const { isNotLoggedIn } = useIsNotLoggedIn();
-    const { data: userData } = useAuthCheckQuery();
+    const { data: userData } = useQuery({ ...authCheckOption });
     const isSlackIdExist = typeof userData?.slackId === 'string';
-    const { mutate, isLoading, isSuccess } = useGenerateSlackLinkMutation();
+    const { mutate, isPending, isSuccess } = useGenerateSlackLinkMutation();
     const notionURL = import.meta.env.VITE_SLACK_ID_DESCRIPTION;
     const [message, setMessage] = useState('');
 
@@ -105,7 +106,7 @@ const SettingSlack = withAsyncBoundary(
           슬랙 아이디 찾기
         </LinkField>
         <Button
-          isLoading={isLoading}
+          isLoading={isPending}
           type="submit"
           mt="6"
           w="100%"

@@ -1,10 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
-import { QueryOptions } from '@/apis/types';
 import { PostResponse } from 'common/types/raws';
+import { queryOptions } from '@tanstack/react-query';
 import queryKey from '@/apis/queryKeys';
 import parsePost from 'common/utils/parsePost';
-import { Post } from 'common/types';
 
 export const getPostDetail = async (id: string) => {
   const { data } = await baseInstance.get<PostResponse>(`/posts/${id}`);
@@ -14,13 +12,9 @@ export const getPostDetail = async (id: string) => {
   return parsePost(data);
 };
 
-const usePostDetailQuery = (id: string, options?: QueryOptions<Post>) => {
-  return useQuery<Post>({
+export const postDetailQueryOption = (id: string) =>
+  queryOptions({
     queryKey: queryKey.posts.detail(id),
     queryFn: () => getPostDetail(id),
-    retry: 0,
-    ...options
+    retry: 0
   });
-};
-
-export default usePostDetailQuery;

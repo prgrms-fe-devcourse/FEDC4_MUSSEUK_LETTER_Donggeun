@@ -6,7 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import useGetPostsInfoQuery from '@/apis/queries/useGetPostsInfoQuery';
+import { useQuery } from '@tanstack/react-query';
+import { getPostsInfoQueryOption } from '@/apis/queries/useGetPostsInfoQuery';
 import PostCard from '@/components/PostCard';
 import Description from './components/Description';
 import MusseukButton from './components/MusseukButton';
@@ -19,7 +20,7 @@ import NotFound from '@/pages/NotFound';
 const Main = () => {
   const navigate = useNavigate();
 
-  const { data, status } = useGetPostsInfoQuery({ suspense: true });
+  const { data, status } = useQuery({ ...getPostsInfoQueryOption });
 
   return (
     <>

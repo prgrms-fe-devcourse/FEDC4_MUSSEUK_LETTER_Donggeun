@@ -18,8 +18,10 @@ import { useState, useRef, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUpdateUserMutation from '@/apis/mutations/useUpdateUserMutation';
 import useProfileImageMutation from '@/apis/mutations/useProfileImageMutation';
-import useUserInfoQuery from '@/apis/queries/useUserInfoQuery';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { userInfoQueryOption } from '@/apis/queries/useUserInfoQuery';
+import { useQuery } from '@tanstack/react-query';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 
 interface ProfileProps {
   userId: string;
@@ -31,8 +33,8 @@ interface FormData {
 }
 
 const ProfileBar = ({ userId }: ProfileProps) => {
-  const { data: user } = useUserInfoQuery(userId);
-  const { data: authUser } = useAuthCheckQuery();
+  const { data: user } = useSuspenseQuery({ ...userInfoQueryOption(userId) });
+  const { data: authUser } = useQuery({ ...authCheckOption });
   const isMyProfile = user?._id === authUser?._id;
 
   const { mutate: putUser } = useUpdateUserMutation();

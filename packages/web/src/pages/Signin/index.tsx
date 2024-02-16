@@ -36,7 +36,7 @@ const SignIn = () => {
   const redirectTo = String(queryString.redirectTo || links.main);
 
   const { isNotLoggedIn } = useIsNotLoggedIn();
-  const { mutate, isLoading } = useSigninMutation();
+  const { mutate, isPending } = useSigninMutation();
 
   const {
     register,
@@ -109,8 +109,8 @@ const SignIn = () => {
       />
       <Button
         type="submit"
-        isLoading={isLoading}
-        isDisabled={isLoading}
+        isLoading={isPending}
+        isDisabled={isPending}
         spinner={<Spinner size="sm" mr="2" />}
         loadingText="로그인 중..."
         mt="6"

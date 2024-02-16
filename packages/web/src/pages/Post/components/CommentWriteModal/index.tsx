@@ -30,7 +30,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
   const { position } = useCommentInfoState();
   const toast = useToast();
 
-  const { mutate, isLoading } = useWriteCommentMutation(postId);
+  const { mutate, isPending } = useWriteCommentMutation(postId);
   const {
     register,
     handleSubmit,
@@ -143,7 +143,7 @@ const CommentWriteModal = ({ isOpen, onClose, postId }: CommentWriteModalProps) 
           <Button onClick={handleClose} mr="1.5rem">
             돌아가기
           </Button>
-          <Button type="submit" form="write" colorScheme="primary" isLoading={isLoading} loadingText={'작성 중..'}>
+          <Button type="submit" form="write" colorScheme="primary" isLoading={isPending} loadingText={'작성 중..'}>
             작성하기
           </Button>
         </ModalFooter>

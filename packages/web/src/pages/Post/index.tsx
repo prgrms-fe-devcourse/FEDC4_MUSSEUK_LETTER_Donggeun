@@ -5,7 +5,8 @@ import ListButton from './components/ListButton';
 import BackgroundHome from '@/assets/images/background_home.png';
 import CommentBoard from './components/CommentBoard';
 import CommentWriteModal from './components/CommentWriteModal';
-import usePostDetailQuery from '@/apis/queries/usePostDetailQuery';
+import { useQuery } from '@tanstack/react-query';
+import { postDetailQueryOption } from '@/apis/queries/usePostDetailQuery';
 import CommentListModal from './components/CommentListModal';
 import CommentInfoModal from './components/CommentInfoModal';
 import { CommentInfoProvider } from './contexts/CommentInfoProvider';
@@ -38,7 +39,7 @@ const Post = () => {
   const { isOpen: isListOpen, onOpen: onListOpen, onClose: onListClose } = useDisclosure();
   const { isOpen: isPostDeleteOpen, onOpen: onPostDeleteOpen, onClose: onPostDeleteClose } = useDisclosure();
 
-  const { data: postData, isError: isPostError } = usePostDetailQuery(postId);
+  const { data: postData, isError: isPostError } = useQuery({ ...postDetailQueryOption(postId) });
   const { auth: userData, isNotLoggedIn } = useIsNotLoggedIn();
 
   const isAuthor = !!userData && !!postData && userData._id === postData.author._id;

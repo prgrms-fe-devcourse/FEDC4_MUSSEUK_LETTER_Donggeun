@@ -1,11 +1,12 @@
 import { Box, Flex, Image, Icon, useMediaQuery } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import { SearchIcon } from '@chakra-ui/icons';
 import logo from '@/assets/images/logo.png';
 import logo_mobile from '@/assets/images/logo_mobile.png';
 import InputField from '@/components/header/components/Input';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from './components/Button';
-import useAuthCheckQuery from '@/apis/queries/useAuthCheckQuery';
+import { authCheckOption } from '@/apis/queries/useAuthCheckQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import HeaderMenu from './components/Menu';
 import { z } from 'zod';
@@ -27,7 +28,7 @@ const Header = () => {
   const { handleSubmit, register, reset } = useForm<InputValue>({
     resolver: zodResolver(formSchema)
   });
-  const { data } = useAuthCheckQuery();
+  const { data } = useQuery({ ...authCheckOption });
 
   const onSubmit: SubmitHandler<InputValue> = (value: { keyword: string }) => {
     navigate(`/search/${value.keyword}`);

@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions } from '@tanstack/react-query';
 import { baseInstance } from '@/apis/instance';
 import queryKey from '@/apis/queryKeys';
 import { PostResponse } from 'common/types/raws';
-import { Post } from 'common/types';
 import parsePost from 'common/utils/parsePost';
 
 export const getUserPostList = async (userId: string) => {
@@ -11,11 +10,8 @@ export const getUserPostList = async (userId: string) => {
   return data.map((post) => parsePost(post));
 };
 
-const useUserPostListQuery = (userId: string) => {
-  return useQuery<Post[]>({
+export const userPostListQueryOption = (userId: string) =>
+  queryOptions({
     queryKey: queryKey.posts.search(userId),
     queryFn: () => getUserPostList(userId)
   });
-};
-
-export default useUserPostListQuery;
